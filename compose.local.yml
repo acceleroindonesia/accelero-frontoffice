@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: accelero-client-app
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    networks:
+      - accelero-client-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-local
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-local.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - accelero-client-network
+
+networks:
+  accelero-client-network:
+    driver: bridge

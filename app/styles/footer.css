@@ -1,0 +1,219 @@
+.footer {
+    background-color: #141414; /* Netflix dark */
+    color: #e5e5e5;
+    padding-top: 80px;
+    padding-bottom: 60px;
+    position: relative;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.8);
+}
+
+.brand-name {
+    text-transform: lowercase;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #e50914; /* Netflix red */
+    /*letter-spacing: 1px;*/
+}
+
+.brand-name:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 10px rgba(229, 9, 20, 0.8);
+}
+
+.footer-wave {
+    display: none; /* Remove wave for minimal look */
+}
+
+.footer-container {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 2.5rem;
+}
+
+.footer-logo {
+    width: 42px;
+    height: 42px;
+    fill: #e50914;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    min-width: 160px;
+}
+
+.column h4 {
+    color: #ffffff;
+    margin-bottom: 0.6rem;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.column a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.column a:hover {
+    color: #e50914;
+    text-decoration: underline;
+}
+
+.newsletter {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+.newsletter p {
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #cccccc;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.input-container input {
+    padding: 0.75rem 1rem;
+    border: none;
+    width: 100%;
+    font-size: 1rem;
+    outline: none;
+    color: #fff;
+    background: transparent;
+}
+
+.input-container button {
+    background-color: #e50914;
+    border: none;
+    padding: 0 0.5rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.input-container button:hover {
+    background-color: #b00610;
+}
+
+.copy {
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #777;
+}
+
+.copy a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.copy a:hover {
+    color: #e50914;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #e50914;
+    border-radius: 50%;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(229, 9, 20, 0.5);
+}
+
+.social-icons a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(229, 9, 20, 0.8);
+}
+
+.signin-btn {
+    background-color: #e50914;       /* Netflix red */
+    color: white;                  /* White text */
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 50em;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.signin-btn:hover {
+    background-color: #b00610;       /* Darker red on hover */
+    transform: scale(1.03);          /* Slight zoom */
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .footer-logo{
+       display: none;
+    }
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    /*.input-container {*/
+    /*    flex-direction: column;*/
+    /*    align-items: stretch;*/
+    /*}*/
+
+    /*.input-container button {*/
+    /*    border-radius: 0 0 4px 4px;*/
+    /*    margin-top: 0.1rem;*/
+    /*}*/
+}
+
