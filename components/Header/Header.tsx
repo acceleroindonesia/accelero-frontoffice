@@ -1,199 +1,145 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-
-import Link from 'next/link';
-
-// hooks
-import useClickOutside from '@hooks/useClickOutside';
-
-// components
-import Dropdown from '@components/Dropdown/Dropdown';
-import DropdownItem from '@components/Dropdown/DropdownItem';
-import ProfilePhoto from '@components/Profile/ProfilePhoto';
-import { signOut, useSession } from 'next-auth/react';
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const Header: React.FC = () => {
-  const wrapperRef = useRef<any>(null);
-
-  const [menu, setMenu] = useState<boolean>(false);
-  const [dropdown, setDropdown] = useState<boolean>(false);
-
+  const pathname = usePathname();
   const { data: session } = useSession();
-  const isLoggedIn = !!session;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [language, setLanguage] = useState<"en" | "id">("en");
 
-  /**
-   * This is a functional component for the Header.
-   * It uses the useClickOutside hook to handle click events outside the component.
-   * It also manages the state of the menu and dropdown.
-   */
-  useClickOutside(wrapperRef, () => {
-    setDropdown(false);
-  });
+  const navigation = [
+    { name: "Home", href: "/" },
+    { name: "Programs", href: "/programs" },
+    { name: "Impact", href: "/impact" },
+    { name: "Volunteer", href: "/volunteer" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
+  ];
 
-  /**
-   * Toggles the menu state.
-   */
-  const menuState = (): void => {
-    setMenu((state) => !state);
+  const toggleLanguage = () => {
+    setLanguage(language === "en" ? "id" : "en");
+    // TODO: Implement i18n language switching
   };
 
-  const handleSignOut = (): void => {
-    signOut({ callbackUrl: '/' });
-    setDropdown(false);
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <header className='colorful-header'>
-      <div className='container'>
-        <div className='logo'>
-          <Link href='/' className='colorful-link logo-link'>
-            <span className='brand-name-header'>accelero</span>
+    <header className="header" suppressHydrationWarning>
+      <div className="header-container">
+        {/* Logo */}
+        <div className="header-logo">
+          <Link href="/">
+            <div className="logo-wrapper">
+              <span className="logo-icon">📚</span>
+              <div className="logo-text">
+                <span className="logo-title">Accelero</span>
+                <span className="logo-subtitle">Foundation</span>
+              </div>
+            </div>
+          </Link>
+        </div>
+
+        {/* Desktop Navigation */}
+        <nav className="header-nav">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`nav-link ${pathname === item.href ? "active" : ""}`}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Header Actions */}
+        <div className="header-actions">
+          {/* Language Toggle */}
+          <button
+            onClick={toggleLanguage}
+            className="language-toggle"
+            title="Change Language"
+            suppressHydrationWarning
+          >
+            {language === "en" ? "🇬🇧 EN" : "🇮🇩 ID"}
+          </button>
+
+          {/* User Menu or Donate Button */}
+          {session?.user ? (
+            <div className="user-menu">
+              <Link href="/members/account" className="user-link">
+                <span className="user-icon">👤</span>
+                <span className="user-name">{session.user.name}</span>
+              </Link>
+            </div>
+          ) : (
+            <Link href="/members/signin" className="signin-link">
+              Sign In
+            </Link>
+          )}
+
+          {/* Primary CTA */}
+          <Link href="/donate" className="donate-button" suppressHydrationWarning>
+            <span className="donate-icon">❤️</span>
+            <span>Donate Now</span>
           </Link>
 
+          {/* Mobile Menu Toggle */}
           <button
-            type='button'
-            onClick={() => {
-              menuState();
-            }}
+            className={`mobile-menu-toggle ${isMenuOpen ? "active" : ""}`}
+            onClick={handleMenuToggle}
+            aria-label="Toggle menu"
+            suppressHydrationWarning
           >
-            <span className='material-symbols-outlined white-icon'>menu</span>
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
         </div>
-        <div className='links responsive-hide'>
-          <Link href='/' className=' colorful-link'>
-            Home
-          </Link>
-          <Link href='/contact' className='colorful-link'>
-            Contact us
-          </Link>
-          <Link href='/events' className='colorful-link'>
-            Events
-          </Link>
-          {/*<Link href='/news' className='gray'>*/}
-          {/*  News*/}
-          {/*</Link>*/}
-        </div>
-        <div className='members' ref={wrapperRef}>
-          {isLoggedIn ? (
-            <>
-              <Link href='/members/account' className='colorful-link'>
-                <ProfilePhoto image='https://www.cenksari.com/content/profile.jpg' size='small' />
-              </Link>
-              <button
-                type='button'
-                className='menu-opener colorful-link'
-                onClick={() => setDropdown(!dropdown)}
-              >
-                {'Menu'}
-                <span className='material-symbols-outlined'>
-                  {dropdown ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
-                </span>
-              </button>
-              {dropdown && (
-                <Dropdown color='gray'>
-                  <DropdownItem url='/members/tickets' text='My tickets' />
-                  <DropdownItem url='/members/account' text='My account' />
-                  <hr />
-                  <DropdownItem text='Sign out' onClick={() => handleSignOut()} url={''} />
-                </Dropdown>
-              )}
-            </>
-          ) : (
-            <>
-              <div className='authHeader'>
-                <Link href='/members/signup' className='signup'>
-                  Sign up
-                </Link>
-                <Link href='/members/signin' className='signin'>
-                  Sign in
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
       </div>
-      {menu && (
-        <div className='main-menu-backdrop'>
-          <div className='main-menu'>
-            <div className='top'>
-              <button
-                type='button'
-                onClick={() => {
-                  menuState();
-                }}
-              >
-                <span className='material-symbols-outlined'>close</span>
-              </button>
-            </div>
-            <div className='padding-top center'>
-              <ul>
-                <li>
-                  <Link href='/' className='white'>
-                    Home
-                  </Link>
-                </li>
-                {isLoggedIn ? (
-                  <>
-                    <li>
-                      <Link href='/members/account' className='white'>
-                        My account
-                      </Link>
-                    </li>
 
-                    <li>
-                      <Link href='/tickets' className='white'>
-                        My tickets
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href='/members/signout' className='white' onClick={handleSignOut}>
-                        Sign out
-                      </Link>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    <li>
-                      <Link href='/members/signup' className='white'>
-                        Sign up
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href='/members/signin' className='white'>
-                        Sign in
-                      </Link>
-                    </li>
-                  </>
-                )}
-                <li>
-                  <Link href='/events' className='white'>
-                    Events
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/help' className='white'>
-                    Help
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/contact' className='white'>
-                    Contact us
-                  </Link>
-                </li>
-                <li>
-                  <Link href='/promoters' className='white'>
-                    For promoters
-                  </Link>
-                </li>
-              </ul>
-            </div>
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="mobile-nav">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`mobile-nav-link ${pathname === item.href ? "active" : ""}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name}
+            </Link>
+          ))}
+          <div className="mobile-nav-actions">
+            {!session?.user && (
+              <Link
+                href="/members/signin"
+                className="mobile-signin"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Sign In
+              </Link>
+            )}
+            <Link
+              href="/donate"
+              className="mobile-donate"
+              onClick={() => setIsMenuOpen(false)}
+              suppressHydrationWarning
+            >
+              ❤️ Donate Now
+            </Link>
           </div>
         </div>
       )}
     </header>
   );
 };
-
 
 export default Header;

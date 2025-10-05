@@ -20,6 +20,37 @@ const nextConfig = {
     }
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.pravatar.cc",
+        port: "",
+        pathname: "/**",
+      },
+      // Add your actual image hosting domains here when you replace dummy images
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+  // reactStrictMode: true,
+  // swcMinify: true,
 };
 
 export default nextConfig;
