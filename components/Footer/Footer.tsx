@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
       { name: "Partnerships", href: "/partnerships" },
     ],
     getInvolved: [
-      { name: "Donate", href: "/donate" },
+      { name: "Donate", href: "/donations" },
       { name: "Volunteer", href: "/volunteer" },
       { name: "Corporate Giving", href: "/partnerships/corporate" },
       { name: "Fundraise", href: "/fundraise" },

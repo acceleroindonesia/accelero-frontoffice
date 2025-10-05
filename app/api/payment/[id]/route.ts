@@ -1,4 +1,4 @@
-// app/api/payment/[id]/route.ts
+// app/api/payment/[slug]]/route.ts
 import { prisma } from '@utils/Prisma';
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';

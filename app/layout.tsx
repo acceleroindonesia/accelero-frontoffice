@@ -7,16 +7,21 @@ import "./styles/payment.css";
 import "./styles/page.css";
 import "./styles/footer.css";
 import "./styles/header.css";
+import "./styles/project-detail.css";
+import "./styles/projects.css";
+import "./styles/donate.css";
 import SessionWrapper from "@components/SessionWrapper";
 
 // variables
 export const runtime = "edge";
 
-const RootLayout: React.FC<Readonly<{ children: React.ReactNode }>> = ({ children }) => (
+const RootLayout: React.FC<Readonly<{ children: React.ReactNode }>> = ({
+  children,
+}) => (
   <html lang="en" suppressHydrationWarning>
-  <body suppressHydrationWarning>
-  <SessionWrapper>{children}</SessionWrapper>
-  </body>
+    <body suppressHydrationWarning>
+      <SessionWrapper>{children}</SessionWrapper>
+    </body>
   </html>
 );
 

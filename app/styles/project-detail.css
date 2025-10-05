@@ -1,0 +1,1008 @@
+
+/* ===== Project Detail Hero ===== */
+.project-detail-hero {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 0 3rem 0;
+    overflow: hidden;
+}
+
+.project-hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-img {
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(26, 26, 26, 0.8) 100%
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    color: white;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: white;
+}
+
+.breadcrumb span {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-badge-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.badge-category {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.badge-status {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-active {
+    background: #48bb78;
+    color: white;
+}
+
+.status-completed {
+    background: #ed8936;
+    color: white;
+}
+
+.project-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    max-width: 900px;
+}
+
+.project-hero-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.meta-icon {
+    font-size: 1.2rem;
+}
+
+/* ===== Main Content Area ===== */
+.project-detail-main {
+    padding: 4rem 0;
+    background: #f8f9fa;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* ===== Left Content ===== */
+.detail-content {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.detail-tabs {
+    display: flex;
+    border-bottom: 2px solid #f0f0f0;
+    overflow-x: auto;
+}
+
+.tab {
+    flex: 1;
+    padding: 1.25rem 1.5rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    position: relative;
+}
+
+.tab:hover {
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.tab.active {
+    color: #667eea;
+}
+
+.tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.tab-content {
+    padding: 3rem;
+}
+
+/* ===== Overview Tab ===== */
+.overview-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.content-section h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+}
+
+.lead-text {
+    font-size: 1.3rem;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.body-text {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.8;
+}
+
+.challenge-box {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-radius: 16px;
+    border-left: 4px solid #667eea;
+}
+
+.challenge-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.challenge-box h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+}
+
+.challenge-box p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.approach-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.approach-card {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.approach-card:hover {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.approach-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.approach-card h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.approach-card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.impact-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.impact-metric {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.metric-number {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.school-info-card {
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 16px;
+}
+
+.school-header {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.school-icon {
+    font-size: 3rem;
+    width: 70px;
+    height: 70px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.school-header h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.school-header p {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.school-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-label {
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.detail-value {
+    font-size: 1rem;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+/* ===== Updates Tab ===== */
+.updates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.update-card {
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 16px;
+    border-left: 4px solid #667eea;
+}
+
+.update-date {
+    font-size: 0.9rem;
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.update-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.update-content {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.7;
+}
+
+/* ===== Budget Tab ===== */
+.budget-overview {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-radius: 16px;
+    margin-bottom: 2rem;
+}
+
+.budget-overview h3 {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.budget-total {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.budget-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.budget-item {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.budget-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.budget-item-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.budget-item-amount {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.budget-item-bar {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.budget-item-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50px;
+    transition: width 1s ease;
+}
+
+.budget-item-percentage {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ===== Timeline Tab ===== */
+.timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+}
+
+.timeline-marker {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.timeline-dot {
+    width: 20px;
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-item.completed .timeline-dot {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+.timeline-line {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(100% + 2rem);
+    background: #e0e0e0;
+}
+
+.timeline-content-box {
+    flex: 1;
+    padding-bottom: 2rem;
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.timeline-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.timeline-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #48bb78;
+    color: white;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* ===== Empty States ===== */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1.5rem;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+}
+
+.empty-state p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* ===== Right Sidebar ===== */
+.detail-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.sticky-card {
+    position: sticky;
+    top: 100px;
+}
+
+.donation-card,
+.quick-impact-card,
+.similar-projects-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Donation Card */
+.donation-progress {
+    margin-bottom: 2rem;
+}
+
+.progress-stats-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.raised-amount,
+.goal-amount {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.amount-label,
+.goal-label {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.amount-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #667eea;
+}
+
+.goal-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.progress-bar-large {
+    height: 12px;
+    background: #f0f0f0;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-fill-large {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50px;
+    position: relative;
+    transition: width 1s ease;
+}
+
+.progress-percentage-large {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.donation-remaining {
+    text-align: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.donation-remaining strong {
+    color: #1a1a1a;
+    font-size: 1.1rem;
+}
+
+.donation-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.stat-box-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.stat-box-label {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+}
+.btn-donate-large {
+    width: 100%;
+    padding: 1rem 0.1rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 0.625rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
+    line-height: 1.2;
+}
+
+.btn-donate-large:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+}
+
+.btn-donate-large .btn-icon {
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.btn-donate-large span:not(.btn-icon) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-share {
+    width: 100%;
+    padding: 0.75rem 0.1rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.btn-share {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.btn-share:hover {
+    background: #667eea;
+    color: white;
+}
+
+.project-completed-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.completed-icon {
+    font-size: 1.5rem;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.donation-secure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.secure-icon {
+    font-size: 1rem;
+    color: #48bb78;
+}
+
+/* Quick Impact Card */
+.quick-impact-card h3,
+.similar-projects-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.quick-impact-card p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.impact-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.impact-example {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 3px solid #667eea;
+}
+
+.impact-amount {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.5rem;
+}
+
+.impact-desc {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Similar Projects Card */
+.btn-view-all {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-view-all:hover {
+    background: #667eea;
+    color: white;
+}
+
+/* Loading States */
+.project-detail-loading {
+    min-height: 80vh;
+}
+
+.skeleton-hero-detail {
+    height: 500px;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.skeleton-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 3rem;
+    padding: 4rem 2rem;
+}
+
+.skeleton-content {
+    height: 800px;
+    width: 100%;
+}
+
+.skeleton-sidebar {
+    height: 600px;
+    width: 100%;
+}
+
+/* Not Found */
+.project-not-found {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.project-not-found h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.project-not-found p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1200px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sticky-card {
+        position: relative;
+        top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-hero-title {
+        font-size: 2rem;
+    }
+
+    .tab-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .approach-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .impact-metrics {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .detail-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tab {
+        flex: 0 0 auto;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-detail-hero {
+        min-height: 400px;
+    }
+
+    .project-hero-title {
+        font-size: 1.8rem;
+    }
+
+    .project-hero-meta {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .donation-card,
+    .quick-impact-card,
+    .similar-projects-card {
+        padding: 1.5rem;
+    }
+
+    .amount-value {
+        font-size: 1.2rem;
+    }
+}

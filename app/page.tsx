@@ -7,7 +7,6 @@ import Section from "@components/Section/Section";
 import HeroSection from "./home/components/HeroSection";
 import ImpactStats from "./home/components/ImpactStats";
 import ProjectCard from "@components/Card/ProjectCard";
-import CardGroup from "@components/Card/CardGroup";
 import HowItWorks from "./home/components/HowItWorks";
 import VolunteerCTA from "./home/components/VolunteerCTA";
 import { ScrollAnimations } from "./home/components/ScrollAnimations";
