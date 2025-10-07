@@ -10,6 +10,9 @@ import "./styles/header.css";
 import "./styles/project-detail.css";
 import "./styles/projects.css";
 import "./styles/donate.css";
+import "./styles/about.css";
+import "./styles/contact.css";
+import "./styles/impact.css";
 import SessionWrapper from "@components/SessionWrapper";
 
 // variables

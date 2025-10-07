@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Master from "@components/Layout/Master";
+import Section from "@components/Section/Section";
 import ProjectCard from "@components/Card/ProjectCard";
 import { ScrollAnimations } from "../home/components/ScrollAnimations";
 import Request, { type IResponse } from "@utils/Request";
@@ -26,7 +27,7 @@ const ProjectsPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedStatus, setSelectedStatus] = useState<string>("active");
+  const [selectedStatus, setSelectedStatus] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("newest");
 
   const categories = [
@@ -46,44 +47,50 @@ const ProjectsPage: React.FC = () => {
   }, [projects, searchQuery, selectedCategory, selectedStatus, sortBy]);
 
   const fetchProjects = async () => {
-    const res: IResponse = await Request.getResponse({
-      url: "/api/projects?limit=50",
-      method: "GET",
-    });
+    try {
+      const res: IResponse = await Request.getResponse({
+        url: "/api/projects?limit=50",
+        method: "GET",
+      });
 
-    if (res?.data?.projects) {
-      setProjects(res.data.projects);
+      if (res?.data?.projects) {
+        setProjects(res.data.projects);
+      }
+    } catch (error) {
+      console.error("Failed to fetch projects:", error);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const filterAndSortProjects = () => {
     let filtered = [...projects];
 
-    // Filter by search query
     if (searchQuery) {
       filtered = filtered.filter(
         (project) =>
           project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           project.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          project.description.toLowerCase().includes(searchQuery.toLowerCase())
+          project.description.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     }
 
-    // Filter by category
     if (selectedCategory !== "all") {
-      filtered = filtered.filter((project) => project.category === selectedCategory);
+      filtered = filtered.filter(
+        (project) =>
+          project.category?.toLowerCase() === selectedCategory.toLowerCase(),
+      );
     }
 
-    // Filter by status
     if (selectedStatus !== "all") {
-      filtered = filtered.filter((project) => project.status === selectedStatus);
+      filtered = filtered.filter(
+        (project) =>
+          project.status?.toLowerCase() === selectedStatus.toLowerCase(),
+      );
     }
 
-    // Sort projects
     switch (sortBy) {
       case "newest":
-        // Assuming projects come sorted by newest by default
         break;
       case "funding-high":
         filtered.sort((a, b) => {
@@ -110,15 +117,18 @@ const ProjectsPage: React.FC = () => {
   const handleClearFilters = () => {
     setSearchQuery("");
     setSelectedCategory("all");
-    setSelectedStatus("active");
+    setSelectedStatus("all");
     setSortBy("newest");
   };
 
   const activeFiltersCount =
     (searchQuery ? 1 : 0) +
     (selectedCategory !== "all" ? 1 : 0) +
-    (selectedStatus !== "active" ? 1 : 0) +
+    (selectedStatus !== "all" ? 1 : 0) +
     (sortBy !== "newest" ? 1 : 0);
+
+  const hasAnyProjects = projects.length > 0;
+  const hasFilteredResults = filteredProjects.length > 0;
 
   if (isLoading) {
     return (
@@ -146,132 +156,133 @@ const ProjectsPage: React.FC = () => {
     <Master>
       <ScrollAnimations />
 
-      {/* Page Header */}
       <section className="projects-page-header">
         <div className="container">
           <div className="header-content">
             <span className="page-label">Our Programs</span>
             <h1 className="page-title">Make a Difference Today</h1>
             <p className="page-subtitle">
-              Browse our programs and support schools and students who need it most. Every donation
-              is tracked transparently and makes a real impact.
+              Browse our programs and support schools and students who need it
+              most. Every donation is tracked transparently and makes a real
+              impact.
             </p>
           </div>
 
-          {/* Stats Overview */}
-          <div className="header-stats">
-            <div className="stat-item">
-              <div className="stat-value">{projects.length}</div>
-              <div className="stat-label">Active Programs</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-value">
-                {projects.reduce((sum, p) => sum + p.studentsImpacted, 0).toLocaleString()}
+          {hasAnyProjects && (
+            <div className="header-stats">
+              <div className="stat-item">
+                <div className="stat-value">{projects.length}</div>
+                <div className="stat-label">Active Programs</div>
               </div>
-              <div className="stat-label">Students Reached</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-value">
-                Rp{" "}
-                {Math.round(
-                  projects.reduce((sum, p) => sum + p.raisedAmount, 0) / 1000000
-                ).toLocaleString()}
-                M
+              <div className="stat-item">
+                <div className="stat-value">
+                  {projects
+                    .reduce((sum, p) => sum + p.studentsImpacted, 0)
+                    .toLocaleString()}
+                </div>
+                <div className="stat-label">Students Reached</div>
               </div>
-              <div className="stat-label">Total Raised</div>
+              <div className="stat-item">
+                <div className="stat-value">
+                  Rp{" "}
+                  {Math.round(
+                    projects.reduce((sum, p) => sum + p.raisedAmount, 0) /
+                      1000000,
+                  ).toLocaleString()}
+                  M
+                </div>
+                <div className="stat-label">Total Raised</div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* Filters and Search */}
-      <section className="projects-filters-section">
+      {hasAnyProjects && (
+        <section className="projects-filters-section">
+          <div className="container">
+            <div className="filters-compact">
+              <div className="search-and-filters">
+                <div className="search-bar">
+                  <span className="search-icon">🔍</span>
+                  <input
+                    type="text"
+                    placeholder="Search programs..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="search-input"
+                  />
+                  {searchQuery && (
+                    <button
+                      className="clear-search"
+                      onClick={() => setSearchQuery("")}
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+
+                <div className="filter-dropdowns">
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="filter-select"
+                  >
+                    {categories.map((category) => (
+                      <option key={category.value} value={category.value}>
+                        {category.icon} {category.label}
+                      </option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={selectedStatus}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    className="filter-select"
+                  >
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                  </select>
+
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="filter-select"
+                  >
+                    <option value="newest">Newest First</option>
+                    <option value="funding-low">Lowest Funded</option>
+                    <option value="funding-high">Highest Funded</option>
+                    <option value="impact-high">Most Impact</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="filter-actions">
+                {activeFiltersCount > 0 && (
+                  <button
+                    className="clear-filters-btn"
+                    onClick={handleClearFilters}
+                  >
+                    Clear ({activeFiltersCount})
+                  </button>
+                )}
+                <div className="results-count">
+                  {filteredProjects.length} result
+                  {filteredProjects.length !== 1 ? "s" : ""}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <Section className="projects-section-modern">
         <div className="container">
-          {/* Search Bar */}
-          <div className="search-bar-wrapper">
-            <div className="search-bar">
-              <span className="search-icon">🔍</span>
-              <input
-                type="text"
-                placeholder="Search by school name, location, or description..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="search-input"
-              />
-              {searchQuery && (
-                <button className="clear-search" onClick={() => setSearchQuery("")}>
-                  ✕
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Category Filters */}
-          <div className="category-filters">
-            {categories.map((category) => (
-              <button
-                key={category.value}
-                className={`category-btn ${selectedCategory === category.value ? "active" : ""}`}
-                onClick={() => setSelectedCategory(category.value)}
-              >
-                <span className="category-icon">{category.icon}</span>
-                <span className="category-label">{category.label}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Filter Bar */}
-          <div className="filter-bar">
-            <div className="filter-left">
-              <div className="filter-group">
-                <label className="filter-label">Status:</label>
-                <select
-                  value={selectedStatus}
-                  onChange={(e) => setSelectedStatus(e.target.value)}
-                  className="filter-select"
-                >
-                  <option value="all">All Status</option>
-                  <option value="active">Active</option>
-                  <option value="completed">Completed</option>
-                </select>
-              </div>
-
-              <div className="filter-group">
-                <label className="filter-label">Sort By:</label>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="filter-select"
-                >
-                  <option value="newest">Newest First</option>
-                  <option value="funding-low">Lowest Funded</option>
-                  <option value="funding-high">Highest Funded</option>
-                  <option value="impact-high">Most Impact</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="filter-right">
-              {activeFiltersCount > 0 && (
-                <button className="clear-filters-btn" onClick={handleClearFilters}>
-                  Clear Filters ({activeFiltersCount})
-                </button>
-              )}
-              <div className="results-count">
-                {filteredProjects.length} program{filteredProjects.length !== 1 ? "s" : ""}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Grid */}
-      <section className="projects-grid-section">
-        <div className="container">
-          {filteredProjects.length > 0 ? (
+          {hasFilteredResults ? (
             <div className="projects-grid">
-              {filteredProjects.map((project, index) => (
-                <div key={project.id} data-aos="fade-up" data-aos-delay={Math.min(index * 50, 300)}>
+              {filteredProjects.map((project) => (
+                <div key={project.id}>
                   <ProjectCard
                     id={project.id}
                     url={project.url}
@@ -292,39 +303,67 @@ const ProjectsPage: React.FC = () => {
               <div className="no-results-icon">🔍</div>
               <h3>No Programs Found</h3>
               <p>
-                We couldn't find any programs matching your criteria. Try adjusting your filters or
-                search query.
+                {hasAnyProjects
+                  ? "We couldn't find any programs matching your criteria. Try adjusting your filters or search query."
+                  : "We don't have any active programs at the moment. Check back soon!"}
               </p>
-              <button className="btn-reset" onClick={handleClearFilters}>
-                Reset Filters
-              </button>
+              {hasAnyProjects && activeFiltersCount > 0 && (
+                <button className="btn-reset" onClick={handleClearFilters}>
+                  Reset Filters
+                </button>
+              )}
             </div>
           )}
         </div>
-      </section>
+      </Section>
 
-      {/* CTA Section */}
-      <section className="projects-cta-section">
-        <div className="container">
-          <div className="cta-card">
-            <div className="cta-content">
-              <h2>Can't Find What You're Looking For?</h2>
-              <p>
-                Make a general donation to our fund and we'll allocate it to the programs that need
-                it most.
-              </p>
-            </div>
-            <div className="cta-actions">
-              <a href="/donate?type=general" className="btn-cta-large">
-                Donate to General Fund
-              </a>
-              <a href="/contact" className="btn-cta-outline">
-                Contact Us
-              </a>
+      {hasAnyProjects && !hasFilteredResults && activeFiltersCount > 0 && (
+        <section className="projects-cta-section">
+          <div className="container">
+            <div className="cta-card">
+              <div className="cta-content">
+                <h2>Can't Find What You're Looking For?</h2>
+                <p>
+                  Make a general donation to our fund and we'll allocate it to
+                  the programs that need it most.
+                </p>
+              </div>
+              <div className="cta-actions">
+                <a href="/donate?type=general" className="btn-cta-large">
+                  Donate to General Fund
+                </a>
+                <a href="/contact" className="btn-cta-outline">
+                  Contact Us
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {hasFilteredResults && (
+        <section className="projects-cta-section">
+          <div className="container">
+            <div className="cta-card">
+              <div className="cta-content">
+                <h2>Want to Make an Even Bigger Impact?</h2>
+                <p>
+                  Support our general fund to help us allocate resources where
+                  they're needed most across all our programs.
+                </p>
+              </div>
+              <div className="cta-actions">
+                <a href="/donate?type=general" className="btn-cta-large">
+                  Donate to General Fund
+                </a>
+                <a href="/contact" className="btn-cta-outline">
+                  Learn More
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
     </Master>
   );
 };
