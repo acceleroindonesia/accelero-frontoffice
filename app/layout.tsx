@@ -34,7 +34,7 @@ const description =
   "Join us in improving foundational literacy and numeracy in underserved schools through Teaching at the Right Level (TaRL) programs.";
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: "device2-width",
   themeColor: "#667eea",
   initialScale: 1,
 };
