@@ -1,7 +1,7 @@
 'use client';
 
-import base64 from 'base-64';
-import axios, { type AxiosResponse, type AxiosError } from 'axios';
+import base64 from "base-64";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
 
 // interfaces
 export interface IResponse {
@@ -42,9 +42,7 @@ const buildUrl = (): string => {
  * @return {any} The parsed JavaScript object.
  */
 const parseResults = (value: string): any => {
-  const parse = JSON.parse(value);
-
-  return parse;
+  return JSON.parse(value);
 };
 
 /**
@@ -96,7 +94,7 @@ const getResponse = async (parameters: IRequest): Promise<IResponse> => {
 
       let parsedResults;
 
-      if (responseText !== '') {
+      if (responseText !== "") {
         parsedResults = parseResults(responseText);
       } else {
         parsedResults = { title: err.message };
