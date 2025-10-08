@@ -13,10 +13,8 @@ import "./styles/donate.css";
 import "./styles/about.css";
 import "./styles/contact.css";
 import "./styles/impact.css";
+import "./styles/volunteer.css";
 import SessionWrapper from "@components/SessionWrapper";
-
-// variables
-export const runtime = "edge";
 
 const RootLayout: React.FC<Readonly<{ children: React.ReactNode }>> = ({
   children,

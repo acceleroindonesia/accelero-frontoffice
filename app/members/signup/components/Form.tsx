@@ -1,238 +1,216 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import useAlert from "@hooks/useAlert";
+import toolBox from "@utils/ToolBox";
+import "../../../styles/auth.css";
 
-import Link from 'next/link';
-
-// hooks
-import useAlert from '@hooks/useAlert';
-
-// components
-import Input from '@components/Form/Input';
-import Switch from '@components/Form/Switch';
-import Button from '@components/Button/Button';
-import Loader from '@components/Loader/Loader';
-
-// utils
-import Request, { type IRequest, type IResponse } from '@utils/Request';
-import { signIn } from 'next-auth/react';
-import toolBox from '@utils/ToolBox';
-
-// interfaces
 interface IFormProps {
-  tos: boolean;
   name: string;
   email: string;
   password: string;
+  confirmPassword: string;
+  agreement: boolean;
 }
 
 const Form: React.FC = () => {
+  const router = useRouter();
   const { showAlert, hideAlert } = useAlert();
-
   const [loading, setLoading] = useState<boolean>(false);
   const [formValues, setFormValues] = useState<IFormProps>({
-    name: '',
-    email: '',
-    password: '',
-    tos: false,
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    agreement: false,
   });
 
-  /**
-   * Handles the change event for input fields in the form.
-   *
-   * This function is called when the value of an input field in the form changes. It updates the state of the form values with the new value.
-   *
-   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event.
-   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-
+    const { name, value, type, checked } = e.target;
     setFormValues({
       ...formValues,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
-  /**
-   * Handles the change event for checkbox fields in the form.
-   *
-   * This function is called when the value of a checkbox field in the form changes. It updates the state of the form values with the new value.
-   *
-   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event.
-   */
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, checked } = e.target;
-
-    setFormValues({
-      ...formValues,
-      [name]: checked,
-    });
-  };
-
-  /**
-   * Handles the form submission event.
-   *
-   * This function is called when the form is submitted. It prevents the default form submission behavior,
-   * hides any existing alert, sets the loading state to true, sends a POST request to the signin/password endpoint,
-   * and handles the response. If the response status is 200, it redirects the user to the account activation page.
-   * If the status is not 200, it shows an error alert. Finally, it sets the loading state back to false.
-   *
-   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
-   * @returns {Promise<any>} A promise that resolves when the request is complete.
-   */
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<any> => {
-    e.preventDefault();
-
-    hideAlert();
-
-    setLoading(true);
+  const validateForm = (): boolean => {
+    if (!formValues.name.trim()) {
+      showAlert({ type: "error", text: "Please enter your name" });
+      return false;
+    }
 
     if (!toolBox.isEmail(formValues.email)) {
-      showAlert({ type: 'error', text: 'Invalid email format' });
-      setLoading(false);
+      showAlert({ type: "error", text: "Invalid email format" });
+      return false;
+    }
+
+    if (formValues.password.length < 8) {
+      showAlert({
+        type: "error",
+        text: "Password must be at least 8 characters",
+      });
+      return false;
+    }
+
+    if (formValues.password !== formValues.confirmPassword) {
+      showAlert({ type: "error", text: "Passwords do not match" });
+      return false;
+    }
+
+    if (!formValues.agreement) {
+      showAlert({
+        type: "error",
+        text: "Please agree to the terms and conditions",
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
+    hideAlert();
+
+    if (!validateForm()) {
       return;
     }
 
-    const parameters: IRequest = {
-      url: '/api/register',
-      method: 'POST',
-      postData: {
-        name: formValues.name,
-        email: formValues.email,
-        password: formValues.password,
-        agreement: formValues.tos,
-      },
-    };
+    setLoading(true);
 
-    const req: IResponse = await Request.getResponse(parameters);
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formValues.name,
+          email: formValues.email,
+          password: formValues.password,
+          agreement: formValues.agreement,
+        }),
+      });
 
-    const { status, data } = req;
+      const data = await response.json();
 
-    if (status === 201) {
-      window.location.href = '/members/signin';
-    } else {
-      showAlert({ type: 'error', text: data?.message ?? '' });
+      if (response.status === 201 || response.ok) {
+        showAlert({
+          type: "success",
+          text: "Account created successfully! Redirecting...",
+        });
+        setTimeout(() => {
+          router.push("/members/signin");
+        }, 2000);
+      } else {
+        showAlert({
+          type: "error",
+          text: data.message || "Failed to create account. Please try again.",
+        });
+        setLoading(false);
+      }
+    } catch (error) {
+      showAlert({
+        type: "error",
+        text: "An error occurred. Please try again later.",
+      });
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   if (loading) {
-    return <Loader type='inline' color='white' text='Hang on a second' />;
+    return (
+      <div className="auth-loader">
+        <div className="spinner" />
+        <p>Creating your account...</p>
+      </div>
+    );
   }
 
   return (
-    <form
-      className='form shrink'
-      noValidate
-      onSubmit={(e) => {
-        void handleSubmit(e);
-      }}
-    >
-      <div className='form-elements'>
-        <div className='form-line'>
-          <div className='one-line'>
-            {/*<button type='button' className='google-button' onClick={() => signIn('google')}>*/}
-            {/*  <svg*/}
-            {/*    version='1.1'*/}
-            {/*    xmlns='http://www.w3.org/2000/svg'*/}
-            {/*    width='18px'*/}
-            {/*    height='18px'*/}
-            {/*    viewBox='0 0 48 48'*/}
-            {/*  >*/}
-            {/*    <g>*/}
-            {/*      <path*/}
-            {/*        fill='#EA4335'*/}
-            {/*        d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'*/}
-            {/*      />*/}
-            {/*      <path*/}
-            {/*        fill='#4285F4'*/}
-            {/*        d='M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'*/}
-            {/*      />*/}
-            {/*      <path*/}
-            {/*        fill='#FBBC05'*/}
-            {/*        d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'*/}
-            {/*      />*/}
-            {/*      <path*/}
-            {/*        fill='#34A853'*/}
-            {/*        d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'*/}
-            {/*      />*/}
-            {/*      <path fill='none' d='M0 0h48v48H0z' />*/}
-            {/*    </g>*/}
-            {/*  </svg>*/}
-            {/*  <span>Sign up with Google</span>*/}
-            {/*</button>*/}
-          </div>
-        </div>
-        <div className='or-line'>
-          <hr />
-          <span>OR</span>
-        </div>
-        <div className='form-line'>
-          <div className='one-line'>
-            <div className='label-line'>
-              <label htmlFor='name'>Name</label>
-            </div>
-            <Input
-              type='text'
-              name='name'
-              value={formValues.name}
-              maxLength={64}
-              placeholder='Enter your name'
-              required
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className='form-line'>
-          <div className='one-line'>
-            <div className='label-line'>
-              <label htmlFor='email'>E-mail address</label>
-            </div>
-            <Input
-              type='email'
-              name='email'
-              value={formValues.email}
-              maxLength={128}
-              placeholder='Enter your e-mail address'
-              required
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className='form-line'>
-          <div className='label-line'>
-            <label htmlFor='password'>Password</label>
-          </div>
-          <Input
-            type='password'
-            name='password'
-            value={formValues.password}
-            maxLength={64}
-            placeholder='Enter your password'
-            required
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form-line'>
-          <div className='label-line'>
-            <label htmlFor='tos'>Agreements</label>
-          </div>
-          <Switch name='tos' color='blue' onChange={handleCheckboxChange}>
-            I agree to the{' '}
-            <Link href='/legal/privacy-policy' className='red'>
-              Privacy policy
-            </Link>{' '}
-            and{' '}
-            <Link href='/legal/terms-of-service' className='red'>
-              TOS
-            </Link>
-          </Switch>
-        </div>
-        <div className='form-buttons'>
-          <Button type='submit' color='red-filled' text='Sign up' />
-        </div>
+    <form className="auth-form" onSubmit={handleSubmit} noValidate>
+      <div className="auth-form-group">
+        <label htmlFor="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formValues.name}
+          onChange={handleChange}
+          placeholder="Enter your full name"
+          required
+          autoComplete="name"
+        />
       </div>
+
+      <div className="auth-form-group">
+        <label htmlFor="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formValues.email}
+          onChange={handleChange}
+          placeholder="Enter your email"
+          required
+          autoComplete="email"
+        />
+      </div>
+
+      <div className="auth-form-group">
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formValues.password}
+          onChange={handleChange}
+          placeholder="Create a password (min. 8 characters)"
+          required
+          autoComplete="new-password"
+        />
+      </div>
+
+      <div className="auth-form-group">
+        <label htmlFor="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          value={formValues.confirmPassword}
+          onChange={handleChange}
+          placeholder="Confirm your password"
+          required
+          autoComplete="new-password"
+        />
+      </div>
+
+      <div className="checkbox-group">
+        <input
+          type="checkbox"
+          id="agreement"
+          name="agreement"
+          checked={formValues.agreement}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="agreement">
+          I agree to the{" "}
+          <Link href="/legal/terms-of-service" target="_blank">
+            Terms of Service
+          </Link>{" "}
+          and{" "}
+          <Link href="/legal/privacy-policy" target="_blank">
+            Privacy Policy
+          </Link>
+        </label>
+      </div>
+
+      <button type="submit" className="auth-submit-btn" disabled={loading}>
+        Create Account
+      </button>
     </form>
   );
 };

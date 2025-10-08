@@ -1,50 +1,65 @@
-import Link from 'next/link';
-
-import { type Metadata } from 'next';
-
-// components
-import Master from '@components/Layout/Master';
-import Section from '@components/Section/Section';
-import Heading from '@components/Heading/Heading';
-
-import Form from './components/Form';
+import Link from "next/link";
+import { type Metadata } from "next";
+import Form from "./components/Form";
+import "../../styles/auth.css";
 
 const Page: React.FC = () => (
-  <Master>
-    <Section className='white-background'>
-      <div className='container'>
-        <div className='center'>
-          <Heading type={1} color='white' text='Sign up' />
-          <p className='white form-information'>
-            Create an account to customize your experience for your ticketing journey.{' '}
-            <Link href='/members/signin' className='red'>
-              Click here
-            </Link>{' '}
-            to sign in if you already have an account.
-          </p>
-        </div>
-        <Form />
+  <div className="auth-page">
+    <Link href="/" className="auth-logo-link">
+      <div className="auth-logo">
+        <span className="logo-icon">🎓</span>
+        <span className="logo-text">Accelero Foundation</span>
       </div>
-    </Section>
-  </Master>
+    </Link>
+
+    <div className="auth-container">
+      <div className="auth-header">
+        <h1>Create Account</h1>
+        <p>
+          Join Accelero Foundation and start making a difference in education.
+        </p>
+      </div>
+
+      <Form />
+
+      <div className="auth-footer">
+        <p>
+          Already have an account?{" "}
+          <Link href="/members/signin">Sign in here</Link>
+        </p>
+      </div>
+    </div>
+
+    <div className="auth-back-home">
+      <Link href="/">← Back to Home</Link>
+    </div>
+  </div>
 );
 
-const title = 'Sign up';
-const canonical = 'https://accelero-ticketing.com/members/signup';
-const description = 'accelero ticketing is a accelero ticketing solution';
+const title = "Sign Up - Accelero Foundation";
+const canonical = "https://accelero.vercel.app/members/signup";
+const description =
+  "Create your Accelero Foundation account and join us in transforming education across Indonesia";
 
 export const metadata: Metadata = {
   title,
   description,
-  keywords: 'accelero ticketing',
+  keywords:
+    "sign up, register, accelero foundation, education, volunteer, donate",
   alternates: { canonical },
   openGraph: {
     title,
     description,
     url: canonical,
-    type: 'website',
-    siteName: 'accelero ticketing',
-    images: 'https://accelero-ticketing.com/logo192.png',
+    type: "website",
+    siteName: "Accelero Foundation",
+    images: "/logo192.png",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/logo192.png"],
   },
 };
 
