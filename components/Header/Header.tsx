@@ -15,9 +15,11 @@ const Header: React.FC = () => {
     { name: "Home", href: "/" },
     { name: "Projects", href: "/projects" },
     { name: "Impact", href: "/impact" },
+    { name: "Partner", href: "/partner" },
     { name: "Volunteer", href: "/volunteer" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
+    { name: "Blog", href: "/Blog" },
   ];
 
   const toggleLanguage = () => {

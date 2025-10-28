@@ -1,0 +1,497 @@
+/* Partnership Hero Section */
+.partnership-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partnership-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.partnership-hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.partnership-hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+/* Button Styles */
+.btn-hero {
+    display: inline-block;
+    padding: 16px 40px;
+    background: white;
+    color: #667eea;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-outline {
+    display: inline-block;
+    padding: 12px 30px;
+    background: transparent;
+    color: #667eea;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-primary-large {
+    display: inline-block;
+    padding: 16px 40px;
+    background: white;
+    color: #667eea;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-large:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline-light {
+    display: inline-block;
+    padding: 16px 40px;
+    background: transparent;
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border: 2px solid white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+    background: white;
+    color: #667eea;
+    transform: translateY(-2px);
+}
+
+/* Why Partner Section */
+.partnership-why {
+    padding: 80px 20px;
+    background: #f8f9fa;
+}
+
+.partnership-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.benefit-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.benefit-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.benefit-card p {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* Partnership Types Section */
+.partnership-types {
+    padding: 80px 20px;
+}
+
+.partnership-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.type-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    border: 2px solid #e9ecef;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.type-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+}
+
+.type-card h3 {
+    font-size: 1.75rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.type-card > p {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.type-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    flex-grow: 1;
+}
+
+.type-features li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    color: #555;
+}
+
+.type-features li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Success Stories Section */
+.partnership-stories {
+    padding: 80px 20px;
+    background: #f8f9fa;
+}
+
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.story-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease;
+}
+
+.story-card:hover {
+    transform: translateY(-5px);
+}
+
+.story-image-placeholder {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.story-icon {
+    font-size: 4rem;
+}
+
+.story-content {
+    padding: 30px;
+}
+
+.story-content h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.story-description {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.story-impact {
+    display: flex;
+    gap: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+.impact-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.impact-stat strong {
+    font-size: 1.75rem;
+    color: #667eea;
+}
+
+.impact-stat span {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* Process Section */
+.partnership-process {
+    padding: 80px 20px;
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.process-step {
+    text-align: center;
+    position: relative;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin: 0 auto 20px;
+}
+
+.process-step h4 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.process-step p {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* CTA Section */
+.partnership-cta {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.cta-content p {
+    font-size: 1.125rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    line-height: 1.7;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Section Title */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .partnership-hero {
+        padding: 60px 20px;
+        min-height: 400px;
+    }
+
+    .partnership-hero-title {
+        font-size: 2rem;
+    }
+
+    .partnership-hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .btn-hero,
+    .btn-primary-large,
+    .btn-outline-light {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .partnership-why,
+    .partnership-types,
+    .partnership-stories,
+    .partnership-process,
+    .partnership-cta {
+        padding: 60px 20px;
+    }
+
+    .section-title {
+        font-size: 1.875rem;
+    }
+
+    .partnership-benefits-grid,
+    .partnership-types-grid,
+    .stories-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .benefit-card,
+    .type-card {
+        padding: 30px 20px;
+    }
+
+    .benefit-icon {
+        font-size: 2.5rem;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .story-impact {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cta-content h2 {
+        font-size: 1.75rem;
+    }
+
+    .cta-content p {
+        font-size: 1rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cta-buttons a {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .partnership-hero-title {
+        font-size: 1.75rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .benefit-card h3,
+    .type-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .story-content h4 {
+        font-size: 1.25rem;
+    }
+
+    .process-step h4 {
+        font-size: 1.125rem;
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .btn-hero,
+    .btn-primary-large,
+    .btn-outline-light {
+        padding: 14px 30px;
+        font-size: 1rem;
+    }
+
+    .btn-outline {
+        padding: 10px 25px;
+        font-size: 0.95rem;
+    }
+}

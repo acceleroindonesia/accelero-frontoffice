@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -11,6 +10,8 @@ import HowItWorks from "./home/components/HowItWorks";
 import VolunteerCTA from "./home/components/VolunteerCTA";
 import { ScrollAnimations } from "./home/components/ScrollAnimations";
 import Request, { type IResponse } from "@utils/Request";
+import PartnershipCTA from "./home/components/PartnershipCTA";
+import BlogCTA from "./home/components/BlogCTA";
 
 interface IProject {
   id: string;
@@ -109,6 +110,8 @@ const Page: React.FC = () => {
 
       <HowItWorks />
       <VolunteerCTA />
+      {/*<PartnershipCTA />*/}
+      {/*<BlogCTA />*/}
     </Master>
   );
 };

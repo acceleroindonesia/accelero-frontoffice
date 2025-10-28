@@ -30,6 +30,10 @@ const Heading: React.FC<IProps> = ({ text, type, color }) => {
     return <h6 className={color}>{text}</h6>;
   }
 
+  if (type === 7) {
+    return <h6 className={color}>{text}</h6>;
+  }
+
   throw Error('No H tag this type! Please use 1-6 type values.');
 };
 
