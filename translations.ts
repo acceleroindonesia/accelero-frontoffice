@@ -218,6 +218,41 @@ export const translations = {
     viewAllPrograms: 'View All Programs',
     supportThisProject: 'Support This Project',
     viewImpact: 'View Impact',
+    // Projects Page
+    makeADifferenceToday: 'Make a Difference Today',
+    browseOurPrograms:
+      'Browse our programs and support schools and students who need it most. Every donation is tracked transparently and makes a real impact.',
+    activePrograms: 'Active Programs',
+    totalRaised: 'Total Raised',
+    searchPrograms: 'Search programs...',
+    allPrograms: 'All Programs',
+    literacy: 'Literacy',
+    numeracy: 'Numeracy',
+    teacherTraining: 'Teacher Training',
+    infrastructure: 'Infrastructure',
+    allStatus: 'All Status',
+    active: 'Active',
+    completed: 'Completed',
+    newestFirst: 'Newest First',
+    lowestFunded: 'Lowest Funded',
+    highestFunded: 'Highest Funded',
+    mostImpact: 'Most Impact',
+    clear: 'Clear',
+    results: 'results',
+    result: 'result',
+    noProgramsFound: 'No Programs Found',
+    noProgramsFoundDesc:
+      "We couldn't find any programs matching your criteria. Try adjusting your filters or search query.",
+    noActiveProgramsDesc: "We don't have any active programs at the moment. Check back soon!",
+    resetFilters: 'Reset Filters',
+    cantFindWhatYoureLookingFor: "Can't Find What You're Looking For?",
+    donateToGeneralFundDesc:
+      "Make a general donation to our fund and we'll allocate it to the programs that need it most.",
+    donateToGeneralFund: 'Donate to General Fund',
+    contactUs: 'Contact Us',
+    wantToMakeEvenBiggerImpact: 'Want to Make an Even Bigger Impact?',
+    supportGeneralFundDesc:
+      "Support our general fund to help us allocate resources where they're needed most across all our programs.",
   },
   id: {
     // Navigation
@@ -437,6 +472,42 @@ export const translations = {
     viewAllPrograms: 'Lihat Semua Program',
     supportThisProject: 'Dukung Proyek Ini',
     viewImpact: 'Lihat Dampak',
+
+    // Projects Page
+    makeADifferenceToday: 'Buat Perbedaan Hari Ini',
+    browseOurPrograms:
+      'Jelajahi program kami dan dukung sekolah serta siswa yang paling membutuhkannya. Setiap donasi dilacak secara transparan dan membuat dampak nyata.',
+    activePrograms: 'Program Aktif',
+    totalRaised: 'Total Terkumpul',
+    searchPrograms: 'Cari program...',
+    allPrograms: 'Semua Program',
+    literacy: 'Literasi',
+    numeracy: 'Numerasi',
+    teacherTraining: 'Pelatihan Guru',
+    infrastructure: 'Infrastruktur',
+    allStatus: 'Semua Status',
+    active: 'Aktif',
+    completed: 'Selesai',
+    newestFirst: 'Terbaru',
+    lowestFunded: 'Pendanaan Terendah',
+    highestFunded: 'Pendanaan Tertinggi',
+    mostImpact: 'Dampak Terbesar',
+    clear: 'Hapus',
+    results: 'hasil',
+    result: 'hasil',
+    noProgramsFound: 'Program Tidak Ditemukan',
+    noProgramsFoundDesc:
+      'Kami tidak dapat menemukan program yang sesuai dengan kriteria Anda. Coba sesuaikan filter atau kata kunci pencarian Anda.',
+    noActiveProgramsDesc: 'Saat ini kami tidak memiliki program aktif. Periksa kembali nanti!',
+    resetFilters: 'Reset Filter',
+    cantFindWhatYoureLookingFor: 'Tidak Dapat Menemukan yang Anda Cari?',
+    donateToGeneralFundDesc:
+      'Buat donasi umum ke dana kami dan kami akan mengalokasikannya ke program yang paling membutuhkannya.',
+    donateToGeneralFund: 'Donasi ke Dana Umum',
+    contactUs: 'Hubungi Kami',
+    wantToMakeEvenBiggerImpact: 'Ingin Membuat Dampak yang Lebih Besar?',
+    supportGeneralFundDesc:
+      'Dukung dana umum kami untuk membantu kami mengalokasikan sumber daya di mana mereka paling dibutuhkan di semua program kami.',
   },
 }
 

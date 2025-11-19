@@ -6,6 +6,7 @@ import Section from '@components/Section/Section'
 import ProjectCard from '@components/Card/ProjectCard'
 import { ScrollAnimations } from '../home/components/ScrollAnimations'
 import Request, { type IResponse } from '@utils/Request'
+import { useLanguage } from '@contexts/LanguageContext'
 
 interface IProject {
   id: string
@@ -22,6 +23,7 @@ interface IProject {
 }
 
 const ProjectsPage: React.FC = () => {
+  const { t } = useLanguage()
   const [projects, setProjects] = useState<IProject[]>([])
   const [filteredProjects, setFilteredProjects] = useState<IProject[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -31,11 +33,11 @@ const ProjectsPage: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>('newest')
 
   const categories = [
-    { value: 'all', label: 'All Programs', icon: '🎯' },
-    { value: 'literacy', label: 'Literacy', icon: '📚' },
-    { value: 'numeracy', label: 'Numeracy', icon: '🔢' },
-    { value: 'teacher-training', label: 'Teacher Training', icon: '👨‍🏫' },
-    { value: 'infrastructure', label: 'Infrastructure', icon: '🏗️' },
+    { value: 'all', label: t('allPrograms'), icon: '🎯' },
+    { value: 'literacy', label: t('literacy'), icon: '📚' },
+    { value: 'numeracy', label: t('numeracy'), icon: '🔢' },
+    { value: 'teacher-training', label: t('teacherTraining'), icon: '👨‍🏫' },
+    { value: 'infrastructure', label: t('infrastructure'), icon: '🏗️' },
   ]
 
   useEffect(() => {
@@ -90,18 +92,18 @@ const ProjectsPage: React.FC = () => {
     switch (sortBy) {
       case 'newest':
         break
-      case 'funding-high':
-        filtered.sort((a, b) => {
-          const aPercent = (a.raisedAmount / a.goalAmount) * 100
-          const bPercent = (b.raisedAmount / b.goalAmount) * 100
-          return bPercent - aPercent
-        })
-        break
       case 'funding-low':
         filtered.sort((a, b) => {
           const aPercent = (a.raisedAmount / a.goalAmount) * 100
           const bPercent = (b.raisedAmount / b.goalAmount) * 100
           return aPercent - bPercent
+        })
+        break
+      case 'funding-high':
+        filtered.sort((a, b) => {
+          const aPercent = (a.raisedAmount / a.goalAmount) * 100
+          const bPercent = (b.raisedAmount / b.goalAmount) * 100
+          return bPercent - aPercent
         })
         break
       case 'impact-high':
@@ -157,25 +159,22 @@ const ProjectsPage: React.FC = () => {
       <section className="projects-page-header">
         <div className="container">
           <div className="header-content">
-            <span className="page-label">Our Programs</span>
-            <h1 className="page-title">Make a Difference Today</h1>
-            <p className="page-subtitle">
-              Browse our programs and support schools and students who need it most. Every donation
-              is tracked transparently and makes a real impact.
-            </p>
+            <span className="page-label">{t('ourPrograms')}</span>
+            <h1 className="page-title">{t('makeADifferenceToday')}</h1>
+            <p className="page-subtitle">{t('browseOurPrograms')}</p>
           </div>
 
           {hasAnyProjects && (
             <div className="header-stats">
               <div className="stat-item">
                 <div className="stat-value">{projects.length}</div>
-                <div className="stat-label">Active Programs</div>
+                <div className="stat-label">{t('activePrograms')}</div>
               </div>
               <div className="stat-item">
                 <div className="stat-value">
                   {projects.reduce((sum, p) => sum + p.studentsImpacted, 0).toLocaleString()}
                 </div>
-                <div className="stat-label">Students Reached</div>
+                <div className="stat-label">{t('studentsReached')}</div>
               </div>
               <div className="stat-item">
                 <div className="stat-value">
@@ -185,7 +184,7 @@ const ProjectsPage: React.FC = () => {
                   ).toLocaleString()}
                   M
                 </div>
-                <div className="stat-label">Total Raised</div>
+                <div className="stat-label">{t('totalRaised')}</div>
               </div>
             </div>
           )}
@@ -201,7 +200,7 @@ const ProjectsPage: React.FC = () => {
                   <span className="search-icon">🔍</span>
                   <input
                     type="text"
-                    placeholder="Search programs..."
+                    placeholder={t('searchPrograms')}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="search-input"
@@ -231,9 +230,9 @@ const ProjectsPage: React.FC = () => {
                     onChange={(e) => setSelectedStatus(e.target.value)}
                     className="filter-select"
                   >
-                    <option value="all">All Status</option>
-                    <option value="active">Active</option>
-                    <option value="completed">Completed</option>
+                    <option value="all">{t('allStatus')}</option>
+                    <option value="active">{t('active')}</option>
+                    <option value="completed">{t('completed')}</option>
                   </select>
 
                   <select
@@ -241,10 +240,10 @@ const ProjectsPage: React.FC = () => {
                     onChange={(e) => setSortBy(e.target.value)}
                     className="filter-select"
                   >
-                    <option value="newest">Newest First</option>
-                    <option value="funding-low">Lowest Funded</option>
-                    <option value="funding-high">Highest Funded</option>
-                    <option value="impact-high">Most Impact</option>
+                    <option value="newest">{t('newestFirst')}</option>
+                    <option value="funding-low">{t('lowestFunded')}</option>
+                    <option value="funding-high">{t('highestFunded')}</option>
+                    <option value="impact-high">{t('mostImpact')}</option>
                   </select>
                 </div>
               </div>
@@ -252,12 +251,12 @@ const ProjectsPage: React.FC = () => {
               <div className="filter-actions">
                 {activeFiltersCount > 0 && (
                   <button className="clear-filters-btn" onClick={handleClearFilters}>
-                    Clear ({activeFiltersCount})
+                    {t('clear')} ({activeFiltersCount})
                   </button>
                 )}
                 <div className="results-count">
-                  {filteredProjects.length} result
-                  {filteredProjects.length !== 1 ? 's' : ''}
+                  {filteredProjects.length}{' '}
+                  {filteredProjects.length !== 1 ? t('results') : t('result')}
                 </div>
               </div>
             </div>
@@ -289,15 +288,11 @@ const ProjectsPage: React.FC = () => {
           ) : (
             <div className="no-results">
               <div className="no-results-icon">🔍</div>
-              <h3>No Programs Found</h3>
-              <p>
-                {hasAnyProjects
-                  ? "We couldn't find any programs matching your criteria. Try adjusting your filters or search query."
-                  : "We don't have any active programs at the moment. Check back soon!"}
-              </p>
+              <h3>{t('noProgramsFound')}</h3>
+              <p>{hasAnyProjects ? t('noProgramsFoundDesc') : t('noActiveProgramsDesc')}</p>
               {hasAnyProjects && activeFiltersCount > 0 && (
                 <button className="btn-reset" onClick={handleClearFilters}>
-                  Reset Filters
+                  {t('resetFilters')}
                 </button>
               )}
             </div>
@@ -310,18 +305,15 @@ const ProjectsPage: React.FC = () => {
           <div className="container">
             <div className="cta-card">
               <div className="cta-content">
-                <h2>Can't Find What You're Looking For?</h2>
-                <p>
-                  Make a general donation to our fund and we'll allocate it to the programs that
-                  need it most.
-                </p>
+                <h2>{t('cantFindWhatYoureLookingFor')}</h2>
+                <p>{t('donateToGeneralFundDesc')}</p>
               </div>
               <div className="cta-actions">
                 <a href="/donate?type=general" className="btn-cta-large">
-                  Donate to General Fund
+                  {t('donateToGeneralFund')}
                 </a>
                 <a href="/contact" className="btn-cta-outline">
-                  Contact Us
+                  {t('contactUs')}
                 </a>
               </div>
             </div>
@@ -334,18 +326,15 @@ const ProjectsPage: React.FC = () => {
           <div className="container">
             <div className="cta-card">
               <div className="cta-content">
-                <h2>Want to Make an Even Bigger Impact?</h2>
-                <p>
-                  Support our general fund to help us allocate resources where they're needed most
-                  across all our programs.
-                </p>
+                <h2>{t('wantToMakeEvenBiggerImpact')}</h2>
+                <p>{t('supportGeneralFundDesc')}</p>
               </div>
               <div className="cta-actions">
                 <a href="/donate?type=general" className="btn-cta-large">
-                  Donate to General Fund
+                  {t('donateToGeneralFund')}
                 </a>
                 <a href="/contact" className="btn-cta-outline">
-                  Learn More
+                  {t('learnMore')}
                 </a>
               </div>
             </div>
