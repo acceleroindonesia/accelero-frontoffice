@@ -1633,7 +1633,12 @@ input[type='range' i]::-webkit-slider-thumb {
 }
 
 .lang-code {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
   letter-spacing: 0.5px;
 }
 
