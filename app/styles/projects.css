@@ -45,7 +45,7 @@
 
 .projects-section-modern .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
   gap: 2.5rem;
   margin-bottom: 3rem;
 }
@@ -394,7 +394,7 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
   gap: 2.5rem;
 }
 
@@ -747,7 +747,7 @@
 /* ===== Responsive Design ===== */
 @media (max-width: 1200px) {
   .projects-grid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   }
 }
 
@@ -798,6 +798,11 @@
   .filter-right {
     width: 100%;
     justify-content: space-between;
+  }
+
+  .projects-section-modern .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .projects-grid {
