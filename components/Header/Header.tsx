@@ -90,7 +90,7 @@ const Header: React.FC = () => {
           {/* Primary CTA */}
           <Link href="/donate" className="donate-button" suppressHydrationWarning>
             <span className="donate-icon">❤️</span>
-            <span>Donate Now</span>
+            <span>{t('donate')}</span>
           </Link>
 
           {/* Mobile Menu Toggle */}

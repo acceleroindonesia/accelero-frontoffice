@@ -6,6 +6,7 @@ import Master from '@components/Layout/Master'
 import Image from 'next/image'
 import Link from 'next/link'
 import Request, { type IResponse } from '@utils/Request'
+import { useLanguage } from '@contexts/LanguageContext'
 
 interface IProjectDetail {
   id: string
@@ -56,6 +57,7 @@ const ProjectDetailPage: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<'overview' | 'updates' | 'budget' | 'timeline'>(
     'overview',
   )
+  const { t } = useLanguage()
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -444,7 +446,7 @@ const ProjectDetailPage: React.FC = () => {
                   <>
                     <Link href={`/donate?project=${project.id}`} className="btn-donate-large">
                       <span className="btn-icon">❤️</span>
-                      <span>Donate Now</span>
+                      <span>{t('donate')}</span>
                     </Link>
                     <button className="btn-share">
                       <span className="btn-icon">📤</span>
