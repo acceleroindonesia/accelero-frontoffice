@@ -454,7 +454,6 @@ export const translations = {
     getInTouch: 'Get in Touch',
 
     // Contact Page
-    getInTouch: 'Get In Touch',
     contactHeroTitle: "We'd Love to Hear From You",
     contactHeroSubtitle:
       "Have questions about our programs? Want to volunteer or partner with us? We're here to help and excited to connect!",
@@ -533,6 +532,31 @@ export const translations = {
       'Whether through volunteering, donating, or partnering—there are many ways to support educational equity in Indonesia.',
     makeADonation: 'Make a Donation',
     viewOurPrograms: 'View Our Programs',
+
+    // Blog Page
+    ourBlog: 'Our Blog',
+    storiesOfImpact: 'Stories of Impact',
+    blogHeroSubtitle:
+      'Discover the latest news, impact stories, and updates from our work in education and community development.',
+    searchArticles: 'Search articles...',
+    allPosts: 'All Posts',
+    impactStoriesCategory: 'Impact Stories',
+    updatesCategory: 'Updates',
+    eventsCategory: 'Events',
+    teamNewsCategory: 'Team News',
+    clearFilters: 'Clear Filters',
+    showing: 'Showing',
+    of: 'of',
+    articles: 'articles',
+    noArticlesFound: 'No Articles Found',
+    noArticlesMessage:
+      "We couldn't find any articles matching your criteria. Try adjusting your filters or search query.",
+    stayUpdated: 'Stay Updated',
+    subscribeNewsletter:
+      'Subscribe to our newsletter to receive the latest impact stories, program updates, and volunteer opportunities directly in your inbox.',
+    enterYourEmail: 'Enter your email',
+    subscribeBtn: 'Subscribe',
+    minRead: 'min read',
   },
   id: {
     // Navigation
@@ -1071,6 +1095,32 @@ export const translations = {
       'Baik melalui volunteering, donasi, atau kemitraan—ada banyak cara untuk mendukung kesetaraan pendidikan di Indonesia.',
     makeADonation: 'Buat Donasi',
     viewOurPrograms: 'Lihat Program Kami',
+
+    // Blog Page
+    ourBlog: 'Blog Kami',
+    storiesOfImpact: 'Kisah Dampak',
+    blogHeroSubtitle:
+      'Temukan berita terbaru, kisah dampak, dan pembaruan dari pekerjaan kami di bidang pendidikan dan pengembangan komunitas.',
+    searchArticles: 'Cari artikel...',
+    allPosts: 'Semua Postingan',
+    impactStoriesCategory: 'Kisah Dampak',
+    updatesCategory: 'Pembaruan',
+    eventsCategory: 'Acara',
+    teamNewsCategory: 'Berita Tim',
+    clearFilters: 'Hapus Filter',
+    showing: 'Menampilkan',
+    of: 'dari',
+    articles: 'artikel',
+    noArticlesFound: 'Artikel Tidak Ditemukan',
+    noArticlesMessage:
+      'Kami tidak dapat menemukan artikel yang sesuai dengan kriteria Anda. Coba sesuaikan filter atau kata kunci pencarian Anda.',
+    resetFilters: 'Reset Filter',
+    stayUpdated: 'Tetap Terkini',
+    subscribeNewsletter:
+      'Berlangganan newsletter kami untuk menerima kisah dampak terbaru, pembaruan program, dan peluang relawan langsung di kotak masuk Anda.',
+    enterYourEmail: 'Masukkan email Anda',
+    subscribeBtn: 'Berlangganan',
+    minRead: 'menit baca',
   },
 }
 
