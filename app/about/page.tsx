@@ -3,9 +3,11 @@
 import Master from '@components/Layout/Master'
 import Section from '@components/Section/Section'
 import { ScrollAnimations } from '../home/components/ScrollAnimations'
-import Image from 'next/image'
+import { useLanguage } from '@contexts/LanguageContext'
 
 const AboutPage: React.FC = () => {
+  const { t } = useLanguage()
+
   return (
     <Master>
       <ScrollAnimations />
@@ -14,13 +16,9 @@ const AboutPage: React.FC = () => {
       <section className="about-hero">
         <div className="container">
           <div className="about-hero-content">
-            <span className="about-label">About Accelero</span>
-            <h1 className="about-title">Empowering Indonesia's Future, One Child at a Time</h1>
-            <p className="about-subtitle">
-              We believe that every child deserves quality education, regardless of where they were
-              born. Together, we're bridging the learning gap in Indonesia's most underserved
-              communities.
-            </p>
+            <span className="about-label">{t('aboutAccelero')}</span>
+            <h1 className="about-title">{t('aboutHeroTitle')}</h1>
+            <p className="about-subtitle">{t('aboutHeroSubtitle')}</p>
           </div>
         </div>
       </section>
@@ -30,29 +28,15 @@ const AboutPage: React.FC = () => {
         <div className="container">
           <div className="story-grid">
             <div className="story-content">
-              <span className="section-label">Our Story</span>
-              <h2 className="section-title-large">Born from Personal Experience</h2>
-              <p className="story-text">
-                Founded in 2025 by <strong>Catherine Octaviane Tikara</strong> and{' '}
-                <strong>Kevin Evannanda Septian</strong>, Accelero was born from personal
-                experience. Both founders grew up in rural regions of Indonesia and witnessed
-                firsthand the educational disparities that exist between urban and rural
-                communities.
-              </p>
-              <p className="story-text">
-                Their journey through education in urban centers gave them a deep understanding of
-                the challenges faced by students who are often left behind in the classroom. Driven
-                by this awareness and a commitment to change, they founded Accelero to address the
-                urgent need for equitable educational opportunities for children in rural Indonesia.
-              </p>
+              <span className="section-label">{t('ourStory')}</span>
+              <h2 className="section-title-large">{t('bornFromExperience')}</h2>
+              <p className="story-text">{t('ourStoryText1')}</p>
+              <p className="story-text">{t('ourStoryText2')}</p>
               <div className="story-highlight">
                 <span className="highlight-icon">🏆</span>
                 <div>
-                  <h4>D-Prize Grant Recipient 2025</h4>
-                  <p>
-                    Recognized for our innovative approach to distributing evidence-based education
-                    solutions in underserved regions.
-                  </p>
+                  <h4>{t('dPrizeRecipient')}</h4>
+                  <p>{t('dPrizeDesc')}</p>
                 </div>
               </div>
             </div>
@@ -71,20 +55,13 @@ const AboutPage: React.FC = () => {
           <div className="mv-grid">
             <div className="mv-card mission-card">
               <div className="mv-icon">🎯</div>
-              <h3>Our Mission</h3>
-              <p>
-                To accelerate foundational literacy and numeracy for children in Indonesia's most
-                underserved communities through evidence-based teaching methods and community
-                empowerment.
-              </p>
+              <h3>{t('ourMission')}</h3>
+              <p>{t('missionText')}</p>
             </div>
             <div className="mv-card vision-card">
               <div className="mv-icon">🌟</div>
-              <h3>Our Vision</h3>
-              <p>
-                An Indonesia where no child is left behind because of where they were born—where
-                every child has access to quality education and the opportunity to thrive.
-              </p>
+              <h3>{t('ourVision')}</h3>
+              <p>{t('visionText')}</p>
             </div>
           </div>
         </div>
@@ -94,52 +71,34 @@ const AboutPage: React.FC = () => {
       <Section className="what-we-do-section">
         <div className="container">
           <div className="section-header-center">
-            <span className="section-label">What We Do</span>
-            <h2 className="section-title-large">
-              Evidence-Based Education, Community-Powered Impact
-            </h2>
-            <p className="section-description">
-              We bring the proven Teaching at the Right Level (TaRL) methodology to rural primary
-              schools across Indonesia
-            </p>
+            <span className="section-label">{t('whatWeDo')}</span>
+            <h2 className="section-title-large">{t('evidenceBasedEducation')}</h2>
+            <p className="section-description">{t('whatWeDoDesc')}</p>
           </div>
 
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">📖</div>
-              <h3>After-School Programs</h3>
-              <p>
-                Supporting students in grades 3-6 who are falling behind in reading and math by
-                teaching them based on their actual learning level, not their grade level.
-              </p>
+              <h3>{t('afterSchoolPrograms')}</h3>
+              <p>{t('afterSchoolDesc')}</p>
             </div>
 
             <div className="feature-card">
               <div className="feature-icon">👨‍🏫</div>
-              <h3>University Volunteer Training</h3>
-              <p>
-                Partnering with local universities to recruit and train student volunteers,
-                providing hands-on teaching experience while empowering them to serve their
-                communities.
-              </p>
+              <h3>{t('universityVolunteer')}</h3>
+              <p>{t('universityVolunteerDesc')}</p>
             </div>
 
             <div className="feature-card">
               <div className="feature-icon">📚</div>
-              <h3>Literacy-Rich Environments</h3>
-              <p>
-                Equipping schools with reading books through donations and local partnerships,
-                helping create joyful, engaging learning spaces.
-              </p>
+              <h3>{t('literacyRichEnvironments')}</h3>
+              <p>{t('literacyRichDesc')}</p>
             </div>
 
             <div className="feature-card">
               <div className="feature-icon">🤝</div>
-              <h3>Community Partnerships</h3>
-              <p>
-                Working closely with schools, district education offices, and local universities to
-                create inclusive and scalable learning ecosystems.
-              </p>
+              <h3>{t('communityPartnerships')}</h3>
+              <p>{t('communityPartnershipsDesc')}</p>
             </div>
           </div>
         </div>
@@ -149,36 +108,34 @@ const AboutPage: React.FC = () => {
       <section className="impact-goals-section">
         <div className="container">
           <div className="section-header-center">
-            <span className="section-label">Our Impact</span>
-            <h2 className="section-title-large">Making Education Accessible</h2>
-            <p className="section-description">
-              Our ambitious goals for creating lasting change in Indonesia's education landscape
-            </p>
+            <span className="section-label">{t('ourImpact')}</span>
+            <h2 className="section-title-large">{t('makingEducationAccessible')}</h2>
+            <p className="section-description">{t('impactGoalsDesc')}</p>
           </div>
 
           <div className="goals-grid">
             <div className="goal-card">
               <div className="goal-number">5,000+</div>
-              <div className="goal-label">Students Reached</div>
-              <p className="goal-desc">Across 5 provinces by 2026</p>
+              <div className="goal-label">{t('studentsReachedGoal')}</div>
+              <p className="goal-desc">{t('acrossProvinces')}</p>
             </div>
 
             <div className="goal-card">
               <div className="goal-number">500+</div>
-              <div className="goal-label">Volunteer Teachers</div>
-              <p className="goal-desc">Trained and empowered</p>
+              <div className="goal-label">{t('volunteerTeachers')}</div>
+              <p className="goal-desc">{t('trainedEmpowered')}</p>
             </div>
 
             <div className="goal-card">
               <div className="goal-number">200</div>
-              <div className="goal-label">Pilot Learners</div>
-              <p className="goal-desc">Current milestone in Sorong</p>
+              <div className="goal-label">{t('pilotLearners')}</div>
+              <p className="goal-desc">{t('currentMilestone')}</p>
             </div>
 
             <div className="goal-card">
               <div className="goal-number">864</div>
-              <div className="goal-label">Proven Interventions</div>
-              <p className="goal-desc">Evidence-based programs</p>
+              <div className="goal-label">{t('provenInterventions')}</div>
+              <p className="goal-desc">{t('evidenceBasedPrograms')}</p>
             </div>
           </div>
         </div>
@@ -188,63 +145,48 @@ const AboutPage: React.FC = () => {
       <Section className="why-different-section">
         <div className="container">
           <div className="section-header-center">
-            <span className="section-label">Why We're Different</span>
-            <h2 className="section-title-large">A Sustainable, Community-Driven Model</h2>
+            <span className="section-label">{t('whyDifferent')}</span>
+            <h2 className="section-title-large">{t('sustainableCommunityModel')}</h2>
           </div>
 
           <div className="differences-list">
             <div className="difference-item">
               <div className="diff-number">01</div>
               <div className="diff-content">
-                <h3>Evidence-Based</h3>
-                <p>
-                  We use the globally-proven Teaching at the Right Level (TaRL) methodology, backed
-                  by rigorous research and successful implementation worldwide.
-                </p>
+                <h3>{t('evidenceBased')}</h3>
+                <p>{t('evidenceBasedDesc')}</p>
               </div>
             </div>
 
             <div className="difference-item">
               <div className="diff-number">02</div>
               <div className="diff-content">
-                <h3>Local Talent</h3>
-                <p>
-                  We recruit and develop educators from within the communities we serve, ensuring
-                  cultural relevance and long-term sustainability.
-                </p>
+                <h3>{t('localTalent')}</h3>
+                <p>{t('localTalentDesc')}</p>
               </div>
             </div>
 
             <div className="difference-item">
               <div className="diff-number">03</div>
               <div className="diff-content">
-                <h3>Scalable Model</h3>
-                <p>
-                  Our university partnership model can be replicated across Indonesia, creating a
-                  multiplier effect for educational impact.
-                </p>
+                <h3>{t('scalableModelTitle')}</h3>
+                <p>{t('scalableModelDesc')}</p>
               </div>
             </div>
 
             <div className="difference-item">
               <div className="diff-number">04</div>
               <div className="diff-content">
-                <h3>Sustainable Approach</h3>
-                <p>
-                  We build capacity within communities rather than creating dependency, ensuring
-                  lasting change beyond our direct involvement.
-                </p>
+                <h3>{t('sustainableApproach')}</h3>
+                <p>{t('sustainableApproachDesc')}</p>
               </div>
             </div>
 
             <div className="difference-item">
               <div className="diff-number">05</div>
               <div className="diff-content">
-                <h3>Holistic Support</h3>
-                <p>
-                  We combine curriculum innovation with literacy culture and infrastructure support
-                  for comprehensive educational transformation.
-                </p>
+                <h3>{t('holisticSupport')}</h3>
+                <p>{t('holisticSupportDesc')}</p>
               </div>
             </div>
           </div>
@@ -255,11 +197,9 @@ const AboutPage: React.FC = () => {
       <section className="team-section">
         <div className="container">
           <div className="section-header-center">
-            <span className="section-label">Our Team</span>
-            <h2 className="section-title-large">Meet the Founders</h2>
-            <p className="section-description">
-              Passionate educators committed to transforming Indonesia's education landscape
-            </p>
+            <span className="section-label">{t('ourTeam')}</span>
+            <h2 className="section-title-large">{t('meetTheFounders')}</h2>
+            <p className="section-description">{t('passionateEducators')}</p>
           </div>
 
           <div className="team-grid">
@@ -268,12 +208,8 @@ const AboutPage: React.FC = () => {
                 <span className="team-initials">CT</span>
               </div>
               <h3>Catherine Octaviane Tikara</h3>
-              <p className="team-role">Co-Founder & Strategic Program Lead</p>
-              <p className="team-bio">
-                Responsible for program innovation, stakeholder engagement, and scaling strategies
-                from ideation to implementation. Catherine's rural roots fuel her passion for
-                educational equity.
-              </p>
+              <p className="team-role">{t('coFounderStrategic')}</p>
+              <p className="team-bio">{t('catherineBio')}</p>
             </div>
 
             <div className="team-card">
@@ -281,11 +217,8 @@ const AboutPage: React.FC = () => {
                 <span className="team-initials">KE</span>
               </div>
               <h3>Kevin Evannanda Septian</h3>
-              <p className="team-role">Co-Founder</p>
-              <p className="team-bio">
-                Bringing expertise in operational excellence and community partnerships. Kevin's
-                firsthand experience with educational disparities drives Accelero's mission forward.
-              </p>
+              <p className="team-role">{t('coFounder')}</p>
+              <p className="team-bio">{t('kevinBio')}</p>
             </div>
           </div>
         </div>
@@ -295,20 +228,17 @@ const AboutPage: React.FC = () => {
       <section className="about-cta-section">
         <div className="container">
           <div className="cta-card-large">
-            <h2>Join the Movement</h2>
-            <p>
-              Whether you're a university student, educator, donor, or partner organization—there's
-              a place for you in creating educational equity across Indonesia.
-            </p>
+            <h2>{t('joinTheMovement')}</h2>
+            <p>{t('joinMovementDesc')}</p>
             <div className="cta-buttons-group">
               <a href="/donate" className="btn-cta-primary-large">
-                Support Our Mission
+                {t('supportOurMission')}
               </a>
               <a href="/volunteer" className="btn-cta-secondary-large">
-                Become a Volunteer
+                {t('becomeVolunteer')}
               </a>
               <a href="/contact" className="btn-cta-outline-large">
-                Get in Touch
+                {t('getInTouch')}
               </a>
             </div>
           </div>

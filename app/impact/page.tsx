@@ -5,6 +5,7 @@ import Master from '@components/Layout/Master'
 import Section from '@components/Section/Section'
 import { ScrollAnimations } from '../home/components/ScrollAnimations'
 import Request, { type IResponse } from '@utils/Request'
+import { useLanguage } from '@contexts/LanguageContext'
 
 interface IImpactStats {
   totalStudents: number
@@ -16,6 +17,7 @@ interface IImpactStats {
 }
 
 const ImpactPage: React.FC = () => {
+  const { t } = useLanguage()
   const [stats, setStats] = useState<IImpactStats>({
     totalStudents: 0,
     totalSchools: 0,
@@ -46,8 +48,7 @@ const ImpactPage: React.FC = () => {
         const activePrograms = projects.filter((p: any) => p.status === 'active').length
         const completedPrograms = projects.filter((p: any) => p.status === 'completed').length
 
-        // Estimate schools (some projects have multiple schools)
-        const totalSchools = projects.length + 4 // +4 for multi-school partnerships
+        const totalSchools = projects.length + 4
 
         setStats({
           totalStudents,
@@ -94,12 +95,9 @@ const ImpactPage: React.FC = () => {
       <section className="impact-hero">
         <div className="container">
           <div className="impact-hero-content">
-            <span className="impact-label">Our Impact</span>
-            <h1 className="impact-title">Transforming Lives Through Education</h1>
-            <p className="impact-subtitle">
-              See the real, measurable difference we're making in communities across Indonesia.
-              Every number represents a child's brighter future.
-            </p>
+            <span className="impact-label">{t('ourImpact')}</span>
+            <h1 className="impact-title">{t('measuringOurImpact')}</h1>
+            <p className="impact-subtitle">{t('impactPageDesc')}</p>
           </div>
         </div>
       </section>
@@ -111,14 +109,14 @@ const ImpactPage: React.FC = () => {
             <div className="stat-card-large">
               <div className="stat-icon">🎓</div>
               <div className="stat-number">{stats.totalStudents.toLocaleString()}</div>
-              <div className="stat-label">Students Reached</div>
+              <div className="stat-label">{t('totalStudentsReached')}</div>
               <div className="stat-description">Children receiving quality education support</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">🏫</div>
               <div className="stat-number">{stats.totalSchools}</div>
-              <div className="stat-label">Schools Partnered</div>
+              <div className="stat-label">{t('schoolsTransformed')}</div>
               <div className="stat-description">Educational institutions we work with</div>
             </div>
 
@@ -132,21 +130,21 @@ const ImpactPage: React.FC = () => {
             <div className="stat-card-large">
               <div className="stat-icon">💰</div>
               <div className="stat-number">{formatCurrency(stats.totalFunded)}</div>
-              <div className="stat-label">Total Raised</div>
+              <div className="stat-label">{t('totalRaised')}</div>
               <div className="stat-description">Invested in children's futures</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">🚀</div>
               <div className="stat-number">{stats.activePrograms}</div>
-              <div className="stat-label">Active Programs</div>
+              <div className="stat-label">{t('activePrograms')}</div>
               <div className="stat-description">Ongoing educational initiatives</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">✅</div>
               <div className="stat-number">{stats.completedPrograms}</div>
-              <div className="stat-label">Completed Programs</div>
+              <div className="stat-label">{t('completed')} Programs</div>
               <div className="stat-description">Successfully finished projects</div>
             </div>
           </div>
@@ -282,7 +280,7 @@ const ImpactPage: React.FC = () => {
       <Section className="success-stories-section">
         <div className="container">
           <div className="section-header-center">
-            <h2 className="section-title-large">Success Stories</h2>
+            <h2 className="section-title-large">{t('successStories')}</h2>
             <p className="section-description">Real stories of transformation from our programs</p>
           </div>
 
@@ -416,7 +414,7 @@ const ImpactPage: React.FC = () => {
             </p>
             <div className="cta-buttons-group">
               <a href="/donate" className="btn-cta-primary-large">
-                Make a Donation
+                {t('donateToday')}
               </a>
               <a href="/projects" className="btn-cta-secondary-large">
                 Browse Programs

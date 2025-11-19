@@ -3,9 +3,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Master from '@components/Layout/Master'
+import { useLanguage } from '@contexts/LanguageContext'
 
 const VolunteerPage = () => {
   const router = useRouter()
+  const { t } = useLanguage()
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -19,18 +22,20 @@ const VolunteerPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState('')
 
-  const volunteerAreas = [
-    'Education & Tutoring',
-    'Healthcare & Medical',
-    'Environmental Conservation',
-    'Community Development',
-    'Technology & Digital Skills',
-    'Arts & Culture',
-    'Animal Welfare',
-    'Disaster Relief',
+  // Volunteer areas with translation keys
+  const volunteerAreaKeys = [
+    'educationTutoring',
+    'healthcareMedical',
+    'environmentalConservation',
+    'communityDevelopment',
+    'technologyDigitalSkills',
+    'artsCulture',
+    'animalWelfare',
+    'disasterRelief',
   ]
 
-  const availabilityOptions = ['Weekdays', 'Weekends', 'Evenings', 'Flexible']
+  // Availability options with translation keys
+  const availabilityKeys = ['weekdays', 'weekends', 'evenings', 'flexible']
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -39,14 +44,14 @@ const VolunteerPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const toggleInterest = (area: string) => {
+  const toggleInterest = (areaKey: string) => {
     setFormData((prev) => {
-      const isSelected = prev.interests.includes(area)
+      const isSelected = prev.interests.includes(areaKey)
       return {
         ...prev,
         interests: isSelected
-          ? prev.interests.filter((item) => item !== area)
-          : [...prev.interests, area],
+          ? prev.interests.filter((item) => item !== areaKey)
+          : [...prev.interests, areaKey],
       }
     })
   }
@@ -64,7 +69,7 @@ const VolunteerPage = () => {
       })
 
       if (response.ok) {
-        setMessage('Thank you for your interest! We will contact you soon.')
+        setMessage(t('thankYouVolunteer'))
         setFormData({
           firstName: '',
           lastName: '',
@@ -77,10 +82,10 @@ const VolunteerPage = () => {
         })
         setTimeout(() => router.push('/home'), 3000)
       } else {
-        setMessage('Something went wrong. Please try again.')
+        setMessage(t('somethingWentWrong'))
       }
     } catch (error) {
-      setMessage('Failed to submit. Please try again later.')
+      setMessage(t('failedToSubmit'))
     } finally {
       setIsSubmitting(false)
     }
@@ -91,11 +96,8 @@ const VolunteerPage = () => {
       <div className="volunteer-page">
         <section className="volunteer-hero">
           <div className="container">
-            <h1>Become a Volunteer</h1>
-            <p>
-              Make a difference in your community. Join our team of dedicated volunteers and help
-              create positive change.
-            </p>
+            <h1>{t('volunteerHeroTitle')}</h1>
+            <p>{t('volunteerHeroSubtitle')}</p>
           </div>
         </section>
 
@@ -103,35 +105,37 @@ const VolunteerPage = () => {
           <div className="container">
             <div className="volunteer-grid">
               <div className="volunteer-info">
-                <h2>Why Volunteer?</h2>
+                <h2>{t('whyVolunteer')}</h2>
                 <div className="benefits">
                   <div className="benefit-item">
                     <div className="benefit-icon">🤝</div>
-                    <h3>Make an Impact</h3>
-                    <p>Directly contribute to meaningful projects that change lives</p>
+                    <h3>{t('makeAnImpact')}</h3>
+                    <p>{t('makeAnImpactDesc')}</p>
                   </div>
                   <div className="benefit-item">
                     <div className="benefit-icon">🌱</div>
-                    <h3>Learn & Grow</h3>
-                    <p>Develop new skills and gain valuable experience</p>
+                    <h3>{t('learnAndGrow')}</h3>
+                    <p>{t('learnAndGrowDesc')}</p>
                   </div>
                   <div className="benefit-item">
                     <div className="benefit-icon">👥</div>
-                    <h3>Connect</h3>
-                    <p>Meet like-minded people and build lasting relationships</p>
+                    <h3>{t('connect')}</h3>
+                    <p>{t('connectDesc')}</p>
                   </div>
                   <div className="benefit-item">
                     <div className="benefit-icon">💪</div>
-                    <h3>Empower</h3>
-                    <p>Help empower communities to reach their full potential</p>
+                    <h3>{t('empower')}</h3>
+                    <p>{t('empowerDesc')}</p>
                   </div>
                 </div>
               </div>
 
               <div className="volunteer-form-wrapper">
-                <h2>Volunteer Application</h2>
+                <h2>{t('volunteerApplication')}</h2>
                 {message && (
-                  <div className={`message ${message.includes('Thank you') ? 'success' : 'error'}`}>
+                  <div
+                    className={`message ${message.includes(t('thankYouVolunteer').split('!')[0]) ? 'success' : 'error'}`}
+                  >
                     {message}
                   </div>
                 )}
@@ -139,7 +143,7 @@ const VolunteerPage = () => {
                   <div className="form-row">
                     <div className="form-group">
                       <label htmlFor="firstName">
-                        First Name <span className="required">*</span>
+                        {t('firstName')} <span className="required">{t('required')}</span>
                       </label>
                       <input
                         type="text"
@@ -152,7 +156,7 @@ const VolunteerPage = () => {
                     </div>
                     <div className="form-group">
                       <label htmlFor="lastName">
-                        Last Name <span className="required">*</span>
+                        {t('lastName')} <span className="required">{t('required')}</span>
                       </label>
                       <input
                         type="text"
@@ -168,7 +172,7 @@ const VolunteerPage = () => {
                   <div className="form-row">
                     <div className="form-group">
                       <label htmlFor="email">
-                        Email <span className="required">*</span>
+                        {t('email')} <span className="required">{t('required')}</span>
                       </label>
                       <input
                         type="email"
@@ -180,7 +184,7 @@ const VolunteerPage = () => {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="phone">Phone</label>
+                      <label htmlFor="phone">{t('phone')}</label>
                       <input
                         type="tel"
                         id="phone"
@@ -193,17 +197,17 @@ const VolunteerPage = () => {
 
                   <div className="form-group">
                     <label>
-                      Areas of Interest <span className="required">*</span>
+                      {t('areasOfInterest')} <span className="required">{t('required')}</span>
                     </label>
                     <div className="checkbox-group">
-                      {volunteerAreas.map((area) => {
-                        const isChecked = formData.interests.includes(area)
+                      {volunteerAreaKeys.map((areaKey) => {
+                        const isChecked = formData.interests.includes(areaKey)
                         return (
                           // eslint-disable-next-line jsx-a11y/click-events-have-key-events
                           <div
-                            key={area}
+                            key={areaKey}
                             className={`checkbox-label ${isChecked ? 'checked' : ''}`}
-                            onClick={() => toggleInterest(area)}
+                            onClick={() => toggleInterest(areaKey)}
                           >
                             <input
                               type="checkbox"
@@ -211,21 +215,19 @@ const VolunteerPage = () => {
                               onChange={() => {}}
                               onClick={(e) => e.stopPropagation()}
                             />
-                            <span>{area}</span>
+                            <span>{t(areaKey)}</span>
                           </div>
                         )
                       })}
                     </div>
                     {formData.interests.length === 0 && (
-                      <small className="form-hint">
-                        Please select at least one area of interest
-                      </small>
+                      <small className="form-hint">{t('selectOneInterest')}</small>
                     )}
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="availability">
-                      Availability <span className="required">*</span>
+                      {t('availability')} <span className="required">{t('required')}</span>
                     </label>
                     <select
                       id="availability"
@@ -234,30 +236,30 @@ const VolunteerPage = () => {
                       onChange={handleInputChange}
                       required
                     >
-                      <option value="">Select your availability</option>
-                      {availabilityOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
+                      <option value="">{t('selectAvailability')}</option>
+                      {availabilityKeys.map((key) => (
+                        <option key={key} value={key}>
+                          {t(key)}
                         </option>
                       ))}
                     </select>
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="experience">Relevant Experience (Optional)</label>
+                    <label htmlFor="experience">{t('relevantExperience')}</label>
                     <textarea
                       id="experience"
                       name="experience"
                       value={formData.experience}
                       onChange={handleInputChange}
                       rows={4}
-                      placeholder="Tell us about any relevant experience or skills you have..."
+                      placeholder={t('experiencePlaceholder')}
                     />
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="motivation">
-                      Why do you want to volunteer? <span className="required">*</span>
+                      {t('whyVolunteerQuestion')} <span className="required">{t('required')}</span>
                     </label>
                     <textarea
                       id="motivation"
@@ -266,7 +268,7 @@ const VolunteerPage = () => {
                       onChange={handleInputChange}
                       rows={4}
                       required
-                      placeholder="Share your motivation for volunteering with us..."
+                      placeholder={t('motivationPlaceholder')}
                     />
                   </div>
 
@@ -275,7 +277,7 @@ const VolunteerPage = () => {
                     className="submit-btn"
                     disabled={isSubmitting || formData.interests.length === 0}
                   >
-                    {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                    {isSubmitting ? t('submitting') : t('submitApplication')}
                   </button>
                 </form>
               </div>

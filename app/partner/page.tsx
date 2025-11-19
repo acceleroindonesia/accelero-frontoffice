@@ -3,19 +3,20 @@
 import React from 'react'
 import '../styles/partnership.css'
 import Master from '@components/Layout/Master'
+import { useLanguage } from '@contexts/LanguageContext'
 
 export default function PartnershipPage() {
+  const { t } = useLanguage()
+
   return (
     <Master>
       {/* Hero Section */}
       <section className="partnership-hero">
         <div className="partnership-hero-content">
-          <h1 className="partnership-hero-title">Partner With Us</h1>
-          <p className="partnership-hero-subtitle">
-            Join forces to create lasting impact and transform communities together
-          </p>
+          <h1 className="partnership-hero-title">{t('partnershipHeroTitle')}</h1>
+          <p className="partnership-hero-subtitle">{t('partnershipHeroSubtitle')}</p>
           <a href="/contact" className="btn-hero">
-            Become a Partner
+            {t('becomeAPartner')}
           </a>
         </div>
       </section>
@@ -23,38 +24,27 @@ export default function PartnershipPage() {
       {/* Why Partner Section */}
       <section className="partnership-why">
         <div className="container">
-          <h2 className="section-title">Why Partner With Accelero?</h2>
+          <h2 className="section-title">{t('whyPartner')}</h2>
           <div className="partnership-benefits-grid">
             <div className="benefit-card">
               <div className="benefit-icon">🤝</div>
-              <h3>Meaningful Impact</h3>
-              <p>
-                Create real change by supporting programs that directly improve lives in underserved
-                communities
-              </p>
+              <h3>{t('meaningfulImpact')}</h3>
+              <p>{t('meaningfulImpactDesc')}</p>
             </div>
             <div className="benefit-card">
               <div className="benefit-icon">🌍</div>
-              <h3>Global Reach</h3>
-              <p>
-                Expand your social impact footprint across multiple regions and communities
-                worldwide
-              </p>
+              <h3>{t('globalReach')}</h3>
+              <p>{t('globalReachDesc2')}</p>
             </div>
             <div className="benefit-card">
               <div className="benefit-icon">📊</div>
-              <h3>Transparent Reporting</h3>
-              <p>
-                Receive detailed reports on your partnership impact with measurable outcomes and
-                metrics
-              </p>
+              <h3>{t('transparentReporting')}</h3>
+              <p>{t('transparentReportingDesc2')}</p>
             </div>
             <div className="benefit-card">
               <div className="benefit-icon">💼</div>
-              <h3>Brand Visibility</h3>
-              <p>
-                Enhance your corporate social responsibility profile through strategic collaboration
-              </p>
+              <h3>{t('brandVisibility')}</h3>
+              <p>{t('brandVisibilityDesc')}</p>
             </div>
           </div>
         </div>
@@ -63,53 +53,45 @@ export default function PartnershipPage() {
       {/* Partnership Types */}
       <section className="partnership-types">
         <div className="container">
-          <h2 className="section-title">Partnership Opportunities</h2>
+          <h2 className="section-title">{t('partnershipOpportunities')}</h2>
           <div className="partnership-types-grid">
             <div className="type-card">
-              <h3>Corporate Partnership</h3>
-              <p>
-                Strategic alliances with businesses committed to social responsibility and community
-                development
-              </p>
+              <h3>{t('corporatePartnership')}</h3>
+              <p>{t('corporatePartnershipFull')}</p>
               <ul className="type-features">
-                <li>Co-branded initiatives</li>
-                <li>Employee engagement programs</li>
-                <li>Matching gift campaigns</li>
-                <li>Cause marketing opportunities</li>
+                <li>{t('corporateFeature1')}</li>
+                <li>{t('corporateFeature2')}</li>
+                <li>{t('corporateFeature3')}</li>
+                <li>{t('corporateFeature4')}</li>
               </ul>
               <a href="/contact" className="btn-outline">
-                Learn More
+                {t('learnMore')}
               </a>
             </div>
             <div className="type-card">
-              <h3>Foundation Partnership</h3>
-              <p>
-                Collaborate with foundations to amplify grant-making impact and reach more
-                communities
-              </p>
+              <h3>{t('foundationPartnership')}</h3>
+              <p>{t('foundationPartnershipFull')}</p>
               <ul className="type-features">
-                <li>Joint funding initiatives</li>
-                <li>Program development</li>
-                <li>Research collaboration</li>
-                <li>Impact measurement</li>
+                <li>{t('foundationFeature1')}</li>
+                <li>{t('foundationFeature2')}</li>
+                <li>{t('foundationFeature3')}</li>
+                <li>{t('foundationFeature4')}</li>
               </ul>
               <a href="/contact" className="btn-outline">
-                Learn More
+                {t('learnMore')}
               </a>
             </div>
             <div className="type-card">
-              <h3>NGO Partnership</h3>
-              <p>
-                Partner with other nonprofits to combine resources and expertise for greater impact
-              </p>
+              <h3>{t('ngoPartnership')}</h3>
+              <p>{t('ngoPartnershipFull')}</p>
               <ul className="type-features">
-                <li>Resource sharing</li>
-                <li>Joint programs</li>
-                <li>Knowledge exchange</li>
-                <li>Network expansion</li>
+                <li>{t('ngoFeature1')}</li>
+                <li>{t('ngoFeature2')}</li>
+                <li>{t('ngoFeature3')}</li>
+                <li>{t('ngoFeature4')}</li>
               </ul>
               <a href="/contact" className="btn-outline">
-                Learn More
+                {t('learnMore')}
               </a>
             </div>
           </div>
@@ -119,7 +101,7 @@ export default function PartnershipPage() {
       {/* Success Stories */}
       <section className="partnership-stories">
         <div className="container">
-          <h2 className="section-title">Partnership Success Stories</h2>
+          <h2 className="section-title">{t('partnershipSuccessStories')}</h2>
           <div className="stories-grid">
             <div className="story-card">
               <div className="story-image-placeholder">
@@ -134,11 +116,11 @@ export default function PartnershipPage() {
                 <div className="story-impact">
                   <div className="impact-stat">
                     <strong>5,000+</strong>
-                    <span>Students Trained</span>
+                    <span>{t('studentsTrained')}</span>
                   </div>
                   <div className="impact-stat">
                     <strong>15</strong>
-                    <span>Communities</span>
+                    <span>{t('communities')}</span>
                   </div>
                 </div>
               </div>
@@ -156,11 +138,11 @@ export default function PartnershipPage() {
                 <div className="story-impact">
                   <div className="impact-stat">
                     <strong>3,000</strong>
-                    <span>Families Helped</span>
+                    <span>{t('familiesHelped')}</span>
                   </div>
                   <div className="impact-stat">
                     <strong>50%</strong>
-                    <span>Yield Increase</span>
+                    <span>{t('yieldIncrease')}</span>
                   </div>
                 </div>
               </div>
@@ -172,35 +154,27 @@ export default function PartnershipPage() {
       {/* How It Works */}
       <section className="partnership-process">
         <div className="container">
-          <h2 className="section-title">How Partnership Works</h2>
+          <h2 className="section-title">{t('howPartnershipWorks')}</h2>
           <div className="process-steps">
             <div className="process-step">
               <div className="step-number">1</div>
-              <h4>Initial Consultation</h4>
-              <p>
-                We discuss your goals, values, and desired impact areas to find the perfect
-                alignment
-              </p>
+              <h4>{t('initialConsultation')}</h4>
+              <p>{t('initialConsultationDesc')}</p>
             </div>
             <div className="process-step">
               <div className="step-number">2</div>
-              <h4>Customized Proposal</h4>
-              <p>
-                Receive a tailored partnership proposal outlining objectives, activities, and
-                expected outcomes
-              </p>
+              <h4>{t('customizedProposal')}</h4>
+              <p>{t('customizedProposalDesc')}</p>
             </div>
             <div className="process-step">
               <div className="step-number">3</div>
-              <h4>Implementation</h4>
-              <p>Launch collaborative programs with dedicated support and regular communication</p>
+              <h4>{t('implementation')}</h4>
+              <p>{t('implementationDesc')}</p>
             </div>
             <div className="process-step">
               <div className="step-number">4</div>
-              <h4>Impact Reporting</h4>
-              <p>
-                Receive comprehensive reports showcasing the measurable impact of your partnership
-              </p>
+              <h4>{t('impactReporting')}</h4>
+              <p>{t('impactReportingDesc')}</p>
             </div>
           </div>
         </div>
@@ -210,17 +184,14 @@ export default function PartnershipPage() {
       <section className="partnership-cta">
         <div className="container">
           <div className="cta-content">
-            <h2>Ready to Make a Difference Together?</h2>
-            <p>
-              Let's explore how we can partner to create meaningful and lasting impact in
-              communities around the world.
-            </p>
+            <h2>{t('readyToMakeDifference')}</h2>
+            <p>{t('readyToMakeDifferenceDesc')}</p>
             <div className="cta-buttons">
               <a href="/contact" className="btn-primary-large">
-                Start a Conversation
+                {t('startConversation')}
               </a>
               <a href="/about" className="btn-outline-light">
-                Learn About Us
+                {t('learnAboutUs')}
               </a>
             </div>
           </div>
