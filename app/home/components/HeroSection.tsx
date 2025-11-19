@@ -2,28 +2,26 @@
 
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Button from '@components/Button/Button'
+import { useLanguage } from '@contexts/LanguageContext'
 
 const HeroSection: React.FC = () => {
+  const { t } = useLanguage()
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const slides = [
     {
-      title: 'Every Child Deserves the Right to Learn',
-      subtitle:
-        'Transform lives through education. Help us bring quality literacy and numeracy programs to underserved schools across Indonesia.',
+      title: t('heroTitle1'),
+      subtitle: t('heroSubtitle1'),
       image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&h=900&fit=crop',
     },
     {
-      title: 'Building Brighter Futures Together',
-      subtitle:
-        'Join 500+ donors making a real difference. Your support provides books, training, and hope to thousands of students.',
+      title: t('heroTitle2'),
+      subtitle: t('heroSubtitle2'),
       image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1600&h=900&fit=crop',
     },
     {
-      title: 'Teaching at the Right Level Works',
-      subtitle:
-        '85% improvement in literacy rates. Our proven TaRL methodology meets students where they are and helps them soar.',
+      title: t('heroTitle3'),
+      subtitle: t('heroSubtitle3'),
       image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&h=900&fit=crop',
     },
   ]
@@ -55,7 +53,7 @@ const HeroSection: React.FC = () => {
         <div className="hero-content-wrapper">
           <div className="hero-badge">
             <span className="badge-icon">🎓</span>
-            <span className="badge-text">Transforming Education Since 2020</span>
+            <span className="badge-text">{t('heroBadge')}</span>
           </div>
 
           <h1 className="hero-title-modern">{slides[currentSlide].title}</h1>
@@ -66,14 +64,14 @@ const HeroSection: React.FC = () => {
             <Link href="/donate" className="btn-primary-large">
               <span className="btn-icon">❤️</span>
               <span className="btn-text">
-                <strong>Donate Now</strong>
-                <small>Make an impact today</small>
+                <strong>{t('donateNow')}</strong>
+                <small>{t('makeImpactToday')}</small>
               </span>
             </Link>
             <Link href="/projects" className="btn-secondary-large">
               <span className="btn-text">
-                <strong>View Programs</strong>
-                <small>See where we work</small>
+                <strong>{t('viewPrograms')}</strong>
+                <small>{t('seeWhereWeWork')}</small>
               </span>
               <span className="btn-arrow">→</span>
             </Link>
@@ -85,21 +83,21 @@ const HeroSection: React.FC = () => {
               <div className="stat-icon">👥</div>
               <div className="stat-content">
                 <strong>2,500+</strong>
-                <span>Students Helped</span>
+                <span>{t('studentsHelped')}</span>
               </div>
             </div>
             <div className="quick-stat">
               <div className="stat-icon">🏫</div>
               <div className="stat-content">
                 <strong>45+</strong>
-                <span>Partner Schools</span>
+                <span>{t('partnerSchools')}</span>
               </div>
             </div>
             <div className="quick-stat">
               <div className="stat-icon">📈</div>
               <div className="stat-content">
                 <strong>85%</strong>
-                <span>Success Rate</span>
+                <span>{t('successRate')}</span>
               </div>
             </div>
           </div>
@@ -123,7 +121,7 @@ const HeroSection: React.FC = () => {
         <div className="scroll-mouse">
           <div className="scroll-wheel"></div>
         </div>
-        <span>Scroll to explore</span>
+        <span>{t('scrollToExplore')}</span>
       </div>
     </section>
   )

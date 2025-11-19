@@ -5,7 +5,6 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import bcrypt from 'bcrypt'
 import { prisma } from '@utils/Prisma'
 import { encode as jwtEncodeDefault, decode as jwtDecodeDefault } from 'next-auth/jwt'
-import { randomUUID } from 'node:crypto'
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -30,12 +29,21 @@ export const authOptions: AuthOptions = {
         if (!user || !user.password) return null
 
         const isValid = await bcrypt.compare(credentials.password, user.password)
-        return isValid ? user : null
+
+        if (!isValid) return null
+
+        return {
+          id: String(user.id),
+          email: user.email,
+          name: user.name,
+          phoneNumber: user.phoneNumber,
+          role: user.role,
+        }
       },
     }),
   ],
   session: {
-    strategy: 'database', // this will let NextAuth manage session tokens in DB
+    strategy: 'database',
     maxAge: 7 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
   },
@@ -66,20 +74,20 @@ export const authOptions: AuthOptions = {
         token.phoneNumber = user.phoneNumber
         token.status = 'authenticated'
         token.isCreds = account?.provider === 'credentials'
-        token.role = (user as any).role || 'user'
+        token.role = user.role || 'user'
         token.sub = String(user.id)
       }
       return token
     },
-    async session({ session, user, token }) {
+    async session({ session, user }) {
       if (session.user && user?.id) {
-        session.user!.id = user.id
+        session.user.id = String(user.id)
         session.user.email = user.email
         session.user.name = user.name
-        session.user!.phoneNumber = user.phoneNumber
-        session.user!.emailVerified = user.emailVerified
-        session.user!.role = user.role
-        session!.status = true
+        session.user.phoneNumber = (user as any).phoneNumber
+        session.user.emailVerified = user.emailVerified
+        session.user.role = (user as any).role
+        session.status = true
       }
       return session
     },
@@ -96,7 +104,7 @@ export const authOptions: AuthOptions = {
   jwt: {
     async encode({ token, secret, maxAge }) {
       if (token?.isCreds) {
-        const sessionToken = randomUUID()
+        const sessionToken = crypto.randomUUID()
         if (token.sub != null) {
           await prisma.session.create({
             data: {
@@ -111,16 +119,30 @@ export const authOptions: AuthOptions = {
       return jwtEncodeDefault({ token, secret, maxAge })
     },
     async decode({ token, secret }) {
-      const dbSession = await prisma.session.findUnique({
-        where: { sessionToken: token as string },
-      })
-      if (dbSession) {
-        return {
-          sub: String(dbSession.userId),
-          exp: Math.floor(dbSession.expires.getTime() / 1000),
-        }
+      // Fix: Check if token exists and is a string before proceeding
+      if (!token || typeof token !== 'string') {
+        return null
       }
-      return jwtDecodeDefault({ token: token as string, secret })
+
+      try {
+        // Try to find session in database first
+        const dbSession = await prisma.session.findUnique({
+          where: { sessionToken: token },
+        })
+
+        if (dbSession) {
+          return {
+            sub: String(dbSession.userId),
+            exp: Math.floor(dbSession.expires.getTime() / 1000),
+          }
+        }
+
+        // Fallback to JWT decode for OAuth providers
+        return jwtDecodeDefault({ token, secret })
+      } catch (error) {
+        console.error('Error decoding token:', error)
+        return null
+      }
     },
   },
   secret: process.env.NEXTAUTH_SECRET,

@@ -2,8 +2,11 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { useLanguage } from '@contexts/LanguageContext'
 
 const PartnershipCTA: React.FC = () => {
+  const { t } = useLanguage()
+
   return (
     <section className="partnership-cta-modern">
       <div className="partnership-bg-pattern"></div>
@@ -11,49 +14,45 @@ const PartnershipCTA: React.FC = () => {
         <div className="partnership-grid">
           {/* Left Content */}
           <div className="partnership-content-modern">
-            <span className="partnership-label">Get Involved</span>
+            <span className="partnership-label">{t('getInvolved')}</span>
             <h2 className="partnership-title-modern">
-              Partner With Us,
+              {t('partnerWithUs')},
               <br />
-              <span className="gradient-text">Create Lasting Impact</span>
+              <span className="gradient-text">{t('createLastingImpact')}</span>
             </h2>
-            <p className="partnership-desc-modern">
-              Join leading organizations committed to transforming education and empowering
-              communities. Together, we can amplify your social impact and create sustainable
-              change.
-            </p>
+            <p className="partnership-desc-modern">{t('partnershipDesc')}</p>
 
             <div className="partnership-features">
               <div className="feature-item">
                 <div className="feature-icon">🤝</div>
                 <div>
-                  <strong>Strategic Alignment</strong>
-                  <p>Partnerships tailored to your CSR goals</p>
+                  <strong>{t('strategicAlignment')}</strong>
+                  <p>{t('strategicAlignmentDesc')}</p>
                 </div>
               </div>
               <div className="feature-item">
                 <div className="feature-icon">📊</div>
                 <div>
-                  <strong>Transparent Reporting</strong>
-                  <p>Detailed impact metrics and regular updates</p>
+                  <strong>{t('transparentReporting')}</strong>
+                  <p>{t('transparentReportingDesc')}</p>
                 </div>
               </div>
               <div className="feature-item">
                 <div className="feature-icon">🌍</div>
                 <div>
-                  <strong>Global Reach</strong>
-                  <p>Programs across multiple communities</p>
+                  <strong>{t('globalReach')}</strong>
+                  <p>{t('globalReachDesc')}</p>
                 </div>
               </div>
             </div>
 
             <div className="partnership-actions-modern">
               <Link href="/contact" className="btn-partnership-primary">
-                <span>Become a Partner</span>
+                <span>{t('becomeAPartner')}</span>
                 <span className="btn-arrow">→</span>
               </Link>
               <Link href="/about" className="btn-partnership-secondary">
-                Learn About Us
+                {t('learnAboutUs')}
               </Link>
             </div>
 
@@ -76,27 +75,27 @@ const PartnershipCTA: React.FC = () => {
           {/* Right Stats */}
           <div className="partnership-stats-panel">
             <div className="stats-panel-header">
-              <h3>Partnership Impact</h3>
-              <p>Building stronger communities together</p>
+              <h3>{t('partnershipImpact')}</h3>
+              <p>{t('buildingStrongerCommunities')}</p>
             </div>
             <div className="stats-panel-grid">
               <div className="panel-stat">
                 <div className="panel-stat-number">25+</div>
-                <div className="panel-stat-label">Active Partners</div>
+                <div className="panel-stat-label">{t('activePartners')}</div>
                 <div className="panel-stat-bar">
                   <div className="panel-stat-fill" style={{ width: '80%' }}></div>
                 </div>
               </div>
               <div className="panel-stat">
                 <div className="panel-stat-number">$2.5M</div>
-                <div className="panel-stat-label">Joint Funding</div>
+                <div className="panel-stat-label">{t('jointFunding')}</div>
                 <div className="panel-stat-bar">
                   <div className="panel-stat-fill" style={{ width: '70%' }}></div>
                 </div>
               </div>
               <div className="panel-stat">
                 <div className="panel-stat-number">8,000+</div>
-                <div className="panel-stat-label">Lives Impacted</div>
+                <div className="panel-stat-label">{t('livesImpacted')}</div>
                 <div className="panel-stat-bar">
                   <div className="panel-stat-fill" style={{ width: '90%' }}></div>
                 </div>
@@ -105,36 +104,36 @@ const PartnershipCTA: React.FC = () => {
 
             {/* Partnership Types */}
             <div className="opportunities-list">
-              <h4>Partnership Opportunities</h4>
+              <h4>{t('partnershipOpportunities')}</h4>
               <div className="opportunity-item">
                 <span className="opportunity-icon">🏢</span>
                 <div>
-                  <strong>Corporate Partnership</strong>
-                  <span>Strategic CSR initiatives</span>
+                  <strong>{t('corporatePartnership')}</strong>
+                  <span>{t('corporatePartnershipDesc')}</span>
                 </div>
-                <span className="opportunity-badge">Available</span>
+                <span className="opportunity-badge">{t('available')}</span>
               </div>
               <div className="opportunity-item">
                 <span className="opportunity-icon">🌱</span>
                 <div>
-                  <strong>Foundation Partnership</strong>
-                  <span>Grant-making collaboration</span>
+                  <strong>{t('foundationPartnership')}</strong>
+                  <span>{t('foundationPartnershipDesc')}</span>
                 </div>
-                <span className="opportunity-badge">Available</span>
+                <span className="opportunity-badge">{t('available')}</span>
               </div>
               <div className="opportunity-item">
                 <span className="opportunity-icon">👥</span>
                 <div>
-                  <strong>NGO Partnership</strong>
-                  <span>Resource sharing programs</span>
+                  <strong>{t('ngoPartnership')}</strong>
+                  <span>{t('ngoPartnershipDesc')}</span>
                 </div>
-                <span className="opportunity-badge">Available</span>
+                <span className="opportunity-badge">{t('available')}</span>
               </div>
             </div>
 
             {/* Current Partners */}
             <div className="current-partners">
-              <h4>Trusted By</h4>
+              <h4>{t('trustedBy')}</h4>
               <div className="partner-logos">
                 <div className="partner-logo">TC</div>
                 <div className="partner-logo">GF</div>

@@ -1,36 +1,39 @@
 'use client'
 
 import React from 'react'
+import { useLanguage } from '@contexts/LanguageContext'
 
 const HowItWorks: React.FC = () => {
+  const { t } = useLanguage()
+
   const steps = [
     {
       number: '01',
       icon: '🎯',
-      title: 'Choose Your Impact',
-      description: 'Browse featured schools and programs that need support right now',
-      details: ['View school details', 'See specific needs', 'Track progress live'],
+      title: t('chooseYourImpact'),
+      description: t('chooseYourImpactDesc'),
+      details: [t('chooseDetail1'), t('chooseDetail2'), t('chooseDetail3')],
     },
     {
       number: '02',
       icon: '💝',
-      title: 'Donate Securely',
-      description: 'Make a one-time or monthly donation via QRIS or credit card',
-      details: ['100% secure', 'Tax-deductible', 'Add personal message'],
+      title: t('donateSecurely'),
+      description: t('donateSecurelyDesc'),
+      details: [t('donateDetail1'), t('donateDetail2'), t('donateDetail3')],
     },
     {
       number: '03',
       icon: '📊',
-      title: 'Track Progress',
-      description: 'Receive regular updates with photos, stories, and measurable results',
-      details: ['Monthly reports', 'Student testimonials', 'Photo updates'],
+      title: t('trackProgress'),
+      description: t('trackProgressDesc'),
+      details: [t('trackDetail1'), t('trackDetail2'), t('trackDetail3')],
     },
     {
       number: '04',
       icon: '🌟',
-      title: 'See Results',
-      description: 'Watch students achieve milestones and transform their futures',
-      details: ['Success metrics', 'Before & after', 'Community impact'],
+      title: t('seeResults'),
+      description: t('seeResultsDesc'),
+      details: [t('seeDetail1'), t('seeDetail2'), t('seeDetail3')],
     },
   ]
 
@@ -38,11 +41,9 @@ const HowItWorks: React.FC = () => {
     <section className="how-it-works-modern">
       <div className="container">
         <div className="section-header-modern center">
-          <span className="section-label">Simple & Transparent</span>
-          <h2 className="section-title-modern">How Your Donation Creates Change</h2>
-          <p className="section-desc-modern">
-            From your generosity to student success - every step is tracked and transparent
-          </p>
+          <span className="section-label">{t('simpleTransparent')}</span>
+          <h2 className="section-title-modern">{t('howDonationCreatesChange')}</h2>
+          <p className="section-desc-modern">{t('howDonationDesc')}</p>
         </div>
 
         <div className="steps-timeline">
@@ -76,14 +77,14 @@ const HowItWorks: React.FC = () => {
 
         {/* CTA */}
         <div className="section-cta">
-          <h3>Ready to make a difference?</h3>
-          <p>Join hundreds of donors transforming education in Indonesia</p>
+          <h3>{t('readyToMakeDifference2')}</h3>
+          <p>{t('readyToMakeDifferenceDesc2')}</p>
           <div className="cta-buttons">
             <a href="/donate" className="btn-cta-primary">
-              Start Donating
+              {t('startDonating')}
             </a>
             <a href="/volunteer" className="btn-cta-secondary">
-              Become a Volunteer
+              {t('becomeVolunteer')}
             </a>
           </div>
         </div>

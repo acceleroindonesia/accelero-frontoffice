@@ -12,6 +12,7 @@ import { ScrollAnimations } from './home/components/ScrollAnimations'
 import Request, { type IResponse } from '@utils/Request'
 import PartnershipCTA from './home/components/PartnershipCTA'
 import BlogCTA from './home/components/BlogCTA'
+import { useLanguage } from '@contexts/LanguageContext'
 
 interface IProject {
   id: string
@@ -29,6 +30,7 @@ interface IProject {
 const Page: React.FC = () => {
   const [projects, setProjects] = useState<IProject[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -74,9 +76,9 @@ const Page: React.FC = () => {
       <Section className="projects-section-modern">
         <div className="container">
           <div className="projects-header" data-aos="fade-up">
-            <span className="section-label">Our Programs</span>
-            <h2 className="section-title-modern">Featured Programs</h2>
-            <p className="section-desc-modern">Support schools and students who need it most</p>
+            <span className="section-label">{t('ourPrograms')}</span>
+            <h2 className="section-title-modern">{t('featuredPrograms')}</h2>
+            <p className="section-desc-modern">{t('supportSchool')}</p>
           </div>
 
           <div className="projects-grid">
@@ -100,7 +102,7 @@ const Page: React.FC = () => {
 
           <div className="center" data-aos="fade-up">
             <a href="/projects" className="btn-cta-primary">
-              View All Programs
+              {t('viewAllPrograms')}
             </a>
           </div>
         </div>

@@ -2,8 +2,11 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { useLanguage } from '@contexts/LanguageContext'
 
 const VolunteerCTA: React.FC = () => {
+  const { t } = useLanguage()
+
   return (
     <section className="volunteer-cta-modern">
       <div className="volunteer-bg-pattern"></div>
@@ -11,49 +14,45 @@ const VolunteerCTA: React.FC = () => {
         <div className="volunteer-grid">
           {/* Left Content */}
           <div className="volunteer-content-modern">
-            <span className="volunteer-label">Get Involved</span>
+            <span className="volunteer-label">{t('getInvolved')}</span>
             <h2 className="volunteer-title-modern">
-              Give Your Time,
+              {t('giveYourTime')},
               <br />
-              <span className="gradient-text">Transform Lives</span>
+              <span className="gradient-text">{t('transformLives')}</span>
             </h2>
-            <p className="volunteer-desc-modern">
-              Join our community of passionate volunteers making a direct impact on students'
-              learning journeys. Whether you can teach, mentor, or support our programs - every
-              contribution matters.
-            </p>
+            <p className="volunteer-desc-modern">{t('volunteerCtaDesc')}</p>
 
             <div className="volunteer-features">
               <div className="feature-item">
                 <div className="feature-icon">📅</div>
                 <div>
-                  <strong>Flexible Schedule</strong>
-                  <p>Online or on-site, full-time or part-time</p>
+                  <strong>{t('flexibleSchedule')}</strong>
+                  <p>{t('flexibleScheduleDesc')}</p>
                 </div>
               </div>
               <div className="feature-item">
                 <div className="feature-icon">🎓</div>
                 <div>
-                  <strong>Full Training</strong>
-                  <p>Complete onboarding and ongoing support</p>
+                  <strong>{t('fullTraining')}</strong>
+                  <p>{t('fullTrainingDesc')}</p>
                 </div>
               </div>
               <div className="feature-item">
                 <div className="feature-icon">🤝</div>
                 <div>
-                  <strong>Meaningful Impact</strong>
-                  <p>See the direct results of your work</p>
+                  <strong>{t('meaningfulImpact')}</strong>
+                  <p>{t('meaningfulImpactDesc2')}</p>
                 </div>
               </div>
             </div>
 
             <div className="volunteer-actions-modern">
               <Link href="/volunteer" className="btn-volunteer-primary">
-                <span>Apply to Volunteer</span>
+                <span>{t('applyToVolunteer')}</span>
                 <span className="btn-arrow">→</span>
               </Link>
               <Link href="/partnerships" className="btn-volunteer-secondary">
-                Corporate Partnerships
+                {t('corporatePartnerships')}
               </Link>
             </div>
 
@@ -76,27 +75,27 @@ const VolunteerCTA: React.FC = () => {
           {/* Right Stats */}
           <div className="volunteer-stats-panel">
             <div className="stats-panel-header">
-              <h3>Volunteer Impact</h3>
-              <p>This year's achievements</p>
+              <h3>{t('volunteerImpact')}</h3>
+              <p>{t('thisYearAchievements')}</p>
             </div>
             <div className="stats-panel-grid">
               <div className="panel-stat">
                 <div className="panel-stat-number">120+</div>
-                <div className="panel-stat-label">Active Volunteers</div>
+                <div className="panel-stat-label">{t('activeVolunteers')}</div>
                 <div className="panel-stat-bar">
                   <div className="panel-stat-fill" style={{ width: '75%' }}></div>
                 </div>
               </div>
               <div className="panel-stat">
                 <div className="panel-stat-number">8,400</div>
-                <div className="panel-stat-label">Teaching Hours</div>
+                <div className="panel-stat-label">{t('teachingHours')}</div>
                 <div className="panel-stat-bar">
                   <div className="panel-stat-fill" style={{ width: '60%' }}></div>
                 </div>
               </div>
               <div className="panel-stat">
                 <div className="panel-stat-number">1,200+</div>
-                <div className="panel-stat-label">Students Tutored</div>
+                <div className="panel-stat-label">{t('studentsTutored')}</div>
                 <div className="panel-stat-bar">
                   <div className="panel-stat-fill" style={{ width: '85%' }}></div>
                 </div>
@@ -105,30 +104,30 @@ const VolunteerCTA: React.FC = () => {
 
             {/* Opportunities */}
             <div className="opportunities-list">
-              <h4>Current Opportunities</h4>
+              <h4>{t('currentOpportunities')}</h4>
               <div className="opportunity-item">
                 <span className="opportunity-icon">📖</span>
                 <div>
-                  <strong>Reading Tutor</strong>
-                  <span>Remote • 3hrs/week</span>
+                  <strong>{t('readingTutor')}</strong>
+                  <span>{t('readingTutorDetails')}</span>
                 </div>
-                <span className="opportunity-badge">5 slots</span>
+                <span className="opportunity-badge">5 {t('slots')}</span>
               </div>
               <div className="opportunity-item">
                 <span className="opportunity-icon">🔢</span>
                 <div>
-                  <strong>Math Mentor</strong>
-                  <span>Jakarta • Weekends</span>
+                  <strong>{t('mathMentor')}</strong>
+                  <span>{t('mathMentorDetails')}</span>
                 </div>
-                <span className="opportunity-badge">3 slots</span>
+                <span className="opportunity-badge">3 {t('slots')}</span>
               </div>
               <div className="opportunity-item">
                 <span className="opportunity-icon">🎨</span>
                 <div>
-                  <strong>Creative Workshop Leader</strong>
-                  <span>Sorong • Monthly</span>
+                  <strong>{t('creativeWorkshopLeader')}</strong>
+                  <span>{t('creativeWorkshopDetails')}</span>
                 </div>
-                <span className="opportunity-badge">2 slots</span>
+                <span className="opportunity-badge">2 {t('slots')}</span>
               </div>
             </div>
           </div>

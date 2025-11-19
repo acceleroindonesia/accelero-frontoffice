@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useLanguage } from '@contexts/LanguageContext'
 
 interface IProjectCard {
   id: string
@@ -29,6 +30,7 @@ const ProjectCard: React.FC<IProjectCard> = ({
   const percentage = Math.min((raisedAmount / goalAmount) * 100, 100)
   const remaining = goalAmount - raisedAmount
   const isActive = status === 'active'
+  const { t } = useLanguage()
 
   return (
     <div className={`project-card ${!isActive ? 'project-card-inactive' : ''}`}>
@@ -95,7 +97,7 @@ const ProjectCard: React.FC<IProjectCard> = ({
 
         <Link href={`/projects/${url}`} className="project-donate-link">
           <button className="btn btn-primary btn-block">
-            {isActive ? 'Support This Project' : 'View Impact'}
+            {isActive ? t('supportThisProject') : t('viewImpact')}
           </button>
         </Link>
       </div>

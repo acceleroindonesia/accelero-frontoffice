@@ -1,35 +1,38 @@
 'use client'
 
 import React from 'react'
+import { useLanguage } from '@contexts/LanguageContext'
 
 const ImpactStats: React.FC = () => {
+  const { t } = useLanguage()
+
   const stats = [
     {
       icon: '📚',
       number: '12,500+',
-      label: 'Books Distributed',
-      description: 'Reading materials for every level',
+      label: t('booksDistributed'),
+      description: t('booksDistributedDesc'),
       color: '#667eea',
     },
     {
       icon: '👨‍🏫',
       number: '156',
-      label: 'Teachers Trained',
-      description: 'Empowering educators with TaRL',
+      label: t('teachersTrained'),
+      description: t('teachersTrainedDesc'),
       color: '#f56565',
     },
     {
       icon: '🌍',
       number: '8',
-      label: 'Regions Served',
-      description: 'Across Eastern Indonesia',
+      label: t('regionsServed'),
+      description: t('regionsServedDesc'),
       color: '#48bb78',
     },
     {
       icon: '💰',
       number: 'Rp 285M',
-      label: 'Total Funding',
-      description: 'Raised from generous donors',
+      label: t('totalFunding'),
+      description: t('totalFundingDesc'),
       color: '#ed8936',
     },
   ]
@@ -39,11 +42,9 @@ const ImpactStats: React.FC = () => {
       <div className="container">
         {/* Section Header */}
         <div className="section-header-modern">
-          <span className="section-label">Our Impact</span>
-          <h2 className="section-title-modern">Making Real Difference</h2>
-          <p className="section-desc-modern">
-            Transparent results powered by community support and proven methodologies
-          </p>
+          <span className="section-label">{t('ourImpact')}</span>
+          <h2 className="section-title-modern">{t('makingRealDifference')}</h2>
+          <p className="section-desc-modern">{t('impactStatsDesc')}</p>
         </div>
 
         {/* Stats Grid */}
@@ -71,8 +72,8 @@ const ImpactStats: React.FC = () => {
         <div className="overall-progress">
           <div className="progress-header">
             <div>
-              <h4>2025 Annual Goal Progress</h4>
-              <p>Reaching 5,000 students by end of year</p>
+              <h4>{t('annualGoalProgress')}</h4>
+              <p>{t('annualGoalProgressDesc')}</p>
             </div>
             <div className="progress-percentage">50%</div>
           </div>
@@ -82,8 +83,8 @@ const ImpactStats: React.FC = () => {
             </div>
           </div>
           <div className="progress-footer">
-            <span>2,500 students reached</span>
-            <span>2,500 students to go</span>
+            <span>2,500 {t('studentsReached')}</span>
+            <span>2,500 {t('studentsToGo')}</span>
           </div>
         </div>
       </div>
