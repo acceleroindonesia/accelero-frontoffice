@@ -1,39 +1,39 @@
-"use client";
+'use client'
 
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Button from "@components/Button/Button";
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
+import Button from '@components/Button/Button'
 
 const HeroSection: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   const slides = [
     {
-      title: "Every Child Deserves the Right to Learn",
+      title: 'Every Child Deserves the Right to Learn',
       subtitle:
-        "Transform lives through education. Help us bring quality literacy and numeracy programs to underserved schools across Indonesia.",
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&h=900&fit=crop",
+        'Transform lives through education. Help us bring quality literacy and numeracy programs to underserved schools across Indonesia.',
+      image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&h=900&fit=crop',
     },
     {
-      title: "Building Brighter Futures Together",
+      title: 'Building Brighter Futures Together',
       subtitle:
-        "Join 500+ donors making a real difference. Your support provides books, training, and hope to thousands of students.",
-      image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1600&h=900&fit=crop",
+        'Join 500+ donors making a real difference. Your support provides books, training, and hope to thousands of students.',
+      image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1600&h=900&fit=crop',
     },
     {
-      title: "Teaching at the Right Level Works",
+      title: 'Teaching at the Right Level Works',
       subtitle:
-        "85% improvement in literacy rates. Our proven TaRL methodology meets students where they are and helps them soar.",
-      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&h=900&fit=crop",
+        '85% improvement in literacy rates. Our proven TaRL methodology meets students where they are and helps them soar.',
+      image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&h=900&fit=crop',
     },
-  ];
+  ]
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [slides.length])
 
   return (
     <section className="hero-modern">
@@ -42,7 +42,7 @@ const HeroSection: React.FC = () => {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`hero-slide ${index === currentSlide ? "active" : ""}`}
+            className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
             style={{ backgroundImage: `url(${slide.image})` }}
           >
             <div className="hero-overlay-gradient"></div>
@@ -110,7 +110,7 @@ const HeroSection: React.FC = () => {
           {slides.map((_, index) => (
             <button
               key={index}
-              className={`slider-dot ${index === currentSlide ? "active" : ""}`}
+              className={`slider-dot ${index === currentSlide ? 'active' : ''}`}
               onClick={() => setCurrentSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -126,7 +126,7 @@ const HeroSection: React.FC = () => {
         <span>Scroll to explore</span>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default HeroSection;
+export default HeroSection

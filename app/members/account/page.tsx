@@ -1,38 +1,38 @@
-import { type Metadata } from 'next';
+import { type Metadata } from 'next'
 
 // components
-import Master from '@components/Layout/Master';
-import Section from '@components/Section/Section';
-import Heading from '@components/Heading/Heading';
-import ButtonGroup from '@components/Button/ButtonGroup';
-import ButtonGroupItem from '@components/Button/ButtonGroupItem';
+import Master from '@components/Layout/Master'
+import Section from '@components/Section/Section'
+import Heading from '@components/Heading/Heading'
+import ButtonGroup from '@components/Button/ButtonGroup'
+import ButtonGroupItem from '@components/Button/ButtonGroupItem'
 
-import FormMain from './components/FormMain';
-import FormPhoto from './components/FormPhoto';
+import FormMain from './components/FormMain'
+import FormPhoto from './components/FormPhoto'
 
 const Page: React.FC = () => (
   <Master>
-    <Section className='white-background'>
-      <div className='container'>
-        <div className='center'>
-          <Heading type={1} color='white' text='My account' />
-          <p className='white form-information'>
+    <Section className="white-background">
+      <div className="container">
+        <div className="center">
+          <Heading type={1} color="white" text="My account" />
+          <p className="white form-information">
             You can update your profile photo and your account details here.
           </p>
-          <div className='button-container'>
-            <ButtonGroup color='gray'>
-              <ButtonGroupItem url='members/tickets' text='My tickets' />
-              <ButtonGroupItem url='members/account' text='My account' active />
+          <div className="button-container">
+            <ButtonGroup color="gray">
+              <ButtonGroupItem url="members/tickets" text="My tickets" />
+              <ButtonGroupItem url="members/account" text="My account" active />
             </ButtonGroup>
           </div>
-          <div className='padding-top'>
-            <FormPhoto data='https://www.cenksari.com/content/profile.jpg' />
+          <div className="padding-top">
+            <FormPhoto data="https://www.cenksari.com/content/profile.jpg" />
           </div>
         </div>
       </div>
     </Section>
-    <Section className='white-background'>
-      <div className='container'>
+    <Section className="white-background">
+      <div className="container">
         <FormMain
           data={{
             name: 'Cenk',
@@ -43,11 +43,11 @@ const Page: React.FC = () => (
       </div>
     </Section>
   </Master>
-);
+)
 
-const title = 'My account';
-const canonical = 'https://accelero-ticketing.com/members/account';
-const description = 'accelero ticketing is a accelero ticketing solution';
+const title = 'My account'
+const canonical = 'https://accelero-ticketing.com/members/account'
+const description = 'accelero ticketing is a accelero ticketing solution'
 
 export const metadata: Metadata = {
   title,
@@ -62,6 +62,6 @@ export const metadata: Metadata = {
     siteName: 'accelero ticketing',
     images: 'https://accelero-ticketing.com/logo192.png',
   },
-};
+}
 
-export default Page;
+export default Page

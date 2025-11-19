@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Master from "@components/Layout/Master";
-import Section from "@components/Section/Section";
-import { ScrollAnimations } from "../home/components/ScrollAnimations";
-import Request, { type IResponse } from "@utils/Request";
+import { useEffect, useState } from 'react'
+import Master from '@components/Layout/Master'
+import Section from '@components/Section/Section'
+import { ScrollAnimations } from '../home/components/ScrollAnimations'
+import Request, { type IResponse } from '@utils/Request'
 
 interface IImpactStats {
-  totalStudents: number;
-  totalSchools: number;
-  totalDonors: number;
-  totalFunded: number;
-  activePrograms: number;
-  completedPrograms: number;
+  totalStudents: number
+  totalSchools: number
+  totalDonors: number
+  totalFunded: number
+  activePrograms: number
+  completedPrograms: number
 }
 
 const ImpactPage: React.FC = () => {
@@ -23,31 +23,31 @@ const ImpactPage: React.FC = () => {
     totalFunded: 0,
     activePrograms: 0,
     completedPrograms: 0,
-  });
-  const [isLoading, setIsLoading] = useState(true);
+  })
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    fetchImpactData();
-  }, []);
+    fetchImpactData()
+  }, [])
 
   const fetchImpactData = async () => {
     try {
       const res: IResponse = await Request.getResponse({
-        url: "/api/projects?limit=100",
-        method: "GET",
-      });
+        url: '/api/projects?limit=100',
+        method: 'GET',
+      })
 
       if (res?.data?.projects) {
-        const projects = res.data.projects;
+        const projects = res.data.projects
 
-        const totalStudents = projects.reduce((sum: number, p: any) => sum + p.studentsImpacted, 0);
-        const totalDonors = projects.reduce((sum: number, p: any) => sum + p.donorCount, 0);
-        const totalFunded = projects.reduce((sum: number, p: any) => sum + p.raisedAmount, 0);
-        const activePrograms = projects.filter((p: any) => p.status === "active").length;
-        const completedPrograms = projects.filter((p: any) => p.status === "completed").length;
+        const totalStudents = projects.reduce((sum: number, p: any) => sum + p.studentsImpacted, 0)
+        const totalDonors = projects.reduce((sum: number, p: any) => sum + p.donorCount, 0)
+        const totalFunded = projects.reduce((sum: number, p: any) => sum + p.raisedAmount, 0)
+        const activePrograms = projects.filter((p: any) => p.status === 'active').length
+        const completedPrograms = projects.filter((p: any) => p.status === 'completed').length
 
         // Estimate schools (some projects have multiple schools)
-        const totalSchools = projects.length + 4; // +4 for multi-school partnerships
+        const totalSchools = projects.length + 4 // +4 for multi-school partnerships
 
         setStats({
           totalStudents,
@@ -56,18 +56,18 @@ const ImpactPage: React.FC = () => {
           totalFunded,
           activePrograms,
           completedPrograms,
-        });
+        })
       }
     } catch (error) {
-      console.error("Failed to fetch impact data:", error);
+      console.error('Failed to fetch impact data:', error)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const formatCurrency = (amount: number) => {
-    return `Rp ${(amount / 1000000).toFixed(1)}M`;
-  };
+    return `Rp ${(amount / 1000000).toFixed(1)}M`
+  }
 
   if (isLoading) {
     return (
@@ -83,7 +83,7 @@ const ImpactPage: React.FC = () => {
           </div>
         </div>
       </Master>
-    );
+    )
   }
 
   return (
@@ -97,8 +97,8 @@ const ImpactPage: React.FC = () => {
             <span className="impact-label">Our Impact</span>
             <h1 className="impact-title">Transforming Lives Through Education</h1>
             <p className="impact-subtitle">
-              See the real, measurable difference we're making in communities across
-              Indonesia. Every number represents a child's brighter future.
+              See the real, measurable difference we're making in communities across Indonesia.
+              Every number represents a child's brighter future.
             </p>
           </div>
         </div>
@@ -112,54 +112,42 @@ const ImpactPage: React.FC = () => {
               <div className="stat-icon">🎓</div>
               <div className="stat-number">{stats.totalStudents.toLocaleString()}</div>
               <div className="stat-label">Students Reached</div>
-              <div className="stat-description">
-                Children receiving quality education support
-              </div>
+              <div className="stat-description">Children receiving quality education support</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">🏫</div>
               <div className="stat-number">{stats.totalSchools}</div>
               <div className="stat-label">Schools Partnered</div>
-              <div className="stat-description">
-                Educational institutions we work with
-              </div>
+              <div className="stat-description">Educational institutions we work with</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">❤️</div>
               <div className="stat-number">{stats.totalDonors.toLocaleString()}</div>
               <div className="stat-label">Generous Donors</div>
-              <div className="stat-description">
-                People making education possible
-              </div>
+              <div className="stat-description">People making education possible</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">💰</div>
               <div className="stat-number">{formatCurrency(stats.totalFunded)}</div>
               <div className="stat-label">Total Raised</div>
-              <div className="stat-description">
-                Invested in children's futures
-              </div>
+              <div className="stat-description">Invested in children's futures</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">🚀</div>
               <div className="stat-number">{stats.activePrograms}</div>
               <div className="stat-label">Active Programs</div>
-              <div className="stat-description">
-                Ongoing educational initiatives
-              </div>
+              <div className="stat-description">Ongoing educational initiatives</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">✅</div>
               <div className="stat-number">{stats.completedPrograms}</div>
               <div className="stat-label">Completed Programs</div>
-              <div className="stat-description">
-                Successfully finished projects
-              </div>
+              <div className="stat-description">Successfully finished projects</div>
             </div>
           </div>
         </div>
@@ -180,8 +168,8 @@ const ImpactPage: React.FC = () => {
               <div className="category-icon">📚</div>
               <h3>Literacy Development</h3>
               <p>
-                Helping students build strong reading and writing foundations through
-                proven TaRL methodology
+                Helping students build strong reading and writing foundations through proven TaRL
+                methodology
               </p>
               <div className="category-stat">
                 <strong>850+</strong> students improving reading skills
@@ -192,8 +180,7 @@ const ImpactPage: React.FC = () => {
               <div className="category-icon">🔢</div>
               <h3>Numeracy Skills</h3>
               <p>
-                Making math accessible and fun through game-based learning and
-                interactive tools
+                Making math accessible and fun through game-based learning and interactive tools
               </p>
               <div className="category-stat">
                 <strong>360+</strong> students building math confidence
@@ -203,10 +190,7 @@ const ImpactPage: React.FC = () => {
             <div className="category-card">
               <div className="category-icon">👨‍🏫</div>
               <h3>Teacher Training</h3>
-              <p>
-                Empowering educators with modern teaching methods for sustainable
-                impact
-              </p>
+              <p>Empowering educators with modern teaching methods for sustainable impact</p>
               <div className="category-stat">
                 <strong>30+</strong> teachers trained in TaRL
               </div>
@@ -215,10 +199,7 @@ const ImpactPage: React.FC = () => {
             <div className="category-card">
               <div className="category-icon">🏗️</div>
               <h3>Infrastructure</h3>
-              <p>
-                Creating inspiring learning spaces with proper facilities and
-                resources
-              </p>
+              <p>Creating inspiring learning spaces with proper facilities and resources</p>
               <div className="category-stat">
                 <strong>300+</strong> students benefiting from new spaces
               </div>
@@ -302,18 +283,16 @@ const ImpactPage: React.FC = () => {
         <div className="container">
           <div className="section-header-center">
             <h2 className="section-title-large">Success Stories</h2>
-            <p className="section-description">
-              Real stories of transformation from our programs
-            </p>
+            <p className="section-description">Real stories of transformation from our programs</p>
           </div>
 
           <div className="stories-grid">
             <div className="story-card">
               <div className="story-quote">"</div>
               <p className="story-text">
-                After just 3 months in the Reading Excellence Program, my daughter
-                went from struggling with basic words to reading full sentences. She
-                now reads bedtime stories to her younger brother!
+                After just 3 months in the Reading Excellence Program, my daughter went from
+                struggling with basic words to reading full sentences. She now reads bedtime stories
+                to her younger brother!
               </p>
               <div className="story-author">
                 <strong>Ibu Sari</strong>
@@ -324,9 +303,8 @@ const ImpactPage: React.FC = () => {
             <div className="story-card">
               <div className="story-quote">"</div>
               <p className="story-text">
-                The TaRL training completely changed how I teach. I now understand
-                that meeting students where they are is more important than covering
-                the entire curriculum.
+                The TaRL training completely changed how I teach. I now understand that meeting
+                students where they are is more important than covering the entire curriculum.
               </p>
               <div className="story-author">
                 <strong>Pak Ahmad</strong>
@@ -337,8 +315,8 @@ const ImpactPage: React.FC = () => {
             <div className="story-card">
               <div className="story-quote">"</div>
               <p className="story-text">
-                Our new reading room has become the favorite place in school. Students
-                come early and stay late just to spend time with books. It's magical!
+                Our new reading room has become the favorite place in school. Students come early
+                and stay late just to spend time with books. It's magical!
               </p>
               <div className="story-author">
                 <strong>Suster Maria</strong>
@@ -400,21 +378,21 @@ const ImpactPage: React.FC = () => {
                 <div className="gain-item">
                   <span>Literacy</span>
                   <div className="gain-bar">
-                    <div className="gain-fill" style={{ width: "85%" }}></div>
+                    <div className="gain-fill" style={{ width: '85%' }}></div>
                   </div>
                   <strong>85%</strong>
                 </div>
                 <div className="gain-item">
                   <span>Numeracy</span>
                   <div className="gain-bar">
-                    <div className="gain-fill" style={{ width: "78%" }}></div>
+                    <div className="gain-fill" style={{ width: '78%' }}></div>
                   </div>
                   <strong>78%</strong>
                 </div>
                 <div className="gain-item">
                   <span>Confidence</span>
                   <div className="gain-bar">
-                    <div className="gain-fill" style={{ width: "92%" }}></div>
+                    <div className="gain-fill" style={{ width: '92%' }}></div>
                   </div>
                   <strong>92%</strong>
                 </div>
@@ -433,8 +411,8 @@ const ImpactPage: React.FC = () => {
           <div className="cta-card-impact">
             <h2>Be Part of Our Impact Story</h2>
             <p>
-              Every donation creates ripples of change. Join us in transforming
-              education for thousands of children across Indonesia.
+              Every donation creates ripples of change. Join us in transforming education for
+              thousands of children across Indonesia.
             </p>
             <div className="cta-buttons-group">
               <a href="/donate" className="btn-cta-primary-large">
@@ -448,7 +426,7 @@ const ImpactPage: React.FC = () => {
         </div>
       </section>
     </Master>
-  );
-};
+  )
+}
 
-export default ImpactPage;
+export default ImpactPage

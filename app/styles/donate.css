@@ -1,707 +1,706 @@
-
 /* ===== Donate Hero ===== */
 .donate-hero {
-    padding: 6rem 0 4rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    text-align: center;
+  padding: 6rem 0 4rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
 }
 
 .donate-hero-content {
-    max-width: 700px;
-    margin: 0 auto;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .donate-label {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1.5rem;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
 }
 
 .donate-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
 }
 
 .donate-subtitle {
-    font-size: 1.2rem;
-    opacity: 0.95;
-    line-height: 1.6;
+  font-size: 1.2rem;
+  opacity: 0.95;
+  line-height: 1.6;
 }
 
 /* ===== Form Section ===== */
 .donate-form-section {
-    padding: 4rem 0;
-    background: #f8f9fa;
+  padding: 4rem 0;
+  background: #f8f9fa;
 }
 
 .donate-grid {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 3rem;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 3rem;
+  align-items: start;
 }
 
 .donate-form-container {
-    background: white;
-    border-radius: 20px;
-    padding: 3rem;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 .donate-form {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 /* Form Sections */
 .form-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .section-title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
 }
 
 .section-number {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-weight: 700;
-    flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 /* Form Elements */
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .form-label {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
 }
 
 .optional {
-    font-weight: 400;
-    color: #999;
-    font-size: 0.85rem;
+  font-weight: 400;
+  color: #999;
+  font-size: 0.85rem;
 }
 
 .form-input,
 .form-select,
 .form-textarea {
-    padding: 0.875rem 1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    font-family: inherit;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .form-textarea {
-    resize: vertical;
-    min-height: 100px;
+  resize: vertical;
+  min-height: 100px;
 }
 
 .form-hint {
-    font-size: 0.85rem;
-    color: #666;
+  font-size: 0.85rem;
+  color: #666;
 }
 
 .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 /* Input with Prefix */
 .input-with-prefix {
-    position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .input-prefix {
-    position: absolute;
-    left: 1rem;
-    font-weight: 600;
-    color: #666;
+  position: absolute;
+  left: 1rem;
+  font-weight: 600;
+  color: #666;
 }
 
 .input-with-prefix .form-input {
-    padding-left: 3rem;
+  padding-left: 3rem;
 }
 
 /* Donation Type Toggle */
 .donation-type-toggle {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .toggle-btn {
-    padding: 1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .toggle-btn:hover {
-    border-color: #667eea;
-    background: rgba(102, 126, 234, 0.05);
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
 }
 
 .toggle-btn.active {
-    border-color: #667eea;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+  border-color: #667eea;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
 }
 
 .toggle-icon {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
 .monthly-info {
-    padding: 1rem;
-    background: #e8f4fd;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    color: #0066cc;
+  padding: 1rem;
+  background: #e8f4fd;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #0066cc;
 }
 
 /* Amount Grid */
 .amount-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
 
 .amount-btn {
-    padding: 1.25rem 1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    background: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
+  padding: 1.25rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
 .amount-btn:hover {
-    border-color: #667eea;
-    background: rgba(102, 126, 234, 0.05);
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
 }
 
 .amount-btn.active {
-    border-color: #667eea;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    border-width: 3px;
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border-width: 3px;
 }
 
 .amount-value {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
 }
 
 /* Selected Project Card */
 .selected-project-card {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 12px;
-    border: 2px solid #667eea;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid #667eea;
 }
 
 .project-mini-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    overflow: hidden;
-    flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .project-mini-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .project-mini-info h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #1a1a1a;
 }
 
 .project-mini-info p {
-    font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.5rem;
 }
 
 .project-mini-stats {
-    display: flex;
-    gap: 1rem;
-    font-size: 0.8rem;
-    color: #667eea;
-    font-weight: 600;
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #667eea;
+  font-weight: 600;
 }
 
 /* Checkboxes */
 .form-checkboxes {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.95rem;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  cursor: pointer;
 }
 
-.checkbox-label input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+.checkbox-label input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 /* Submit Button */
 .submit-btn {
-    width: 100%;
-    padding: 1.25rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  width: 100%;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
 }
 
 .submit-btn:hover:not(:disabled) {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
 }
 
 .submit-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .spinner {
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .form-security {
-    text-align: center;
-    font-size: 0.85rem;
-    color: #666;
-    margin: 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
 }
 
 /* ===== Sidebar ===== */
 .donate-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    position: sticky;
-    top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 100px;
 }
 
 .donation-summary {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 .donation-summary h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #1a1a1a;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
 }
 
 .summary-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .summary-label {
-    font-size: 0.9rem;
-    color: #666;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .summary-value {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    text-align: right;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-align: right;
 }
 
 .summary-amount {
-    font-size: 1.5rem;
-    color: #667eea;
+  font-size: 1.5rem;
+  color: #667eea;
 }
 
 .summary-divider {
-    height: 2px;
-    background: #f0f0f0;
-    margin: 1rem 0;
+  height: 2px;
+  background: #f0f0f0;
+  margin: 1rem 0;
 }
 
 .summary-impact {
-    padding: 1.5rem;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-    border-radius: 12px;
-    margin-top: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-radius: 12px;
+  margin-top: 1rem;
 }
 
 .summary-impact h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: #1a1a1a;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #1a1a1a;
 }
 
 .summary-impact p {
-    font-size: 0.95rem;
-    color: #666;
-    line-height: 1.6;
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
 }
 
 .summary-yearly {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #666;
-    margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #666;
+  margin-top: 1rem;
 }
 
 /* Trust Badges */
 .trust-badges {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 .trust-badges h4 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #1a1a1a;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
 }
 
 .badge-item {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .badge-icon {
-    width: 32px;
-    height: 32px;
-    background: #48bb78;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: #48bb78;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .badge-item strong {
-    display: block;
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-    color: #1a1a1a;
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: #1a1a1a;
 }
 
 .badge-item p {
-    font-size: 0.85rem;
-    color: #666;
-    margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
 }
 
 /* ===== FAQ Section ===== */
 .donate-faq {
-    padding: 4rem 0;
-    background: white;
+  padding: 4rem 0;
+  background: white;
 }
 
 .donate-faq h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 3rem;
-    color: #1a1a1a;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  color: #1a1a1a;
 }
 
 .faq-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
 }
 
 .faq-item {
-    padding: 2rem;
-    background: #f8f9fa;
-    border-radius: 16px;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 16px;
 }
 
 .faq-item h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: #1a1a1a;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #1a1a1a;
 }
 
 .faq-item p {
-    font-size: 0.95rem;
-    color: #666;
-    line-height: 1.6;
-    margin: 0;
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 1200px) {
-    .donate-grid {
-        grid-template-columns: 1fr;
-    }
+  .donate-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .donate-sidebar {
-        position: relative;
-        top: 0;
-    }
+  .donate-sidebar {
+    position: relative;
+    top: 0;
+  }
 }
 
 @media (max-width: 768px) {
-    /* Fix container padding */
-    .donate-hero .container,
-    .donate-form-section .container,
-    .donate-faq .container {
-        padding: 0 1rem;
-    }
+  /* Fix container padding */
+  .donate-hero .container,
+  .donate-form-section .container,
+  .donate-faq .container {
+    padding: 0 1rem;
+  }
 
-    .donate-hero {
-        padding: 4rem 0 3rem;
-    }
+  .donate-hero {
+    padding: 4rem 0 3rem;
+  }
 
-    .donate-title {
-        font-size: 2.5rem;
-    }
+  .donate-title {
+    font-size: 2.5rem;
+  }
 
-    .donate-form-container {
-        padding: 2rem;
-    }
+  .donate-form-container {
+    padding: 2rem;
+  }
 
-    .amount-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .amount-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .form-row {
-        grid-template-columns: 1fr;
-    }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 
-    .donation-type-toggle {
-        gap: 0.75rem;
-    }
+  .donation-type-toggle {
+    gap: 0.75rem;
+  }
 
-    .toggle-btn {
-        padding: 0.875rem 0.75rem;
-        font-size: 0.9rem;
-    }
+  .toggle-btn {
+    padding: 0.875rem 0.75rem;
+    font-size: 0.9rem;
+  }
 
-    .faq-grid {
-        grid-template-columns: 1fr;
-    }
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .section-title {
-        font-size: 1.25rem;
-    }
+  .section-title {
+    font-size: 1.25rem;
+  }
 }
 
 @media (max-width: 480px) {
-    /* Extra tight padding for small screens */
-    .donate-hero .container,
-    .donate-form-section .container,
-    .donate-faq .container {
-        padding: 0 0.75rem;
-    }
+  /* Extra tight padding for small screens */
+  .donate-hero .container,
+  .donate-form-section .container,
+  .donate-faq .container {
+    padding: 0 0.75rem;
+  }
 
-    .donate-hero {
-        padding: 3rem 0 2rem;
-    }
+  .donate-hero {
+    padding: 3rem 0 2rem;
+  }
 
-    .donate-title {
-        font-size: 2rem;
-    }
+  .donate-title {
+    font-size: 2rem;
+  }
 
-    .donate-subtitle {
-        font-size: 1rem;
-    }
+  .donate-subtitle {
+    font-size: 1rem;
+  }
 
-    .donate-form-container {
-        padding: 1.5rem;
-        border-radius: 16px;
-        width: 50%;
-        max-width: 100%;
-    }
+  .donate-form-container {
+    padding: 1.5rem;
+    border-radius: 16px;
+    width: 50%;
+    max-width: 100%;
+  }
 
-    .form-section {
-        gap: 1.25rem;
-    }
+  .form-section {
+    gap: 1.25rem;
+  }
 
-    .section-title {
-        font-size: 1.1rem;
-        gap: 0.75rem;
-    }
+  .section-title {
+    font-size: 1.1rem;
+    gap: 0.75rem;
+  }
 
-    .section-number {
-        width: 32px;
-        height: 32px;
-        font-size: 0.9rem;
-    }
+  .section-number {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
 
-    .amount-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
+  .amount-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
 
-    .amount-btn {
-        padding: 1rem 0.75rem;
-    }
+  .amount-btn {
+    padding: 1rem 0.75rem;
+  }
 
-    .amount-value {
-        font-size: 0.95rem;
-    }
+  .amount-value {
+    font-size: 0.95rem;
+  }
 
-    .donation-type-toggle {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
+  .donation-type-toggle {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
 
-    .toggle-btn {
-        padding: 1rem;
-        font-size: 0.9rem;
-    }
+  .toggle-btn {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
 
-    .form-input,
-    .form-select,
-    .form-textarea {
-        padding: 0.75rem 0.875rem;
-        font-size: 0.95rem;
-    }
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.95rem;
+  }
 
-    .input-with-prefix .form-input {
-        padding-left: 2.75rem;
-    }
+  .input-with-prefix .form-input {
+    padding-left: 2.75rem;
+  }
 
-    .input-prefix {
-        left: 0.875rem;
-        font-size: 0.95rem;
-    }
+  .input-prefix {
+    left: 0.875rem;
+    font-size: 0.95rem;
+  }
 
-    .submit-btn {
-        padding: 1rem;
-        font-size: 1rem;
-    }
+  .submit-btn {
+    padding: 1rem;
+    font-size: 1rem;
+  }
 
-    .donation-summary,
-    .trust-badges {
-        padding: 1.5rem;
-    }
+  .donation-summary,
+  .trust-badges {
+    padding: 1.5rem;
+  }
 
-    .donation-summary h3 {
-        font-size: 1.25rem;
-    }
+  .donation-summary h3 {
+    font-size: 1.25rem;
+  }
 
-    .summary-item {
-        padding: 0.875rem 0;
-    }
+  .summary-item {
+    padding: 0.875rem 0;
+  }
 
-    .summary-amount {
-        font-size: 1.25rem;
-    }
+  .summary-amount {
+    font-size: 1.25rem;
+  }
 
-    .faq-item {
-        padding: 1.5rem;
-    }
+  .faq-item {
+    padding: 1.5rem;
+  }
 
-    .donate-faq h2 {
-        font-size: 2rem;
-    }
+  .donate-faq h2 {
+    font-size: 2rem;
+  }
 }

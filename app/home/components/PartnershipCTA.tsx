@@ -1,8 +1,7 @@
+'use client'
 
-"use client";
-
-import React from "react";
-import Link from "next/link";
+import React from 'react'
+import Link from 'next/link'
 
 const PartnershipCTA: React.FC = () => {
   return (
@@ -19,9 +18,9 @@ const PartnershipCTA: React.FC = () => {
               <span className="gradient-text">Create Lasting Impact</span>
             </h2>
             <p className="partnership-desc-modern">
-              Join leading organizations committed to transforming education and
-              empowering communities. Together, we can amplify your social
-              impact and create sustainable change.
+              Join leading organizations committed to transforming education and empowering
+              communities. Together, we can amplify your social impact and create sustainable
+              change.
             </p>
 
             <div className="partnership-features">
@@ -61,16 +60,12 @@ const PartnershipCTA: React.FC = () => {
             {/* Testimonial */}
             <div className="partnership-testimonial">
               <div className="testimonial-avatar">
-                <img
-                  src="https://i.pravatar.cc/150?img=12"
-                  alt="Partner Representative"
-                />
+                <img src="https://i.pravatar.cc/150?img=12" alt="Partner Representative" />
               </div>
               <div className="testimonial-content">
                 <p>
-                  "Partnering with Accelero has been transformative for our CSR
-                  initiatives. Their transparency and measurable impact align
-                  perfectly with our values."
+                  "Partnering with Accelero has been transformative for our CSR initiatives. Their
+                  transparency and measurable impact align perfectly with our values."
                 </p>
                 <strong>Michael Chen</strong>
                 <span>CSR Director, TechCorp Global</span>
@@ -89,30 +84,21 @@ const PartnershipCTA: React.FC = () => {
                 <div className="panel-stat-number">25+</div>
                 <div className="panel-stat-label">Active Partners</div>
                 <div className="panel-stat-bar">
-                  <div
-                    className="panel-stat-fill"
-                    style={{ width: "80%" }}
-                  ></div>
+                  <div className="panel-stat-fill" style={{ width: '80%' }}></div>
                 </div>
               </div>
               <div className="panel-stat">
                 <div className="panel-stat-number">$2.5M</div>
                 <div className="panel-stat-label">Joint Funding</div>
                 <div className="panel-stat-bar">
-                  <div
-                    className="panel-stat-fill"
-                    style={{ width: "70%" }}
-                  ></div>
+                  <div className="panel-stat-fill" style={{ width: '70%' }}></div>
                 </div>
               </div>
               <div className="panel-stat">
                 <div className="panel-stat-number">8,000+</div>
                 <div className="panel-stat-label">Lives Impacted</div>
                 <div className="panel-stat-bar">
-                  <div
-                    className="panel-stat-fill"
-                    style={{ width: "90%" }}
-                  ></div>
+                  <div className="panel-stat-fill" style={{ width: '90%' }}></div>
                 </div>
               </div>
             </div>
@@ -160,7 +146,7 @@ const PartnershipCTA: React.FC = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default PartnershipCTA;
+export default PartnershipCTA

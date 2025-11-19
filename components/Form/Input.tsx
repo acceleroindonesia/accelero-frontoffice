@@ -1,14 +1,14 @@
 // interfaces
 interface IProps {
-  name: string;
-  type: string;
-  value?: string;
-  maxLength: number;
-  disabled?: boolean;
-  required?: boolean;
-  placeholder: string;
-  readOnly?: boolean;
-  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  name: string
+  type: string
+  value?: string
+  maxLength: number
+  disabled?: boolean
+  required?: boolean
+  placeholder: string
+  readOnly?: boolean
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
 }
 
 const Input: React.FC<IProps> = ({
@@ -26,16 +26,16 @@ const Input: React.FC<IProps> = ({
     id={name}
     type={type}
     name={name}
-    autoComplete='off'
+    autoComplete="off"
     readOnly={readOnly}
     disabled={disabled}
     required={required}
     value={value}
     maxLength={maxLength}
-    className='input-text'
+    className="input-text"
     placeholder={placeholder}
     onChange={onChange}
   />
-);
+)
 
-export default Input;
+export default Input

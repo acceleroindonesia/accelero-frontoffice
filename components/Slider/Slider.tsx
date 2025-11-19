@@ -1,42 +1,42 @@
-'use client';
+'use client'
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react'
 
 // interfaces
 interface IProps {
-  touch?: boolean;
-  margin?: number;
-  children: React.ReactNode;
+  touch?: boolean
+  margin?: number
+  children: React.ReactNode
 }
 
 const Slider: React.FC<IProps> = ({ margin, touch, children }) => {
-  const startX = useRef<number>(0);
-  const isDown = useRef<boolean>(false);
-  const itemWidth = useRef<number>(0);
-  const scrollLeftX = useRef<number>(0);
-  const preventClick = useRef<boolean>(false);
-  const movedDistance = useRef<number>(0);
-  const navReferenceDiv = useRef<HTMLDivElement | null>(null);
+  const startX = useRef<number>(0)
+  const isDown = useRef<boolean>(false)
+  const itemWidth = useRef<number>(0)
+  const scrollLeftX = useRef<number>(0)
+  const preventClick = useRef<boolean>(false)
+  const movedDistance = useRef<number>(0)
+  const navReferenceDiv = useRef<HTMLDivElement | null>(null)
 
-  const [leftArrowDisabled, setLeftArrowDisabled] = useState<boolean>(true);
-  const [rightArrowDisabled, setRightArrowDisabled] = useState<boolean>(false);
+  const [leftArrowDisabled, setLeftArrowDisabled] = useState<boolean>(true)
+  const [rightArrowDisabled, setRightArrowDisabled] = useState<boolean>(false)
 
   /**
    * Sets up the scroll functionality and event listeners on the navigation element.
    */
   useEffect(() => {
-    const currentNav = navReferenceDiv.current!;
+    const currentNav = navReferenceDiv.current!
 
     /**
      * Updates the disabled state of the left and right arrow buttons based on the current scroll position.
      */
     const updateButtons = () => {
-      const { offsetWidth, scrollWidth, scrollLeft } = navReferenceDiv.current!;
+      const { offsetWidth, scrollWidth, scrollLeft } = navReferenceDiv.current!
 
-      setLeftArrowDisabled(scrollLeft <= 0);
+      setLeftArrowDisabled(scrollLeft <= 0)
 
-      setRightArrowDisabled(scrollWidth - Math.round(scrollLeft) <= offsetWidth + 1);
-    };
+      setRightArrowDisabled(scrollWidth - Math.round(scrollLeft) <= offsetWidth + 1)
+    }
 
     /**
      * Handles mouse movement during a drag interaction.
@@ -44,20 +44,20 @@ const Slider: React.FC<IProps> = ({ margin, touch, children }) => {
      * @param e - The `MouseEvent` representing the mouse move event.
      */
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDown.current) return;
+      if (!isDown.current) return
 
-      const x = e.pageX - navReferenceDiv.current!.offsetLeft;
+      const x = e.pageX - navReferenceDiv.current!.offsetLeft
 
-      const walk = x - startX.current;
+      const walk = x - startX.current
 
-      navReferenceDiv.current!.scrollLeft = scrollLeftX.current - walk;
+      navReferenceDiv.current!.scrollLeft = scrollLeftX.current - walk
 
-      movedDistance.current = Math.abs(walk);
+      movedDistance.current = Math.abs(walk)
 
-      preventClick.current = movedDistance.current > 5;
+      preventClick.current = movedDistance.current > 5
 
-      updateButtons();
-    };
+      updateButtons()
+    }
 
     /**
      * Initiates a drag interaction when the mouse button is pressed down on the navigation element.
@@ -65,42 +65,42 @@ const Slider: React.FC<IProps> = ({ margin, touch, children }) => {
      * @param e - The `MouseEvent` representing the mouse down event.
      */
     const handleMouseDown = (e: MouseEvent) => {
-      e.preventDefault();
+      e.preventDefault()
 
-      isDown.current = true;
+      isDown.current = true
 
-      startX.current = e.pageX - navReferenceDiv.current!.offsetLeft;
+      startX.current = e.pageX - navReferenceDiv.current!.offsetLeft
 
-      scrollLeftX.current = navReferenceDiv.current!.scrollLeft;
+      scrollLeftX.current = navReferenceDiv.current!.scrollLeft
 
-      preventClick.current = false;
+      preventClick.current = false
 
-      movedDistance.current = 0;
+      movedDistance.current = 0
 
-      updateButtons();
-    };
+      updateButtons()
+    }
 
     /**
      * Ends the drag interaction when the mouse button is released.
      */
     const handleMouseUp = () => {
-      isDown.current = false;
-    };
+      isDown.current = false
+    }
 
     /**
      * Ends the drag interaction when the mouse leaves the navigation area.
      */
     const handleMouseLeave = () => {
-      isDown.current = false;
-      preventClick.current = false;
-    };
+      isDown.current = false
+      preventClick.current = false
+    }
 
     /**
      * Updates the arrow button state during scrolling.
      */
     const handleScroll = () => {
-      updateButtons();
-    };
+      updateButtons()
+    }
 
     /**
      * Prevents the default click action if the mouse has been dragged to avoid accidental clicks on child elements during scrolling.
@@ -109,42 +109,42 @@ const Slider: React.FC<IProps> = ({ margin, touch, children }) => {
      */
     const handleClick = (e: MouseEvent) => {
       if (preventClick.current) {
-        e.preventDefault();
+        e.preventDefault()
       }
-    };
-
-    if (currentNav.children.length > 0) {
-      const firstChild = currentNav.children[0] as HTMLElement;
-
-      itemWidth.current = firstChild.offsetWidth + (margin ?? 0);
     }
 
-    updateButtons();
+    if (currentNav.children.length > 0) {
+      const firstChild = currentNav.children[0] as HTMLElement
 
-    window.addEventListener('resize', updateButtons);
-    currentNav.addEventListener('click', handleClick);
-    currentNav.addEventListener('scroll', handleScroll);
+      itemWidth.current = firstChild.offsetWidth + (margin ?? 0)
+    }
+
+    updateButtons()
+
+    window.addEventListener('resize', updateButtons)
+    currentNav.addEventListener('click', handleClick)
+    currentNav.addEventListener('scroll', handleScroll)
 
     if (touch) {
-      currentNav.addEventListener('mouseup', handleMouseUp);
-      currentNav.addEventListener('mousedown', handleMouseDown);
-      currentNav.addEventListener('mousemove', handleMouseMove);
-      currentNav.addEventListener('mouseleave', handleMouseLeave);
+      currentNav.addEventListener('mouseup', handleMouseUp)
+      currentNav.addEventListener('mousedown', handleMouseDown)
+      currentNav.addEventListener('mousemove', handleMouseMove)
+      currentNav.addEventListener('mouseleave', handleMouseLeave)
     }
 
     return () => {
-      window.removeEventListener('resize', updateButtons);
-      currentNav.removeEventListener('click', handleClick);
-      currentNav.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', updateButtons)
+      currentNav.removeEventListener('click', handleClick)
+      currentNav.removeEventListener('scroll', handleScroll)
 
       if (touch) {
-        currentNav.removeEventListener('mouseup', handleMouseUp);
-        currentNav.removeEventListener('mousedown', handleMouseDown);
-        currentNav.removeEventListener('mousemove', handleMouseMove);
-        currentNav.removeEventListener('mouseleave', handleMouseLeave);
+        currentNav.removeEventListener('mouseup', handleMouseUp)
+        currentNav.removeEventListener('mousedown', handleMouseDown)
+        currentNav.removeEventListener('mousemove', handleMouseMove)
+        currentNav.removeEventListener('mouseleave', handleMouseLeave)
       }
-    };
-  }, [touch, margin]);
+    }
+  }, [touch, margin])
 
   /**
    * Scrolls the navigation container horizontally by one item width.
@@ -152,51 +152,51 @@ const Slider: React.FC<IProps> = ({ margin, touch, children }) => {
    * @param direction - A string indicating the direction to scroll, either 'left' or 'right'.
    */
   const handleHorizontalScroll = (direction: 'left' | 'right') => {
-    const scrollAmount = direction === 'left' ? -itemWidth.current : itemWidth.current;
+    const scrollAmount = direction === 'left' ? -itemWidth.current : itemWidth.current
 
     navReferenceDiv.current!.scrollBy({
       left: scrollAmount,
       behavior: 'smooth',
-    });
+    })
 
-    const { offsetWidth, scrollWidth, scrollLeft } = navReferenceDiv.current!;
+    const { offsetWidth, scrollWidth, scrollLeft } = navReferenceDiv.current!
 
-    setLeftArrowDisabled(scrollLeft <= 0);
+    setLeftArrowDisabled(scrollLeft <= 0)
 
-    setRightArrowDisabled(scrollWidth - Math.round(scrollLeft) <= offsetWidth + 1);
-  };
+    setRightArrowDisabled(scrollWidth - Math.round(scrollLeft) <= offsetWidth + 1)
+  }
 
   return (
-    <div className='scroll-container'>
+    <div className="scroll-container">
       {!leftArrowDisabled && (
-        <div className='left-arrow'>
+        <div className="left-arrow">
           <button
-            type='button'
+            type="button"
             disabled={leftArrowDisabled}
             onClick={() => handleHorizontalScroll('left')}
             className={`button-circle ${leftArrowDisabled ? 'button-gray' : 'button-default'}`}
           >
-            <span className='material-symbols-outlined'>chevron_left</span>
+            <span className="material-symbols-outlined">chevron_left</span>
           </button>
         </div>
       )}
-      <div className='scrollable' ref={navReferenceDiv}>
+      <div className="scrollable" ref={navReferenceDiv}>
         {children}
       </div>
       {!rightArrowDisabled && (
-        <div className='right-arrow'>
+        <div className="right-arrow">
           <button
-            type='button'
+            type="button"
             disabled={rightArrowDisabled}
             onClick={() => handleHorizontalScroll('right')}
             className={`button-circle ${rightArrowDisabled ? 'button-gray' : 'button-default'}`}
           >
-            <span className='material-symbols-outlined'>chevron_right</span>
+            <span className="material-symbols-outlined">chevron_right</span>
           </button>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Slider;
+export default Slider

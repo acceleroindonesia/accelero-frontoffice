@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import React from "react";
-import Link from "next/link";
+import React from 'react'
+import Link from 'next/link'
 
 const BlogCTA: React.FC = () => {
   return (
@@ -18,9 +18,8 @@ const BlogCTA: React.FC = () => {
               <span className="gradient-text">Stay Inspired</span>
             </h2>
             <p className="blog-desc-modern">
-              Subscribe to our newsletter and get the latest impact stories,
-              program updates, and inspiring content delivered directly to your
-              inbox every month.
+              Subscribe to our newsletter and get the latest impact stories, program updates, and
+              inspiring content delivered directly to your inbox every month.
             </p>
 
             <div className="blog-features">
@@ -59,9 +58,7 @@ const BlogCTA: React.FC = () => {
               </button>
             </div>
 
-            <p className="newsletter-note">
-              Join 5,000+ subscribers. Unsubscribe anytime.
-            </p>
+            <p className="newsletter-note">Join 5,000+ subscribers. Unsubscribe anytime.</p>
 
             {/* Social Links */}
             <div className="blog-social">
@@ -94,30 +91,21 @@ const BlogCTA: React.FC = () => {
                 <div className="panel-stat-number">50+</div>
                 <div className="panel-stat-label">Articles Published</div>
                 <div className="panel-stat-bar">
-                  <div
-                    className="panel-stat-fill"
-                    style={{ width: "75%" }}
-                  ></div>
+                  <div className="panel-stat-fill" style={{ width: '75%' }}></div>
                 </div>
               </div>
               <div className="panel-stat">
                 <div className="panel-stat-number">10K+</div>
                 <div className="panel-stat-label">Monthly Readers</div>
                 <div className="panel-stat-bar">
-                  <div
-                    className="panel-stat-fill"
-                    style={{ width: "85%" }}
-                  ></div>
+                  <div className="panel-stat-fill" style={{ width: '85%' }}></div>
                 </div>
               </div>
               <div className="panel-stat">
                 <div className="panel-stat-number">5K+</div>
                 <div className="panel-stat-label">Newsletter Subscribers</div>
                 <div className="panel-stat-bar">
-                  <div
-                    className="panel-stat-fill"
-                    style={{ width: "70%" }}
-                  ></div>
+                  <div className="panel-stat-fill" style={{ width: '70%' }}></div>
                 </div>
               </div>
             </div>
@@ -180,7 +168,7 @@ const BlogCTA: React.FC = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default BlogCTA;
+export default BlogCTA

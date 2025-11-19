@@ -1,66 +1,64 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Link from "next/link";
-import { signIn } from "next-auth/react";
-import useAlert from "@hooks/useAlert";
-import toolBox from "@utils/ToolBox";
-import "../../../styles/auth.css";
+import { useState } from 'react'
+import Link from 'next/link'
+import { signIn } from 'next-auth/react'
+import useAlert from '@hooks/useAlert'
+import toolBox from '@utils/ToolBox'
+import '../../../styles/auth.css'
 
 interface IFormProps {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 const Form: React.FC = () => {
-  const { showAlert, hideAlert } = useAlert();
-  const [loading, setLoading] = useState<boolean>(false);
+  const { showAlert, hideAlert } = useAlert()
+  const [loading, setLoading] = useState<boolean>(false)
   const [formValues, setFormValues] = useState<IFormProps>({
-    email: "",
-    password: "",
-  });
+    email: '',
+    password: '',
+  })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormValues({
       ...formValues,
       [name]: value,
-    });
-  };
+    })
+  }
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
-    e.preventDefault();
-    hideAlert();
-    setLoading(true);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault()
+    hideAlert()
+    setLoading(true)
 
     if (!toolBox.isEmail(formValues.email)) {
-      showAlert({ type: "error", text: "Invalid email format" });
-      setLoading(false);
-      return;
+      showAlert({ type: 'error', text: 'Invalid email format' })
+      setLoading(false)
+      return
     }
 
     if (!formValues.password) {
-      showAlert({ type: "error", text: "Password is required" });
-      setLoading(false);
-      return;
+      showAlert({ type: 'error', text: 'Password is required' })
+      setLoading(false)
+      return
     }
 
-    const res = await signIn("credentials", {
+    const res = await signIn('credentials', {
       redirect: false,
       email: formValues.email,
       password: formValues.password,
-    });
+    })
 
     if (res?.ok) {
-      showAlert({ type: "success", text: "Success! Redirecting..." });
-      window.location.href = "/members/account";
+      showAlert({ type: 'success', text: 'Success! Redirecting...' })
+      window.location.href = '/members/account'
     } else {
-      showAlert({ type: "error", text: "Invalid email or password" });
-      setLoading(false);
+      showAlert({ type: 'error', text: 'Invalid email or password' })
+      setLoading(false)
     }
-  };
+  }
 
   if (loading) {
     return (
@@ -68,7 +66,7 @@ const Form: React.FC = () => {
         <div className="spinner" />
         <p>Signing you in...</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -140,7 +138,7 @@ const Form: React.FC = () => {
         Sign In
       </button>
     </form>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form

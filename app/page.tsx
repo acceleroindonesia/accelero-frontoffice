@@ -1,50 +1,50 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Master from "@components/Layout/Master";
-import Section from "@components/Section/Section";
-import HeroSection from "./home/components/HeroSection";
-import ImpactStats from "./home/components/ImpactStats";
-import ProjectCard from "@components/Card/ProjectCard";
-import HowItWorks from "./home/components/HowItWorks";
-import VolunteerCTA from "./home/components/VolunteerCTA";
-import { ScrollAnimations } from "./home/components/ScrollAnimations";
-import Request, { type IResponse } from "@utils/Request";
-import PartnershipCTA from "./home/components/PartnershipCTA";
-import BlogCTA from "./home/components/BlogCTA";
+import { useEffect, useState } from 'react'
+import Master from '@components/Layout/Master'
+import Section from '@components/Section/Section'
+import HeroSection from './home/components/HeroSection'
+import ImpactStats from './home/components/ImpactStats'
+import ProjectCard from '@components/Card/ProjectCard'
+import HowItWorks from './home/components/HowItWorks'
+import VolunteerCTA from './home/components/VolunteerCTA'
+import { ScrollAnimations } from './home/components/ScrollAnimations'
+import Request, { type IResponse } from '@utils/Request'
+import PartnershipCTA from './home/components/PartnershipCTA'
+import BlogCTA from './home/components/BlogCTA'
 
 interface IProject {
-  id: string;
-  url: string;
-  title: string;
-  location: string;
-  description: string;
-  goalAmount: number;
-  raisedAmount: number;
-  studentsImpacted: number;
-  image: string;
-  status: string;
+  id: string
+  url: string
+  title: string
+  location: string
+  description: string
+  goalAmount: number
+  raisedAmount: number
+  studentsImpacted: number
+  image: string
+  status: string
 }
 
 const Page: React.FC = () => {
-  const [projects, setProjects] = useState<IProject[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [projects, setProjects] = useState<IProject[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchProjects = async () => {
       const res: IResponse = await Request.getResponse({
-        url: "/api/projects?featured=true&limit=6",
-        method: "GET",
-      });
+        url: '/api/projects?featured=true&limit=6',
+        method: 'GET',
+      })
 
       if (res?.data?.projects) {
-        setProjects(res.data.projects);
+        setProjects(res.data.projects)
       }
-      setIsLoading(false);
-    };
+      setIsLoading(false)
+    }
 
-    fetchProjects();
-  }, []);
+    fetchProjects()
+  }, [])
 
   if (isLoading) {
     return (
@@ -62,7 +62,7 @@ const Page: React.FC = () => {
           </div>
         </div>
       </Master>
-    );
+    )
   }
 
   return (
@@ -76,9 +76,7 @@ const Page: React.FC = () => {
           <div className="projects-header" data-aos="fade-up">
             <span className="section-label">Our Programs</span>
             <h2 className="section-title-modern">Featured Programs</h2>
-            <p className="section-desc-modern">
-              Support schools and students who need it most
-            </p>
+            <p className="section-desc-modern">Support schools and students who need it most</p>
           </div>
 
           <div className="projects-grid">
@@ -113,7 +111,7 @@ const Page: React.FC = () => {
       {/*<PartnershipCTA />*/}
       {/*<BlogCTA />*/}
     </Master>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

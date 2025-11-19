@@ -1,124 +1,122 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import useAlert from "@hooks/useAlert";
-import toolBox from "@utils/ToolBox";
-import "../../../styles/auth.css";
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import useAlert from '@hooks/useAlert'
+import toolBox from '@utils/ToolBox'
+import '../../../styles/auth.css'
 
 interface IFormProps {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  agreement: boolean;
+  name: string
+  email: string
+  password: string
+  confirmPassword: string
+  agreement: boolean
 }
 
 const Form: React.FC = () => {
-  const router = useRouter();
-  const { showAlert, hideAlert } = useAlert();
-  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter()
+  const { showAlert, hideAlert } = useAlert()
+  const [loading, setLoading] = useState<boolean>(false)
   const [formValues, setFormValues] = useState<IFormProps>({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
     agreement: false,
-  });
+  })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked } = e.target
     setFormValues({
       ...formValues,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
+      [name]: type === 'checkbox' ? checked : value,
+    })
+  }
 
   const validateForm = (): boolean => {
     if (!formValues.name.trim()) {
-      showAlert({ type: "error", text: "Please enter your name" });
-      return false;
+      showAlert({ type: 'error', text: 'Please enter your name' })
+      return false
     }
 
     if (!toolBox.isEmail(formValues.email)) {
-      showAlert({ type: "error", text: "Invalid email format" });
-      return false;
+      showAlert({ type: 'error', text: 'Invalid email format' })
+      return false
     }
 
     if (formValues.password.length < 8) {
       showAlert({
-        type: "error",
-        text: "Password must be at least 8 characters",
-      });
-      return false;
+        type: 'error',
+        text: 'Password must be at least 8 characters',
+      })
+      return false
     }
 
     if (formValues.password !== formValues.confirmPassword) {
-      showAlert({ type: "error", text: "Passwords do not match" });
-      return false;
+      showAlert({ type: 'error', text: 'Passwords do not match' })
+      return false
     }
 
     if (!formValues.agreement) {
       showAlert({
-        type: "error",
-        text: "Please agree to the terms and conditions",
-      });
-      return false;
+        type: 'error',
+        text: 'Please agree to the terms and conditions',
+      })
+      return false
     }
 
-    return true;
-  };
+    return true
+  }
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
-    e.preventDefault();
-    hideAlert();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault()
+    hideAlert()
 
     if (!validateForm()) {
-      return;
+      return
     }
 
-    setLoading(true);
+    setLoading(true)
 
     try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formValues.name,
           email: formValues.email,
           password: formValues.password,
           agreement: formValues.agreement,
         }),
-      });
+      })
 
-      const data = await response.json();
+      const data = await response.json()
 
       if (response.status === 201 || response.ok) {
         showAlert({
-          type: "success",
-          text: "Account created successfully! Redirecting...",
-        });
+          type: 'success',
+          text: 'Account created successfully! Redirecting...',
+        })
         setTimeout(() => {
-          router.push("/members/signin");
-        }, 2000);
+          router.push('/members/signin')
+        }, 2000)
       } else {
         showAlert({
-          type: "error",
-          text: data.message || "Failed to create account. Please try again.",
-        });
-        setLoading(false);
+          type: 'error',
+          text: data.message || 'Failed to create account. Please try again.',
+        })
+        setLoading(false)
       }
     } catch (error) {
       showAlert({
-        type: "error",
-        text: "An error occurred. Please try again later.",
-      });
-      setLoading(false);
+        type: 'error',
+        text: 'An error occurred. Please try again later.',
+      })
+      setLoading(false)
     }
-  };
+  }
 
   if (loading) {
     return (
@@ -126,7 +124,7 @@ const Form: React.FC = () => {
         <div className="spinner" />
         <p>Creating your account...</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -197,11 +195,11 @@ const Form: React.FC = () => {
           required
         />
         <label htmlFor="agreement">
-          I agree to the{" "}
+          I agree to the{' '}
           <Link href="/legal/terms-of-service" target="_blank">
             Terms of Service
-          </Link>{" "}
-          and{" "}
+          </Link>{' '}
+          and{' '}
           <Link href="/legal/privacy-policy" target="_blank">
             Privacy Policy
           </Link>
@@ -212,7 +210,7 @@ const Form: React.FC = () => {
         Create Account
       </button>
     </form>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form

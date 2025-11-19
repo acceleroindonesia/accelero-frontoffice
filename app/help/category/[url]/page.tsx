@@ -1,40 +1,40 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { type Metadata } from 'next';
+import { type Metadata } from 'next'
 
 // components
-import Master from '@components/Layout/Master';
-import Section from '@components/Section/Section';
-import Heading from '@components/Heading/Heading';
-import ButtonLink from '@components/Button/ButtonLink';
+import Master from '@components/Layout/Master'
+import Section from '@components/Section/Section'
+import Heading from '@components/Heading/Heading'
+import ButtonLink from '@components/Button/ButtonLink'
 
 const Page: React.FC = () => (
   <Master>
-    <Section className='white-background'>
-      <div className='container'>
-        <div className='center'>
-          <Heading type={1} color='gray' text='Help category' />
+    <Section className="white-background">
+      <div className="container">
+        <div className="center">
+          <Heading type={1} color="gray" text="Help category" />
           <p>Showing all answers from this category.</p>
         </div>
       </div>
     </Section>
 
-    <Section className='white-background'>
-      <div className='container'>
-        <div className='help-answers center'>
+    <Section className="white-background">
+      <div className="container">
+        <div className="help-answers center">
           <ul>
             <li>
-              <Link href='/help/answer/1' className='blue'>
+              <Link href="/help/answer/1" className="blue">
                 How can i sign in?
               </Link>
             </li>
             <li>
-              <Link href='/help/answer/1' className='blue'>
+              <Link href="/help/answer/1" className="blue">
                 How can i sign up?
               </Link>
             </li>
             <li>
-              <Link href='/help/answer/1' className='blue'>
+              <Link href="/help/answer/1" className="blue">
                 Reset your password
               </Link>
             </li>
@@ -43,32 +43,32 @@ const Page: React.FC = () => (
       </div>
     </Section>
 
-    <Section className='gray-background'>
-      <div className='container'>
-        <div className='center'>
-          <Heading type={3} color='gray' text='Any questions?' />
-          <p className='gray'>
+    <Section className="gray-background">
+      <div className="container">
+        <div className="center">
+          <Heading type={3} color="gray" text="Any questions?" />
+          <p className="gray">
             If you can&apos;t find what you are looking for or need further support please contact
             us and we will be happy to help.
           </p>
 
-          <div className='button-container'>
+          <div className="button-container">
             <ButtonLink
-              color='blue-filled'
-              rightIcon='arrow_forward'
-              text='Contact us'
-              url='contact'
+              color="blue-filled"
+              rightIcon="arrow_forward"
+              text="Contact us"
+              url="contact"
             />
           </div>
         </div>
       </div>
     </Section>
   </Master>
-);
+)
 
-const title = 'Help';
-const canonical = 'https://accelero-ticketing.com/help/category/1';
-const description = 'accelero ticketing is a accelero ticketing solution';
+const title = 'Help'
+const canonical = 'https://accelero-ticketing.com/help/category/1'
+const description = 'accelero ticketing is a accelero ticketing solution'
 
 export const metadata: Metadata = {
   title,
@@ -83,6 +83,6 @@ export const metadata: Metadata = {
     siteName: 'accelero ticketing',
     images: 'https://accelero-ticketing.com/logo192.png',
   },
-};
+}
 
-export default Page;
+export default Page

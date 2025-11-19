@@ -1,29 +1,29 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 // interfaces
 interface IProps {
-  url: string;
-  text: string;
-  active?: boolean;
-  disabled?: boolean;
+  url: string
+  text: string
+  active?: boolean
+  disabled?: boolean
 }
 
 const ButtonGroupItem: React.FC<IProps> = ({ url, text, active, disabled }) => {
-  let className = '';
+  let className = ''
 
   if (disabled === true) {
-    className = 'disabled';
+    className = 'disabled'
   } else if (active === true) {
-    className = 'active';
+    className = 'active'
   } else {
-    className = 'passive';
+    className = 'passive'
   }
 
   return (
     <Link className={`button ${className}`} href={`/${url}`}>
       {text}
     </Link>
-  );
-};
+  )
+}
 
-export default ButtonGroupItem;
+export default ButtonGroupItem

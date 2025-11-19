@@ -1,70 +1,70 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Master from "@components/Layout/Master";
-import Section from "@components/Section/Section";
-import ProjectCard from "@components/Card/ProjectCard";
-import { ScrollAnimations } from "../home/components/ScrollAnimations";
-import Request, { type IResponse } from "@utils/Request";
+import { useEffect, useState } from 'react'
+import Master from '@components/Layout/Master'
+import Section from '@components/Section/Section'
+import ProjectCard from '@components/Card/ProjectCard'
+import { ScrollAnimations } from '../home/components/ScrollAnimations'
+import Request, { type IResponse } from '@utils/Request'
 
 interface IProject {
-  id: string;
-  url: string;
-  title: string;
-  location: string;
-  description: string;
-  goalAmount: number;
-  raisedAmount: number;
-  studentsImpacted: number;
-  image: string;
-  status: string;
-  category: string;
+  id: string
+  url: string
+  title: string
+  location: string
+  description: string
+  goalAmount: number
+  raisedAmount: number
+  studentsImpacted: number
+  image: string
+  status: string
+  category: string
 }
 
 const ProjectsPage: React.FC = () => {
-  const [projects, setProjects] = useState<IProject[]>([]);
-  const [filteredProjects, setFilteredProjects] = useState<IProject[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedStatus, setSelectedStatus] = useState<string>("all");
-  const [sortBy, setSortBy] = useState<string>("newest");
+  const [projects, setProjects] = useState<IProject[]>([])
+  const [filteredProjects, setFilteredProjects] = useState<IProject[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [selectedStatus, setSelectedStatus] = useState<string>('all')
+  const [sortBy, setSortBy] = useState<string>('newest')
 
   const categories = [
-    { value: "all", label: "All Programs", icon: "🎯" },
-    { value: "literacy", label: "Literacy", icon: "📚" },
-    { value: "numeracy", label: "Numeracy", icon: "🔢" },
-    { value: "teacher-training", label: "Teacher Training", icon: "👨‍🏫" },
-    { value: "infrastructure", label: "Infrastructure", icon: "🏗️" },
-  ];
+    { value: 'all', label: 'All Programs', icon: '🎯' },
+    { value: 'literacy', label: 'Literacy', icon: '📚' },
+    { value: 'numeracy', label: 'Numeracy', icon: '🔢' },
+    { value: 'teacher-training', label: 'Teacher Training', icon: '👨‍🏫' },
+    { value: 'infrastructure', label: 'Infrastructure', icon: '🏗️' },
+  ]
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    fetchProjects()
+  }, [])
 
   useEffect(() => {
-    filterAndSortProjects();
-  }, [projects, searchQuery, selectedCategory, selectedStatus, sortBy]);
+    filterAndSortProjects()
+  }, [projects, searchQuery, selectedCategory, selectedStatus, sortBy])
 
   const fetchProjects = async () => {
     try {
       const res: IResponse = await Request.getResponse({
-        url: "/api/projects?limit=50",
-        method: "GET",
-      });
+        url: '/api/projects?limit=50',
+        method: 'GET',
+      })
 
       if (res?.data?.projects) {
-        setProjects(res.data.projects);
+        setProjects(res.data.projects)
       }
     } catch (error) {
-      console.error("Failed to fetch projects:", error);
+      console.error('Failed to fetch projects:', error)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const filterAndSortProjects = () => {
-    let filtered = [...projects];
+    let filtered = [...projects]
 
     if (searchQuery) {
       filtered = filtered.filter(
@@ -72,63 +72,61 @@ const ProjectsPage: React.FC = () => {
           project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           project.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
           project.description.toLowerCase().includes(searchQuery.toLowerCase()),
-      );
+      )
     }
 
-    if (selectedCategory !== "all") {
+    if (selectedCategory !== 'all') {
       filtered = filtered.filter(
-        (project) =>
-          project.category?.toLowerCase() === selectedCategory.toLowerCase(),
-      );
+        (project) => project.category?.toLowerCase() === selectedCategory.toLowerCase(),
+      )
     }
 
-    if (selectedStatus !== "all") {
+    if (selectedStatus !== 'all') {
       filtered = filtered.filter(
-        (project) =>
-          project.status?.toLowerCase() === selectedStatus.toLowerCase(),
-      );
+        (project) => project.status?.toLowerCase() === selectedStatus.toLowerCase(),
+      )
     }
 
     switch (sortBy) {
-      case "newest":
-        break;
-      case "funding-high":
+      case 'newest':
+        break
+      case 'funding-high':
         filtered.sort((a, b) => {
-          const aPercent = (a.raisedAmount / a.goalAmount) * 100;
-          const bPercent = (b.raisedAmount / b.goalAmount) * 100;
-          return bPercent - aPercent;
-        });
-        break;
-      case "funding-low":
+          const aPercent = (a.raisedAmount / a.goalAmount) * 100
+          const bPercent = (b.raisedAmount / b.goalAmount) * 100
+          return bPercent - aPercent
+        })
+        break
+      case 'funding-low':
         filtered.sort((a, b) => {
-          const aPercent = (a.raisedAmount / a.goalAmount) * 100;
-          const bPercent = (b.raisedAmount / b.goalAmount) * 100;
-          return aPercent - bPercent;
-        });
-        break;
-      case "impact-high":
-        filtered.sort((a, b) => b.studentsImpacted - a.studentsImpacted);
-        break;
+          const aPercent = (a.raisedAmount / a.goalAmount) * 100
+          const bPercent = (b.raisedAmount / b.goalAmount) * 100
+          return aPercent - bPercent
+        })
+        break
+      case 'impact-high':
+        filtered.sort((a, b) => b.studentsImpacted - a.studentsImpacted)
+        break
     }
 
-    setFilteredProjects(filtered);
-  };
+    setFilteredProjects(filtered)
+  }
 
   const handleClearFilters = () => {
-    setSearchQuery("");
-    setSelectedCategory("all");
-    setSelectedStatus("all");
-    setSortBy("newest");
-  };
+    setSearchQuery('')
+    setSelectedCategory('all')
+    setSelectedStatus('all')
+    setSortBy('newest')
+  }
 
   const activeFiltersCount =
     (searchQuery ? 1 : 0) +
-    (selectedCategory !== "all" ? 1 : 0) +
-    (selectedStatus !== "all" ? 1 : 0) +
-    (sortBy !== "newest" ? 1 : 0);
+    (selectedCategory !== 'all' ? 1 : 0) +
+    (selectedStatus !== 'all' ? 1 : 0) +
+    (sortBy !== 'newest' ? 1 : 0)
 
-  const hasAnyProjects = projects.length > 0;
-  const hasFilteredResults = filteredProjects.length > 0;
+  const hasAnyProjects = projects.length > 0
+  const hasFilteredResults = filteredProjects.length > 0
 
   if (isLoading) {
     return (
@@ -149,7 +147,7 @@ const ProjectsPage: React.FC = () => {
           </div>
         </div>
       </Master>
-    );
+    )
   }
 
   return (
@@ -162,9 +160,8 @@ const ProjectsPage: React.FC = () => {
             <span className="page-label">Our Programs</span>
             <h1 className="page-title">Make a Difference Today</h1>
             <p className="page-subtitle">
-              Browse our programs and support schools and students who need it
-              most. Every donation is tracked transparently and makes a real
-              impact.
+              Browse our programs and support schools and students who need it most. Every donation
+              is tracked transparently and makes a real impact.
             </p>
           </div>
 
@@ -176,18 +173,15 @@ const ProjectsPage: React.FC = () => {
               </div>
               <div className="stat-item">
                 <div className="stat-value">
-                  {projects
-                    .reduce((sum, p) => sum + p.studentsImpacted, 0)
-                    .toLocaleString()}
+                  {projects.reduce((sum, p) => sum + p.studentsImpacted, 0).toLocaleString()}
                 </div>
                 <div className="stat-label">Students Reached</div>
               </div>
               <div className="stat-item">
                 <div className="stat-value">
-                  Rp{" "}
+                  Rp{' '}
                   {Math.round(
-                    projects.reduce((sum, p) => sum + p.raisedAmount, 0) /
-                      1000000,
+                    projects.reduce((sum, p) => sum + p.raisedAmount, 0) / 1000000,
                   ).toLocaleString()}
                   M
                 </div>
@@ -213,10 +207,7 @@ const ProjectsPage: React.FC = () => {
                     className="search-input"
                   />
                   {searchQuery && (
-                    <button
-                      className="clear-search"
-                      onClick={() => setSearchQuery("")}
-                    >
+                    <button className="clear-search" onClick={() => setSearchQuery('')}>
                       ✕
                     </button>
                   )}
@@ -260,16 +251,13 @@ const ProjectsPage: React.FC = () => {
 
               <div className="filter-actions">
                 {activeFiltersCount > 0 && (
-                  <button
-                    className="clear-filters-btn"
-                    onClick={handleClearFilters}
-                  >
+                  <button className="clear-filters-btn" onClick={handleClearFilters}>
                     Clear ({activeFiltersCount})
                   </button>
                 )}
                 <div className="results-count">
                   {filteredProjects.length} result
-                  {filteredProjects.length !== 1 ? "s" : ""}
+                  {filteredProjects.length !== 1 ? 's' : ''}
                 </div>
               </div>
             </div>
@@ -324,8 +312,8 @@ const ProjectsPage: React.FC = () => {
               <div className="cta-content">
                 <h2>Can't Find What You're Looking For?</h2>
                 <p>
-                  Make a general donation to our fund and we'll allocate it to
-                  the programs that need it most.
+                  Make a general donation to our fund and we'll allocate it to the programs that
+                  need it most.
                 </p>
               </div>
               <div className="cta-actions">
@@ -348,8 +336,8 @@ const ProjectsPage: React.FC = () => {
               <div className="cta-content">
                 <h2>Want to Make an Even Bigger Impact?</h2>
                 <p>
-                  Support our general fund to help us allocate resources where
-                  they're needed most across all our programs.
+                  Support our general fund to help us allocate resources where they're needed most
+                  across all our programs.
                 </p>
               </div>
               <div className="cta-actions">
@@ -365,7 +353,7 @@ const ProjectsPage: React.FC = () => {
         </section>
       )}
     </Master>
-  );
-};
+  )
+}
 
-export default ProjectsPage;
+export default ProjectsPage

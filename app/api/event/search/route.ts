@@ -1,14 +1,14 @@
-import { NextResponse } from 'next/server';
-import { prisma } from '@utils/Prisma';
-import ToolBox from '@utils/ToolBox';
+import { NextResponse } from 'next/server'
+import { prisma } from '@utils/Prisma'
+import ToolBox from '@utils/ToolBox'
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { keyword } = body;
+    const body = await req.json()
+    const { keyword } = body
 
     if (!keyword || keyword.length < 3) {
-      return NextResponse.json({ message: 'Invalid keyword.' }, { status: 400 });
+      return NextResponse.json({ message: 'Invalid keyword.' }, { status: 400 })
     }
 
     const events = await prisma.event.findMany({
@@ -31,11 +31,11 @@ export async function POST(req: Request) {
         },
         venue: true,
       },
-    });
+    })
 
     const results = events
       .map((e) => {
-        const ticket = e.ticketTypes?.[0] ?? { price: 0, stock: 0 };
+        const ticket = e.ticketTypes?.[0] ?? { price: 0, stock: 0 }
         return {
           url: e.slug ?? e.id.toString(),
           name: e.title,
@@ -51,18 +51,18 @@ export async function POST(req: Request) {
           from: ToolBox.formatCurrency(parseInt(ticket.price?.toString() ?? '0')),
           venue: e.venue?.name ?? '',
           image: e.thumbnailUrl ?? '',
-        };
+        }
       })
       .sort((a, b) => {
         // Events with stock come first
-        if (a.stock !== 0 && b.stock === 0) return -1;
-        if (a.stock === 0 && b.stock !== 0) return 1;
-        return 0;
-      });
+        if (a.stock !== 0 && b.stock === 0) return -1
+        if (a.stock === 0 && b.stock !== 0) return 1
+        return 0
+      })
 
-    return NextResponse.json({ results }, { status: 200 });
+    return NextResponse.json({ results }, { status: 200 })
   } catch (error) {
-    console.error('Search Error:', error);
-    return NextResponse.json({ message: 'Failed to search events' }, { status: 500 });
+    console.error('Search Error:', error)
+    return NextResponse.json({ message: 'Failed to search events' }, { status: 500 })
   }
 }

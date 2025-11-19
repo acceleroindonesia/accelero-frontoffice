@@ -1,65 +1,62 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Master from "@components/Layout/Master";
-import Section from "@components/Section/Section";
-import { ScrollAnimations } from "../home/components/ScrollAnimations";
+import { useState } from 'react'
+import Master from '@components/Layout/Master'
+import Section from '@components/Section/Section'
+import { ScrollAnimations } from '../home/components/ScrollAnimations'
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "general",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+    name: '',
+    email: '',
+    phone: '',
+    subject: 'general',
+    message: '',
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<{
-    type: "success" | "error" | null;
-    message: string;
-  }>({ type: null, message: "" });
+    type: 'success' | 'error' | null
+    message: string
+  }>({ type: null, message: '' })
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: "" });
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: '' })
 
     try {
       // Simulate API call - replace with actual API endpoint
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500))
 
       setSubmitStatus({
-        type: "success",
-        message:
-          "Thank you for contacting us! We'll get back to you within 24 hours.",
-      });
+        type: 'success',
+        message: "Thank you for contacting us! We'll get back to you within 24 hours.",
+      })
       setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "general",
-        message: "",
-      });
+        name: '',
+        email: '',
+        phone: '',
+        subject: 'general',
+        message: '',
+      })
     } catch (error) {
       setSubmitStatus({
-        type: "error",
-        message: "Something went wrong. Please try again or email us directly.",
-      });
+        type: 'error',
+        message: 'Something went wrong. Please try again or email us directly.',
+      })
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
     <Master>
@@ -72,8 +69,8 @@ const ContactPage: React.FC = () => {
             <span className="contact-label">Get In Touch</span>
             <h1 className="contact-title">We'd Love to Hear From You</h1>
             <p className="contact-subtitle">
-              Have questions about our programs? Want to volunteer or partner
-              with us? We're here to help and excited to connect!
+              Have questions about our programs? Want to volunteer or partner with us? We're here to
+              help and excited to connect!
             </p>
           </div>
         </div>
@@ -88,10 +85,7 @@ const ContactPage: React.FC = () => {
               <div className="method-icon email-icon">📧</div>
               <h3>Email Us</h3>
               <p>Our team typically responds within 24 hours</p>
-              <a
-                href="mailto:info@accelero-indonesia.org"
-                className="method-link"
-              >
+              <a href="mailto:info@accelero-indonesia.org" className="method-link">
                 info@accelero-indonesia.org
               </a>
             </div>
@@ -130,10 +124,7 @@ const ContactPage: React.FC = () => {
             <div className="form-container">
               <div className="form-header">
                 <h2>Send Us a Message</h2>
-                <p>
-                  Fill out the form below and we'll get back to you as soon as
-                  possible
-                </p>
+                <p>Fill out the form below and we'll get back to you as soon as possible</p>
               </div>
 
               <form onSubmit={handleSubmit} className="contact-form">
@@ -227,17 +218,13 @@ const ContactPage: React.FC = () => {
 
                 {submitStatus.type && (
                   <div
-                    className={`form-status ${submitStatus.type === "success" ? "success" : "error"}`}
+                    className={`form-status ${submitStatus.type === 'success' ? 'success' : 'error'}`}
                   >
                     {submitStatus.message}
                   </div>
                 )}
 
-                <button
-                  type="submit"
-                  className="submit-btn"
-                  disabled={isSubmitting}
-                >
+                <button type="submit" className="submit-btn" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>
                       <span className="spinner"></span>
@@ -257,10 +244,7 @@ const ContactPage: React.FC = () => {
             <div className="contact-info-sidebar">
               <div className="info-card">
                 <h3>Quick Connect</h3>
-                <p>
-                  Prefer a more immediate response? Reach out directly through
-                  these channels:
-                </p>
+                <p>Prefer a more immediate response? Reach out directly through these channels:</p>
                 <div className="quick-links">
                   <a
                     href="https://wa.me/6281292207121?text=Hi%20Accelero!"
@@ -271,10 +255,7 @@ const ContactPage: React.FC = () => {
                     <span className="btn-icon">💬</span>
                     <span>Message on WhatsApp</span>
                   </a>
-                  <a
-                    href="mailto:info@accelero-indonesia.org"
-                    className="quick-link-btn email-btn"
-                  >
+                  <a href="mailto:info@accelero-indonesia.org" className="quick-link-btn email-btn">
                     <span className="btn-icon">📧</span>
                     <span>Send Email</span>
                   </a>
@@ -304,9 +285,7 @@ const ContactPage: React.FC = () => {
 
               <div className="info-card">
                 <h3>Need Help?</h3>
-                <p>
-                  Check out our FAQ page for quick answers to common questions.
-                </p>
+                <p>Check out our FAQ page for quick answers to common questions.</p>
                 <a href="/help" className="help-link">
                   Visit Help Center →
                 </a>
@@ -328,37 +307,33 @@ const ContactPage: React.FC = () => {
             <div className="faq-card">
               <h4>How can I volunteer with Accelero?</h4>
               <p>
-                We partner with local universities to recruit volunteers. If
-                you're a university student interested in teaching, please fill
-                out the contact form above with "Volunteer Opportunity" as the
-                subject.
+                We partner with local universities to recruit volunteers. If you're a university
+                student interested in teaching, please fill out the contact form above with
+                "Volunteer Opportunity" as the subject.
               </p>
             </div>
 
             <div className="faq-card">
               <h4>How do I make a donation?</h4>
               <p>
-                You can donate through our secure donation page. We accept
-                various payment methods and provide transparent tracking of how
-                your donation is used.
+                You can donate through our secure donation page. We accept various payment methods
+                and provide transparent tracking of how your donation is used.
               </p>
             </div>
 
             <div className="faq-card">
               <h4>Can my organization partner with Accelero?</h4>
               <p>
-                We welcome partnerships with schools, universities, NGOs, and
-                corporations. Please contact us with "Partnership" as the
-                subject to discuss collaboration opportunities.
+                We welcome partnerships with schools, universities, NGOs, and corporations. Please
+                contact us with "Partnership" as the subject to discuss collaboration opportunities.
               </p>
             </div>
 
             <div className="faq-card">
               <h4>How do I get updates on your programs?</h4>
               <p>
-                Subscribe to our newsletter when making a donation, or follow
-                our social media channels for regular updates on our impact and
-                activities.
+                Subscribe to our newsletter when making a donation, or follow our social media
+                channels for regular updates on our impact and activities.
               </p>
             </div>
           </div>
@@ -371,8 +346,8 @@ const ContactPage: React.FC = () => {
           <div className="cta-card-contact">
             <h2>Join Our Mission</h2>
             <p>
-              Whether through volunteering, donating, or partnering—there are
-              many ways to support educational equity in Indonesia.
+              Whether through volunteering, donating, or partnering—there are many ways to support
+              educational equity in Indonesia.
             </p>
             <div className="cta-buttons-row">
               <a href="/donate" className="btn-cta-white">
@@ -386,7 +361,7 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
     </Master>
-  );
-};
+  )
+}
 
-export default ContactPage;
+export default ContactPage

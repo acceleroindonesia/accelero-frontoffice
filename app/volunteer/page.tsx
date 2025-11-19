@@ -1,92 +1,90 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Master from "@components/Layout/Master";
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Master from '@components/Layout/Master'
 
 const VolunteerPage = () => {
-  const router = useRouter();
+  const router = useRouter()
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     interests: [] as string[],
-    availability: "",
-    experience: "",
-    motivation: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState("");
+    availability: '',
+    experience: '',
+    motivation: '',
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [message, setMessage] = useState('')
 
   const volunteerAreas = [
-    "Education & Tutoring",
-    "Healthcare & Medical",
-    "Environmental Conservation",
-    "Community Development",
-    "Technology & Digital Skills",
-    "Arts & Culture",
-    "Animal Welfare",
-    "Disaster Relief",
-  ];
+    'Education & Tutoring',
+    'Healthcare & Medical',
+    'Environmental Conservation',
+    'Community Development',
+    'Technology & Digital Skills',
+    'Arts & Culture',
+    'Animal Welfare',
+    'Disaster Relief',
+  ]
 
-  const availabilityOptions = ["Weekdays", "Weekends", "Evenings", "Flexible"];
+  const availabilityOptions = ['Weekdays', 'Weekends', 'Evenings', 'Flexible']
 
   const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const toggleInterest = (area: string) => {
     setFormData((prev) => {
-      const isSelected = prev.interests.includes(area);
+      const isSelected = prev.interests.includes(area)
       return {
         ...prev,
         interests: isSelected
           ? prev.interests.filter((item) => item !== area)
           : [...prev.interests, area],
-      };
-    });
-  };
+      }
+    })
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setMessage("");
+    e.preventDefault()
+    setIsSubmitting(true)
+    setMessage('')
 
     try {
-      const response = await fetch("/api/volunteer", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/volunteer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
-      });
+      })
 
       if (response.ok) {
-        setMessage("Thank you for your interest! We will contact you soon.");
+        setMessage('Thank you for your interest! We will contact you soon.')
         setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
           interests: [],
-          availability: "",
-          experience: "",
-          motivation: "",
-        });
-        setTimeout(() => router.push("/home"), 3000);
+          availability: '',
+          experience: '',
+          motivation: '',
+        })
+        setTimeout(() => router.push('/home'), 3000)
       } else {
-        setMessage("Something went wrong. Please try again.");
+        setMessage('Something went wrong. Please try again.')
       }
     } catch (error) {
-      setMessage("Failed to submit. Please try again later.");
+      setMessage('Failed to submit. Please try again later.')
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
     <Master>
@@ -95,8 +93,8 @@ const VolunteerPage = () => {
           <div className="container">
             <h1>Become a Volunteer</h1>
             <p>
-              Make a difference in your community. Join our team of dedicated
-              volunteers and help create positive change.
+              Make a difference in your community. Join our team of dedicated volunteers and help
+              create positive change.
             </p>
           </div>
         </section>
@@ -110,10 +108,7 @@ const VolunteerPage = () => {
                   <div className="benefit-item">
                     <div className="benefit-icon">🤝</div>
                     <h3>Make an Impact</h3>
-                    <p>
-                      Directly contribute to meaningful projects that change
-                      lives
-                    </p>
+                    <p>Directly contribute to meaningful projects that change lives</p>
                   </div>
                   <div className="benefit-item">
                     <div className="benefit-icon">🌱</div>
@@ -123,16 +118,12 @@ const VolunteerPage = () => {
                   <div className="benefit-item">
                     <div className="benefit-icon">👥</div>
                     <h3>Connect</h3>
-                    <p>
-                      Meet like-minded people and build lasting relationships
-                    </p>
+                    <p>Meet like-minded people and build lasting relationships</p>
                   </div>
                   <div className="benefit-item">
                     <div className="benefit-icon">💪</div>
                     <h3>Empower</h3>
-                    <p>
-                      Help empower communities to reach their full potential
-                    </p>
+                    <p>Help empower communities to reach their full potential</p>
                   </div>
                 </div>
               </div>
@@ -140,11 +131,7 @@ const VolunteerPage = () => {
               <div className="volunteer-form-wrapper">
                 <h2>Volunteer Application</h2>
                 {message && (
-                  <div
-                    className={`message ${
-                      message.includes("Thank you") ? "success" : "error"
-                    }`}
-                  >
+                  <div className={`message ${message.includes('Thank you') ? 'success' : 'error'}`}>
                     {message}
                   </div>
                 )}
@@ -210,12 +197,12 @@ const VolunteerPage = () => {
                     </label>
                     <div className="checkbox-group">
                       {volunteerAreas.map((area) => {
-                        const isChecked = formData.interests.includes(area);
+                        const isChecked = formData.interests.includes(area)
                         return (
                           // eslint-disable-next-line jsx-a11y/click-events-have-key-events
                           <div
                             key={area}
-                            className={`checkbox-label ${isChecked ? "checked" : ""}`}
+                            className={`checkbox-label ${isChecked ? 'checked' : ''}`}
                             onClick={() => toggleInterest(area)}
                           >
                             <input
@@ -226,7 +213,7 @@ const VolunteerPage = () => {
                             />
                             <span>{area}</span>
                           </div>
-                        );
+                        )
                       })}
                     </div>
                     {formData.interests.length === 0 && (
@@ -257,9 +244,7 @@ const VolunteerPage = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="experience">
-                      Relevant Experience (Optional)
-                    </label>
+                    <label htmlFor="experience">Relevant Experience (Optional)</label>
                     <textarea
                       id="experience"
                       name="experience"
@@ -272,8 +257,7 @@ const VolunteerPage = () => {
 
                   <div className="form-group">
                     <label htmlFor="motivation">
-                      Why do you want to volunteer?{" "}
-                      <span className="required">*</span>
+                      Why do you want to volunteer? <span className="required">*</span>
                     </label>
                     <textarea
                       id="motivation"
@@ -291,7 +275,7 @@ const VolunteerPage = () => {
                     className="submit-btn"
                     disabled={isSubmitting || formData.interests.length === 0}
                   >
-                    {isSubmitting ? "Submitting..." : "Submit Application"}
+                    {isSubmitting ? 'Submitting...' : 'Submit Application'}
                   </button>
                 </form>
               </div>
@@ -300,7 +284,7 @@ const VolunteerPage = () => {
         </section>
       </div>
     </Master>
-  );
+  )
 }
 
-export default VolunteerPage;
+export default VolunteerPage

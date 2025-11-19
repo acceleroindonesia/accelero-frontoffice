@@ -1,38 +1,38 @@
-"use client";
+'use client'
 
-import React from "react";
+import React from 'react'
 
 const HowItWorks: React.FC = () => {
   const steps = [
     {
-      number: "01",
-      icon: "🎯",
-      title: "Choose Your Impact",
-      description: "Browse featured schools and programs that need support right now",
-      details: ["View school details", "See specific needs", "Track progress live"],
+      number: '01',
+      icon: '🎯',
+      title: 'Choose Your Impact',
+      description: 'Browse featured schools and programs that need support right now',
+      details: ['View school details', 'See specific needs', 'Track progress live'],
     },
     {
-      number: "02",
-      icon: "💝",
-      title: "Donate Securely",
-      description: "Make a one-time or monthly donation via QRIS or credit card",
-      details: ["100% secure", "Tax-deductible", "Add personal message"],
+      number: '02',
+      icon: '💝',
+      title: 'Donate Securely',
+      description: 'Make a one-time or monthly donation via QRIS or credit card',
+      details: ['100% secure', 'Tax-deductible', 'Add personal message'],
     },
     {
-      number: "03",
-      icon: "📊",
-      title: "Track Progress",
-      description: "Receive regular updates with photos, stories, and measurable results",
-      details: ["Monthly reports", "Student testimonials", "Photo updates"],
+      number: '03',
+      icon: '📊',
+      title: 'Track Progress',
+      description: 'Receive regular updates with photos, stories, and measurable results',
+      details: ['Monthly reports', 'Student testimonials', 'Photo updates'],
     },
     {
-      number: "04",
-      icon: "🌟",
-      title: "See Results",
-      description: "Watch students achieve milestones and transform their futures",
-      details: ["Success metrics", "Before & after", "Community impact"],
+      number: '04',
+      icon: '🌟',
+      title: 'See Results',
+      description: 'Watch students achieve milestones and transform their futures',
+      details: ['Success metrics', 'Before & after', 'Community impact'],
     },
-  ];
+  ]
 
   return (
     <section className="how-it-works-modern">
@@ -47,7 +47,12 @@ const HowItWorks: React.FC = () => {
 
         <div className="steps-timeline">
           {steps.map((step, index) => (
-            <div key={index} className="step-item" data-aos="fade-right" data-aos-delay={index * 150}>
+            <div
+              key={index}
+              className="step-item"
+              data-aos="fade-right"
+              data-aos-delay={index * 150}
+            >
               <div className="step-connector">
                 {index < steps.length - 1 && <div className="connector-line"></div>}
               </div>
@@ -84,7 +89,7 @@ const HowItWorks: React.FC = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default HowItWorks;
+export default HowItWorks

@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
+import { useState } from 'react'
 
 // hooks
-import useAlert from '@hooks/useAlert';
+import useAlert from '@hooks/useAlert'
 
 // components
-import Input from '@components/Form/Input';
+import Input from '@components/Form/Input'
 
 // interfaces
 interface IFormProps {
-  keyword: string;
+  keyword: string
 }
 
 const FormSearch: React.FC = () => {
-  const { showAlert } = useAlert();
+  const { showAlert } = useAlert()
 
   const [formValues, setFormValues] = useState<IFormProps>({
     keyword: '',
-  });
+  })
 
   /**
    * Handles the change event for form inputs.
@@ -26,13 +26,13 @@ const FormSearch: React.FC = () => {
    * @param {React.ChangeEvent<HTMLInputElement>} e - The event object from the input change.
    */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
 
     setFormValues({
       ...formValues,
       [name]: value,
-    });
-  };
+    })
+  }
 
   /**
    * Handles the form submission event.
@@ -43,33 +43,33 @@ const FormSearch: React.FC = () => {
    * @param {React.FormEvent<HTMLFormElement>} e - The event object from the form submission.
    */
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { keyword } = formValues;
+    const { keyword } = formValues
 
     if (keyword === '' || keyword.length < 3) {
-      showAlert({ type: 'error', text: 'Please enter minimum 3 characters for search.' });
+      showAlert({ type: 'error', text: 'Please enter minimum 3 characters for search.' })
     }
-  };
+  }
 
   return (
     <form noValidate onSubmit={handleSubmit}>
-      <div className='search-inputs flex flex-h-center flex-space-between'>
+      <div className="search-inputs flex flex-h-center flex-space-between">
         <Input
-          type='text'
-          name='keyword'
+          type="text"
+          name="keyword"
           value={formValues.keyword}
           maxLength={64}
-          placeholder='Search keyword, topic, question'
+          placeholder="Search keyword, topic, question"
           required
           onChange={handleChange}
         />
-        <button type='submit'>
-          <span className='material-symbols-outlined'>search</span>
+        <button type="submit">
+          <span className="material-symbols-outlined">search</span>
         </button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default FormSearch;
+export default FormSearch

@@ -1,13 +1,13 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 interface IProps {
-  url: string;
-  text: string;
-  color: string;
-  leftIcon?: string;
-  rightIcon?: string;
-  target?: string;
-  rel?: string;
+  url: string
+  text: string
+  color: string
+  leftIcon?: string
+  rightIcon?: string
+  target?: string
+  rel?: string
 }
 
 const ButtonLink: React.FC<IProps> = ({
@@ -20,15 +20,15 @@ const ButtonLink: React.FC<IProps> = ({
   rel = 'noopener noreferrer',
 }) => {
   const isExternal =
-    url.startsWith('http') || url.startsWith('mailto:') || url.startsWith('https://wa.me');
+    url.startsWith('http') || url.startsWith('mailto:') || url.startsWith('https://wa.me')
 
   const content = (
     <>
-      {leftIcon && <span className='material-symbols-outlined left-icon'>{leftIcon}</span>}
+      {leftIcon && <span className="material-symbols-outlined left-icon">{leftIcon}</span>}
       {text}
-      {rightIcon && <span className='material-symbols-outlined right-icon'>{rightIcon}</span>}
+      {rightIcon && <span className="material-symbols-outlined right-icon">{rightIcon}</span>}
     </>
-  );
+  )
 
   return isExternal ? (
     <a href={url} className={`button ${color}`} target={target} rel={rel}>
@@ -38,7 +38,7 @@ const ButtonLink: React.FC<IProps> = ({
     <Link className={`button ${color}`} href={`/${url}`}>
       {content}
     </Link>
-  );
-};
+  )
+}
 
-export default ButtonLink;
+export default ButtonLink

@@ -1,77 +1,77 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import Master from "@components/Layout/Master";
-import Image from "next/image";
-import Link from "next/link";
-import Request, { type IResponse } from "@utils/Request";
+import { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
+import Master from '@components/Layout/Master'
+import Image from 'next/image'
+import Link from 'next/link'
+import Request, { type IResponse } from '@utils/Request'
 
 interface IProjectDetail {
-  id: string;
-  url: string;
-  title: string;
-  location: string;
-  description: string;
-  fullDescription?: string;
-  goalAmount: number;
-  raisedAmount: number;
-  studentsImpacted: number;
-  image: string;
-  status: string;
-  category: string;
-  startDate: string;
-  endDate: string;
+  id: string
+  url: string
+  title: string
+  location: string
+  description: string
+  fullDescription?: string
+  goalAmount: number
+  raisedAmount: number
+  studentsImpacted: number
+  image: string
+  status: string
+  category: string
+  startDate: string
+  endDate: string
   school: {
-    name: string;
-    address: string;
-    principalName: string;
-    studentCount: number;
-    establishedYear?: number;
-  };
-  donorCount: number;
-  volunteerCount: number;
+    name: string
+    address: string
+    principalName: string
+    studentCount: number
+    establishedYear?: number
+  }
+  donorCount: number
+  volunteerCount: number
   milestones?: Array<{
-    date: string;
-    description: string;
-    completed: boolean;
-  }>;
+    date: string
+    description: string
+    completed: boolean
+  }>
   updates?: Array<{
-    date: string;
-    title: string;
-    content: string;
-  }>;
+    date: string
+    title: string
+    content: string
+  }>
   budget?: Array<{
-    item: string;
-    amount: number;
-  }>;
+    item: string
+    amount: number
+  }>
 }
 
 const ProjectDetailPage: React.FC = () => {
-  const params = useParams();
-  const slug = params.slug as string;
+  const params = useParams()
+  const slug = params.slug as string
 
-  const [project, setProject] = useState<IProjectDetail | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedTab, setSelectedTab] = useState<
-    "overview" | "updates" | "budget" | "timeline"
-  >("overview");
+  const [project, setProject] = useState<IProjectDetail | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [selectedTab, setSelectedTab] = useState<'overview' | 'updates' | 'budget' | 'timeline'>(
+    'overview',
+  )
 
   useEffect(() => {
     const fetchProject = async () => {
       const res: IResponse = await Request.getResponse({
         url: `/api/projects/${slug}`,
-        method: "GET",
-      });
+        method: 'GET',
+      })
 
       if (res?.data?.project) {
-        setProject(res.data.project);
+        setProject(res.data.project)
       }
-      setIsLoading(false);
-    };
+      setIsLoading(false)
+    }
 
-    fetchProject();
-  }, [slug]);
+    fetchProject()
+  }, [slug])
 
   if (isLoading) {
     return (
@@ -86,7 +86,7 @@ const ProjectDetailPage: React.FC = () => {
           </div>
         </div>
       </Master>
-    );
+    )
   }
 
   if (!project) {
@@ -95,36 +95,25 @@ const ProjectDetailPage: React.FC = () => {
         <div className="project-not-found">
           <div className="container">
             <h1>Project Not Found</h1>
-            <p>
-              The project you're looking for doesn't exist or has been removed.
-            </p>
+            <p>The project you're looking for doesn't exist or has been removed.</p>
             <Link href="/projects" className="btn-primary">
               View All Projects
             </Link>
           </div>
         </div>
       </Master>
-    );
+    )
   }
 
-  const percentage = Math.min(
-    (project.raisedAmount / project.goalAmount) * 100,
-    100,
-  );
-  const remaining = project.goalAmount - project.raisedAmount;
+  const percentage = Math.min((project.raisedAmount / project.goalAmount) * 100, 100)
+  const remaining = project.goalAmount - project.raisedAmount
 
   return (
     <Master>
       {/* Hero Section */}
       <section className="project-detail-hero">
         <div className="project-hero-image">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            priority
-            className="hero-img"
-          />
+          <Image src={project.image} alt={project.title} fill priority className="hero-img" />
           <div className="hero-overlay"></div>
         </div>
         <div className="hero-content">
@@ -138,9 +127,7 @@ const ProjectDetailPage: React.FC = () => {
             </div>
             <div className="hero-badge-group">
               <span className="badge-category">{project.category}</span>
-              <span className={`badge-status status-${project.status}`}>
-                {project.status}
-              </span>
+              <span className={`badge-status status-${project.status}`}>{project.status}</span>
             </div>
             <h1 className="project-hero-title">{project.title}</h1>
             <div className="project-hero-meta">
@@ -170,26 +157,26 @@ const ProjectDetailPage: React.FC = () => {
               {/* Tabs */}
               <div className="detail-tabs">
                 <button
-                  className={`tab ${selectedTab === "overview" ? "active" : ""}`}
-                  onClick={() => setSelectedTab("overview")}
+                  className={`tab ${selectedTab === 'overview' ? 'active' : ''}`}
+                  onClick={() => setSelectedTab('overview')}
                 >
                   Overview
                 </button>
                 <button
-                  className={`tab ${selectedTab === "updates" ? "active" : ""}`}
-                  onClick={() => setSelectedTab("updates")}
+                  className={`tab ${selectedTab === 'updates' ? 'active' : ''}`}
+                  onClick={() => setSelectedTab('updates')}
                 >
                   Updates ({project.updates?.length || 0})
                 </button>
                 <button
-                  className={`tab ${selectedTab === "budget" ? "active" : ""}`}
-                  onClick={() => setSelectedTab("budget")}
+                  className={`tab ${selectedTab === 'budget' ? 'active' : ''}`}
+                  onClick={() => setSelectedTab('budget')}
                 >
                   Budget Breakdown
                 </button>
                 <button
-                  className={`tab ${selectedTab === "timeline" ? "active" : ""}`}
-                  onClick={() => setSelectedTab("timeline")}
+                  className={`tab ${selectedTab === 'timeline' ? 'active' : ''}`}
+                  onClick={() => setSelectedTab('timeline')}
                 >
                   Timeline
                 </button>
@@ -197,14 +184,12 @@ const ProjectDetailPage: React.FC = () => {
 
               {/* Tab Content */}
               <div className="tab-content">
-                {selectedTab === "overview" && (
+                {selectedTab === 'overview' && (
                   <div className="overview-content">
                     <div className="content-section">
                       <h2>About This Program</h2>
                       <p className="lead-text">{project.description}</p>
-                      <p className="body-text">
-                        {project.fullDescription || project.description}
-                      </p>
+                      <p className="body-text">{project.fullDescription || project.description}</p>
                     </div>
 
                     <div className="content-section">
@@ -214,10 +199,9 @@ const ProjectDetailPage: React.FC = () => {
                         <div>
                           <h3>Why This Matters</h3>
                           <p>
-                            Many students in {project.location} are falling
-                            behind in foundational literacy and numeracy skills.
-                            Without intervention, they risk being left behind
-                            permanently.
+                            Many students in {project.location} are falling behind in foundational
+                            literacy and numeracy skills. Without intervention, they risk being left
+                            behind permanently.
                           </p>
                         </div>
                       </div>
@@ -254,17 +238,11 @@ const ProjectDetailPage: React.FC = () => {
                       <div className="impact-metrics">
                         <div className="impact-metric">
                           <div className="metric-number">85%</div>
-                          <div className="metric-label">
-                            Expected improvement rate
-                          </div>
+                          <div className="metric-label">Expected improvement rate</div>
                         </div>
                         <div className="impact-metric">
-                          <div className="metric-number">
-                            {project.studentsImpacted}
-                          </div>
-                          <div className="metric-label">
-                            Students to benefit
-                          </div>
+                          <div className="metric-number">{project.studentsImpacted}</div>
+                          <div className="metric-label">Students to benefit</div>
                         </div>
                         <div className="impact-metric">
                           <div className="metric-number">12</div>
@@ -286,24 +264,16 @@ const ProjectDetailPage: React.FC = () => {
                         <div className="school-details">
                           <div className="detail-row">
                             <span className="detail-label">Principal:</span>
-                            <span className="detail-value">
-                              {project.school.principalName}
-                            </span>
+                            <span className="detail-value">{project.school.principalName}</span>
                           </div>
                           <div className="detail-row">
-                            <span className="detail-label">
-                              Total Students:
-                            </span>
-                            <span className="detail-value">
-                              {project.school.studentCount}
-                            </span>
+                            <span className="detail-label">Total Students:</span>
+                            <span className="detail-value">{project.school.studentCount}</span>
                           </div>
                           {project.school.establishedYear && (
                             <div className="detail-row">
                               <span className="detail-label">Established:</span>
-                              <span className="detail-value">
-                                {project.school.establishedYear}
-                              </span>
+                              <span className="detail-value">{project.school.establishedYear}</span>
                             </div>
                           )}
                         </div>
@@ -312,21 +282,18 @@ const ProjectDetailPage: React.FC = () => {
                   </div>
                 )}
 
-                {selectedTab === "updates" && (
+                {selectedTab === 'updates' && (
                   <div className="updates-content">
                     {project.updates && project.updates.length > 0 ? (
                       <div className="updates-list">
                         {project.updates.map((update, index) => (
                           <div key={index} className="update-card">
                             <div className="update-date">
-                              {new Date(update.date).toLocaleDateString(
-                                "en-US",
-                                {
-                                  month: "long",
-                                  day: "numeric",
-                                  year: "numeric",
-                                },
-                              )}
+                              {new Date(update.date).toLocaleDateString('en-US', {
+                                month: 'long',
+                                day: 'numeric',
+                                year: 'numeric',
+                              })}
                             </div>
                             <h3 className="update-title">{update.title}</h3>
                             <p className="update-content">{update.content}</p>
@@ -337,15 +304,13 @@ const ProjectDetailPage: React.FC = () => {
                       <div className="empty-state">
                         <span className="empty-icon">📝</span>
                         <h3>No Updates Yet</h3>
-                        <p>
-                          Check back soon for progress updates on this program
-                        </p>
+                        <p>Check back soon for progress updates on this program</p>
                       </div>
                     )}
                   </div>
                 )}
 
-                {selectedTab === "budget" && (
+                {selectedTab === 'budget' && (
                   <div className="budget-content">
                     {project.budget && project.budget.length > 0 ? (
                       <>
@@ -357,14 +322,11 @@ const ProjectDetailPage: React.FC = () => {
                         </div>
                         <div className="budget-list">
                           {project.budget.map((item, index) => {
-                            const itemPercentage =
-                              (item.amount / project.goalAmount) * 100;
+                            const itemPercentage = (item.amount / project.goalAmount) * 100
                             return (
                               <div key={index} className="budget-item">
                                 <div className="budget-item-header">
-                                  <span className="budget-item-name">
-                                    {item.item}
-                                  </span>
+                                  <span className="budget-item-name">{item.item}</span>
                                   <span className="budget-item-amount">
                                     Rp {item.amount.toLocaleString()}
                                   </span>
@@ -379,7 +341,7 @@ const ProjectDetailPage: React.FC = () => {
                                   {itemPercentage.toFixed(1)}% of total budget
                                 </div>
                               </div>
-                            );
+                            )
                           })}
                         </div>
                       </>
@@ -387,22 +349,20 @@ const ProjectDetailPage: React.FC = () => {
                       <div className="empty-state">
                         <span className="empty-icon">💰</span>
                         <h3>Budget Details Coming Soon</h3>
-                        <p>
-                          Detailed budget breakdown will be available shortly
-                        </p>
+                        <p>Detailed budget breakdown will be available shortly</p>
                       </div>
                     )}
                   </div>
                 )}
 
-                {selectedTab === "timeline" && (
+                {selectedTab === 'timeline' && (
                   <div className="timeline-content">
                     {project.milestones && project.milestones.length > 0 ? (
                       <div className="timeline-list">
                         {project.milestones.map((milestone, index) => (
                           <div
                             key={index}
-                            className={`timeline-item ${milestone.completed ? "completed" : ""}`}
+                            className={`timeline-item ${milestone.completed ? 'completed' : ''}`}
                           >
                             <div className="timeline-marker">
                               <div className="timeline-dot"></div>
@@ -412,22 +372,15 @@ const ProjectDetailPage: React.FC = () => {
                             </div>
                             <div className="timeline-content-box">
                               <div className="timeline-date">
-                                {new Date(milestone.date).toLocaleDateString(
-                                  "en-US",
-                                  {
-                                    month: "long",
-                                    day: "numeric",
-                                    year: "numeric",
-                                  },
-                                )}
+                                {new Date(milestone.date).toLocaleDateString('en-US', {
+                                  month: 'long',
+                                  day: 'numeric',
+                                  year: 'numeric',
+                                })}
                               </div>
-                              <p className="timeline-description">
-                                {milestone.description}
-                              </p>
+                              <p className="timeline-description">{milestone.description}</p>
                               {milestone.completed && (
-                                <span className="timeline-badge">
-                                  ✓ Completed
-                                </span>
+                                <span className="timeline-badge">✓ Completed</span>
                               )}
                             </div>
                           </div>
@@ -437,10 +390,7 @@ const ProjectDetailPage: React.FC = () => {
                       <div className="empty-state">
                         <span className="empty-icon">📅</span>
                         <h3>Timeline Coming Soon</h3>
-                        <p>
-                          Program milestones will be added as the project
-                          progresses
-                        </p>
+                        <p>Program milestones will be added as the project progresses</p>
                       </div>
                     )}
                   </div>
@@ -462,28 +412,20 @@ const ProjectDetailPage: React.FC = () => {
                     </div>
                     <div className="goal-amount">
                       <span className="goal-label">Goal</span>
-                      <span className="goal-value">
-                        Rp {project.goalAmount.toLocaleString()}
-                      </span>
+                      <span className="goal-value">Rp {project.goalAmount.toLocaleString()}</span>
                     </div>
                   </div>
                   <div className="progress-bar-large">
-                    <div
-                      className="progress-fill-large"
-                      style={{ width: `${percentage}%` }}
-                    >
+                    <div className="progress-fill-large" style={{ width: `${percentage}%` }}>
                       <div className="progress-shimmer"></div>
                     </div>
                   </div>
-                  <div className="progress-percentage-large">
-                    {percentage.toFixed(0)}% funded
-                  </div>
+                  <div className="progress-percentage-large">{percentage.toFixed(0)}% funded</div>
                 </div>
 
-                {remaining > 0 && project.status === "active" && (
+                {remaining > 0 && project.status === 'active' && (
                   <div className="donation-remaining">
-                    <strong>Rp {remaining.toLocaleString()}</strong> still
-                    needed
+                    <strong>Rp {remaining.toLocaleString()}</strong> still needed
                   </div>
                 )}
 
@@ -493,19 +435,14 @@ const ProjectDetailPage: React.FC = () => {
                     <div className="stat-box-label">Donors</div>
                   </div>
                   <div className="stat-box">
-                    <div className="stat-box-number">
-                      {project.volunteerCount}
-                    </div>
+                    <div className="stat-box-number">{project.volunteerCount}</div>
                     <div className="stat-box-label">Volunteers</div>
                   </div>
                 </div>
 
-                {project.status === "active" ? (
+                {project.status === 'active' ? (
                   <>
-                    <Link
-                      href={`/donate?project=${project.id}`}
-                      className="btn-donate-large"
-                    >
+                    <Link href={`/donate?project=${project.id}`} className="btn-donate-large">
                       <span className="btn-icon">❤️</span>
                       <span>Donate Now</span>
                     </Link>
@@ -538,15 +475,11 @@ const ProjectDetailPage: React.FC = () => {
                   </div>
                   <div className="impact-example">
                     <div className="impact-amount">Rp 500,000</div>
-                    <div className="impact-desc">
-                      Supports 5 students for 1 month
-                    </div>
+                    <div className="impact-desc">Supports 5 students for 1 month</div>
                   </div>
                   <div className="impact-example">
                     <div className="impact-amount">Rp 1,000,000</div>
-                    <div className="impact-desc">
-                      Trains 1 teacher in TaRL method
-                    </div>
+                    <div className="impact-desc">Trains 1 teacher in TaRL method</div>
                   </div>
                 </div>
               </div>
@@ -563,7 +496,7 @@ const ProjectDetailPage: React.FC = () => {
         </div>
       </div>
     </Master>
-  );
-};
+  )
+}
 
-export default ProjectDetailPage;
+export default ProjectDetailPage

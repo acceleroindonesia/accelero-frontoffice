@@ -26,7 +26,7 @@
       "@contexts/*": ["./contexts/*"],
       "@providers/*": ["./providers/*"],
       "@components/*": ["./components/*"],
-      "@orm*": ["./prisma/orm"],
+      "@orm*": ["./prisma/orm"]
     },
     "target": "ES2017"
   },

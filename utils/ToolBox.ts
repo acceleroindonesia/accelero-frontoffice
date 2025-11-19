@@ -5,9 +5,10 @@
  * @return {boolean} - Returns true if the string is a valid email address, otherwise false.
  */
 const isEmail = (value: string): boolean => {
-  const pattern = /^([a-zA-Z0-9_.+-]+)@((\[[0-9]{1,3}(\.[0-9]{1,3}){3}])|(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}))$/;
-  return pattern.test(value);
-};
+  const pattern =
+    /^([a-zA-Z0-9_.+-]+)@((\[[0-9]{1,3}(\.[0-9]{1,3}){3}])|(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}))$/
+  return pattern.test(value)
+}
 /**
  * Checks if the provided string consists only of digits.
  *
@@ -15,10 +16,10 @@ const isEmail = (value: string): boolean => {
  * @return {boolean} - Returns true if the string consists only of digits, otherwise false.
  */
 const isNumeric = (value: string): boolean => {
-  const pattern = /^\d+$/;
+  const pattern = /^\d+$/
 
-  return pattern.test(value);
-};
+  return pattern.test(value)
+}
 
 /**
  * Checks if the provided string is a strong password.
@@ -27,10 +28,10 @@ const isNumeric = (value: string): boolean => {
  * @return {boolean} - Returns true if the string is a strong password, otherwise false.
  */
 const isStrongPassword = (value: string): boolean => {
-  const pattern = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
+  const pattern = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,16}$/
 
-  return pattern.test(value);
-};
+  return pattern.test(value)
+}
 
 /**
  * Formats a number as a currency string in GBP with the symbol.
@@ -44,13 +45,13 @@ const formatCurrency = (value: number): string =>
     currency: 'IDR',
     minimumFractionDigits: 0,
     currencyDisplay: 'symbol',
-  }).format(value);
+  }).format(value)
 
 const ToolBox = {
   isEmail,
   isNumeric,
   formatCurrency,
   isStrongPassword,
-};
+}
 
-export default ToolBox;
+export default ToolBox

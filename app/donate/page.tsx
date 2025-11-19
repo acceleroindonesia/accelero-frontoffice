@@ -1,168 +1,164 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import Master from "@components/Layout/Master";
-import { ScrollAnimations } from "../home/components/ScrollAnimations";
-import Request, { type IResponse } from "@utils/Request";
+import { useEffect, useState } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
+import Master from '@components/Layout/Master'
+import { ScrollAnimations } from '../home/components/ScrollAnimations'
+import Request, { type IResponse } from '@utils/Request'
 
 interface IDonationProject {
-  id: string;
-  title: string;
-  location: string;
-  goalAmount: number;
-  raisedAmount: number;
-  studentsImpacted: number;
-  image: string;
+  id: string
+  title: string
+  location: string
+  goalAmount: number
+  raisedAmount: number
+  studentsImpacted: number
+  image: string
 }
 
 const DonatePage: React.FC = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const projectParam = searchParams.get("project");
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const projectParam = searchParams.get('project')
 
-  const [selectedProject, setSelectedProject] =
-    useState<IDonationProject | null>(null);
-  const [projects, setProjects] = useState<IDonationProject[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [selectedProject, setSelectedProject] = useState<IDonationProject | null>(null)
+  const [projects, setProjects] = useState<IDonationProject[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   // Form state
-  const [donationType, setDonationType] = useState<"one-time" | "monthly">(
-    "one-time",
-  );
-  const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
-  const [customAmount, setCustomAmount] = useState("");
-  const [motivation, setMotivation] = useState("");
-  const [message, setMessage] = useState("");
-  const [donorName, setDonorName] = useState("");
-  const [donorEmail, setDonorEmail] = useState("");
-  const [donorPhone, setDonorPhone] = useState("");
-  const [anonymous, setAnonymous] = useState(false);
-  const [newsletter, setNewsletter] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [donationType, setDonationType] = useState<'one-time' | 'monthly'>('one-time')
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(null)
+  const [customAmount, setCustomAmount] = useState('')
+  const [motivation, setMotivation] = useState('')
+  const [message, setMessage] = useState('')
+  const [donorName, setDonorName] = useState('')
+  const [donorEmail, setDonorEmail] = useState('')
+  const [donorPhone, setDonorPhone] = useState('')
+  const [anonymous, setAnonymous] = useState(false)
+  const [newsletter, setNewsletter] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const predefinedAmounts = [50000, 100000, 250000, 500000, 1000000, 2500000];
+  const predefinedAmounts = [50000, 100000, 250000, 500000, 1000000, 2500000]
 
   const motivationOptions = [
-    { value: "", label: "Select your motivation..." },
-    { value: "education", label: "I believe in education equity" },
-    { value: "community", label: "Supporting my community" },
-    { value: "impact", label: "Want to see measurable impact" },
-    { value: "future", label: "Investing in children's future" },
-    { value: "tax", label: "Tax-deductible donation" },
-    { value: "other", label: "Other" },
-  ];
+    { value: '', label: 'Select your motivation...' },
+    { value: 'education', label: 'I believe in education equity' },
+    { value: 'community', label: 'Supporting my community' },
+    { value: 'impact', label: 'Want to see measurable impact' },
+    { value: 'future', label: "Investing in children's future" },
+    { value: 'tax', label: 'Tax-deductible donation' },
+    { value: 'other', label: 'Other' },
+  ]
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    fetchProjects()
+  }, [])
 
   useEffect(() => {
     if (projectParam && projects.length > 0) {
-      const project = projects.find((p) => p.id === projectParam);
+      const project = projects.find((p) => p.id === projectParam)
       if (project) {
-        setSelectedProject(project);
+        setSelectedProject(project)
       }
     }
-  }, [projectParam, projects]);
+  }, [projectParam, projects])
 
   const fetchProjects = async () => {
     try {
       const res: IResponse = await Request.getResponse({
-        url: "/api/projects?status=active&limit=20",
-        method: "GET",
-      });
+        url: '/api/projects?status=active&limit=20',
+        method: 'GET',
+      })
 
       if (res?.data?.projects) {
-        setProjects(res.data.projects);
+        setProjects(res.data.projects)
       }
     } catch (error) {
-      console.error("Failed to fetch projects:", error);
+      console.error('Failed to fetch projects:', error)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   // Update URL when project changes
   const handleProjectChange = (projectId: string) => {
-    const project = projects.find((p) => p.id === projectId);
-    setSelectedProject(project || null);
+    const project = projects.find((p) => p.id === projectId)
+    setSelectedProject(project || null)
 
     // Update URL query parameter
-    const newUrl =
-      projectId === "general" ? "/donate" : `/donate?project=${projectId}`;
+    const newUrl = projectId === 'general' ? '/donate' : `/donate?project=${projectId}`
 
-    router.push(newUrl, { scroll: false });
-  };
+    router.push(newUrl, { scroll: false })
+  }
 
   const getDonationAmount = (): number => {
     if (customAmount) {
-      return parseInt(customAmount);
+      return parseInt(customAmount)
     }
-    return selectedAmount || 0;
-  };
+    return selectedAmount || 0
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+    e.preventDefault()
+    setIsSubmitting(true)
 
-    const amount = getDonationAmount();
+    const amount = getDonationAmount()
 
     if (amount < 10000) {
-      alert("Minimum donation is Rp 10,000");
-      setIsSubmitting(false);
-      return;
+      alert('Minimum donation is Rp 10,000')
+      setIsSubmitting(false)
+      return
     }
 
     if (!donorName || !donorEmail) {
-      alert("Please fill in your name and email");
-      setIsSubmitting(false);
-      return;
+      alert('Please fill in your name and email')
+      setIsSubmitting(false)
+      return
     }
 
     try {
       const res: IResponse = await Request.getResponse({
-        url: "/api/donations",
-        method: "POST",
+        url: '/api/donations',
+        method: 'POST',
         postData: {
-          projectId: selectedProject?.id || "general",
+          projectId: selectedProject?.id || 'general',
           amount,
           frequency: donationType,
           motivation,
           message: message || null,
-          donorName: anonymous ? "Anonymous" : donorName,
+          donorName: anonymous ? 'Anonymous' : donorName,
           donorEmail,
           donorPhone: donorPhone || null,
           anonymous,
           newsletter,
         },
-      });
+      })
 
       if (res?.data?.success) {
         // Redirect to payment page
-        window.location.href = `/payment/${res.data.donationId}`;
+        window.location.href = `/payment/${res.data.donationId}`
       } else {
-        alert(res?.data?.error || "Failed to process donation");
+        alert(res?.data?.error || 'Failed to process donation')
       }
     } catch (error) {
-      console.error("Donation error:", error);
-      alert("An error occurred. Please try again.");
+      console.error('Donation error:', error)
+      alert('An error occurred. Please try again.')
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   const getImpactMessage = () => {
-    const amount = getDonationAmount();
+    const amount = getDonationAmount()
     if (amount >= 1000000) {
-      return `can train ${Math.floor(amount / 1000000)} teacher(s) in TaRL methodology`;
+      return `can train ${Math.floor(amount / 1000000)} teacher(s) in TaRL methodology`
     } else if (amount >= 500000) {
-      return `can support ${Math.floor(amount / 100000)} students for one month`;
+      return `can support ${Math.floor(amount / 100000)} students for one month`
     } else if (amount >= 100000) {
-      return `can provide ${Math.floor(amount / 10000)} reading books`;
+      return `can provide ${Math.floor(amount / 10000)} reading books`
     }
-    return "will make a real difference in a student's life";
-  };
+    return "will make a real difference in a student's life"
+  }
 
   return (
     <Master>
@@ -175,8 +171,8 @@ const DonatePage: React.FC = () => {
             <span className="donate-label">Make an Impact</span>
             <h1 className="donate-title">Every Donation Changes Lives</h1>
             <p className="donate-subtitle">
-              Your contribution provides books, training, and hope to students
-              who need it most. 100% transparent, 100% impactful.
+              Your contribution provides books, training, and hope to students who need it most.
+              100% transparent, 100% impactful.
             </p>
           </div>
         </div>
@@ -199,12 +195,10 @@ const DonatePage: React.FC = () => {
                     <label className="form-label">Support</label>
                     <select
                       className="form-select"
-                      value={selectedProject?.id || "general"}
+                      value={selectedProject?.id || 'general'}
                       onChange={(e) => handleProjectChange(e.target.value)}
                     >
-                      <option value="general">
-                        General Fund - Where Most Needed
-                      </option>
+                      <option value="general">General Fund - Where Most Needed</option>
                       {projects.map((project) => (
                         <option key={project.id} value={project.id}>
                           {project.title} - {project.location}
@@ -216,23 +210,16 @@ const DonatePage: React.FC = () => {
                   {selectedProject && (
                     <div className="selected-project-card">
                       <div className="project-mini-image">
-                        <img
-                          src={selectedProject.image}
-                          alt={selectedProject.title}
-                        />
+                        <img src={selectedProject.image} alt={selectedProject.title} />
                       </div>
                       <div className="project-mini-info">
                         <h4>{selectedProject.title}</h4>
                         <p>{selectedProject.location}</p>
                         <div className="project-mini-stats">
-                          <span>
-                            👥 {selectedProject.studentsImpacted} students
-                          </span>
+                          <span>👥 {selectedProject.studentsImpacted} students</span>
                           <span>
                             {Math.round(
-                              (selectedProject.raisedAmount /
-                                selectedProject.goalAmount) *
-                                100,
+                              (selectedProject.raisedAmount / selectedProject.goalAmount) * 100,
                             )}
                             % funded
                           </span>
@@ -253,26 +240,25 @@ const DonatePage: React.FC = () => {
                   <div className="donation-type-toggle">
                     <button
                       type="button"
-                      className={`toggle-btn ${donationType === "one-time" ? "active" : ""}`}
-                      onClick={() => setDonationType("one-time")}
+                      className={`toggle-btn ${donationType === 'one-time' ? 'active' : ''}`}
+                      onClick={() => setDonationType('one-time')}
                     >
                       <span className="toggle-icon">💝</span>
                       <span>One-Time</span>
                     </button>
                     <button
                       type="button"
-                      className={`toggle-btn ${donationType === "monthly" ? "active" : ""}`}
-                      onClick={() => setDonationType("monthly")}
+                      className={`toggle-btn ${donationType === 'monthly' ? 'active' : ''}`}
+                      onClick={() => setDonationType('monthly')}
                     >
                       <span className="toggle-icon">🔄</span>
                       <span>Monthly</span>
                     </button>
                   </div>
 
-                  {donationType === "monthly" && (
+                  {donationType === 'monthly' && (
                     <div className="monthly-info">
-                      ℹ️ Monthly donations help us plan better and create
-                      lasting impact
+                      ℹ️ Monthly donations help us plan better and create lasting impact
                     </div>
                   )}
 
@@ -282,15 +268,13 @@ const DonatePage: React.FC = () => {
                       <button
                         key={amount}
                         type="button"
-                        className={`amount-btn ${selectedAmount === amount ? "active" : ""}`}
+                        className={`amount-btn ${selectedAmount === amount ? 'active' : ''}`}
                         onClick={() => {
-                          setSelectedAmount(amount);
-                          setCustomAmount("");
+                          setSelectedAmount(amount)
+                          setCustomAmount('')
                         }}
                       >
-                        <span className="amount-value">
-                          Rp {amount.toLocaleString()}
-                        </span>
+                        <span className="amount-value">Rp {amount.toLocaleString()}</span>
                       </button>
                     ))}
                   </div>
@@ -306,15 +290,13 @@ const DonatePage: React.FC = () => {
                         placeholder="Enter amount"
                         value={customAmount}
                         onChange={(e) => {
-                          setCustomAmount(e.target.value);
-                          setSelectedAmount(null);
+                          setCustomAmount(e.target.value)
+                          setSelectedAmount(null)
                         }}
                         min="10000"
                       />
                     </div>
-                    <small className="form-hint">
-                      Minimum donation: Rp 10,000
-                    </small>
+                    <small className="form-hint">Minimum donation: Rp 10,000</small>
                   </div>
                 </div>
 
@@ -325,9 +307,7 @@ const DonatePage: React.FC = () => {
                     Share Your Motivation
                   </h2>
                   <div className="form-group">
-                    <label className="form-label">
-                      What inspired you to give today?
-                    </label>
+                    <label className="form-label">What inspired you to give today?</label>
                     <select
                       className="form-select"
                       value={motivation}
@@ -344,8 +324,7 @@ const DonatePage: React.FC = () => {
 
                   <div className="form-group">
                     <label className="form-label">
-                      Message of Encouragement{" "}
-                      <span className="optional">(Optional)</span>
+                      Message of Encouragement <span className="optional">(Optional)</span>
                     </label>
                     <textarea
                       className="form-textarea"
@@ -390,8 +369,7 @@ const DonatePage: React.FC = () => {
                     </div>
                     <div className="form-group">
                       <label className="form-label">
-                        Phone Number{" "}
-                        <span className="optional">(Optional)</span>
+                        Phone Number <span className="optional">(Optional)</span>
                       </label>
                       <input
                         type="tel"
@@ -443,8 +421,7 @@ const DonatePage: React.FC = () => {
                 </button>
 
                 <p className="form-security">
-                  🔒 Your donation is secure and encrypted. We never store your
-                  payment details.
+                  🔒 Your donation is secure and encrypted. We never store your payment details.
                 </p>
               </form>
             </div>
@@ -457,9 +434,7 @@ const DonatePage: React.FC = () => {
                 <div className="summary-item">
                   <span className="summary-label">Donation Type</span>
                   <span className="summary-value">
-                    {donationType === "one-time"
-                      ? "One-Time"
-                      : "Monthly Recurring"}
+                    {donationType === 'one-time' ? 'One-Time' : 'Monthly Recurring'}
                   </span>
                 </div>
 
@@ -473,9 +448,7 @@ const DonatePage: React.FC = () => {
                 {selectedProject && (
                   <div className="summary-item">
                     <span className="summary-label">Supporting</span>
-                    <span className="summary-value">
-                      {selectedProject.title}
-                    </span>
+                    <span className="summary-value">{selectedProject.title}</span>
                   </div>
                 )}
 
@@ -484,17 +457,14 @@ const DonatePage: React.FC = () => {
                 <div className="summary-impact">
                   <h4>Your Impact</h4>
                   <p>
-                    Your donation of Rp {getDonationAmount().toLocaleString()}{" "}
-                    {getImpactMessage()}
+                    Your donation of Rp {getDonationAmount().toLocaleString()} {getImpactMessage()}
                   </p>
                 </div>
 
-                {donationType === "monthly" && getDonationAmount() > 0 && (
+                {donationType === 'monthly' && getDonationAmount() > 0 && (
                   <div className="summary-yearly">
                     <span>Annual total</span>
-                    <span>
-                      Rp {(getDonationAmount() * 12).toLocaleString()}
-                    </span>
+                    <span>Rp {(getDonationAmount() * 12).toLocaleString()}</span>
                   </div>
                 )}
               </div>
@@ -537,37 +507,36 @@ const DonatePage: React.FC = () => {
             <div className="faq-item">
               <h4>How is my donation used?</h4>
               <p>
-                100% of your donation goes directly to program costs - books,
-                teacher training, and student materials. Administrative costs
-                are covered separately.
+                100% of your donation goes directly to program costs - books, teacher training, and
+                student materials. Administrative costs are covered separately.
               </p>
             </div>
             <div className="faq-item">
               <h4>Will I receive a receipt?</h4>
               <p>
-                Yes! You'll receive an email receipt immediately after donation,
-                which is valid for tax deduction purposes.
+                Yes! You'll receive an email receipt immediately after donation, which is valid for
+                tax deduction purposes.
               </p>
             </div>
             <div className="faq-item">
               <h4>Can I cancel monthly donations?</h4>
               <p>
-                Absolutely. You can cancel or modify your monthly donation at
-                any time from your donor dashboard.
+                Absolutely. You can cancel or modify your monthly donation at any time from your
+                donor dashboard.
               </p>
             </div>
             <div className="faq-item">
               <h4>How do I track impact?</h4>
               <p>
-                We send monthly updates with photos, stories, and measurable
-                results from the programs you support.
+                We send monthly updates with photos, stories, and measurable results from the
+                programs you support.
               </p>
             </div>
           </div>
         </div>
       </section>
     </Master>
-  );
-};
+  )
+}
 
-export default DonatePage;
+export default DonatePage

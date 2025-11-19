@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import React from "react";
-import Link from "next/link";
+import React from 'react'
+import Link from 'next/link'
 
 const VolunteerCTA: React.FC = () => {
   return (
@@ -84,21 +84,21 @@ const VolunteerCTA: React.FC = () => {
                 <div className="panel-stat-number">120+</div>
                 <div className="panel-stat-label">Active Volunteers</div>
                 <div className="panel-stat-bar">
-                  <div className="panel-stat-fill" style={{ width: "75%" }}></div>
+                  <div className="panel-stat-fill" style={{ width: '75%' }}></div>
                 </div>
               </div>
               <div className="panel-stat">
                 <div className="panel-stat-number">8,400</div>
                 <div className="panel-stat-label">Teaching Hours</div>
                 <div className="panel-stat-bar">
-                  <div className="panel-stat-fill" style={{ width: "60%" }}></div>
+                  <div className="panel-stat-fill" style={{ width: '60%' }}></div>
                 </div>
               </div>
               <div className="panel-stat">
                 <div className="panel-stat-number">1,200+</div>
                 <div className="panel-stat-label">Students Tutored</div>
                 <div className="panel-stat-bar">
-                  <div className="panel-stat-fill" style={{ width: "85%" }}></div>
+                  <div className="panel-stat-fill" style={{ width: '85%' }}></div>
                 </div>
               </div>
             </div>
@@ -135,7 +135,7 @@ const VolunteerCTA: React.FC = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default VolunteerCTA;
+export default VolunteerCTA

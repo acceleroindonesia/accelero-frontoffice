@@ -1,35 +1,37 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useLanguage } from '@contexts/LanguageContext'
+import LanguageSwitcher from '@components/Switcher/LanguageSwitcher'
 
 const Header: React.FC = () => {
-  const pathname = usePathname();
-  const { data: session } = useSession();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [language, setLanguage] = useState<"en" | "id">("en");
+  const pathname = usePathname()
+  const { data: session } = useSession()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { t } = useLanguage()
+  const { language, setLanguage } = useLanguage()
 
   const navigation = [
-    { name: "Home", href: "/" },
-    { name: "Projects", href: "/projects" },
-    { name: "Impact", href: "/impact" },
-    { name: "Partner", href: "/partner" },
-    { name: "Volunteer", href: "/volunteer" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
-    { name: "Blog", href: "/blog" },
-  ];
+    { name: t('home'), href: '/' },
+    { name: t('projects'), href: '/projects' },
+    { name: t('impact'), href: '/impact' },
+    { name: t('partner'), href: '/partner' },
+    { name: t('volunteer'), href: '/volunteer' },
+    { name: t('about'), href: '/about' },
+    { name: t('contact'), href: '/contact' },
+    { name: t('blog'), href: '/blog' },
+  ]
 
   const toggleLanguage = () => {
-    setLanguage(language === "en" ? "id" : "en");
-    // TODO: Implement i18n language switching
-  };
+    setLanguage(language === 'en' ? 'id' : 'en')
+  }
 
   const handleMenuToggle = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   return (
     <header className="header" suppressHydrationWarning>
@@ -53,13 +55,12 @@ const Header: React.FC = () => {
             <Link
               key={item.name}
               href={item.href}
-              className={`nav-link ${pathname === item.href ? "active" : ""}`}
+              className={`nav-link ${pathname === item.href ? 'active' : ''}`}
             >
               {item.name}
             </Link>
           ))}
         </nav>
-
         {/* Header Actions */}
         <div className="header-actions">
           {/* Language Toggle */}
@@ -69,22 +70,22 @@ const Header: React.FC = () => {
             title="Change Language"
             suppressHydrationWarning
           >
-            {language === "en" ? "🇬🇧 EN" : "🇮🇩 ID"}
+            {language === 'en' ? '🇬🇧 EN' : '🇮🇩 ID'}
           </button>
 
           {/* User Menu or Donate Button */}
-          {session?.user ? (
-            <div className="user-menu">
-              <Link href="/members/account" className="user-link">
-                <span className="user-icon">👤</span>
-                <span className="user-name">{session.user.name}</span>
-              </Link>
-            </div>
-          ) : (
-            <Link href="/members/signin" className="signin-link">
-              Sign In
-            </Link>
-          )}
+          {/*{session?.user ? (*/}
+          {/*  <div className="user-menu">*/}
+          {/*    <Link href="/members/account" className="user-link">*/}
+          {/*      <span className="user-icon">👤</span>*/}
+          {/*      <span className="user-name">{session.user.name}</span>*/}
+          {/*    </Link>*/}
+          {/*  </div>*/}
+          {/*) : (*/}
+          {/*  <Link href="/members/signin" className="signin-link">*/}
+          {/*    Sign In*/}
+          {/*  </Link>*/}
+          {/*)}*/}
 
           {/* Primary CTA */}
           <Link href="/donate" className="donate-button" suppressHydrationWarning>
@@ -94,7 +95,7 @@ const Header: React.FC = () => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className={`mobile-menu-toggle ${isMenuOpen ? "active" : ""}`}
+            className={`mobile-menu-toggle ${isMenuOpen ? 'active' : ''}`}
             onClick={handleMenuToggle}
             aria-label="Toggle menu"
             suppressHydrationWarning
@@ -113,7 +114,7 @@ const Header: React.FC = () => {
             <Link
               key={item.name}
               href={item.href}
-              className={`mobile-nav-link ${pathname === item.href ? "active" : ""}`}
+              className={`mobile-nav-link ${pathname === item.href ? 'active' : ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
               {item.name}
@@ -141,7 +142,7 @@ const Header: React.FC = () => {
         </div>
       )}
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

@@ -1,38 +1,38 @@
-"use client";
+'use client'
 
-import React from "react";
+import React from 'react'
 
 const ImpactStats: React.FC = () => {
   const stats = [
     {
-      icon: "📚",
-      number: "12,500+",
-      label: "Books Distributed",
-      description: "Reading materials for every level",
-      color: "#667eea",
+      icon: '📚',
+      number: '12,500+',
+      label: 'Books Distributed',
+      description: 'Reading materials for every level',
+      color: '#667eea',
     },
     {
-      icon: "👨‍🏫",
-      number: "156",
-      label: "Teachers Trained",
-      description: "Empowering educators with TaRL",
-      color: "#f56565",
+      icon: '👨‍🏫',
+      number: '156',
+      label: 'Teachers Trained',
+      description: 'Empowering educators with TaRL',
+      color: '#f56565',
     },
     {
-      icon: "🌍",
-      number: "8",
-      label: "Regions Served",
-      description: "Across Eastern Indonesia",
-      color: "#48bb78",
+      icon: '🌍',
+      number: '8',
+      label: 'Regions Served',
+      description: 'Across Eastern Indonesia',
+      color: '#48bb78',
     },
     {
-      icon: "💰",
-      number: "Rp 285M",
-      label: "Total Funding",
-      description: "Raised from generous donors",
-      color: "#ed8936",
+      icon: '💰',
+      number: 'Rp 285M',
+      label: 'Total Funding',
+      description: 'Raised from generous donors',
+      color: '#ed8936',
     },
-  ];
+  ]
 
   return (
     <section className="impact-stats-modern">
@@ -49,7 +49,12 @@ const ImpactStats: React.FC = () => {
         {/* Stats Grid */}
         <div className="stats-grid-modern">
           {stats.map((stat, index) => (
-            <div key={index} className="stat-card-modern" data-aos="fade-up" data-aos-delay={index * 100}>
+            <div
+              key={index}
+              className="stat-card-modern"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
               <div className="stat-icon-wrapper" style={{ backgroundColor: `${stat.color}20` }}>
                 <span className="stat-icon-large">{stat.icon}</span>
               </div>
@@ -72,7 +77,7 @@ const ImpactStats: React.FC = () => {
             <div className="progress-percentage">50%</div>
           </div>
           <div className="progress-bar-container">
-            <div className="progress-bar-fill" style={{ width: "50%" }}>
+            <div className="progress-bar-fill" style={{ width: '50%' }}>
               <div className="progress-shimmer"></div>
             </div>
           </div>
@@ -83,7 +88,7 @@ const ImpactStats: React.FC = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default ImpactStats;
+export default ImpactStats

@@ -1,27 +1,27 @@
-"use client";
+'use client'
 
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
 export const ScrollAnimations = () => {
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: "0px 0px -100px 0px",
-    };
+      rootMargin: '0px 0px -100px 0px',
+    }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("aos-animate");
+          entry.target.classList.add('aos-animate')
         }
-      });
-    }, observerOptions);
+      })
+    }, observerOptions)
 
-    const elements = document.querySelectorAll("[data-aos]");
-    elements.forEach((el) => observer.observe(el));
+    const elements = document.querySelectorAll('[data-aos]')
+    elements.forEach((el) => observer.observe(el))
 
-    return () => observer.disconnect();
-  }, []);
+    return () => observer.disconnect()
+  }, [])
 
-  return null;
-};
+  return null
+}
