@@ -1223,13 +1223,6 @@
     box-sizing: border-box;
   }
 
-  .btn-cta-primary,
-  .btn-volunteer-primary,
-  .btn-volunteer-secondary,
-  .btn-cta-secondary {
-    width: 100%;
-  }
-
   .projects-section-modern .container {
     padding: 0 1rem;
   }
