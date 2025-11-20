@@ -63,16 +63,29 @@
 
 .search-input {
   width: 100%;
-  padding: 14px 45px 14px 50px;
-  border: 2px solid #e9ecef;
-  border-radius: 10px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
+  max-width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  transition: all 0.3s ease;
+  background: white;
 }
 
 .search-input:focus {
   outline: none;
   border-color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .clear-search {
@@ -97,8 +110,8 @@
 .category-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
+  gap: 5px;
+  padding: 2px 5px;
   background: white;
   border: 2px solid #e9ecef;
   border-radius: 25px;
@@ -120,7 +133,7 @@
 }
 
 .category-icon {
-  font-size: 1.1rem;
+  font-size: 0.8rem;
 }
 
 .clear-filters-btn {
@@ -751,6 +764,13 @@
   .related-posts-grid {
     grid-template-columns: 1fr;
   }
+
+  .search-input {
+    padding: 1rem 3rem 1rem 3.5rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 @media (max-width: 480px) {
@@ -777,5 +797,12 @@
   .author-bio-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .search-input {
+    padding: 1rem 3rem 1rem 3.5rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }

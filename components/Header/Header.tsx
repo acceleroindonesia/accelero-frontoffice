@@ -121,15 +121,26 @@ const Header: React.FC = () => {
             </Link>
           ))}
           <div className="mobile-nav-actions">
-            {!session?.user && (
-              <Link
-                href="/members/signin"
-                className="mobile-signin"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sign In
-              </Link>
-            )}
+            {/*{!session?.user && (*/}
+            {/*  <Link*/}
+            {/*    href="/members/signin"*/}
+            {/*    className="mobile-signin"*/}
+            {/*    onClick={() => setIsMenuOpen(false)}*/}
+            {/*  >*/}
+            {/*    Sign In*/}
+            {/*  </Link>*/}
+            {/*)}*/}
+            {/* Language Toggle */}
+            <Link
+              href="#"
+              // onClick={toggleLanguage}
+              className="mobile-signin"
+              title="Change Language"
+              onClick={() => toggleLanguage()}
+              suppressHydrationWarning
+            >
+              {language === 'en' ? '🇬🇧 EN' : '🇮🇩 ID'}
+            </Link>
             <Link
               href="/donate"
               className="mobile-donate"
