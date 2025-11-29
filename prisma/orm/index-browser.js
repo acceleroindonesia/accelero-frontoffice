@@ -123,41 +123,24 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  uuid: 'uuid',
   name: 'name',
   email: 'email',
-  phoneNumber: 'phoneNumber',
-  emailVerified: 'emailVerified',
-  image: 'image',
+  email_verified_at: 'email_verified_at',
   password: 'password',
-  role: 'role',
-  isMember: 'isMember',
-  agreement: 'agreement',
+  remember_token: 'remember_token',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  accesses: 'accesses',
+  must_change_password: 'must_change_password'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
-  sessionToken: 'sessionToken',
   userId: 'userId',
-  expires: 'expires'
-};
-
-exports.Prisma.VerificationTokenScalarFieldEnum = {
-  identifier: 'identifier',
-  token: 'token',
-  expires: 'expires'
-};
-
-exports.Prisma.PaymentScalarFieldEnum = {
-  id: 'id',
-  method: 'method',
-  paymentUrl: 'paymentUrl',
-  segment: 'segment',
-  status: 'status',
-  paidAt: 'paidAt',
-  createdAt: 'createdAt'
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  payload: 'payload',
+  last_activity: 'last_activity'
 };
 
 exports.Prisma.ProjectScalarFieldEnum = {
@@ -186,9 +169,192 @@ exports.Prisma.ProjectScalarFieldEnum = {
   deletedAt: 'deletedAt'
 };
 
+exports.Prisma.BlogsScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  user_id: 'user_id',
+  title_id: 'title_id',
+  excerpt_id: 'excerpt_id',
+  content_id: 'content_id',
+  title_en: 'title_en',
+  excerpt_en: 'excerpt_en',
+  content_en: 'content_en',
+  author_name: 'author_name',
+  author_role: 'author_role',
+  author_avatar: 'author_avatar',
+  category: 'category',
+  tags: 'tags',
+  image: 'image',
+  image_alt: 'image_alt',
+  meta_title_id: 'meta_title_id',
+  meta_description_id: 'meta_description_id',
+  meta_title_en: 'meta_title_en',
+  meta_description_en: 'meta_description_en',
+  read_time: 'read_time',
+  views_count: 'views_count',
+  status: 'status',
+  featured: 'featured',
+  published_at: 'published_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
+exports.Prisma.CacheScalarFieldEnum = {
+  key: 'key',
+  value: 'value',
+  expiration: 'expiration'
+};
+
+exports.Prisma.Cache_locksScalarFieldEnum = {
+  key: 'key',
+  owner: 'owner',
+  expiration: 'expiration'
+};
+
+exports.Prisma.ContactsScalarFieldEnum = {
+  id: 'id',
+  contact_id: 'contact_id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  subject: 'subject',
+  message: 'message',
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  status: 'status',
+  priority: 'priority',
+  assigned_to: 'assigned_to',
+  responded_at: 'responded_at',
+  response: 'response',
+  internal_notes: 'internal_notes',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
+exports.Prisma.DonationsScalarFieldEnum = {
+  id: 'id',
+  donation_id: 'donation_id',
+  project_id: 'project_id',
+  user_id: 'user_id',
+  donor_name: 'donor_name',
+  donor_email: 'donor_email',
+  donor_phone: 'donor_phone',
+  amount: 'amount',
+  frequency: 'frequency',
+  status: 'status',
+  payment_method: 'payment_method',
+  payment_channel: 'payment_channel',
+  transaction_id: 'transaction_id',
+  paid_at: 'paid_at',
+  message: 'message',
+  is_anonymous: 'is_anonymous',
+  metadata: 'metadata',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
+exports.Prisma.MigrationsScalarFieldEnum = {
+  id: 'id',
+  migration: 'migration',
+  batch: 'batch'
+};
+
+exports.Prisma.Model_has_permissionsScalarFieldEnum = {
+  permission_id: 'permission_id',
+  model_type: 'model_type',
+  model_id: 'model_id'
+};
+
+exports.Prisma.Model_has_rolesScalarFieldEnum = {
+  role_id: 'role_id',
+  model_type: 'model_type',
+  model_id: 'model_id'
+};
+
+exports.Prisma.Password_reset_tokensScalarFieldEnum = {
+  email: 'email',
+  token: 'token',
+  created_at: 'created_at'
+};
+
+exports.Prisma.PermissionsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  guard_name: 'guard_name',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Personal_access_tokensScalarFieldEnum = {
+  id: 'id',
+  tokenable_type: 'tokenable_type',
+  tokenable_id: 'tokenable_id',
+  name: 'name',
+  token: 'token',
+  abilities: 'abilities',
+  last_used_at: 'last_used_at',
+  expires_at: 'expires_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Role_has_permissionsScalarFieldEnum = {
+  permission_id: 'permission_id',
+  role_id: 'role_id'
+};
+
+exports.Prisma.RolesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  guard_name: 'guard_name',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Socialite_usersScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  provider: 'provider',
+  provider_id: 'provider_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.VolunteersScalarFieldEnum = {
+  id: 'id',
+  volunteer_id: 'volunteer_id',
+  user_id: 'user_id',
+  project_id: 'project_id',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  email: 'email',
+  phone: 'phone',
+  interests: 'interests',
+  availability: 'availability',
+  experience: 'experience',
+  motivation: 'motivation',
+  location: 'location',
+  occupation: 'occupation',
+  status: 'status',
+  approved_at: 'approved_at',
+  notes: 'notes',
+  skills: 'skills',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.JsonNullValueInput = {
@@ -200,24 +366,37 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
-  VerificationToken: 'VerificationToken',
-  Payment: 'Payment',
-  Project: 'Project'
+  Project: 'Project',
+  blogs: 'blogs',
+  cache: 'cache',
+  cache_locks: 'cache_locks',
+  contacts: 'contacts',
+  donations: 'donations',
+  migrations: 'migrations',
+  model_has_permissions: 'model_has_permissions',
+  model_has_roles: 'model_has_roles',
+  password_reset_tokens: 'password_reset_tokens',
+  permissions: 'permissions',
+  personal_access_tokens: 'personal_access_tokens',
+  role_has_permissions: 'role_has_permissions',
+  roles: 'roles',
+  socialite_users: 'socialite_users',
+  volunteers: 'volunteers'
 };
 
 /**

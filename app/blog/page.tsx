@@ -4,23 +4,27 @@ import { useState, useEffect } from 'react'
 import '../styles/blog.css'
 import Master from '@components/Layout/Master'
 import { useLanguage } from '@contexts/LanguageContext'
+import Request, { type IResponse } from '@utils/Request'
 
 interface BlogPost {
   id: string
   slug: string
-  title_en: string
-  title_id: string
-  excerpt_en: string
-  excerpt_id: string
-  author_name: string
-  author_role: string
-  published_at: string
+  title: string
+  titleId: string
+  titleEn: string
+  excerpt: string
+  excerptId: string
+  excerptEn: string
+  authorName: string
+  authorRole: string
+  authorAvatar: string | null
+  publishedAt: string
   category: string
-  image: string
-  read_time: number
+  image: string | null
+  readTime: number
 }
 
-export default function BlogPage() {
+const BlogPage: React.FC = () => {
   const { t, language } = useLanguage()
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([])
@@ -29,99 +33,32 @@ export default function BlogPage() {
   const [isLoading, setIsLoading] = useState(true)
 
   const categories = [
-    { value: 'all', label: t('allPosts'), icon: '📰' },
-    { value: 'impact', label: t('impactStoriesCategory'), icon: '🌟' },
-    { value: 'updates', label: t('updatesCategory'), icon: '📢' },
-    { value: 'events', label: t('eventsCategory'), icon: '🎉' },
-    { value: 'team', label: t('teamNewsCategory'), icon: '👥' },
+    { value: 'all', label: t('allPosts'), icon: '' },
+    { value: 'impact', label: t('impactStoriesCategory'), icon: '' },
+    { value: 'updates', label: t('updatesCategory'), icon: '' },
+    { value: 'events', label: t('eventsCategory'), icon: '' },
+    { value: 'team', label: t('teamNewsCategory'), icon: '' },
   ]
 
   useEffect(() => {
     fetchBlogs()
-  }, [])
+  }, [language])
 
   const fetchBlogs = async () => {
     try {
-      // TODO: Replace with actual API call
-      // const response = await fetch('/api/blog?status=published')
-      // const data = await response.json()
-      // setPosts(data.blogs || [])
+      setIsLoading(true)
+      const res: IResponse = await Request.getResponse({
+        url: `/api/blog?status=published&lang=${language}`,
+        method: 'GET',
+      })
 
-      // Temporary mock data
-      const mockPosts: BlogPost[] = [
-        {
-          id: '1',
-          slug: 'celebrating-5000-students-milestone',
-          title_en: 'Celebrating 5,000 Students Milestone',
-          title_id: 'Merayakan Pencapaian 5.000 Siswa',
-          excerpt_en:
-            "We're thrilled to announce that we've reached a major milestone - 5,000 students have benefited from our education programs across 15 communities.",
-          excerpt_id:
-            'Kami dengan bangga mengumumkan bahwa kami telah mencapai pencapaian besar - 5.000 siswa telah mendapat manfaat dari program pendidikan kami di 15 komunitas.',
-          author_name: 'Sarah Johnson',
-          author_role: 'Program Director',
-          published_at: '2025-01-15',
-          category: 'impact',
-          image: '/images/blog/milestone.jpg',
-          read_time: 5,
-        },
-        {
-          id: '2',
-          slug: 'new-digital-literacy-program-launch',
-          title_en: 'Launching Digital Literacy Program',
-          title_id: 'Meluncurkan Program Literasi Digital',
-          excerpt_en:
-            'Introducing our new digital literacy initiative to prepare students for the technology-driven future. Partnership with TechCorp makes this possible.',
-          excerpt_id:
-            'Memperkenalkan inisiatif literasi digital baru kami untuk mempersiapkan siswa menghadapi masa depan yang didorong teknologi. Kemitraan dengan TechCorp membuat ini mungkin.',
-          author_name: 'Michael Chen',
-          author_role: 'Technology Lead',
-          published_at: '2025-01-10',
-          category: 'updates',
-          image: '/images/blog/digital.jpg',
-          read_time: 4,
-        },
-        {
-          id: '3',
-          slug: 'annual-gala-2025-recap',
-          title_en: 'Annual Gala 2025: A Night of Impact',
-          title_id: 'Gala Tahunan 2025: Malam Berdampak',
-          excerpt_en:
-            'Thank you to everyone who joined us for our Annual Gala. Together we raised $500,000 to support education programs in underserved communities.',
-          excerpt_id:
-            'Terima kasih kepada semua orang yang bergabung dengan kami untuk Gala Tahunan kami. Bersama-sama kami mengumpulkan $500.000 untuk mendukung program pendidikan di komunitas yang kurang terlayani.',
-          author_name: 'Emma Williams',
-          author_role: 'Communications Manager',
-          published_at: '2025-01-05',
-          category: 'events',
-          image: '/images/blog/gala.jpg',
-          read_time: 6,
-        },
-        {
-          id: '4',
-          slug: 'welcome-new-team-members',
-          title_en: 'Welcome to Our Growing Team',
-          title_id: 'Selamat Datang di Tim Kami yang Berkembang',
-          excerpt_en:
-            "We're excited to introduce five new team members who will help us expand our reach and deepen our impact in communities across the region.",
-          excerpt_id:
-            'Kami sangat senang memperkenalkan lima anggota tim baru yang akan membantu kami memperluas jangkauan dan memperdalam dampak kami di komunitas di seluruh wilayah.',
-          author_name: 'David Martinez',
-          author_role: 'HR Director',
-          published_at: '2024-12-28',
-          category: 'team',
-          image: '/images/blog/team.jpg',
-          read_time: 3,
-        },
-      ]
-
-      setTimeout(() => {
-        setPosts(mockPosts)
-        setFilteredPosts(mockPosts)
-        setIsLoading(false)
-      }, 500)
+      if (res?.data?.blogs) {
+        setPosts(res.data.blogs)
+        setFilteredPosts(res.data.blogs)
+      }
     } catch (error) {
       console.error('Failed to fetch blogs:', error)
+    } finally {
       setIsLoading(false)
     }
   }
@@ -131,14 +68,14 @@ export default function BlogPage() {
 
     if (searchQuery) {
       filtered = filtered.filter((post) => {
-        const title = language === 'en' ? post.title_en : post.title_id
-        const excerpt = language === 'en' ? post.excerpt_en : post.excerpt_id
+        const title = language === 'en' ? post.titleEn : post.titleId
+        const excerpt = language === 'en' ? post.excerptEn : post.excerptId
         const searchLower = searchQuery.toLowerCase()
 
         return (
           title.toLowerCase().includes(searchLower) ||
           excerpt.toLowerCase().includes(searchLower) ||
-          post.author_name.toLowerCase().includes(searchLower)
+          post.authorName.toLowerCase().includes(searchLower)
         )
       })
     }
@@ -192,7 +129,7 @@ export default function BlogPage() {
         <div className="container">
           <div className="filters-wrapper">
             <div className="search-bar">
-              <span className="search-icon">🔍</span>
+              <span className="search-icon"></span>
               <input
                 type="text"
                 placeholder={t('searchArticles')}
@@ -241,24 +178,28 @@ export default function BlogPage() {
           {filteredPosts.length > 0 ? (
             <div className="blog-grid">
               {filteredPosts.map((post) => {
-                const title = language === 'en' ? post.title_en : post.title_id
-                const excerpt = language === 'en' ? post.excerpt_en : post.excerpt_id
+                const title = language === 'en' ? post.titleEn : post.titleId
+                const excerpt = language === 'en' ? post.excerptEn : post.excerptId
 
                 return (
                   <article key={post.id} className="blog-card">
                     <a href={`/blog/${post.slug}`} className="blog-card-link">
                       <div className="blog-card-image">
-                        <div className="image-placeholder">
-                          <span className="placeholder-icon">
-                            {categories.find((c) => c.value === post.category)?.icon || '📰'}
-                          </span>
-                        </div>
+                        {post.image ? (
+                          <img src={post.image} alt={title} />
+                        ) : (
+                          <div className="image-placeholder">
+                            <span className="placeholder-icon">
+                              {categories.find((c) => c.value === post.category)?.icon || ''}
+                            </span>
+                          </div>
+                        )}
                         <span className="blog-category">{post.category}</span>
                       </div>
                       <div className="blog-card-content">
                         <div className="blog-meta">
                           <span className="blog-date">
-                            {new Date(post.published_at).toLocaleDateString(
+                            {new Date(post.publishedAt).toLocaleDateString(
                               language === 'en' ? 'en-US' : 'id-ID',
                               {
                                 year: 'numeric',
@@ -268,16 +209,22 @@ export default function BlogPage() {
                             )}
                           </span>
                           <span className="blog-read-time">
-                            {post.read_time} {t('minRead')}
+                            {post.readTime} {t('minRead')}
                           </span>
                         </div>
                         <h3 className="blog-title">{title}</h3>
                         <p className="blog-excerpt">{excerpt}</p>
                         <div className="blog-author">
-                          <div className="author-avatar">{post.author_name.charAt(0)}</div>
+                          <div className="author-avatar">
+                            {post.authorAvatar ? (
+                              <img src={post.authorAvatar} alt={post.authorName} />
+                            ) : (
+                              post.authorName.charAt(0)
+                            )}
+                          </div>
                           <div className="author-info">
-                            <div className="author-name">{post.author_name}</div>
-                            <div className="author-role">{post.author_role}</div>
+                            <div className="author-name">{post.authorName}</div>
+                            <div className="author-role">{post.authorRole}</div>
                           </div>
                         </div>
                       </div>
@@ -288,7 +235,7 @@ export default function BlogPage() {
             </div>
           ) : (
             <div className="no-results">
-              <div className="no-results-icon">🔍</div>
+              <div className="no-results-icon"></div>
               <h3>{t('noArticlesFound')}</h3>
               <p>{t('noArticlesMessage')}</p>
               {activeFiltersCount > 0 && (
@@ -319,3 +266,5 @@ export default function BlogPage() {
     </Master>
   )
 }
+
+export default BlogPage

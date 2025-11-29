@@ -95,41 +95,24 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  uuid: 'uuid',
   name: 'name',
   email: 'email',
-  phoneNumber: 'phoneNumber',
-  emailVerified: 'emailVerified',
-  image: 'image',
+  email_verified_at: 'email_verified_at',
   password: 'password',
-  role: 'role',
-  isMember: 'isMember',
-  agreement: 'agreement',
+  remember_token: 'remember_token',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  accesses: 'accesses',
+  must_change_password: 'must_change_password'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
-  sessionToken: 'sessionToken',
   userId: 'userId',
-  expires: 'expires'
-};
-
-exports.Prisma.VerificationTokenScalarFieldEnum = {
-  identifier: 'identifier',
-  token: 'token',
-  expires: 'expires'
-};
-
-exports.Prisma.PaymentScalarFieldEnum = {
-  id: 'id',
-  method: 'method',
-  paymentUrl: 'paymentUrl',
-  segment: 'segment',
-  status: 'status',
-  paidAt: 'paidAt',
-  createdAt: 'createdAt'
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  payload: 'payload',
+  last_activity: 'last_activity'
 };
 
 exports.Prisma.ProjectScalarFieldEnum = {
@@ -158,9 +141,192 @@ exports.Prisma.ProjectScalarFieldEnum = {
   deletedAt: 'deletedAt'
 };
 
+exports.Prisma.BlogsScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  user_id: 'user_id',
+  title_id: 'title_id',
+  excerpt_id: 'excerpt_id',
+  content_id: 'content_id',
+  title_en: 'title_en',
+  excerpt_en: 'excerpt_en',
+  content_en: 'content_en',
+  author_name: 'author_name',
+  author_role: 'author_role',
+  author_avatar: 'author_avatar',
+  category: 'category',
+  tags: 'tags',
+  image: 'image',
+  image_alt: 'image_alt',
+  meta_title_id: 'meta_title_id',
+  meta_description_id: 'meta_description_id',
+  meta_title_en: 'meta_title_en',
+  meta_description_en: 'meta_description_en',
+  read_time: 'read_time',
+  views_count: 'views_count',
+  status: 'status',
+  featured: 'featured',
+  published_at: 'published_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
+exports.Prisma.CacheScalarFieldEnum = {
+  key: 'key',
+  value: 'value',
+  expiration: 'expiration'
+};
+
+exports.Prisma.Cache_locksScalarFieldEnum = {
+  key: 'key',
+  owner: 'owner',
+  expiration: 'expiration'
+};
+
+exports.Prisma.ContactsScalarFieldEnum = {
+  id: 'id',
+  contact_id: 'contact_id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  subject: 'subject',
+  message: 'message',
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  status: 'status',
+  priority: 'priority',
+  assigned_to: 'assigned_to',
+  responded_at: 'responded_at',
+  response: 'response',
+  internal_notes: 'internal_notes',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
+exports.Prisma.DonationsScalarFieldEnum = {
+  id: 'id',
+  donation_id: 'donation_id',
+  project_id: 'project_id',
+  user_id: 'user_id',
+  donor_name: 'donor_name',
+  donor_email: 'donor_email',
+  donor_phone: 'donor_phone',
+  amount: 'amount',
+  frequency: 'frequency',
+  status: 'status',
+  payment_method: 'payment_method',
+  payment_channel: 'payment_channel',
+  transaction_id: 'transaction_id',
+  paid_at: 'paid_at',
+  message: 'message',
+  is_anonymous: 'is_anonymous',
+  metadata: 'metadata',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
+exports.Prisma.MigrationsScalarFieldEnum = {
+  id: 'id',
+  migration: 'migration',
+  batch: 'batch'
+};
+
+exports.Prisma.Model_has_permissionsScalarFieldEnum = {
+  permission_id: 'permission_id',
+  model_type: 'model_type',
+  model_id: 'model_id'
+};
+
+exports.Prisma.Model_has_rolesScalarFieldEnum = {
+  role_id: 'role_id',
+  model_type: 'model_type',
+  model_id: 'model_id'
+};
+
+exports.Prisma.Password_reset_tokensScalarFieldEnum = {
+  email: 'email',
+  token: 'token',
+  created_at: 'created_at'
+};
+
+exports.Prisma.PermissionsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  guard_name: 'guard_name',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Personal_access_tokensScalarFieldEnum = {
+  id: 'id',
+  tokenable_type: 'tokenable_type',
+  tokenable_id: 'tokenable_id',
+  name: 'name',
+  token: 'token',
+  abilities: 'abilities',
+  last_used_at: 'last_used_at',
+  expires_at: 'expires_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Role_has_permissionsScalarFieldEnum = {
+  permission_id: 'permission_id',
+  role_id: 'role_id'
+};
+
+exports.Prisma.RolesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  guard_name: 'guard_name',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Socialite_usersScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  provider: 'provider',
+  provider_id: 'provider_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.VolunteersScalarFieldEnum = {
+  id: 'id',
+  volunteer_id: 'volunteer_id',
+  user_id: 'user_id',
+  project_id: 'project_id',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  email: 'email',
+  phone: 'phone',
+  interests: 'interests',
+  availability: 'availability',
+  experience: 'experience',
+  motivation: 'motivation',
+  location: 'location',
+  occupation: 'occupation',
+  status: 'status',
+  approved_at: 'approved_at',
+  notes: 'notes',
+  skills: 'skills',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.JsonNullValueInput = {
@@ -172,24 +338,37 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
-  VerificationToken: 'VerificationToken',
-  Payment: 'Payment',
-  Project: 'Project'
+  Project: 'Project',
+  blogs: 'blogs',
+  cache: 'cache',
+  cache_locks: 'cache_locks',
+  contacts: 'contacts',
+  donations: 'donations',
+  migrations: 'migrations',
+  model_has_permissions: 'model_has_permissions',
+  model_has_roles: 'model_has_roles',
+  password_reset_tokens: 'password_reset_tokens',
+  permissions: 'permissions',
+  personal_access_tokens: 'personal_access_tokens',
+  role_has_permissions: 'role_has_permissions',
+  roles: 'roles',
+  socialite_users: 'socialite_users',
+  volunteers: 'volunteers'
 };
 /**
  * Create the Client
@@ -243,13 +422,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"orm\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id            Int       @id @default(autoincrement())\n  uuid          String    @unique @default(uuid())\n  name          String?   @map(\"name\")\n  email         String    @unique @map(\"email\")\n  phoneNumber   String?   @unique @map(\"phone_number\")\n  emailVerified DateTime? @map(\"email_verified\")\n  image         String?   @map(\"image\")\n  password      String?   @map(\"password\")\n  role          String    @default(\"user\") @map(\"role\")\n  isMember      Boolean   @default(false) @map(\"is_member\")\n  agreement     Boolean   @default(false) @map(\"agreement\")\n  createdAt     DateTime  @default(now()) @map(\"created_at\")\n  updatedAt     DateTime  @updatedAt @map(\"updated_at\")\n  sessions      Session[]\n\n  @@map(\"users\")\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique @map(\"session_token\")\n  userId       Int      @map(\"user_id\")\n  expires      DateTime @map(\"expires\")\n  user         User     @relation(fields: [userId], references: [id])\n\n  @@map(\"sessions\")\n}\n\nmodel VerificationToken {\n  identifier String   @map(\"identifier\")\n  token      String   @unique @map(\"token\")\n  expires    DateTime @map(\"expires\")\n\n  @@unique([identifier, token])\n  @@map(\"verification_tokens\")\n}\n\nmodel Payment {\n  id         Int       @id @default(autoincrement())\n  method     String    @map(\"method\")\n  paymentUrl String    @map(\"payment_url\")\n  segment    String?   @map(\"segment\")\n  status     String    @map(\"status\")\n  paidAt     DateTime? @map(\"paid_at\")\n  createdAt  DateTime  @default(now()) @map(\"created_at\")\n\n  @@map(\"payments\")\n}\n\nmodel Project {\n  id               BigInt    @id @default(autoincrement())\n  projectId        String    @unique @map(\"project_id\") @db.VarChar(255)\n  url              String    @unique @db.VarChar(255)\n  titleId          String    @map(\"title_id\") @db.VarChar(255)\n  titleEn          String    @map(\"title_en\") @db.VarChar(255)\n  descriptionId    String    @map(\"description_id\") @db.Text\n  descriptionEn    String    @map(\"description_en\") @db.Text\n  location         String    @db.VarChar(255)\n  goalAmount       BigInt    @map(\"goal_amount\")\n  raisedAmount     BigInt    @default(0) @map(\"raised_amount\")\n  studentsImpacted Int       @map(\"students_impacted\")\n  image            String?   @db.VarChar(255)\n  status           String    @default(\"pending\") @db.VarChar(255)\n  featured         Boolean   @default(false)\n  category         String    @db.VarChar(255)\n  startDate        DateTime  @map(\"start_date\") @db.Date\n  endDate          DateTime  @map(\"end_date\") @db.Date\n  school           Json\n  donorCount       Int       @default(0) @map(\"donor_count\")\n  volunteerCount   Int       @default(0) @map(\"volunteer_count\")\n  createdAt        DateTime? @map(\"created_at\") @db.Timestamp(0)\n  updatedAt        DateTime? @map(\"updated_at\") @db.Timestamp(0)\n  deletedAt        DateTime? @map(\"deleted_at\") @db.Timestamp(0)\n\n  @@map(\"projects\")\n}\n",
-  "inlineSchemaHash": "df150bfc565eb5ffc87039871c0da22f71f1b4b6d3f9c8769505c1a3606f530c",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"orm\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id                   BigInt       @id @default(autoincrement())\n  name                 String       @map(\"name\") @db.VarChar(255)\n  email                String       @unique(map: \"users_email_unique\") @map(\"email\") @db.VarChar(255)\n  email_verified_at    DateTime?    @db.Timestamp(0)\n  password             String       @map(\"password\") @db.VarChar(255)\n  remember_token       String?      @db.VarChar(100)\n  createdAt            DateTime?    @map(\"created_at\") @db.Timestamp(0)\n  updatedAt            DateTime?    @updatedAt @map(\"updated_at\") @db.Timestamp(0)\n  accesses             Json?        @db.Json\n  must_change_password Boolean      @default(false)\n  blogs                blogs[]\n  contacts             contacts[]\n  donations            donations[]\n  volunteers           volunteers[]\n\n  @@map(\"users\")\n}\n\nmodel Session {\n  id            String  @id @default(cuid()) @db.VarChar(255)\n  userId        BigInt? @map(\"user_id\")\n  ip_address    String? @db.VarChar(45)\n  user_agent    String?\n  payload       String\n  last_activity Int\n\n  @@index([last_activity], map: \"sessions_last_activity_index\")\n  @@index([userId], map: \"sessions_user_id_index\")\n  @@map(\"sessions\")\n}\n\nmodel Project {\n  id               BigInt       @id @default(autoincrement())\n  projectId        String       @unique(map: \"projects_project_id_unique\") @map(\"project_id\") @db.VarChar(255)\n  url              String       @unique(map: \"projects_url_unique\") @db.VarChar(255)\n  titleId          String       @map(\"title_id\") @db.VarChar(255)\n  titleEn          String       @map(\"title_en\") @db.VarChar(255)\n  descriptionId    String       @map(\"description_id\")\n  descriptionEn    String       @map(\"description_en\")\n  location         String       @db.VarChar(255)\n  goalAmount       BigInt       @map(\"goal_amount\")\n  raisedAmount     BigInt       @default(0) @map(\"raised_amount\")\n  studentsImpacted Int          @map(\"students_impacted\")\n  image            String?      @db.VarChar(255)\n  status           String       @default(\"pending\") @db.VarChar(255)\n  featured         Boolean      @default(false)\n  category         String       @db.VarChar(255)\n  startDate        DateTime     @map(\"start_date\") @db.Date\n  endDate          DateTime     @map(\"end_date\") @db.Date\n  school           Json         @db.Json\n  donorCount       Int          @default(0) @map(\"donor_count\")\n  volunteerCount   Int          @default(0) @map(\"volunteer_count\")\n  createdAt        DateTime?    @map(\"created_at\") @db.Timestamp(0)\n  updatedAt        DateTime?    @map(\"updated_at\") @db.Timestamp(0)\n  deletedAt        DateTime?    @map(\"deleted_at\") @db.Timestamp(0)\n  donations        donations[]\n  volunteers       volunteers[]\n\n  @@map(\"projects\")\n}\n\n/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.\n/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.\nmodel blogs {\n  id                  BigInt    @id @default(autoincrement())\n  slug                String    @unique(map: \"blogs_slug_unique\") @db.VarChar(255)\n  user_id             BigInt?\n  title_id            String    @db.VarChar(255)\n  excerpt_id          String\n  content_id          String\n  title_en            String    @db.VarChar(255)\n  excerpt_en          String\n  content_en          String\n  author_name         String    @db.VarChar(255)\n  author_role         String?   @db.VarChar(255)\n  author_avatar       String?   @db.VarChar(255)\n  category            String    @db.VarChar(255)\n  tags                Json?     @db.Json\n  image               String?   @db.VarChar(255)\n  image_alt           String?   @db.VarChar(255)\n  meta_title_id       String?   @db.VarChar(255)\n  meta_description_id String?\n  meta_title_en       String?   @db.VarChar(255)\n  meta_description_en String?\n  read_time           Int       @default(1)\n  views_count         BigInt    @default(0)\n  status              String    @default(\"draft\") @db.VarChar(255)\n  featured            Boolean   @default(false)\n  published_at        DateTime? @db.Timestamp(0)\n  created_at          DateTime? @db.Timestamp(0)\n  updated_at          DateTime? @db.Timestamp(0)\n  deleted_at          DateTime? @db.Timestamp(0)\n  users               User?     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: \"blogs_user_id_foreign\")\n\n  @@index([category], map: \"blogs_category_index\")\n  @@index([featured], map: \"blogs_featured_index\")\n  @@index([status, published_at], map: \"blogs_status_published_at_index\")\n}\n\nmodel cache {\n  key        String @id @db.VarChar(255)\n  value      String\n  expiration Int\n}\n\nmodel cache_locks {\n  key        String @id @db.VarChar(255)\n  owner      String @db.VarChar(255)\n  expiration Int\n}\n\n/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.\nmodel contacts {\n  id             BigInt    @id @default(autoincrement())\n  contact_id     String    @unique(map: \"contacts_contact_id_unique\") @db.VarChar(255)\n  name           String    @db.VarChar(255)\n  email          String    @db.VarChar(255)\n  phone          String?   @db.VarChar(255)\n  subject        String    @default(\"general\") @db.VarChar(255)\n  message        String\n  ip_address     String?   @db.VarChar(255)\n  user_agent     String?   @db.VarChar(255)\n  status         String    @default(\"new\") @db.VarChar(255)\n  priority       String    @default(\"medium\") @db.VarChar(255)\n  assigned_to    BigInt?\n  responded_at   DateTime? @db.Timestamp(0)\n  response       String?\n  internal_notes String?\n  created_at     DateTime? @db.Timestamp(0)\n  updated_at     DateTime? @db.Timestamp(0)\n  deleted_at     DateTime? @db.Timestamp(0)\n  users          User?     @relation(fields: [assigned_to], references: [id], onUpdate: NoAction, map: \"contacts_assigned_to_foreign\")\n\n  @@index([email], map: \"contacts_email_index\")\n  @@index([status, created_at], map: \"contacts_status_created_at_index\")\n  @@index([subject], map: \"contacts_subject_index\")\n}\n\n/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.\nmodel donations {\n  id              BigInt    @id @default(autoincrement())\n  donation_id     String    @unique(map: \"donations_donation_id_unique\") @db.VarChar(255)\n  project_id      BigInt\n  user_id         BigInt?\n  donor_name      String?   @db.VarChar(255)\n  donor_email     String?   @db.VarChar(255)\n  donor_phone     String?   @db.VarChar(255)\n  amount          BigInt\n  frequency       String    @default(\"one-time\") @db.VarChar(255)\n  status          String    @default(\"pending\") @db.VarChar(255)\n  payment_method  String?   @db.VarChar(255)\n  payment_channel String?   @db.VarChar(255)\n  transaction_id  String?   @db.VarChar(255)\n  paid_at         DateTime? @db.Timestamp(0)\n  message         String?\n  is_anonymous    Boolean   @default(false)\n  metadata        Json?     @db.Json\n  created_at      DateTime? @db.Timestamp(0)\n  updated_at      DateTime? @db.Timestamp(0)\n  deleted_at      DateTime? @db.Timestamp(0)\n  projects        Project   @relation(fields: [project_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: \"donations_project_id_foreign\")\n  users           User?     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: \"donations_user_id_foreign\")\n\n  @@index([created_at], map: \"donations_created_at_index\")\n  @@index([project_id, status], map: \"donations_project_id_status_index\")\n  @@index([user_id, status], map: \"donations_user_id_status_index\")\n}\n\nmodel migrations {\n  id        Int    @id @default(autoincrement())\n  migration String @db.VarChar(255)\n  batch     Int\n}\n\nmodel model_has_permissions {\n  permission_id BigInt\n  model_type    String      @db.VarChar(255)\n  model_id      BigInt\n  permissions   permissions @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: \"model_has_permissions_permission_id_foreign\")\n\n  @@id([permission_id, model_id, model_type])\n  @@index([model_id, model_type], map: \"model_has_permissions_model_id_model_type_index\")\n}\n\nmodel model_has_roles {\n  role_id    BigInt\n  model_type String @db.VarChar(255)\n  model_id   BigInt\n  roles      roles  @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: \"model_has_roles_role_id_foreign\")\n\n  @@id([role_id, model_id, model_type])\n  @@index([model_id, model_type], map: \"model_has_roles_model_id_model_type_index\")\n}\n\nmodel password_reset_tokens {\n  email      String    @id @db.VarChar(255)\n  token      String    @db.VarChar(255)\n  created_at DateTime? @db.Timestamp(0)\n}\n\nmodel permissions {\n  id                    BigInt                  @id @default(autoincrement())\n  name                  String                  @db.VarChar(255)\n  guard_name            String                  @db.VarChar(255)\n  created_at            DateTime?               @db.Timestamp(0)\n  updated_at            DateTime?               @db.Timestamp(0)\n  model_has_permissions model_has_permissions[]\n  role_has_permissions  role_has_permissions[]\n\n  @@unique([name, guard_name], map: \"permissions_name_guard_name_unique\")\n}\n\nmodel personal_access_tokens {\n  id             BigInt    @id @default(autoincrement())\n  tokenable_type String    @db.VarChar(255)\n  tokenable_id   BigInt\n  name           String    @db.VarChar(255)\n  token          String    @unique(map: \"personal_access_tokens_token_unique\") @db.VarChar(64)\n  abilities      String?\n  last_used_at   DateTime? @db.Timestamp(0)\n  expires_at     DateTime? @db.Timestamp(0)\n  created_at     DateTime? @db.Timestamp(0)\n  updated_at     DateTime? @db.Timestamp(0)\n\n  @@index([tokenable_type, tokenable_id], map: \"personal_access_tokens_tokenable_type_tokenable_id_index\")\n}\n\nmodel role_has_permissions {\n  permission_id BigInt\n  role_id       BigInt\n  permissions   permissions @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: \"role_has_permissions_permission_id_foreign\")\n  roles         roles       @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: \"role_has_permissions_role_id_foreign\")\n\n  @@id([permission_id, role_id])\n}\n\nmodel roles {\n  id                   BigInt                 @id @default(autoincrement())\n  name                 String                 @db.VarChar(255)\n  guard_name           String                 @db.VarChar(255)\n  created_at           DateTime?              @db.Timestamp(0)\n  updated_at           DateTime?              @db.Timestamp(0)\n  model_has_roles      model_has_roles[]\n  role_has_permissions role_has_permissions[]\n\n  @@unique([name, guard_name], map: \"roles_name_guard_name_unique\")\n}\n\nmodel socialite_users {\n  id          BigInt    @id @default(autoincrement())\n  user_id     BigInt\n  provider    String    @db.VarChar(255)\n  provider_id String    @db.VarChar(255)\n  created_at  DateTime? @db.Timestamp(0)\n  updated_at  DateTime? @db.Timestamp(0)\n\n  @@unique([provider, provider_id], map: \"socialite_users_provider_provider_id_unique\")\n}\n\n/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.\nmodel volunteers {\n  id           BigInt    @id @default(autoincrement())\n  volunteer_id String    @unique(map: \"volunteers_volunteer_id_unique\") @db.VarChar(255)\n  user_id      BigInt?\n  project_id   BigInt?\n  first_name   String    @db.VarChar(255)\n  last_name    String    @db.VarChar(255)\n  email        String    @db.VarChar(255)\n  phone        String    @db.VarChar(255)\n  interests    Json?     @db.Json\n  availability Json?     @db.Json\n  experience   String?\n  motivation   String\n  location     String?   @db.VarChar(255)\n  occupation   String?   @db.VarChar(255)\n  status       String    @default(\"pending\") @db.VarChar(255)\n  approved_at  DateTime? @db.Date\n  notes        String?\n  skills       Json?     @db.Json\n  created_at   DateTime? @db.Timestamp(0)\n  updated_at   DateTime? @db.Timestamp(0)\n  deleted_at   DateTime? @db.Timestamp(0)\n  projects     Project?  @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: \"volunteers_project_id_foreign\")\n  users        User?     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: \"volunteers_user_id_foreign\")\n\n  @@index([email, status], map: \"volunteers_email_status_index\")\n  @@index([project_id], map: \"volunteers_project_id_index\")\n  @@index([status], map: \"volunteers_status_index\")\n}\n",
+  "inlineSchemaHash": "87fd54ba8c1c4de30731b3ac8a3e1f2feb5df3b4a05d0b15a3d9fb66b235fcb5",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"uuid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"name\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"email\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"phone_number\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"email_verified\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"image\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"password\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"role\"},{\"name\":\"isMember\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_member\"},{\"name\":\"agreement\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"agreement\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"SessionToUser\"}],\"dbName\":\"users\"},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionToken\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"session_token\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"user_id\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"expires\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SessionToUser\"}],\"dbName\":\"sessions\"},\"VerificationToken\":{\"fields\":[{\"name\":\"identifier\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"identifier\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"token\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"expires\"}],\"dbName\":\"verification_tokens\"},\"Payment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"method\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"method\"},{\"name\":\"paymentUrl\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"payment_url\"},{\"name\":\"segment\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"segment\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"status\"},{\"name\":\"paidAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"paid_at\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"payments\"},\"Project\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"projectId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"project_id\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"titleId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"title_id\"},{\"name\":\"titleEn\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"title_en\"},{\"name\":\"descriptionId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"description_id\"},{\"name\":\"descriptionEn\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"description_en\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"goalAmount\",\"kind\":\"scalar\",\"type\":\"BigInt\",\"dbName\":\"goal_amount\"},{\"name\":\"raisedAmount\",\"kind\":\"scalar\",\"type\":\"BigInt\",\"dbName\":\"raised_amount\"},{\"name\":\"studentsImpacted\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"students_impacted\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"featured\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"start_date\"},{\"name\":\"endDate\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"end_date\"},{\"name\":\"school\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"donorCount\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"donor_count\"},{\"name\":\"volunteerCount\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"volunteer_count\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"deletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"deleted_at\"}],\"dbName\":\"projects\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"name\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"email\"},{\"name\":\"email_verified_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"password\"},{\"name\":\"remember_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"accesses\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"must_change_password\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"blogs\",\"kind\":\"object\",\"type\":\"blogs\",\"relationName\":\"UserToblogs\"},{\"name\":\"contacts\",\"kind\":\"object\",\"type\":\"contacts\",\"relationName\":\"UserTocontacts\"},{\"name\":\"donations\",\"kind\":\"object\",\"type\":\"donations\",\"relationName\":\"UserTodonations\"},{\"name\":\"volunteers\",\"kind\":\"object\",\"type\":\"volunteers\",\"relationName\":\"UserTovolunteers\"}],\"dbName\":\"users\"},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"BigInt\",\"dbName\":\"user_id\"},{\"name\":\"ip_address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_agent\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payload\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_activity\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":\"sessions\"},\"Project\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"projectId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"project_id\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"titleId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"title_id\"},{\"name\":\"titleEn\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"title_en\"},{\"name\":\"descriptionId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"description_id\"},{\"name\":\"descriptionEn\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"description_en\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"goalAmount\",\"kind\":\"scalar\",\"type\":\"BigInt\",\"dbName\":\"goal_amount\"},{\"name\":\"raisedAmount\",\"kind\":\"scalar\",\"type\":\"BigInt\",\"dbName\":\"raised_amount\"},{\"name\":\"studentsImpacted\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"students_impacted\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"featured\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"start_date\"},{\"name\":\"endDate\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"end_date\"},{\"name\":\"school\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"donorCount\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"donor_count\"},{\"name\":\"volunteerCount\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"volunteer_count\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"deletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"deleted_at\"},{\"name\":\"donations\",\"kind\":\"object\",\"type\":\"donations\",\"relationName\":\"ProjectTodonations\"},{\"name\":\"volunteers\",\"kind\":\"object\",\"type\":\"volunteers\",\"relationName\":\"ProjectTovolunteers\"}],\"dbName\":\"projects\"},\"blogs\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"title_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"excerpt_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title_en\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"excerpt_en\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content_en\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author_role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author_avatar\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tags\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"image_alt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"meta_title_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"meta_description_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"meta_title_en\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"meta_description_en\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"read_time\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"views_count\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"featured\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"published_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deleted_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToblogs\"}],\"dbName\":null},\"cache\":{\"fields\":[{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"value\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiration\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"cache_locks\":{\"fields\":[{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"owner\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiration\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"contacts\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"contact_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subject\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ip_address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_agent\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"priority\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"assigned_to\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"responded_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"response\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"internal_notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deleted_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserTocontacts\"}],\"dbName\":null},\"donations\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"donation_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"project_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"donor_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"donor_email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"donor_phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"frequency\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payment_method\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payment_channel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"transaction_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"paid_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"is_anonymous\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"metadata\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deleted_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"projects\",\"kind\":\"object\",\"type\":\"Project\",\"relationName\":\"ProjectTodonations\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserTodonations\"}],\"dbName\":null},\"migrations\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"migration\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"batch\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"model_has_permissions\":{\"fields\":[{\"name\":\"permission_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"model_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"model_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"permissions\",\"kind\":\"object\",\"type\":\"permissions\",\"relationName\":\"model_has_permissionsTopermissions\"}],\"dbName\":null},\"model_has_roles\":{\"fields\":[{\"name\":\"role_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"model_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"model_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"roles\",\"kind\":\"object\",\"type\":\"roles\",\"relationName\":\"model_has_rolesToroles\"}],\"dbName\":null},\"password_reset_tokens\":{\"fields\":[{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"permissions\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guard_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"model_has_permissions\",\"kind\":\"object\",\"type\":\"model_has_permissions\",\"relationName\":\"model_has_permissionsTopermissions\"},{\"name\":\"role_has_permissions\",\"kind\":\"object\",\"type\":\"role_has_permissions\",\"relationName\":\"permissionsTorole_has_permissions\"}],\"dbName\":null},\"personal_access_tokens\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"tokenable_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tokenable_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"abilities\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_used_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"expires_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"role_has_permissions\":{\"fields\":[{\"name\":\"permission_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"role_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"permissions\",\"kind\":\"object\",\"type\":\"permissions\",\"relationName\":\"permissionsTorole_has_permissions\"},{\"name\":\"roles\",\"kind\":\"object\",\"type\":\"roles\",\"relationName\":\"role_has_permissionsToroles\"}],\"dbName\":null},\"roles\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guard_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"model_has_roles\",\"kind\":\"object\",\"type\":\"model_has_roles\",\"relationName\":\"model_has_rolesToroles\"},{\"name\":\"role_has_permissions\",\"kind\":\"object\",\"type\":\"role_has_permissions\",\"relationName\":\"role_has_permissionsToroles\"}],\"dbName\":null},\"socialite_users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"provider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"provider_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"volunteers\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"volunteer_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"project_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"interests\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"availability\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"experience\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"motivation\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"occupation\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"approved_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"skills\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deleted_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"projects\",\"kind\":\"object\",\"type\":\"Project\",\"relationName\":\"ProjectTovolunteers\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserTovolunteers\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
