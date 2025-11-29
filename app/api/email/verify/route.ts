@@ -1,27 +1,115 @@
 import { NextRequest, NextResponse } from 'next/server'
-import jwt from 'jsonwebtoken'
 import { prisma } from '@utils/Prisma'
 
-const JWT_SECRET = process.env.JWT_SECRET!
+// Force Node.js runtime (not Edge)
+export const runtime = 'nodejs'
 
-export async function POST(req: NextRequest) {
-  const { token } = await req.json()
+interface School {
+  name: string
+  address: string
+  principal_name: string
+  student_count: number
+}
 
-  if (!token) {
-    return NextResponse.json({ error: 'Missing token' }, { status: 400 })
-  }
-
+export async function GET(request: NextRequest) {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: number; email: string }
+    const searchParams = request.nextUrl.searchParams
+    const featured = searchParams.get('featured') === 'true'
+    const limit = parseInt(searchParams.get('limit') || '50')
+    const category = searchParams.get('category')
+    const status = searchParams.get('status')
+    const lang = searchParams.get('lang') || 'en'
 
-    const updated = await prisma.user.update({
-      where: { id: decoded.userId },
-      data: { emailVerified: new Date() },
+    // Build the where clause dynamically
+    const whereClause: any = {
+      deletedAt: null,
+    }
+
+    if (featured) {
+      whereClause.featured = true
+    }
+
+    if (category && category !== 'all') {
+      whereClause.category = category
+    }
+
+    if (status && status !== 'all') {
+      whereClause.status = status
+    }
+
+    // Fetch projects from database
+    const projects = await prisma.project.findMany({
+      where: whereClause,
+      take: limit,
+      orderBy: {
+        createdAt: 'desc',
+      },
     })
 
-    return NextResponse.json({ success: true, message: 'Email verified', user: updated })
+    // Transform projects for the response
+    const transformedProjects = projects.map((project) => {
+      const school = project.school as School
+
+      return {
+        id: project.projectId,
+        url: project.url,
+        title: lang === 'id' ? project.titleId : project.titleEn,
+        titleId: project.titleId,
+        titleEn: project.titleEn,
+        location: project.location,
+        description: lang === 'id' ? project.descriptionId : project.descriptionEn,
+        descriptionId: project.descriptionId,
+        descriptionEn: project.descriptionEn,
+        goalAmount: Number(project.goalAmount),
+        raisedAmount: Number(project.raisedAmount),
+        studentsImpacted: project.studentsImpacted,
+        image: project.image,
+        status: project.status,
+        featured: project.featured,
+        category: project.category,
+        startDate: project.startDate?.toISOString().split('T')[0],
+        endDate: project.endDate?.toISOString().split('T')[0],
+        school: {
+          name: school?.name || '',
+          address: school?.address || '',
+          principalName: school?.principal_name || '',
+          studentCount: school?.student_count || 0,
+        },
+        donorCount: project.donorCount,
+        volunteerCount: project.volunteerCount,
+      }
+    })
+
+    // Calculate statistics
+    const totalFunded = transformedProjects.reduce((sum, p) => sum + p.raisedAmount, 0)
+    const totalGoal = transformedProjects.reduce((sum, p) => sum + p.goalAmount, 0)
+    const totalStudents = transformedProjects.reduce((sum, p) => sum + p.studentsImpacted, 0)
+    const totalDonors = transformedProjects.reduce((sum, p) => sum + p.donorCount, 0)
+
+    return NextResponse.json(
+      {
+        success: true,
+        projects: transformedProjects,
+        meta: {
+          total: transformedProjects.length,
+          totalFunded,
+          totalGoal,
+          totalStudents,
+          totalDonors,
+          fundingPercentage: totalGoal > 0 ? Math.round((totalFunded / totalGoal) * 100) : 0,
+        },
+      },
+      { status: 200 },
+    )
   } catch (error) {
-    console.error('Token verification error:', error)
-    return NextResponse.json({ error: 'Invalid or expired token' }, { status: 400 })
+    console.error('Error fetching projects:', error)
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Failed to fetch projects',
+        projects: [],
+      },
+      { status: 500 },
+    )
   }
 }

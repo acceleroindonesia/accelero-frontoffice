@@ -1,92 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { prisma } from '@utils/Prisma'
 
-// Import the same dummy data (in production, this would be from database)
-const DUMMY_PROJECTS = [
-  {
-    id: 'proj-001',
-    url: 'sd-inpres-01-sorong',
-    title: 'Reading Excellence Program - SD Inpres 01 Sorong',
-    location: 'Sorong, Papua Barat',
-    description:
-      'Help 150 students gain foundational reading skills through our proven TaRL methodology. Includes training materials, books, and teacher support.',
-    fullDescription:
-      'This comprehensive reading program targets Grade 1-3 students who are struggling with basic literacy. Our Teaching at the Right Level (TaRL) approach groups students by learning level rather than grade, ensuring each child receives instruction matched to their needs. The program includes 200+ graded reading books, trained facilitators, weekly assessments, and parent engagement workshops. Over 6 months, we aim to move 80% of participating students to age-appropriate reading levels.',
-    goalAmount: 50000000,
-    raisedAmount: 32500000,
-    studentsImpacted: 150,
-    image: 'https://picsum.photos/seed/project1/800/600',
-    status: 'active',
-    featured: true,
-    category: 'literacy',
-    startDate: '2025-01-15',
-    endDate: '2025-12-31',
-    school: {
-      name: 'SD Inpres 01 Sorong',
-      address: 'Jl. Pendidikan No. 123, Sorong',
-      principalName: 'Ibu Siti Nurhaliza',
-      studentCount: 450,
-      establishedYear: 1985,
-    },
-    donorCount: 87,
-    volunteerCount: 12,
-    milestones: [
-      {
-        date: '2025-01-15',
-        description: 'Program launch and baseline assessment',
-        completed: true,
-      },
-      {
-        date: '2025-03-15',
-        description: 'First progress review - 40 students show improvement',
-        completed: true,
-      },
-      {
-        date: '2025-06-15',
-        description: 'Mid-program evaluation',
-        completed: false,
-      },
-      {
-        date: '2025-09-15',
-        description: 'Second progress review',
-        completed: false,
-      },
-      {
-        date: '2025-12-31',
-        description: 'Final assessment and celebration',
-        completed: false,
-      },
-    ],
-    updates: [
-      {
-        date: '2025-03-20',
-        title: 'Amazing Progress in First 2 Months!',
-        content:
-          "We're thrilled to report that 42 students have already moved up one reading level. Parents are noticing the difference at home too!",
-      },
-      {
-        date: '2025-02-10',
-        title: 'Books Have Arrived!',
-        content:
-          'All 200 reading books have been delivered and students are excited to start their learning journey.',
-      },
-    ],
-    budget: [
-      { item: 'Reading books and materials', amount: 20000000 },
-      { item: 'Teacher training', amount: 12000000 },
-      { item: 'Volunteer coordinator salary', amount: 10000000 },
-      { item: 'Assessment tools', amount: 5000000 },
-      { item: 'Parent workshops', amount: 3000000 },
-    ],
-  },
-  // Add more detailed projects as needed
-]
+// Force Node.js runtime (not Edge)
+export const runtime = 'nodejs'
 
-export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
+interface School {
+  name: string
+  address: string
+  principal_name: string
+  student_count: number
+}
+
+export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
-    const { slug } = params
+    const { slug } = await params
+    const searchParams = request.nextUrl.searchParams
+    const lang = searchParams.get('lang') || 'en'
 
-    // Find project by slug
-    const project = DUMMY_PROJECTS.find((p) => p.url === slug)
+    // Find project by slug (url field)
+    const project = await prisma.project.findFirst({
+      where: {
+        url: slug,
+        deletedAt: null,
+      },
+    })
 
     if (!project) {
       return NextResponse.json(
@@ -98,10 +35,42 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
       )
     }
 
+    const school = project.school as School
+
+    // Transform project for the response
+    const transformedProject = {
+      id: project.projectId,
+      url: project.url,
+      title: lang === 'id' ? project.titleId : project.titleEn,
+      titleId: project.titleId,
+      titleEn: project.titleEn,
+      location: project.location,
+      description: lang === 'id' ? project.descriptionId : project.descriptionEn,
+      descriptionId: project.descriptionId,
+      descriptionEn: project.descriptionEn,
+      goalAmount: Number(project.goalAmount),
+      raisedAmount: Number(project.raisedAmount),
+      studentsImpacted: project.studentsImpacted,
+      image: project.image,
+      status: project.status,
+      featured: project.featured,
+      category: project.category,
+      startDate: project.startDate?.toISOString().split('T')[0],
+      endDate: project.endDate?.toISOString().split('T')[0],
+      school: {
+        name: school?.name || '',
+        address: school?.address || '',
+        principalName: school?.principal_name || '',
+        studentCount: school?.student_count || 0,
+      },
+      donorCount: project.donorCount,
+      volunteerCount: project.volunteerCount,
+    }
+
     return NextResponse.json(
       {
         success: true,
-        project,
+        project: transformedProject,
       },
       { status: 200 },
     )

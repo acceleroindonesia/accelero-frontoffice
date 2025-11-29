@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "orm"
+  provider      = "prisma-client-js"
+  output        = "orm"
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
@@ -10,160 +10,292 @@ datasource db {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  uuid          String    @unique @default(uuid())
-  name          String?   @map("name")
-  email         String    @unique @map("email")
-  phoneNumber   String?   @unique @map("phone_number")
-  emailVerified DateTime? @map("email_verified")
-  image         String?   @map("image")
-  password      String?   @map("password")
-  role          String    @default("user") @map("role")
-  isMember      Boolean   @default(false) @map("is_member")
-  agreement     Boolean   @default(false) @map("agreement")
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @updatedAt @map("updated_at")
-  accounts      Account[]
-  orders        Order[]
-  sessions      Session[]
+  id                   BigInt       @id @default(autoincrement())
+  name                 String       @map("name") @db.VarChar(255)
+  email                String       @unique(map: "users_email_unique") @map("email") @db.VarChar(255)
+  email_verified_at    DateTime?    @db.Timestamp(0)
+  password             String       @map("password") @db.VarChar(255)
+  remember_token       String?      @db.VarChar(100)
+  createdAt            DateTime?    @map("created_at") @db.Timestamp(0)
+  updatedAt            DateTime?    @updatedAt @map("updated_at") @db.Timestamp(0)
+  accesses             Json?        @db.Json
+  must_change_password Boolean      @default(false)
+  blogs                blogs[]
+  contacts             contacts[]
+  donations            donations[]
+  volunteers           volunteers[]
 
   @@map("users")
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            Int     @map("user_id")
-  type              String  @map("type")
-  provider          String  @map("provider")
-  providerAccountId String  @map("provider_account_id")
-  refresh_token     String? @map("refresh_token")
-  access_token      String? @map("access_token")
-  expires_at        Int?    @map("expires_at")
-  token_type        String? @map("token_type")
-  scope             String? @map("scope")
-  id_token          String? @map("id_token")
-  session_state     String? @map("session_state")
-  user              User    @relation(fields: [userId], references: [id])
-
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
-}
-
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique @map("session_token")
-  userId       Int      @map("user_id")
-  expires      DateTime @map("expires")
-  user         User     @relation(fields: [userId], references: [id])
+  id            String  @id @default(cuid()) @db.VarChar(255)
+  userId        BigInt? @map("user_id")
+  ip_address    String? @db.VarChar(45)
+  user_agent    String?
+  payload       String
+  last_activity Int
 
+  @@index([last_activity], map: "sessions_last_activity_index")
+  @@index([userId], map: "sessions_user_id_index")
   @@map("sessions")
 }
 
-model VerificationToken {
-  identifier String   @map("identifier")
-  token      String   @unique @map("token")
-  expires    DateTime @map("expires")
+model Project {
+  id               BigInt       @id @default(autoincrement())
+  projectId        String       @unique(map: "projects_project_id_unique") @map("project_id") @db.VarChar(255)
+  url              String       @unique(map: "projects_url_unique") @db.VarChar(255)
+  titleId          String       @map("title_id") @db.VarChar(255)
+  titleEn          String       @map("title_en") @db.VarChar(255)
+  descriptionId    String       @map("description_id")
+  descriptionEn    String       @map("description_en")
+  location         String       @db.VarChar(255)
+  goalAmount       BigInt       @map("goal_amount")
+  raisedAmount     BigInt       @default(0) @map("raised_amount")
+  studentsImpacted Int          @map("students_impacted")
+  image            String?      @db.VarChar(255)
+  status           String       @default("pending") @db.VarChar(255)
+  featured         Boolean      @default(false)
+  category         String       @db.VarChar(255)
+  startDate        DateTime     @map("start_date") @db.Date
+  endDate          DateTime     @map("end_date") @db.Date
+  school           Json         @db.Json
+  donorCount       Int          @default(0) @map("donor_count")
+  volunteerCount   Int          @default(0) @map("volunteer_count")
+  createdAt        DateTime?    @map("created_at") @db.Timestamp(0)
+  updatedAt        DateTime?    @map("updated_at") @db.Timestamp(0)
+  deletedAt        DateTime?    @map("deleted_at") @db.Timestamp(0)
+  donations        donations[]
+  volunteers       volunteers[]
 
-  @@unique([identifier, token])
-  @@map("verification_tokens")
+  @@map("projects")
 }
 
-model Venue {
-  id        Int      @id @default(autoincrement())
-  name      String   @map("name")
-  address   String   @map("address")
-  capacity  Int      @map("capacity")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @map("updated_at")
-  events    Event[]
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model blogs {
+  id                  BigInt    @id @default(autoincrement())
+  slug                String    @unique(map: "blogs_slug_unique") @db.VarChar(255)
+  user_id             BigInt?
+  title_id            String    @db.VarChar(255)
+  excerpt_id          String
+  content_id          String
+  title_en            String    @db.VarChar(255)
+  excerpt_en          String
+  content_en          String
+  author_name         String    @db.VarChar(255)
+  author_role         String?   @db.VarChar(255)
+  author_avatar       String?   @db.VarChar(255)
+  category            String    @db.VarChar(255)
+  tags                Json?     @db.Json
+  image               String?   @db.VarChar(255)
+  image_alt           String?   @db.VarChar(255)
+  meta_title_id       String?   @db.VarChar(255)
+  meta_description_id String?
+  meta_title_en       String?   @db.VarChar(255)
+  meta_description_en String?
+  read_time           Int       @default(1)
+  views_count         BigInt    @default(0)
+  status              String    @default("draft") @db.VarChar(255)
+  featured            Boolean   @default(false)
+  published_at        DateTime? @db.Timestamp(0)
+  created_at          DateTime? @db.Timestamp(0)
+  updated_at          DateTime? @db.Timestamp(0)
+  deleted_at          DateTime? @db.Timestamp(0)
+  users               User?     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "blogs_user_id_foreign")
 
-  @@map("venues")
+  @@index([category], map: "blogs_category_index")
+  @@index([featured], map: "blogs_featured_index")
+  @@index([status, published_at], map: "blogs_status_published_at_index")
 }
 
-model Event {
-  id           Int          @id @default(autoincrement())
-  uuid         String       @unique @default(uuid())
-  title        String       @map("title")
-  slug         String       @unique @map("slug")
-  description  String       @map("description")
-  date         DateTime     @map("date")
-  venueId      Int          @map("venue_id")
-  status       String       @map("status")
-  thumbnailUrl String       @map("thumbnail_url")
-  isPrivate    Boolean      @default(false) @map("is_private")
-  createdAt    DateTime     @default(now()) @map("created_at")
-  updatedAt    DateTime     @default(now()) @map("updated_at")
-  banners      Banner[]
-  venue        Venue        @relation(fields: [venueId], references: [id])
-  ticketTypes  TicketType[]
-
-  @@map("events")
+model cache {
+  key        String @id @db.VarChar(255)
+  value      String
+  expiration Int
 }
 
-model Banner {
-  id        Int      @id @default(autoincrement())
-  eventId   Int      @map("event_id")
-  bannerUrl String   @map("banner_url")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @map("updated_at")
-  event     Event    @relation(fields: [eventId], references: [id])
-
-  @@map("banners")
+model cache_locks {
+  key        String @id @db.VarChar(255)
+  owner      String @db.VarChar(255)
+  expiration Int
 }
 
-model TicketType {
-  id          Int         @id @default(autoincrement())
-  eventId     Int         @map("event_id")
-  name        String      @map("name")
-  price       Decimal     @map("price")
-  stock       Int         @map("stock")
-  information String?     @map("information")
-  createdAt   DateTime    @default(now()) @map("created_at")
-  updatedAt   DateTime    @default(now()) @map("updated_at")
-  orderItems  OrderItem[]
-  event       Event       @relation(fields: [eventId], references: [id])
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model contacts {
+  id             BigInt    @id @default(autoincrement())
+  contact_id     String    @unique(map: "contacts_contact_id_unique") @db.VarChar(255)
+  name           String    @db.VarChar(255)
+  email          String    @db.VarChar(255)
+  phone          String?   @db.VarChar(255)
+  subject        String    @default("general") @db.VarChar(255)
+  message        String
+  ip_address     String?   @db.VarChar(255)
+  user_agent     String?   @db.VarChar(255)
+  status         String    @default("new") @db.VarChar(255)
+  priority       String    @default("medium") @db.VarChar(255)
+  assigned_to    BigInt?
+  responded_at   DateTime? @db.Timestamp(0)
+  response       String?
+  internal_notes String?
+  created_at     DateTime? @db.Timestamp(0)
+  updated_at     DateTime? @db.Timestamp(0)
+  deleted_at     DateTime? @db.Timestamp(0)
+  users          User?     @relation(fields: [assigned_to], references: [id], onUpdate: NoAction, map: "contacts_assigned_to_foreign")
 
-  @@map("ticket_types")
+  @@index([email], map: "contacts_email_index")
+  @@index([status, created_at], map: "contacts_status_created_at_index")
+  @@index([subject], map: "contacts_subject_index")
 }
 
-model Order {
-  id         Int         @id @default(autoincrement())
-  uuid       String      @unique @default(uuid())
-  userId     Int         @map("user_id")
-  status     String      @map("status")
-  totalPrice Decimal     @map("total_price")
-  createdAt  DateTime    @default(now()) @map("created_at")
-  updatedAt  DateTime    @default(now()) @map("updated_at")
-  orderItems OrderItem[]
-  user       User        @relation(fields: [userId], references: [id])
-  payment    Payment?
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model donations {
+  id              BigInt    @id @default(autoincrement())
+  donation_id     String    @unique(map: "donations_donation_id_unique") @db.VarChar(255)
+  project_id      BigInt
+  user_id         BigInt?
+  donor_name      String?   @db.VarChar(255)
+  donor_email     String?   @db.VarChar(255)
+  donor_phone     String?   @db.VarChar(255)
+  amount          BigInt
+  frequency       String    @default("one-time") @db.VarChar(255)
+  status          String    @default("pending") @db.VarChar(255)
+  payment_method  String?   @db.VarChar(255)
+  payment_channel String?   @db.VarChar(255)
+  transaction_id  String?   @db.VarChar(255)
+  paid_at         DateTime? @db.Timestamp(0)
+  message         String?
+  is_anonymous    Boolean   @default(false)
+  metadata        Json?     @db.Json
+  created_at      DateTime? @db.Timestamp(0)
+  updated_at      DateTime? @db.Timestamp(0)
+  deleted_at      DateTime? @db.Timestamp(0)
+  projects        Project   @relation(fields: [project_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "donations_project_id_foreign")
+  users           User?     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "donations_user_id_foreign")
 
-  @@map("orders")
+  @@index([created_at], map: "donations_created_at_index")
+  @@index([project_id, status], map: "donations_project_id_status_index")
+  @@index([user_id, status], map: "donations_user_id_status_index")
 }
 
-model OrderItem {
-  id            Int        @id @default(autoincrement())
-  orderId       Int        @map("order_id")
-  ticketTypeId  Int        @map("ticket_type_id")
-  quantity      Int        @map("quantity")
-  unitPrice     Decimal    @map("unit_price")
-  subtotalPrice Decimal    @map("subtotal_price")
-  order         Order      @relation(fields: [orderId], references: [id])
-  ticketType    TicketType @relation(fields: [ticketTypeId], references: [id])
-
-  @@map("order_items")
+model migrations {
+  id        Int    @id @default(autoincrement())
+  migration String @db.VarChar(255)
+  batch     Int
 }
 
-model Payment {
-  id         Int       @id @default(autoincrement())
-  orderId    Int       @unique @map("order_id")
-  method     String    @map("method")
-  paymentUrl String    @map("payment_url")
-  segment    String?   @map("segment")
-  status     String    @map("status")
-  paidAt     DateTime? @map("paid_at")
-  createdAt  DateTime  @default(now()) @map("created_at")
-  order      Order     @relation(fields: [orderId], references: [id])
+model model_has_permissions {
+  permission_id BigInt
+  model_type    String      @db.VarChar(255)
+  model_id      BigInt
+  permissions   permissions @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "model_has_permissions_permission_id_foreign")
 
-  @@map("payments")
+  @@id([permission_id, model_id, model_type])
+  @@index([model_id, model_type], map: "model_has_permissions_model_id_model_type_index")
+}
+
+model model_has_roles {
+  role_id    BigInt
+  model_type String @db.VarChar(255)
+  model_id   BigInt
+  roles      roles  @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "model_has_roles_role_id_foreign")
+
+  @@id([role_id, model_id, model_type])
+  @@index([model_id, model_type], map: "model_has_roles_model_id_model_type_index")
+}
+
+model password_reset_tokens {
+  email      String    @id @db.VarChar(255)
+  token      String    @db.VarChar(255)
+  created_at DateTime? @db.Timestamp(0)
+}
+
+model permissions {
+  id                    BigInt                  @id @default(autoincrement())
+  name                  String                  @db.VarChar(255)
+  guard_name            String                  @db.VarChar(255)
+  created_at            DateTime?               @db.Timestamp(0)
+  updated_at            DateTime?               @db.Timestamp(0)
+  model_has_permissions model_has_permissions[]
+  role_has_permissions  role_has_permissions[]
+
+  @@unique([name, guard_name], map: "permissions_name_guard_name_unique")
+}
+
+model personal_access_tokens {
+  id             BigInt    @id @default(autoincrement())
+  tokenable_type String    @db.VarChar(255)
+  tokenable_id   BigInt
+  name           String    @db.VarChar(255)
+  token          String    @unique(map: "personal_access_tokens_token_unique") @db.VarChar(64)
+  abilities      String?
+  last_used_at   DateTime? @db.Timestamp(0)
+  expires_at     DateTime? @db.Timestamp(0)
+  created_at     DateTime? @db.Timestamp(0)
+  updated_at     DateTime? @db.Timestamp(0)
+
+  @@index([tokenable_type, tokenable_id], map: "personal_access_tokens_tokenable_type_tokenable_id_index")
+}
+
+model role_has_permissions {
+  permission_id BigInt
+  role_id       BigInt
+  permissions   permissions @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "role_has_permissions_permission_id_foreign")
+  roles         roles       @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "role_has_permissions_role_id_foreign")
+
+  @@id([permission_id, role_id])
+}
+
+model roles {
+  id                   BigInt                 @id @default(autoincrement())
+  name                 String                 @db.VarChar(255)
+  guard_name           String                 @db.VarChar(255)
+  created_at           DateTime?              @db.Timestamp(0)
+  updated_at           DateTime?              @db.Timestamp(0)
+  model_has_roles      model_has_roles[]
+  role_has_permissions role_has_permissions[]
+
+  @@unique([name, guard_name], map: "roles_name_guard_name_unique")
+}
+
+model socialite_users {
+  id          BigInt    @id @default(autoincrement())
+  user_id     BigInt
+  provider    String    @db.VarChar(255)
+  provider_id String    @db.VarChar(255)
+  created_at  DateTime? @db.Timestamp(0)
+  updated_at  DateTime? @db.Timestamp(0)
+
+  @@unique([provider, provider_id], map: "socialite_users_provider_provider_id_unique")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model volunteers {
+  id           BigInt    @id @default(autoincrement())
+  volunteer_id String    @unique(map: "volunteers_volunteer_id_unique") @db.VarChar(255)
+  user_id      BigInt?
+  project_id   BigInt?
+  first_name   String    @db.VarChar(255)
+  last_name    String    @db.VarChar(255)
+  email        String    @db.VarChar(255)
+  phone        String    @db.VarChar(255)
+  interests    Json?     @db.Json
+  availability Json?     @db.Json
+  experience   String?
+  motivation   String
+  location     String?   @db.VarChar(255)
+  occupation   String?   @db.VarChar(255)
+  status       String    @default("pending") @db.VarChar(255)
+  approved_at  DateTime? @db.Date
+  notes        String?
+  skills       Json?     @db.Json
+  created_at   DateTime? @db.Timestamp(0)
+  updated_at   DateTime? @db.Timestamp(0)
+  deleted_at   DateTime? @db.Timestamp(0)
+  projects     Project?  @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "volunteers_project_id_foreign")
+  users        User?     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "volunteers_user_id_foreign")
+
+  @@index([email, status], map: "volunteers_email_status_index")
+  @@index([project_id], map: "volunteers_project_id_index")
+  @@index([status], map: "volunteers_status_index")
 }

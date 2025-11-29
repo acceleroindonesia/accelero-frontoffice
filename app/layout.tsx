@@ -18,7 +18,7 @@ import SessionWrapper from '@components/SessionWrapper'
 import { LanguageProvider } from '@contexts/LanguageContext'
 
 // variables
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 const RootLayout: React.FC<Readonly<{ children: React.ReactNode }>> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>
