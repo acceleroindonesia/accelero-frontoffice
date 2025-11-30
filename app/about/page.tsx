@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Master from '@components/Layout/Master'
 import Section from '@components/Section/Section'
 import { ScrollAnimations } from '../home/components/ScrollAnimations'
@@ -204,8 +205,14 @@ const AboutPage: React.FC = () => {
 
           <div className="team-grid">
             <div className="team-card">
-              <div className="team-image-placeholder">
-                <span className="team-initials">CT</span>
+              <div className="team-image">
+                <Image
+                  src="/Catherine_Portrait_Formal_1.jpeg"
+                  alt="Catherine Octaviane Tikara"
+                  width={200}
+                  height={200}
+                  className="team-photo"
+                />
               </div>
               <h3>Catherine Octaviane Tikara</h3>
               <p className="team-role">{t('coFounderStrategic')}</p>
@@ -213,8 +220,14 @@ const AboutPage: React.FC = () => {
             </div>
 
             <div className="team-card">
-              <div className="team-image-placeholder">
-                <span className="team-initials">KE</span>
+              <div className="team-image">
+                <Image
+                  src="/kevin_founder.png"
+                  alt="Kevin Evannanda Septian"
+                  width={200}
+                  height={200}
+                  className="team-photo"
+                />
               </div>
               <h3>Kevin Evannanda Septian</h3>
               <p className="team-role">{t('coFounder')}</p>
