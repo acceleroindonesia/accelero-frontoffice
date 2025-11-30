@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Master from '@components/Layout/Master'
 import { ScrollAnimations } from '../home/components/ScrollAnimations'
-import Request, { type IResponse } from '@utils/Request'
+import Request from '@utils/Request'
 
 interface IDonationProject {
   id: string
@@ -16,14 +16,43 @@ interface IDonationProject {
   image: string
 }
 
-const DonatePage: React.FC = () => {
+// Loading component for Suspense fallback
+const DonateLoading: React.FC = () => (
+  <div className="donate-loading">
+    <div className="container">
+      <div
+        className="loading-skeleton"
+        style={{
+          height: '200px',
+          marginBottom: '20px',
+          background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+          backgroundSize: '200% 100%',
+          animation: 'shimmer 1.5s infinite',
+          borderRadius: '16px',
+        }}
+      />
+      <div
+        className="loading-skeleton"
+        style={{
+          height: '400px',
+          background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+          backgroundSize: '200% 100%',
+          animation: 'shimmer 1.5s infinite',
+          borderRadius: '16px',
+        }}
+      />
+    </div>
+  </div>
+)
+
+// Main donate content component that uses useSearchParams
+const DonateContent: React.FC = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const projectParam = searchParams.get('project')
 
   const [selectedProject, setSelectedProject] = useState<IDonationProject | null>(null)
   const [projects, setProjects] = useState<IDonationProject[]>([])
-  const [isLoading, setIsLoading] = useState(true)
 
   // Form state
   const [donationType, setDonationType] = useState<'one-time' | 'monthly'>('one-time')
@@ -65,18 +94,17 @@ const DonatePage: React.FC = () => {
 
   const fetchProjects = async () => {
     try {
-      const res: IResponse = await Request.getResponse({
+      const res = await Request.getResponse({
         url: '/api/projects?status=active&limit=20',
         method: 'GET',
       })
 
-      if (res?.data?.projects) {
-        setProjects(res.data.projects)
+      const data = res?.data as { projects?: IDonationProject[] }
+      if (data?.projects) {
+        setProjects(data.projects)
       }
     } catch (error) {
       console.error('Failed to fetch projects:', error)
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -87,13 +115,12 @@ const DonatePage: React.FC = () => {
 
     // Update URL query parameter
     const newUrl = projectId === 'general' ? '/donate' : `/donate?project=${projectId}`
-
     router.push(newUrl, { scroll: false })
   }
 
   const getDonationAmount = (): number => {
     if (customAmount) {
-      return parseInt(customAmount)
+      return parseInt(customAmount) || 0
     }
     return selectedAmount || 0
   }
@@ -117,7 +144,7 @@ const DonatePage: React.FC = () => {
     }
 
     try {
-      const res: IResponse = await Request.getResponse({
+      const res = await Request.getResponse({
         url: '/api/donations',
         method: 'POST',
         postData: {
@@ -134,11 +161,12 @@ const DonatePage: React.FC = () => {
         },
       })
 
-      if (res?.data?.success) {
+      const data = res?.data as { success?: boolean; donationId?: string; error?: string }
+      if (data?.success) {
         // Redirect to payment page
-        window.location.href = `/payment/${res.data.donationId}`
+        window.location.href = `/payment/${data.donationId}`
       } else {
-        alert(res?.data?.error || 'Failed to process donation')
+        alert(data?.error || 'Failed to process donation')
       }
     } catch (error) {
       console.error('Donation error:', error)
@@ -161,7 +189,7 @@ const DonatePage: React.FC = () => {
   }
 
   return (
-    <Master>
+    <>
       <ScrollAnimations />
 
       {/* Hero Section */}
@@ -535,6 +563,17 @@ const DonatePage: React.FC = () => {
           </div>
         </div>
       </section>
+    </>
+  )
+}
+
+// Main page component with Suspense wrapper
+const DonatePage: React.FC = () => {
+  return (
+    <Master>
+      <Suspense fallback={<DonateLoading />}>
+        <DonateContent />
+      </Suspense>
     </Master>
   )
 }
