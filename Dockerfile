@@ -27,6 +27,6 @@ COPY --from=builder /app/next.config.mjs ./next.config.mjs
 COPY --from=builder /app/.env ./.env
 COPY --from=builder /app/prisma ./prisma
 
-EXPOSE 3000
+EXPOSE 8080
 
 CMD ["npm", "start"]
