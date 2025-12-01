@@ -1,4 +1,3 @@
-
 # ===============================================
 # Stage 1: Builder
 # ===============================================
@@ -53,9 +52,6 @@ COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/next.config.mjs ./next.config.mjs
 COPY --from=builder /app/prisma ./prisma
-
-# Copy .env if it exists (be careful with secrets in production!)
-COPY --from=builder /app/.env* ./
 
 EXPOSE 8080
 
