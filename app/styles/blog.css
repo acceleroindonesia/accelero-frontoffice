@@ -1112,6 +1112,8 @@
   font-size: 1rem;
   transition: all 0.3s ease;
   background: #f8fafc;
+  display: inline-block;
+  box-sizing: border-box;
 }
 
 .search-field:focus {
@@ -1454,6 +1456,8 @@
   border-radius: 12px;
   font-size: 1rem;
   width: 100%;
+  display: inline-block;
+  box-sizing: border-box;
 }
 
 .newsletter-submit {

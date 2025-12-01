@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useLanguage } from '@contexts/LanguageContext'
 
 const HeroSection: React.FC = () => {
@@ -12,17 +13,32 @@ const HeroSection: React.FC = () => {
     {
       title: t('heroTitle1'),
       subtitle: t('heroSubtitle1'),
-      image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&h=900&fit=crop',
+      image: '/banner/IMG_2412.jpg',
     },
     {
       title: t('heroTitle2'),
       subtitle: t('heroSubtitle2'),
-      image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1600&h=900&fit=crop',
+      image: '/banner/IMG_2423.jpg',
     },
     {
       title: t('heroTitle3'),
       subtitle: t('heroSubtitle3'),
-      image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&h=900&fit=crop',
+      image: '/banner/IMG_4241.jpg',
+    },
+    {
+      title: t('heroTitle1'),
+      subtitle: t('heroSubtitle1'),
+      image: '/banner/IMG_4244.jpg',
+    },
+    {
+      title: t('heroTitle2'),
+      subtitle: t('heroSubtitle2'),
+      image: '/banner/IMG_4371.jpg',
+    },
+    {
+      title: t('heroTitle3'),
+      subtitle: t('heroSubtitle3'),
+      image: '/banner/IMG_4411.jpg',
     },
   ]
 
@@ -47,7 +63,6 @@ const HeroSection: React.FC = () => {
           </div>
         ))}
       </div>
-
       {/* Content */}
       <div className="hero-container">
         <div className="hero-content-wrapper">
