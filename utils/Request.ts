@@ -32,7 +32,12 @@ const createAuth = base64.encode(`${auth.username}:${auth.password}`)
  * @return {string} The base URL for API requests.
  */
 const buildUrl = (): string => {
-  return process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000'
+  // For client-side: use window.__ENV or empty string (relative URL)
+  if (typeof window !== 'undefined') {
+    return (window as any).__NEXT_PUBLIC_API_BASE_URL || ''
+  }
+  // For server-side: read from process.env
+  return process.env.NEXT_PUBLIC_API_BASE_URL || ''
 }
 
 /**
