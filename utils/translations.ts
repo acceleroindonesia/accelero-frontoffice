@@ -103,7 +103,6 @@ export const translations = {
     flexibleScheduleDesc: 'Online or on-site, full-time or part-time',
     fullTraining: 'Full Training',
     fullTrainingDesc: 'Complete onboarding and ongoing support',
-    meaningfulImpact: 'Meaningful Impact',
     meaningfulImpactDesc2: 'See the direct results of your work',
     applyToVolunteer: 'Apply to Volunteer',
     corporatePartnerships: 'Corporate Partnerships',
@@ -129,41 +128,91 @@ export const translations = {
       'Join leading organizations committed to transforming education and empowering communities. Together, we can amplify your social impact and create sustainable change.',
     strategicAlignment: 'Strategic Alignment',
     strategicAlignmentDesc: 'Partnerships tailored to your CSR goals',
-    transparentReporting: 'Transparent Reporting',
-    transparentReportingDesc: 'Detailed impact metrics and regular updates',
     globalReach: 'Global Reach',
     globalReachDesc: 'Programs across multiple communities',
-    becomeAPartner: 'Become a Partner',
     learnAboutUs: 'Learn About Us',
     partnershipImpact: 'Partnership Impact',
     buildingStrongerCommunities: 'Building stronger communities together',
     activePartners: 'Active Partners',
     jointFunding: 'Joint Funding',
     livesImpacted: 'Lives Impacted',
-    partnershipOpportunities: 'Partnership Opportunities',
-    corporatePartnership: 'Corporate Partnership',
-    corporatePartnershipDesc: 'Strategic CSR initiatives',
-    foundationPartnership: 'Foundation Partnership',
-    foundationPartnershipDesc: 'Grant-making collaboration',
     ngoPartnership: 'NGO Partnership',
     ngoPartnershipDesc: 'Resource sharing programs',
     available: 'Available',
     trustedBy: 'Trusted By',
 
     // Partnership Page
-    partnershipHeroTitle: 'Partner With Us',
+    partnershipHeroTitle: 'Partner With Accelero',
     partnershipHeroSubtitle:
-      'Join forces to create lasting impact and transform communities together',
+      'Together, we can expand access to quality education for thousands of students across Indonesia.',
+    becomeAPartner: 'Become a Partner',
+
+    // Why Partner
     whyPartner: 'Why Partner With Accelero?',
+    meaningfulImpact: 'Meaningful & Measurable Impact',
     meaningfulImpactDesc:
-      'Create real change by supporting programs that directly improve lives in underserved communities',
-    globalReachDesc2:
-      'Expand your social impact footprint across multiple regions and communities worldwide',
-    transparentReportingDesc2:
-      'Receive detailed reports on your partnership impact with measurable outcomes and metrics',
-    brandVisibility: 'Brand Visibility',
+      'Support proven programs that improve literacy, numeracy, and learning environments in underserved schools.',
+    transparentReporting: 'Transparent Reporting',
+    transparentReportingDesc:
+      'Receive comprehensive reports with photos, data, progress metrics, and final outcomes.',
+    accessToSchools: 'Access to School Communities',
+    accessToSchoolsDesc:
+      'Our programs operate across multiple regions, reaching schools with the greatest needs.',
+    brandVisibility: 'Brand Visibility & CSR Strengthening',
     brandVisibilityDesc:
-      'Enhance your corporate social responsibility profile through strategic collaboration',
+      'Enhance your corporate social responsibility profile through strategic, impactful collaboration.',
+
+    // Partnership Opportunities
+    partnershipOpportunities: 'Partnership Opportunities',
+
+    // Corporate Partnership
+    corporatePartnership: 'Corporate Partnership (CSR / Employee Engagement)',
+
+    // University Partnership
+    universityPartnership: 'University Partnership',
+    universityPartnershipDesc:
+      'Ideal for institutions implementing community service, internships, and research collaborations.',
+    universityFeature1: 'Community service programs',
+    universityFeature2: 'On-field student volunteering',
+    universityFeature3: 'Education-focused research collaboration',
+    universityFeature4: 'Scholarship support for teachers or schools',
+
+    // Foundation Partnership
+    foundationPartnership: 'Foundation Partnership',
+    foundationPartnershipDesc: 'Work with us to scale your grant-making impact.',
+    foundationFeature1: 'Co-funding educational programs',
+    foundationFeature2: 'Program design & development',
+    foundationFeature3: 'Long-term impact measurement',
+    foundationFeature4: 'Regional expansion',
+
+    // NGO Partnership
+    ngoFeature1: 'Joint programs',
+    ngoFeature2: 'Resource and expertise sharing',
+    ngoFeature3: 'Community mobilization',
+    ngoFeature4: 'Equitable access initiatives',
+
+    // Partnership Success Stories
+    partnershipSuccessStories: 'Partnership Success Stories',
+    dPrizeQuote:
+      '"Congratulations to D-Prize winner, Accelero Indonesia! Led by Catherine Tikara and Kevin Evannanda Septian, Accelero delivers the Teaching at the Right Level (TaRL) approach through after-school programs in rural primary schools… Through their partnership with local universities, they recruit and train student volunteers, providing them with hands-on teaching experience while empowering them to serve their communities. At the end of its pilot, Accelero would have reached 200+ learners."',
+    dPrizeAttribution: '— D-Prize',
+
+    // How Partnership Works
+    howPartnershipWorks: 'How Partnership Works',
+    initialConsultation: 'Initial Consultation',
+    initialConsultationDesc: 'We explore your goals, values, and desired areas of impact.',
+    customizedProposal: 'Customized Proposal',
+    customizedProposalDesc:
+      'You receive a tailored proposal outlining objectives, activities, timeline, and budget.',
+    implementation: 'Implementation',
+    impactReporting: 'Impact Reporting',
+    impactReportingDesc: 'You receive transparent, data-driven updates at every stage.',
+
+    // CTA
+    readyToCreateImpact: 'Ready to Create Impact Together?',
+    readyToCreateImpactDesc:
+      "Let's explore how we can collaborate to build lasting educational change.",
+    startConversation: 'Start a Conversation',
 
     // Partnership Types
     corporatePartnershipFull:
@@ -174,44 +223,19 @@ export const translations = {
     corporateFeature4: 'Cause marketing opportunities',
     foundationPartnershipFull:
       'Collaborate with foundations to amplify grant-making impact and reach more communities',
-    foundationFeature1: 'Joint funding initiatives',
-    foundationFeature2: 'Program development',
-    foundationFeature3: 'Research collaboration',
-    foundationFeature4: 'Impact measurement',
     ngoPartnershipFull:
       'Partner with other nonprofits to combine resources and expertise for greater impact',
-    ngoFeature1: 'Resource sharing',
-    ngoFeature2: 'Joint programs',
-    ngoFeature3: 'Knowledge exchange',
-    ngoFeature4: 'Network expansion',
 
     // Partnership Stories
-    partnershipSuccessStories: 'Partnership Success Stories',
     studentsTrained: 'Students Trained',
     communities: 'Communities',
     familiesHelped: 'Families Helped',
     yieldIncrease: 'Yield Increase',
 
-    // Partnership Process
-    howPartnershipWorks: 'How Partnership Works',
-    initialConsultation: 'Initial Consultation',
-    initialConsultationDesc:
-      'We discuss your goals, values, and desired impact areas to find the perfect alignment',
-    customizedProposal: 'Customized Proposal',
-    customizedProposalDesc:
-      'Receive a tailored partnership proposal outlining objectives, activities, and expected outcomes',
-    implementation: 'Implementation',
-    implementationDesc:
-      'Launch collaborative programs with dedicated support and regular communication',
-    impactReporting: 'Impact Reporting',
-    impactReportingDesc:
-      'Receive comprehensive reports showcasing the measurable impact of your partnership',
-
     // CTA
     readyToMakeDifference: 'Ready to Make a Difference Together?',
     readyToMakeDifferenceDesc:
       "Let's explore how we can partner to create meaningful and lasting impact in communities around the world.",
-    startConversation: 'Start a Conversation',
     supportSchool: 'Support schools and students who need it most',
     featuredPrograms: 'Featured Programs',
     ourPrograms: 'Our Programs',
@@ -221,7 +245,7 @@ export const translations = {
     // Projects Page
     makeADifferenceToday: 'Make a Difference Today',
     browseOurPrograms:
-      'Browse our programs and support schools and students who need it most. Every donation is tracked transparently and makes a real impact.',
+      "Explore our programs and help partner schools build learning environments that strengthen children's foundational skills. Every donation is transparently recorded—and directly supports better learning spaces, relevant books, and facilities that nurture a strong reading culture.",
     activePrograms: 'Active Programs',
     totalRaised: 'Total Raised',
     searchPrograms: 'Search programs...',
@@ -252,67 +276,132 @@ export const translations = {
     contactUs: 'Contact Us',
     wantToMakeEvenBiggerImpact: 'Want to Make an Even Bigger Impact?',
     supportGeneralFundDesc:
-      "Support our general fund to help us allocate resources where they're needed most across all our programs.",
+      'Support our General Education Fund to help expand the TaRL After School Program across more partner schools.',
+
+    // Project Detail Page
+    aboutThisProgram: 'About This Program',
+    theChallenge: 'The Challenge',
+    whyThisMatters: 'Why This Matters',
+    ourApproachProject: 'Our Approach',
+    expectedImpact: 'Expected Impact',
+    aboutTheSchool: 'About the School',
+    overview: 'Overview',
+    updates: 'Updates',
+    budgetBreakdown: 'Budget Breakdown',
+    timeline: 'Timeline',
+    totalBudget: 'Total Budget',
+    ofTotalBudget: 'of total budget',
+    noUpdatesYet: 'No Updates Yet',
+    noUpdatesDesc: 'Check back soon for progress updates on this program',
+    budgetComingSoon: 'Budget Details Coming Soon',
+    budgetComingSoonDesc: 'Detailed budget breakdown will be available shortly',
+    timelineComingSoon: 'Timeline Coming Soon',
+    timelineComingSoonDesc: 'Program milestones will be added as the project progresses',
+    raised: 'Raised',
+    goal: 'Goal',
+    funded: 'funded',
+    stillNeeded: 'still needed',
+    donors: 'Donors',
+    volunteers: 'Volunteers',
+    shareThisProject: 'Share This Project',
+    projectCompleted: 'Project Completed',
+    secureTransparentDonations: 'Secure & transparent donations',
+    yourImpact: 'Your Impact',
+    seeHowDonationHelps: 'See how your donation helps:',
+    providesReadingBooks: 'Provides 10 reading books',
+    supportsStudentsMonth: 'Supports 5 students for 1 month',
+    trainsTeacher: 'Trains 1 teacher in TaRL method',
+    otherPrograms: 'Other Programs You Might Like',
+    principal: 'Principal',
+    totalStudents: 'Total Students',
+    established: 'Established',
+    studentsWillBenefit: 'students will benefit',
+    toGo: 'to go',
 
     // Impact Page
-    measuringOurImpact: 'Measuring Our Impact',
-    transparentAccountable: 'Transparent, Accountable, and Results-Driven',
+    measuringOurImpact: 'Our Impact',
     impactPageDesc:
-      'Every donation creates real change. See how your support transforms lives and communities across Indonesia through measurable results and transparent reporting.',
-    impactByNumbers: 'Impact By Numbers',
-    totalStudentsReached: 'Total Students Reached',
-    schoolsTransformed: 'Schools Transformed',
-    teachersEmpowered: 'Teachers Empowered',
-    communitiesServed: 'Communities Served',
-    successStories: 'Success Stories',
-    realPeopleRealChange: 'Real People, Real Change',
-    readFullStory: 'Read Full Story',
-    ourApproach: 'Our Approach',
-    howWeCreateImpact: 'How We Create Lasting Impact',
-    dataCollection: 'Data Collection',
-    dataCollectionDesc: 'Comprehensive baseline and ongoing assessments',
-    intervention: 'Intervention',
-    interventionDesc: 'Evidence-based TaRL programs tailored to student needs',
-    monitoring: 'Monitoring',
-    monitoringDesc: 'Regular progress tracking and adjustment',
-    evaluation: 'Evaluation',
-    evaluationDesc: 'Rigorous impact measurement and reporting',
-    impactAcrossRegions: 'Impact Across Regions',
-    whereWeWork: 'Where We Work',
-    programDistribution: 'Program Distribution',
-    literacyPrograms: 'Literacy Programs',
-    numeracyPrograms: 'Numeracy Programs',
-    teacherTrainingPrograms: 'Teacher Training',
-    infrastructureProjects: 'Infrastructure',
-    studentOutcomes: 'Student Outcomes',
-    measuredResults: 'Measured Results',
-    literacyImprovement: 'Literacy Improvement',
-    numeracyImprovement: 'Numeracy Improvement',
-    attendanceIncrease: 'Attendance Increase',
-    parentSatisfaction: 'Parent Satisfaction',
-    sustainableChange: 'Sustainable Change',
-    longTermImpact: 'Long-Term Impact',
-    sustainabilityDesc:
-      'Our programs are designed for lasting impact. We work with local communities to ensure sustainable change that continues long after initial implementation.',
-    communityOwnership: 'Community Ownership',
-    communityOwnershipDesc: 'Local stakeholders lead initiatives',
-    capacityBuilding: 'Capacity Building',
-    capacityBuildingDesc: 'Continuous training and support',
-    governmentPartnership: 'Government Partnership',
-    governmentPartnershipDesc: 'Aligned with national education goals',
-    scalableModel: 'Scalable Model',
-    scalableModelDesc: 'Proven approach ready for expansion',
-    getInvolvedInImpact: 'Get Involved In Our Impact',
-    helpUsReachMore: 'Help Us Reach More Students',
-    getInvolvedDesc:
-      'Your support enables us to expand our proven programs to more schools and communities. Join us in creating lasting educational change.',
-    donateToday: 'Donate Today',
-    becomePartner: 'Become a Partner',
-    downloadImpactReport: 'Download Impact Report',
+      "In the early phase of implementation, 216 students have already benefited from Accelero's learning support—and the number continues to grow.",
+    transparentAccountable: 'Transparent, Accountable, and Results-Driven',
+    impactByNumbers: 'Numbers That Tell the Story',
+    totalStudentsReached: 'Students Reached',
+    totalStudentsReachedDesc: 'Receiving literacy and numeracy support through the TaRL approach.',
+    schoolsTransformed: 'Schools Supported',
+    schoolsTransformedDesc:
+      'Receiving improved learning facilities and after-school learning programs.',
+    teachersEmpowered: 'Teachers Trained',
+    teachersEmpoweredDesc:
+      'Equipped with the TaRL methodology to strengthen classroom learning quality.',
+    communitiesServed: 'Region Reached',
+    communitiesServedDesc:
+      'Launching community-driven education initiatives in Sorong, Southwest Papua.',
+    booksDistributedImpact: 'Books Distributed',
+    booksDistributedImpactDesc:
+      'Providing engaging, level-appropriate reading materials for schools without libraries.',
+    fundsRaisedImpact: 'IDR 285 Million Raised',
+    fundsRaisedImpactDesc: 'Directly invested into improving learning outcomes for children.',
 
-    // Partnership Page
-    heroTitle: 'Partner With Us',
-    heroSubtitle: 'Join forces to create lasting impact and transform communities together',
+    // Impact Focus Areas
+    whereWeCreateImpact: 'Where We Create Impact',
+    focusAreasDesc: 'Focusing on the most urgent areas of educational development',
+    literacyDevelopment: 'Literacy Development',
+    literacyDevelopmentDesc: 'Helping students build reading foundations through TaRL',
+    literacyStudentsCount: '850+ students showing reading improvement',
+    numeracySkills: 'Numeracy Skills',
+    numeracySkillsDesc: 'Supporting early math skills through interactive, game-based learning',
+    numeracyStudentsCount: '360+ students building confidence in math',
+    teacherTrainingImpact: 'Teacher Training',
+    teacherTrainingImpactDesc: 'Empowering educators with modern instructional methods',
+    teacherTrainingCount: '30+ teachers trained in TaRL',
+    infrastructureImprovement: 'Infrastructure Improvement',
+    infrastructureImprovementDesc: 'Building safe and inspiring learning environments',
+    infrastructureStudentsCount: '300+ students benefiting from improved facilities',
+
+    // Communities Section
+    communitiesWeServe: 'Communities We Serve',
+    communitiesWeServeDesc: 'Reaching schools with the greatest need for support',
+    papuaWestPapua: 'Papua & West Papua',
+    studentsCount: 'students',
+    schoolsCount: 'schools',
+
+    // Stories of Change
+    storiesOfChange: 'Stories of Change',
+    storiesOfChangeDesc: 'Real transformations from real people',
+    parentTestimonial:
+      '"After just three months, my daughter went from struggling with basic words to reading full sentences. She now reads bedtime stories to her younger brother."',
+    parentName: '— Sari, Parent, SD Inpres 01 Sorong',
+    teacherTestimonial:
+      '"TaRL training changed everything. I now focus on meeting students at their level instead of rushing through the syllabus."',
+    teacherName: '— Ahmad, Teacher, SDN 05 Jakarta Selatan',
+    principalTestimonial:
+      '"Our new reading room has become the most loved space at school. Students come early just to read. It feels magical."',
+    principalName: '— Sister Maria, Principal, SD Katolik Ende',
+
+    // How We Measure
+    howWeMeasureImpact: 'How We Measure Impact',
+    howWeMeasureDesc: 'Every program includes transparent, evidence-based evaluation',
+    baselineAssessments: 'Baseline Assessments',
+    baselineAssessmentsDesc: 'Measuring where students start',
+    ongoingTracking: 'Ongoing Tracking',
+    ongoingTrackingDesc: 'Weekly & monthly evaluations',
+    finalAssessment: 'Final Assessment',
+    finalAssessmentDesc: 'End-of-program learning outcomes',
+    transparentReportingImpact: 'Transparent Reporting',
+    transparentReportingImpactDesc: 'Donors receive full impact reports',
+
+    // Learning Gains
+    averageLearningGains: 'Average Learning Gains',
+    literacyGain: 'Literacy',
+    numeracyGain: 'Numeracy',
+    confidenceGain: 'Confidence',
+    learningBenchmarkDesc: 'Percentage of students reaching age-appropriate learning benchmarks',
+
+    // CTA
+    bePartOfImpact: 'Be Part of Our Impact',
+    bePartOfImpactDesc:
+      'Every contribution creates long-term change for students across Indonesia.',
+    makeADonation: 'Make a Donation',
+    browsePrograms: 'Browse Programs',
 
     // Volunteer Page
     volunteerHeroTitle: 'Become a Volunteer',
@@ -530,7 +619,6 @@ export const translations = {
     joinOurMission: 'Join Our Mission',
     joinOurMissionDesc:
       'Whether through volunteering, donating, or partnering—there are many ways to support educational equity in Indonesia.',
-    makeADonation: 'Make a Donation',
     viewOurPrograms: 'View Our Programs',
 
     // Blog Page
@@ -662,7 +750,6 @@ export const translations = {
     flexibleScheduleDesc: 'Online atau di lokasi, penuh waktu atau paruh waktu',
     fullTraining: 'Pelatihan Lengkap',
     fullTrainingDesc: 'Orientasi lengkap dan dukungan berkelanjutan',
-    meaningfulImpact: 'Dampak yang Berarti',
     meaningfulImpactDesc2: 'Lihat hasil langsung dari pekerjaan Anda',
     applyToVolunteer: 'Daftar Jadi Relawan',
     corporatePartnerships: 'Kemitraan Korporat',
@@ -688,8 +775,6 @@ export const translations = {
       'Bergabunglah dengan organisasi terkemuka yang berkomitmen untuk mentransformasi pendidikan dan memberdayakan komunitas. Bersama-sama, kita dapat memperkuat dampak sosial Anda dan menciptakan perubahan yang berkelanjutan.',
     strategicAlignment: 'Keselarasan Strategis',
     strategicAlignmentDesc: 'Kemitraan yang disesuaikan dengan tujuan CSR Anda',
-    transparentReporting: 'Pelaporan Transparan',
-    transparentReportingDesc: 'Metrik dampak terperinci dan pembaruan berkala',
     globalReach: 'Jangkauan Global',
     globalReachDesc: 'Program di berbagai komunitas',
     becomeAPartner: 'Jadi Mitra',
@@ -703,7 +788,6 @@ export const translations = {
     corporatePartnership: 'Kemitraan Korporat',
     corporatePartnershipDesc: 'Inisiatif CSR strategis',
     foundationPartnership: 'Kemitraan Yayasan',
-    foundationPartnershipDesc: 'Kolaborasi pemberian hibah',
     ngoPartnership: 'Kemitraan NGO',
     ngoPartnershipDesc: 'Program berbagi sumber daya',
     available: 'Tersedia',
@@ -778,9 +862,9 @@ export const translations = {
     viewImpact: 'Lihat Dampak',
 
     // Projects Page
-    makeADifferenceToday: 'Buat Perbedaan Hari Ini',
+    makeADifferenceToday: 'Mari Wujudkan Perubahan Hari Ini',
     browseOurPrograms:
-      'Jelajahi program kami dan dukung sekolah serta siswa yang paling membutuhkannya. Setiap donasi dilacak secara transparan dan membuat dampak nyata.',
+      'Jelajahi program kami dan bantu sekolah mitra menciptakan lingkungan belajar yang mendukung kemampuan dasar anak. Setiap donasi digunakan secara transparan—dan langsung membantu menyediakan ruang belajar yang lebih layak, buku yang relevan, serta fasilitas yang mendukung budaya membaca di sekolah.',
     activePrograms: 'Program Aktif',
     totalRaised: 'Total Terkumpul',
     searchPrograms: 'Cari program...',
@@ -809,84 +893,133 @@ export const translations = {
       'Buat donasi umum ke dana kami dan kami akan mengalokasikannya ke program yang paling membutuhkannya.',
     donateToGeneralFund: 'Donasi ke Dana Umum',
     contactUs: 'Hubungi Kami',
-    wantToMakeEvenBiggerImpact: 'Ingin Membuat Dampak yang Lebih Besar?',
+    wantToMakeEvenBiggerImpact: 'Ingin Memberi Dampak yang Lebih Besar?',
     supportGeneralFundDesc:
-      'Dukung dana umum kami untuk membantu kami mengalokasikan sumber daya di mana mereka paling dibutuhkan di semua program kami.',
+      'Dukung Dana Pendidikan Umum kami untuk memastikan Program TaRL After School dapat berjalan di lebih banyak sekolah mitra.',
+
+    // Project Detail Page
+    aboutThisProgram: 'Tentang Program Ini',
+    theChallenge: 'Tantangan yang Dihadapi',
+    whyThisMatters: 'Mengapa Ini Penting',
+    ourApproachProject: 'Pendekatan Kami',
+    expectedImpact: 'Dampak yang Diharapkan',
+    aboutTheSchool: 'Tentang Sekolah',
+    overview: 'Ringkasan',
+    updates: 'Pembaruan',
+    budgetBreakdown: 'Rincian Anggaran',
+    timeline: 'Jadwal',
+    totalBudget: 'Total Anggaran',
+    ofTotalBudget: 'dari total anggaran',
+    noUpdatesYet: 'Belum Ada Pembaruan',
+    noUpdatesDesc: 'Periksa kembali untuk pembaruan progres program ini',
+    budgetComingSoon: 'Detail Anggaran Segera Hadir',
+    budgetComingSoonDesc: 'Rincian anggaran terperinci akan segera tersedia',
+    timelineComingSoon: 'Jadwal Segera Hadir',
+    timelineComingSoonDesc: 'Milestone program akan ditambahkan seiring berjalannya proyek',
+    raised: 'Terkumpul',
+    goal: 'Target',
+    funded: 'terdanai',
+    stillNeeded: 'lagi untuk tercapai',
+    donors: 'Donatur',
+    volunteers: 'Relawan',
+    shareThisProject: 'Bagikan Proyek Ini',
+    projectCompleted: 'Proyek Selesai',
+    secureTransparentDonations: 'Donasi aman & transparan',
+    yourImpact: 'Dampak Anda',
+    seeHowDonationHelps: 'Lihat bagaimana donasi Anda membantu:',
+    providesReadingBooks: 'Menyediakan 10 buku bacaan',
+    supportsStudentsMonth: 'Mendukung 5 siswa selama 1 bulan',
+    trainsTeacher: 'Melatih 1 guru dengan metode TaRL',
+    otherPrograms: 'Program Lain yang Mungkin Anda Suka',
+    principal: 'Kepala Sekolah',
+    totalStudents: 'Jumlah Siswa',
+    established: 'Tahun Berdiri',
+    studentsWillBenefit: 'siswa akan terbantu',
+    toGo: 'lagi untuk tercapai',
 
     // Impact Page
-    measuringOurImpact: 'Mengukur Dampak Kami',
-    transparentAccountable: 'Transparan, Bertanggung Jawab, dan Berorientasi Hasil',
+    measuringOurImpact: 'Dampak Kami',
     impactPageDesc:
-      'Setiap donasi menciptakan perubahan nyata. Lihat bagaimana dukungan Anda mengubah kehidupan dan komunitas di seluruh Indonesia melalui hasil terukur dan pelaporan transparan.',
-    impactByNumbers: 'Dampak dalam Angka',
-    totalStudentsReached: 'Total Siswa Terjangkau',
-    schoolsTransformed: 'Sekolah Bertransformasi',
-    teachersEmpowered: 'Guru Diberdayakan',
-    communitiesServed: 'Komunitas Terlayani',
-    successStories: 'Kisah Sukses',
-    realPeopleRealChange: 'Orang Nyata, Perubahan Nyata',
-    readFullStory: 'Baca Kisah Lengkap',
-    ourApproach: 'Pendekatan Kami',
-    howWeCreateImpact: 'Bagaimana Kami Menciptakan Dampak Berkelanjutan',
-    dataCollection: 'Pengumpulan Data',
-    dataCollectionDesc: 'Penilaian baseline komprehensif dan berkelanjutan',
-    intervention: 'Intervensi',
-    interventionDesc: 'Program TaRL berbasis bukti yang disesuaikan dengan kebutuhan siswa',
-    monitoring: 'Pemantauan',
-    monitoringDesc: 'Pelacakan progres reguler dan penyesuaian',
-    evaluation: 'Evaluasi',
-    evaluationDesc: 'Pengukuran dampak dan pelaporan yang ketat',
-    impactAcrossRegions: 'Dampak di Berbagai Wilayah',
-    whereWeWork: 'Dimana Kami Bekerja',
-    programDistribution: 'Distribusi Program',
-    literacyPrograms: 'Program Literasi',
-    numeracyPrograms: 'Program Numerasi',
-    teacherTrainingPrograms: 'Pelatihan Guru',
-    infrastructureProjects: 'Infrastruktur',
-    studentOutcomes: 'Hasil Siswa',
-    measuredResults: 'Hasil Terukur',
-    literacyImprovement: 'Peningkatan Literasi',
-    numeracyImprovement: 'Peningkatan Numerasi',
-    attendanceIncrease: 'Peningkatan Kehadiran',
-    parentSatisfaction: 'Kepuasan Orang Tua',
-    sustainableChange: 'Perubahan Berkelanjutan',
-    longTermImpact: 'Dampak Jangka Panjang',
-    sustainabilityDesc:
-      'Program kami dirancang untuk dampak berkelanjutan. Kami bekerja dengan komunitas lokal untuk memastikan perubahan berkelanjutan yang terus berlanjut lama setelah implementasi awal.',
-    communityOwnership: 'Kepemilikan Komunitas',
-    communityOwnershipDesc: 'Pemangku kepentingan lokal memimpin inisiatif',
-    capacityBuilding: 'Pengembangan Kapasitas',
-    capacityBuildingDesc: 'Pelatihan dan dukungan berkelanjutan',
-    governmentPartnership: 'Kemitraan Pemerintah',
-    governmentPartnershipDesc: 'Selaras dengan tujuan pendidikan nasional',
-    scalableModel: 'Model yang Dapat Diperluas',
-    scalableModelDesc: 'Pendekatan terbukti siap untuk ekspansi',
-    getInvolvedInImpact: 'Terlibat dalam Dampak Kami',
-    helpUsReachMore: 'Bantu Kami Menjangkau Lebih Banyak Siswa',
-    getInvolvedDesc:
-      'Dukungan Anda memungkinkan kami untuk memperluas program terbukti kami ke lebih banyak sekolah dan komunitas. Bergabunglah dengan kami dalam menciptakan perubahan pendidikan yang berkelanjutan.',
-    donateToday: 'Donasi Hari Ini',
-    becomePartner: 'Jadi Mitra',
-    downloadImpactReport: 'Unduh Laporan Dampak',
+      'Dalam periode awal pelaksanaan, 216 siswa telah merasakan manfaat pendampingan belajar Accelero—dan jumlah ini terus bertambah.',
+    transparentAccountable: 'Transparan, Bertanggung Jawab, dan Berorientasi Hasil',
+    impactByNumbers: 'Jejak Dampak Kami',
+    totalStudentsReached: 'Siswa Telah Terbantu',
+    totalStudentsReachedDesc:
+      'Mendapat pendampingan literasi dan numerasi melalui pendekatan TaRL.',
+    schoolsTransformed: 'Sekolah Telah Terbantu',
+    schoolsTransformedDesc: 'Menerima dukungan fasilitas belajar dan program after-school.',
+    teachersEmpowered: 'Guru Telah Dilatih',
+    teachersEmpoweredDesc: 'Menguasai pendekatan TaRL untuk meningkatkan kualitas pembelajaran.',
+    communitiesServed: 'Wilayah Telah Dijangkau',
+    communitiesServedDesc: 'Memulai perubahan berbasis komunitas di Sorong, Papua Barat Daya.',
+    booksDistributedImpact: 'Buku Telah Didistribusikan',
+    booksDistributedImpactDesc: 'Untuk menumbuhkan budaya membaca di sekolah tanpa perpustakaan.',
+    fundsRaisedImpact: 'Rp 285 Juta Dana Terkumpul',
+    fundsRaisedImpactDesc: 'Diinvestasikan untuk peningkatan kualitas belajar anak-anak.',
 
-    // Partnership Page
-    heroTitle: 'Bermitra dengan Kami',
-    heroSubtitle:
-      'Bergabunglah untuk menciptakan dampak berkelanjutan dan mentransformasi komunitas bersama',
+    // Impact Focus Areas
+    whereWeCreateImpact: 'Fokus Dampak Kami',
+    focusAreasDesc: 'Bidang-bidang pendidikan yang paling membutuhkan intervensi',
+    literacyDevelopment: 'Penguatan Literasi',
+    literacyDevelopmentDesc: 'Meningkatkan kemampuan membaca siswa melalui pendekatan TaRL',
+    literacyStudentsCount: '850+ siswa menunjukkan peningkatan kemampuan membaca',
+    numeracySkills: 'Penguatan Numerasi',
+    numeracySkillsDesc:
+      'Membantu siswa memahami konsep dasar matematika melalui aktivitas belajar interaktif',
+    numeracyStudentsCount: '360+ siswa berkembang dalam kemampuan berhitung',
+    teacherTrainingImpact: 'Pelatihan Guru',
+    teacherTrainingImpactDesc:
+      'Membekali guru dengan metode ajar modern untuk dampak jangka panjang',
+    teacherTrainingCount: '20+ guru mendapat pelatihan TaRL',
+    infrastructureImprovement: 'Perbaikan Fasilitas Belajar',
+    infrastructureImprovementDesc: 'Membangun ruang belajar yang layak dan ramah anak',
+    infrastructureStudentsCount: '300+ siswa merasakan manfaat fasilitas baru',
 
-    volunteerHeroTitle: 'Menjadi Relawan',
-    volunteerHeroSubtitle:
-      'Buat perbedaan di komunitas Anda. Bergabunglah dengan tim relawan kami yang berdedikasi dan bantu ciptakan perubahan positif.',
-    whyVolunteer: 'Mengapa Menjadi Relawan?',
-    makeAnImpact: 'Buat Dampak',
-    makeAnImpactDesc: 'Berkontribusi langsung pada proyek bermakna yang mengubah hidup',
-    learnAndGrow: 'Belajar & Berkembang',
-    learnAndGrowDesc: 'Kembangkan keterampilan baru dan dapatkan pengalaman berharga',
-    connect: 'Terhubung',
-    connectDesc:
-      'Bertemu dengan orang-orang yang berpikiran sama dan membangun hubungan yang langgeng',
-    empower: 'Berdayakan',
-    empowerDesc: 'Bantu memberdayakan komunitas untuk mencapai potensi penuh mereka',
+    // Communities Section
+    communitiesWeServe: 'Wilayah Dampak',
+    communitiesWeServeDesc: 'Menjangkau komunitas sekolah yang paling membutuhkan dukungan',
+    papuaWestPapua: 'Papua & Papua Barat',
+    studentsCount: 'siswa',
+    schoolsCount: 'sekolah',
+
+    // Stories of Change
+    storiesOfChange: 'Cerita Perubahan',
+    storiesOfChangeDesc: 'Suara langsung dari mereka yang merasakan dampaknya',
+    parentTestimonial:
+      '"Dalam 3 bulan saja, anak saya yang tadinya kesulitan membaca sekarang bisa membaca cerita sendiri. Setiap malam dia membacakan buku untuk adiknya."',
+    parentName: '— Ibu Sari, Orang Tua Murid SD Inpres 01 Sorong',
+    teacherTestimonial:
+      '"Pelatihan TaRL benar-benar mengubah cara saya mengajar. Saya jadi lebih memahami kebutuhan tiap siswa, bukan hanya mengejar materi."',
+    teacherName: '— Pak Ahmad, Guru SDN 05 Jakarta Selatan',
+    principalTestimonial:
+      '"Ruang baca baru jadi tempat favorit anak-anak. Mereka datang lebih awal hanya untuk membaca. Rasanya seperti mimpi terwujud."',
+    principalName: '— Suster Maria, Kepala Sekolah SD Katolik Ende',
+
+    // How We Measure
+    howWeMeasureImpact: 'Bagaimana Kami Mengukur Dampak',
+    howWeMeasureDesc: 'Setiap program diukur dengan ketat dan transparan',
+    baselineAssessments: 'Baseline Assessment',
+    baselineAssessmentsDesc: 'Pengukuran awal kemampuan siswa',
+    ongoingTracking: 'Pemantauan Berkala',
+    ongoingTrackingDesc: 'Evaluasi mingguan & bulanan untuk memantau perkembangan',
+    finalAssessment: 'Final Assessment',
+    finalAssessmentDesc: 'Penilaian akhir untuk mengukur hasil program',
+    transparentReportingImpact: 'Laporan Transparan',
+    transparentReportingImpactDesc: 'Setiap donatur menerima update lengkap',
+
+    // Learning Gains
+    averageLearningGains: 'Rata-Rata Peningkatan Belajar',
+    literacyGain: 'Literasi',
+    numeracyGain: 'Numerasi',
+    confidenceGain: 'Kepercayaan Diri',
+    learningBenchmarkDesc: 'Persentase siswa yang mencapai level belajar sesuai usia',
+
+    // CTA
+    bePartOfImpact: 'Jadilah Bagian dari Perubahan',
+    bePartOfImpactDesc:
+      'Setiap donasi menciptakan lingkaran kebaikan bagi masa depan anak-anak Indonesia.',
+    makeADonation: 'Donasi Sekarang',
+    browsePrograms: 'Lihat Program',
 
     // Volunteer Form
     volunteerApplication: 'Aplikasi Relawan',
@@ -1093,7 +1226,6 @@ export const translations = {
     joinOurMission: 'Bergabung dengan Misi Kami',
     joinOurMissionDesc:
       'Baik melalui volunteering, donasi, atau kemitraan—ada banyak cara untuk mendukung kesetaraan pendidikan di Indonesia.',
-    makeADonation: 'Buat Donasi',
     viewOurPrograms: 'Lihat Program Kami',
 
     // Blog Page
