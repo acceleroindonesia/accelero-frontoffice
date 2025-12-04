@@ -28,19 +28,19 @@ export const translations = {
     loading: 'Loading...',
 
     // Hero Section
-    heroTitle1: 'Every Child Deserves the Right to Learn',
-    heroTitle2: 'Building Brighter Futures Together',
-    heroTitle3: 'Teaching at the Right Level Works',
+    heroTitle1: 'Every Child Deserves to Learn at Their Own Pace',
+    heroTitle2: 'Building Strong Learning Foundations for Indonesia’s Future Generation',
+    heroTitle3: 'Helping Children Discover Confidence Through Learning',
     heroSubtitle1:
-      'Transform lives through education. Help us bring quality literacy and numeracy programs to underserved schools across Indonesia.',
+      'Together, we help children in Indonesia read, count, and grow in confidence through the Teaching at the Right Level (TaRL) approach — so no child is left behind.',
     heroSubtitle2:
-      'Join 500+ donors making a real difference. Your support provides books, training, and hope to thousands of students.',
+      'We support children in remote communities by ensuring access to quality foundational learning.',
     heroSubtitle3:
-      '85% improvement in literacy rates. Our proven TaRL methodology meets students where they are and helps them soar.',
+      'Your support accelerates real progress in children’s reading, numeracy, and confidence—especially in underserved areas.',
     heroBadge: 'Transforming Education Since 2020',
     donateNow: 'Donate Now',
     makeImpactToday: 'Make an impact today',
-    viewPrograms: 'View Programs',
+    viewPrograms: 'Explore Our Programs',
     seeWhereWeWork: 'See where we work',
     studentsHelped: 'Students Helped',
     partnerSchools: 'Partner Schools',
@@ -49,16 +49,23 @@ export const translations = {
 
     // Impact Stats
     ourImpact: 'Our Impact',
-    makingRealDifference: 'Making Real Difference',
-    impactStatsDesc: 'Transparent results powered by community support and proven methodologies',
+    makingRealDifference: 'Making a Real Difference',
+    impactStatsDesc:
+      'Real change happens when communities come together.\n' +
+      'Here’s how your support is helping children learn and grow.',
     booksDistributed: 'Books Distributed',
-    booksDistributedDesc: 'Reading materials for every level',
+    booksDistributedDesc: 'Providing engaging, level-based reading materials for every child.',
     teachersTrained: 'Teachers Trained',
-    teachersTrainedDesc: 'Empowering educators with TaRL',
+    teachersTrainedDesc:
+      'Empowering educators with the Teaching at the Right Level (TaRL) approach.',
+    schoolsSupported: 'Schools Supported',
+    schoolsSupportedDesc:
+      'Improving learning environments through materials, resources, and guidance.',
     regionsServed: 'Regions Served',
-    regionsServedDesc: 'Across Eastern Indonesia',
-    totalFunding: 'Total Funding',
-    totalFundingDesc: 'Raised from generous donors',
+    regionsServedDesc: 'Starting meaningful educational efforts through local partnerships.',
+    totalFunding: 'Total Funding Raised',
+    totalFundingDesc:
+      'Thanks to generous donors and partners who believe in equal learning opportunities.',
     annualGoalProgress: '2025 Annual Goal Progress',
     annualGoalProgressDesc: 'Reaching 5,000 students by end of year',
     studentsReached: 'students reached',
@@ -673,19 +680,19 @@ export const translations = {
     loading: 'Memuat...',
 
     // Hero Section
-    heroTitle1: 'Setiap Anak Berhak Mendapatkan Pendidikan',
-    heroTitle2: 'Membangun Masa Depan yang Lebih Cerah Bersama',
-    heroTitle3: 'Mengajar Sesuai Tingkat Kemampuan Siswa',
+    heroTitle1: 'Setiap Anak Berhak Belajar Sesuai Kemampuannya',
+    heroTitle2: 'Membangun Pondasi Belajar yang Kuat untuk Masa Depan Anak Indonesia',
+    heroTitle3: 'Membantu Anak Menemukan Kepercayaan Diri Melalui Belajar',
     heroSubtitle1:
-      'Transformasikan kehidupan melalui pendidikan. Bantu kami menghadirkan program literasi dan numerasi berkualitas ke sekolah-sekolah kurang mampu di seluruh Indonesia.',
+      'Bersama, kita bantu anak-anak Indonesia membaca, berhitung, dan percaya diri melalui program Teaching at the Right Level (TaRL) — agar tak ada lagi yang tertinggal di kelas.',
     heroSubtitle2:
-      'Bergabunglah dengan 500+ donatur yang membuat perbedaan nyata. Dukungan Anda menyediakan buku, pelatihan, dan harapan bagi ribuan siswa.',
+      'Kami mendampingi anak-anak di daerah terpencil agar tetap memiliki akses pada pembelajaran dasar yang berkualitas.',
     heroSubtitle3:
-      'Peningkatan 85% dalam tingkat literasi. Metodologi TaRL kami yang terbukti membantu siswa berkembang sesuai kemampuan mereka.',
+      'Dukungan Anda mempercepat perubahan nyata dalam kemampuan membaca, berhitung, dan kepercayaan diri anak-anak di daerah tertinggal.',
     heroBadge: 'Mentransformasi Pendidikan Sejak 2020',
     donateNow: 'Donasi Sekarang',
     makeImpactToday: 'Buat dampak hari ini',
-    viewPrograms: 'Lihat Program',
+    viewPrograms: 'Lihat Program Kami',
     seeWhereWeWork: 'Lihat lokasi kami',
     studentsHelped: 'Siswa Terbantu',
     partnerSchools: 'Sekolah Mitra',
@@ -694,16 +701,22 @@ export const translations = {
 
     // Impact Stats
     ourImpact: 'Dampak Kami',
-    makingRealDifference: 'Membuat Perbedaan Nyata',
-    impactStatsDesc: 'Hasil transparan didukung oleh komunitas dan metodologi terbukti',
-    booksDistributed: 'Buku Didistribusikan',
-    booksDistributedDesc: 'Materi bacaan untuk setiap tingkat',
-    teachersTrained: 'Guru Terlatih',
-    teachersTrainedDesc: 'Memberdayakan pendidik dengan TaRL',
-    regionsServed: 'Wilayah Terlayani',
-    regionsServedDesc: 'Di seluruh Indonesia Timur',
-    totalFunding: 'Total Pendanaan',
-    totalFundingDesc: 'Terkumpul dari donatur murah hati',
+    makingRealDifference: 'Mewujudkan Perubahan Nyata',
+    impactStatsDesc:
+      'Perubahan besar dimulai dari langkah kecil bersama.\n' +
+      'Inilah hasil nyata dari dukungan Anda bagi anak-anak Indonesia.\n',
+    booksDistributed: 'Buku Telah Didistribusikan',
+    booksDistributedDesc: 'Menyediakan bahan bacaan menarik dan sesuai level untuk setiap anak.',
+    teachersTrained: 'Guru Telah Dilatih',
+    teachersTrainedDesc: 'Membekali pendidik dengan pendekatan Teaching at the Right Level (TaRL).',
+    regionsServed: 'Wilayah Telah Dijangkau',
+    regionsServedDesc: 'Memulai langkah perubahan melalui kolaborasi dengan komunitas lokal.',
+    schoolsSupported: 'Sekolah Telah Terbantu',
+    schoolsSupportedDesc:
+      'Mendukung sekolah dengan fasilitas, materi, dan pendampingan pembelajaran.',
+    totalFunding: 'Juta Dana Terkumpul',
+    totalFundingDesc:
+      'Berkat para donatur dan mitra yang percaya pada kesempatan belajar yang setara.',
     annualGoalProgress: 'Progres Target Tahunan 2025',
     annualGoalProgressDesc: 'Menjangkau 5.000 siswa di akhir tahun',
     studentsReached: 'siswa terjangkau',
@@ -711,12 +724,15 @@ export const translations = {
 
     // How It Works
     simpleTransparent: 'Sederhana & Transparan',
-    howDonationCreatesChange: 'Bagaimana Donasi Anda Menciptakan Perubahan',
+    howDonationCreatesChange: 'Bagaimana Donasi Anda Mengubah Hidup',
     howDonationDesc:
-      'Dari kemurahan hati Anda hingga kesuksesan siswa - setiap langkah dilacak dan transparan',
-    chooseYourImpact: 'Pilih Dampak Anda',
+      'Dari niat baik Anda hingga keberhasilan siswa, setiap langkahnya tercatat dan bisa Anda pantau.',
+    chooseYourImpact: 'Pilih Dampak yang Ingin Anda Ciptakan',
     chooseYourImpactDesc:
-      'Jelajahi sekolah dan program unggulan yang membutuhkan dukungan sekarang',
+      'Telusuri sekolah dan program yang saat ini membutuhkan dukungan Anda.\n' +
+      'Lihat profil sekolah\n' +
+      'Ketahui kebutuhan spesifiknya\n' +
+      'Pantau progres secara langsung',
     chooseDetail1: 'Lihat detail sekolah',
     chooseDetail2: 'Lihat kebutuhan spesifik',
     chooseDetail3: 'Pantau progres langsung',

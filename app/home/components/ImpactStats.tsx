@@ -9,21 +9,21 @@ const ImpactStats: React.FC = () => {
   const stats = [
     {
       icon: '📚',
-      number: '12,500+',
+      number: '120+',
       label: t('booksDistributed'),
       description: t('booksDistributedDesc'),
       color: '#667eea',
     },
     {
       icon: '👨‍🏫',
-      number: '156',
+      number: '20',
       label: t('teachersTrained'),
       description: t('teachersTrainedDesc'),
       color: '#f56565',
     },
     {
       icon: '🌍',
-      number: '8',
+      number: '1',
       label: t('regionsServed'),
       description: t('regionsServedDesc'),
       color: '#48bb78',
@@ -34,6 +34,13 @@ const ImpactStats: React.FC = () => {
       label: t('totalFunding'),
       description: t('totalFundingDesc'),
       color: '#ed8936',
+    },
+    {
+      icon: '🏫',
+      number: '2',
+      label: t('schoolsSupported'),
+      description: t('schoolsSupportedDesc'),
+      color: '#38b2ac',
     },
   ]
 
