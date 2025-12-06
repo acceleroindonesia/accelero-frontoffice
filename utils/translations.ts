@@ -51,9 +51,8 @@ export const translations = {
     ourImpact: 'Our Impact',
     makingRealDifference: 'Making a Real Difference',
     impactStatsDesc:
-      'Real change happens when communities come together.\n' +
-      'Here’s how your support is helping children learn and grow.',
-    booksDistributed: 'Books Distributed',
+      'In the early phase of implementation, 216 students have already benefited from Accelero’s learning support—and the number continues to grow.',
+    booksDistributed: '120+ Books Distributed',
     booksDistributedDesc: 'Providing engaging, level-based reading materials for every child.',
     teachersTrained: 'Teachers Trained',
     teachersTrainedDesc:
@@ -68,31 +67,47 @@ export const translations = {
       'Thanks to generous donors and partners who believe in equal learning opportunities.',
     annualGoalProgress: '2025 Annual Goal Progress',
     annualGoalProgressDesc: 'Reaching 5,000 students by end of year',
-    studentsReached: 'students reached',
+    studentsReached: '216+ Students Reached',
     studentsToGo: 'students to go',
 
     // How It Works
     simpleTransparent: 'Simple & Transparent',
-    howDonationCreatesChange: 'How Your Donation Creates Change',
+    howDonationCreatesChange:
+      'From your generosity to real student success — every step is tracked and shared with you.',
     howDonationDesc:
       'From your generosity to student success - every step is tracked and transparent',
     chooseYourImpact: 'Choose Your Impact',
-    chooseYourImpactDesc: 'Browse featured schools and programs that need support right now',
+    chooseYourImpactDesc:
+      'Browse featured schools and programs that need your support today.\n' +
+      'View school profiles\n' +
+      'See what your donation supports\n' +
+      'Track real-time progress',
     chooseDetail1: 'View school details',
     chooseDetail2: 'See specific needs',
     chooseDetail3: 'Track progress live',
     donateSecurely: 'Donate Securely',
-    donateSecurelyDesc: 'Make a one-time or monthly donation via QRIS or credit card',
+    donateSecurelyDesc:
+      'Give once or monthly — safely through QRIS or credit card.\n' +
+      '100% secure platform\n' +
+      'Add a personal message',
     donateDetail1: '100% secure',
     donateDetail2: 'Tax-deductible',
     donateDetail3: 'Add personal message',
     trackProgress: 'Track Progress',
-    trackProgressDesc: 'Receive regular updates with photos, stories, and measurable results',
+    trackProgressDesc:
+      'Stay connected with transparent updates from the field.\n' +
+      'Monthly impact reports\n' +
+      'Photos and stories from students\n' +
+      'Ongoing progress tracking',
     trackDetail1: 'Monthly reports',
     trackDetail2: 'Student testimonials',
     trackDetail3: 'Photo updates',
     seeResults: 'See Results',
-    seeResultsDesc: 'Watch students achieve milestones and transform their futures',
+    seeResultsDesc:
+      'Watch how your support helps students learn, grow, and thrive.\n' +
+      'Measurable outcomes\n' +
+      'Before-and-after results\n' +
+      'Community-wide impact',
     seeDetail1: 'Success metrics',
     seeDetail2: 'Before & after',
     seeDetail3: 'Community impact',
@@ -132,7 +147,8 @@ export const translations = {
     createLastingImpact: 'Create Lasting Impact',
     getInvolved: 'Get Involved',
     partnershipDesc:
-      'Join leading organizations committed to transforming education and empowering communities. Together, we can amplify your social impact and create sustainable change.',
+      'Collaborate with Accelero Indonesia through CSR or institutional partnerships to improve school facilities, provide level-appropriate learning materials, and ensure every student receives equal learning opportunities.\n' +
+      'Your partnership helps us create fairer and more inclusive education for children across Indonesia.\n',
     strategicAlignment: 'Strategic Alignment',
     strategicAlignmentDesc: 'Partnerships tailored to your CSR goals',
     globalReach: 'Global Reach',
@@ -328,21 +344,21 @@ export const translations = {
     // Impact Page
     measuringOurImpact: 'Our Impact',
     impactPageDesc:
-      "In the early phase of implementation, 216 students have already benefited from Accelero's learning support—and the number continues to grow.",
+      'In the early phase of implementation, 216 students have already benefited from Accelero’s learning support—and the number continues to grow.\n',
     transparentAccountable: 'Transparent, Accountable, and Results-Driven',
     impactByNumbers: 'Numbers That Tell the Story',
-    totalStudentsReached: 'Students Reached',
+    totalStudentsReached: '216+ Students Reached',
     totalStudentsReachedDesc: 'Receiving literacy and numeracy support through the TaRL approach.',
-    schoolsTransformed: 'Schools Supported',
+    schoolsTransformed: '2 Schools Supported',
     schoolsTransformedDesc:
       'Receiving improved learning facilities and after-school learning programs.',
     teachersEmpowered: 'Teachers Trained',
     teachersEmpoweredDesc:
       'Equipped with the TaRL methodology to strengthen classroom learning quality.',
-    communitiesServed: 'Region Reached',
+    communitiesServed: '1 Region Reached',
     communitiesServedDesc:
       'Launching community-driven education initiatives in Sorong, Southwest Papua.',
-    booksDistributedImpact: 'Books Distributed',
+    booksDistributedImpact: '120+ Books Distributed\n',
     booksDistributedImpactDesc:
       'Providing engaging, level-appropriate reading materials for schools without libraries.',
     fundsRaisedImpact: 'IDR 285 Million Raised',
@@ -737,31 +753,42 @@ export const translations = {
     chooseDetail2: 'Lihat kebutuhan spesifik',
     chooseDetail3: 'Pantau progres langsung',
     donateSecurely: 'Donasi dengan Aman',
-    donateSecurelyDesc: 'Buat donasi sekali atau bulanan melalui QRIS atau kartu kredit',
+    donateSecurelyDesc:
+      'Beri dukungan satu kali atau rutin setiap bulan lewat QRIS atau kartu kredit.\n' +
+      '100% aman\n' +
+      'Bisa sertakan pesan pribadi',
     donateDetail1: '100% aman',
     donateDetail2: 'Dapat dikurangi pajak',
     donateDetail3: 'Tambahkan pesan pribadi',
-    trackProgress: 'Pantau Progres',
-    trackProgressDesc: 'Terima pembaruan berkala dengan foto, cerita, dan hasil terukur',
+    trackProgress: 'Pantau Perkembangannya',
+    trackProgressDesc:
+      'Dapatkan kabar terbaru dari lapangan secara transparan.\n' +
+      'Laporan dampak bulanan\n' +
+      'Foto & cerita siswa\n' +
+      'Pembaruan progres berkala',
     trackDetail1: 'Laporan bulanan',
     trackDetail2: 'Testimoni siswa',
     trackDetail3: 'Pembaruan foto',
-    seeResults: 'Lihat Hasil',
-    seeResultsDesc: 'Saksikan siswa mencapai pencapaian dan mengubah masa depan mereka',
+    seeResults: 'Lihat Hasil Nyata',
+    seeResultsDesc:
+      'Saksikan bagaimana dukungan Anda membantu siswa belajar, berkembang, dan mewujudkan mimpi.\n' +
+      'Hasil terukur\n' +
+      'Perbandingan sebelum dan sesudah\n' +
+      'Dampak bagi komunitas sekitar\n',
     seeDetail1: 'Metrik kesuksesan',
     seeDetail2: 'Sebelum & sesudah',
     seeDetail3: 'Dampak komunitas',
-    readyToMakeDifference2: 'Siap membuat perbedaan?',
+    readyToMakeDifference2: 'Siap Membuat Perubahan?',
     readyToMakeDifferenceDesc2:
-      'Bergabunglah dengan ratusan donatur yang mentransformasi pendidikan di Indonesia',
+      'Bergabunglah dengan komunitas donatur dan relawan yang ikut mengubah wajah pendidikan di Indonesia.',
     startDonating: 'Mulai Donasi',
     becomeVolunteer: 'Jadi Relawan',
 
     // Volunteer CTA
-    giveYourTime: 'Berikan Waktu Anda',
-    transformLives: 'Transformasi Kehidupan',
+    giveYourTime: 'Bergabung Bersama Kami',
+    transformLives: 'Jadi Bagian dari Perubahan',
     volunteerCtaDesc:
-      'Bergabunglah dengan komunitas relawan kami yang bersemangat membuat dampak langsung pada perjalanan belajar siswa. Baik Anda bisa mengajar, membimbing, atau mendukung program kami - setiap kontribusi penting.',
+      'Mari bersama memperkuat fondasi pendidikan di seluruh Indonesia. Baik sebagai individu, universitas, maupun organisasi — keterlibatan Anda akan membawa dampak nyata.',
     flexibleSchedule: 'Jadwal Fleksibel',
     flexibleScheduleDesc: 'Online atau di lokasi, penuh waktu atau paruh waktu',
     fullTraining: 'Pelatihan Lengkap',
@@ -959,17 +986,17 @@ export const translations = {
       'Dalam periode awal pelaksanaan, 216 siswa telah merasakan manfaat pendampingan belajar Accelero—dan jumlah ini terus bertambah.',
     transparentAccountable: 'Transparan, Bertanggung Jawab, dan Berorientasi Hasil',
     impactByNumbers: 'Jejak Dampak Kami',
-    totalStudentsReached: 'Siswa Telah Terbantu',
+    totalStudentsReached: '216+ Siswa Telah Terbantu',
     totalStudentsReachedDesc:
       'Mendapat pendampingan literasi dan numerasi melalui pendekatan TaRL.',
-    schoolsTransformed: 'Sekolah Telah Terbantu',
-    schoolsTransformedDesc: 'Menerima dukungan fasilitas belajar dan program after-school.',
-    teachersEmpowered: 'Guru Telah Dilatih',
+    schoolsTransformed: '120+ Buku Telah Didistribusikan',
+    schoolsTransformedDesc: 'Untuk menumbuhkan budaya membaca di sekolah tanpa perpustakaan.',
+    teachersEmpowered: '20 Guru Telah Dilatih',
     teachersEmpoweredDesc: 'Menguasai pendekatan TaRL untuk meningkatkan kualitas pembelajaran.',
-    communitiesServed: 'Wilayah Telah Dijangkau',
-    communitiesServedDesc: 'Memulai perubahan berbasis komunitas di Sorong, Papua Barat Daya.',
-    booksDistributedImpact: 'Buku Telah Didistribusikan',
-    booksDistributedImpactDesc: 'Untuk menumbuhkan budaya membaca di sekolah tanpa perpustakaan.',
+    communitiesServed: '2 Sekolah Telah Terbantu',
+    communitiesServedDesc: 'Menerima dukungan fasilitas belajar dan program after-school.',
+    booksDistributedImpact: '1 Wilayah Telah Dijangkau',
+    booksDistributedImpactDesc: 'Memulai perubahan berbasis komunitas di Sorong, Papua Barat Daya.',
     fundsRaisedImpact: 'Rp 285 Juta Dana Terkumpul',
     fundsRaisedImpactDesc: 'Diinvestasikan untuk peningkatan kualitas belajar anak-anak.',
 
@@ -977,15 +1004,25 @@ export const translations = {
     whereWeCreateImpact: 'Fokus Dampak Kami',
     focusAreasDesc: 'Bidang-bidang pendidikan yang paling membutuhkan intervensi',
     literacyDevelopment: 'Penguatan Literasi',
-    literacyDevelopmentDesc: 'Meningkatkan kemampuan membaca siswa melalui pendekatan TaRL',
+    literacyDevelopmentDesc:
+      'Meningkatkan kemampuan membaca siswa melalui pendekatan TaRL\n' +
+      '\n' +
+      '\n' +
+      '850+ siswa menunjukkan peningkatan kemampuan membaca',
     literacyStudentsCount: '850+ siswa menunjukkan peningkatan kemampuan membaca',
     numeracySkills: 'Penguatan Numerasi',
     numeracySkillsDesc:
-      'Membantu siswa memahami konsep dasar matematika melalui aktivitas belajar interaktif',
+      'Membantu siswa memahami konsep dasar matematika melalui aktivitas belajar interaktif\n' +
+      '\n' +
+      '\n' +
+      '360+ siswa berkembang dalam kemampuan berhitung\n',
     numeracyStudentsCount: '360+ siswa berkembang dalam kemampuan berhitung',
     teacherTrainingImpact: 'Pelatihan Guru',
     teacherTrainingImpactDesc:
-      'Membekali guru dengan metode ajar modern untuk dampak jangka panjang',
+      'Membekali guru dengan metode ajar modern untuk dampak jangka panjang\n' +
+      '\n' +
+      '\n' +
+      '20+ guru mendapat pelatihan TaRL\n',
     teacherTrainingCount: '20+ guru mendapat pelatihan TaRL',
     infrastructureImprovement: 'Perbaikan Fasilitas Belajar',
     infrastructureImprovementDesc: 'Membangun ruang belajar yang layak dan ramah anak',
@@ -995,12 +1032,22 @@ export const translations = {
     communitiesWeServe: 'Wilayah Dampak',
     communitiesWeServeDesc: 'Menjangkau komunitas sekolah yang paling membutuhkan dukungan',
     papuaWestPapua: 'Papua & Papua Barat',
-    studentsCount: 'siswa',
-    schoolsCount: 'sekolah',
+    studentsCount: '216 siswa',
+    schoolsCount: '2 sekolah',
 
     // Stories of Change
     storiesOfChange: 'Cerita Perubahan',
-    storiesOfChangeDesc: 'Suara langsung dari mereka yang merasakan dampaknya',
+    storiesOfChangeDesc:
+      'Suara langsung dari mereka yang merasakan dampaknya\n' +
+      '\n' +
+      '“Dalam 3 bulan saja, anak saya yang tadinya kesulitan membaca sekarang bisa membaca cerita sendiri. Setiap malam dia membacakan buku untuk adiknya.”\n' +
+      ' — Ibu Sari, Orang Tua Murid SD Inpres 01 Sorong\n' +
+      '\n' +
+      '“Pelatihan TaRL benar-benar mengubah cara saya mengajar. Saya jadi lebih memahami kebutuhan tiap siswa, bukan hanya mengejar materi.”\n' +
+      ' — Pak Ahmad, Guru SDN 05 Jakarta Selatan\n' +
+      '\n' +
+      '“Ruang baca baru jadi tempat favorit anak-anak. Mereka datang lebih awal hanya untuk membaca. Rasanya seperti mimpi terwujud.”\n' +
+      ' — Suster Maria, Kepala Sekolah SD Katolik Ende\n',
     parentTestimonial:
       '"Dalam 3 bulan saja, anak saya yang tadinya kesulitan membaca sekarang bisa membaca cerita sendiri. Setiap malam dia membacakan buku untuk adiknya."',
     parentName: '— Ibu Sari, Orang Tua Murid SD Inpres 01 Sorong',

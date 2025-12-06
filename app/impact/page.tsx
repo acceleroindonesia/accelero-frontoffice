@@ -414,7 +414,7 @@ const ImpactPage: React.FC = () => {
             </p>
             <div className="cta-buttons-group">
               <a href="/donate" className="btn-cta-primary-large">
-                {t('donateToday')}
+                {t('donate')}
               </a>
               <a href="/projects" className="btn-cta-secondary-large">
                 Browse Programs
