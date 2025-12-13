@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@utils/Prisma'
-
-// Force Node.js runtime (not Edge)
-export const runtime = 'nodejs'
+import ToolBox from '@utils/ToolBox'
 
 export async function GET(request: NextRequest) {
   try {
@@ -60,8 +58,8 @@ export async function GET(request: NextRequest) {
         authorAvatar: blog.author_avatar,
         category: blog.category,
         tags: tags || [],
-        image: blog.image,
-        imageAlt: blog.image_alt,
+        image: ToolBox.withGcsBase(blog.image),
+        imageAlt: ToolBox.withGcsBase(blog.image_alt),
         metaTitle: lang === 'id' ? blog.meta_title_id : blog.meta_title_en,
         metaDescription: lang === 'id' ? blog.meta_description_id : blog.meta_description_en,
         readTime: blog.read_time,

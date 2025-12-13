@@ -9,6 +9,15 @@ const isEmail = (value: string): boolean => {
     /^([a-zA-Z0-9_.+-]+)@((\[[0-9]{1,3}(\.[0-9]{1,3}){3}])|(([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}))$/
   return pattern.test(value)
 }
+
+const GCS_BASE_URL = (process.env.GOOGLE_CLOUD_STORAGE_URL || '').replace(/\/+$/, '')
+
+const withGcsBase = (url: string | null | undefined) => {
+  if (!url) return null
+  if (/^https?:\/\//i.test(url)) return url
+  if (!GCS_BASE_URL) return url
+  return `${GCS_BASE_URL}/${url.replace(/^\/+/, '')}`
+}
 /**
  * Checks if the provided string consists only of digits.
  *
@@ -52,6 +61,7 @@ const ToolBox = {
   isNumeric,
   formatCurrency,
   isStrongPassword,
+  withGcsBase,
 }
 
 export default ToolBox

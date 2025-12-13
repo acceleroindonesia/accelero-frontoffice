@@ -260,7 +260,7 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ params }) => {
                   <div className="detail-tags">
                     <span className="detail-tags-label">🏷️ Tags</span>
                     <div className="detail-tags-list">
-                      {blog.tags.map((tag, index) => (
+                      {(Array.isArray(blog.tags) ? blog.tags : []).map((tag, index) => (
                         <span key={index} className="detail-tag">
                           #{tag}
                         </span>

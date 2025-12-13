@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@utils/Prisma'
+import ToolBox from '@utils/ToolBox'
 
 // Force Node.js runtime (not Edge)
 export const runtime = 'nodejs'
@@ -35,7 +36,31 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       data: { views_count: { increment: 1 } },
     })
 
-    const tags = blog.tags as string[] | null
+    const normalizeTags = (raw: unknown): string[] => {
+      if (Array.isArray(raw)) return raw.map(String).filter(Boolean)
+
+      if (typeof raw === 'string') {
+        const s = raw.trim()
+        if (!s) return []
+
+        try {
+          const parsed = JSON.parse(s)
+          if (Array.isArray(parsed)) return parsed.map(String).filter(Boolean)
+          if (typeof parsed === 'string') return [parsed].filter(Boolean)
+        } catch {
+          // fall through
+        }
+
+        if (s.includes(','))
+          return s
+            .split(',')
+            .map((t) => t.trim())
+            .filter(Boolean)
+        return [s]
+      }
+
+      return []
+    }
 
     // Transform blog for the response
     const transformedBlog = {
@@ -54,9 +79,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       authorRole: blog.author_role,
       authorAvatar: blog.author_avatar,
       category: blog.category,
-      tags: tags || [],
-      image: blog.image,
-      imageAlt: blog.image_alt,
+      tags: normalizeTags(blog.tags),
+      image: ToolBox.withGcsBase(blog.image),
+      imageAlt: ToolBox.withGcsBase(blog.image_alt),
       metaTitle: lang === 'id' ? blog.meta_title_id : blog.meta_title_en,
       metaDescription: lang === 'id' ? blog.meta_description_id : blog.meta_description_en,
       readTime: blog.read_time,
