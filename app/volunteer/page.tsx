@@ -22,7 +22,7 @@ const VolunteerPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState('')
 
-  // Volunteer areas with translation keys
+  // Volunteer areas with translation keys (typed as literals)
   const volunteerAreaKeys = [
     'educationTutoring',
     'healthcareMedical',
@@ -32,10 +32,10 @@ const VolunteerPage = () => {
     'artsCulture',
     'animalWelfare',
     'disasterRelief',
-  ]
+  ] as const
 
-  // Availability options with translation keys
-  const availabilityKeys = ['weekdays', 'weekends', 'evenings', 'flexible']
+  // Availability options with translation keys (typed as literals)
+  const availabilityKeys = ['weekdays', 'weekends', 'evenings', 'flexible'] as const
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -44,7 +44,7 @@ const VolunteerPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const toggleInterest = (areaKey: string) => {
+  const toggleInterest = (areaKey: (typeof volunteerAreaKeys)[number]) => {
     setFormData((prev) => {
       const isSelected = prev.interests.includes(areaKey)
       return {
@@ -80,11 +80,11 @@ const VolunteerPage = () => {
           experience: '',
           motivation: '',
         })
-        setTimeout(() => router.push('/home'), 3000)
+        setTimeout(() => router.push('/'), 3000)
       } else {
         setMessage(t('somethingWentWrong'))
       }
-    } catch (error) {
+    } catch {
       setMessage(t('failedToSubmit'))
     } finally {
       setIsSubmitting(false)
@@ -132,13 +132,17 @@ const VolunteerPage = () => {
 
               <div className="volunteer-form-wrapper">
                 <h2>{t('volunteerApplication')}</h2>
+
                 {message && (
                   <div
-                    className={`message ${message.includes(t('thankYouVolunteer').split('!')[0]) ? 'success' : 'error'}`}
+                    className={`message ${
+                      message.includes(t('thankYouVolunteer').split('!')[0]) ? 'success' : 'error'
+                    }`}
                   >
                     {message}
                   </div>
                 )}
+
                 <form onSubmit={handleSubmit} className="volunteer-form">
                   <div className="form-row">
                     <div className="form-group">
@@ -154,6 +158,7 @@ const VolunteerPage = () => {
                         required
                       />
                     </div>
+
                     <div className="form-group">
                       <label htmlFor="lastName">
                         {t('lastName')} <span className="required">{t('required')}</span>
@@ -183,14 +188,18 @@ const VolunteerPage = () => {
                         required
                       />
                     </div>
+
                     <div className="form-group">
-                      <label htmlFor="phone">{t('phone')}</label>
+                      <label htmlFor="phone">
+                        {t('phone')} <span className="required">{t('required')}</span>
+                      </label>
                       <input
                         type="tel"
                         id="phone"
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </div>
@@ -199,27 +208,26 @@ const VolunteerPage = () => {
                     <label>
                       {t('areasOfInterest')} <span className="required">{t('required')}</span>
                     </label>
+
                     <div className="checkbox-group">
                       {volunteerAreaKeys.map((areaKey) => {
                         const isChecked = formData.interests.includes(areaKey)
                         return (
-                          // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-                          <div
+                          <label
                             key={areaKey}
                             className={`checkbox-label ${isChecked ? 'checked' : ''}`}
-                            onClick={() => toggleInterest(areaKey)}
                           >
                             <input
                               type="checkbox"
                               checked={isChecked}
-                              onChange={() => {}}
-                              onClick={(e) => e.stopPropagation()}
+                              onChange={() => toggleInterest(areaKey)}
                             />
                             <span>{t(areaKey)}</span>
-                          </div>
+                          </label>
                         )
                       })}
                     </div>
+
                     {formData.interests.length === 0 && (
                       <small className="form-hint">{t('selectOneInterest')}</small>
                     )}
