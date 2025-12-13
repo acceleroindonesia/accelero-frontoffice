@@ -11237,7 +11237,7 @@ export namespace Prisma {
   export type DonationsGroupByOutputType = {
     id: bigint
     donation_id: string
-    project_id: bigint
+    project_id: bigint | null
     user_id: bigint | null
     donor_name: string | null
     donor_email: string | null
@@ -11297,7 +11297,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
-    projects?: boolean | ProjectDefaultArgs<ExtArgs>
+    projects?: boolean | donations$projectsArgs<ExtArgs>
     users?: boolean | donations$usersArgs<ExtArgs>
   }, ExtArgs["result"]["donations"]>
 
@@ -11322,7 +11322,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
-    projects?: boolean | ProjectDefaultArgs<ExtArgs>
+    projects?: boolean | donations$projectsArgs<ExtArgs>
     users?: boolean | donations$usersArgs<ExtArgs>
   }, ExtArgs["result"]["donations"]>
 
@@ -11347,7 +11347,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
-    projects?: boolean | ProjectDefaultArgs<ExtArgs>
+    projects?: boolean | donations$projectsArgs<ExtArgs>
     users?: boolean | donations$usersArgs<ExtArgs>
   }, ExtArgs["result"]["donations"]>
 
@@ -11376,28 +11376,28 @@ export namespace Prisma {
 
   export type donationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "donation_id" | "project_id" | "user_id" | "donor_name" | "donor_email" | "donor_phone" | "amount" | "frequency" | "status" | "payment_method" | "payment_channel" | "transaction_id" | "paid_at" | "message" | "is_anonymous" | "metadata" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["donations"]>
   export type donationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    projects?: boolean | ProjectDefaultArgs<ExtArgs>
+    projects?: boolean | donations$projectsArgs<ExtArgs>
     users?: boolean | donations$usersArgs<ExtArgs>
   }
   export type donationsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    projects?: boolean | ProjectDefaultArgs<ExtArgs>
+    projects?: boolean | donations$projectsArgs<ExtArgs>
     users?: boolean | donations$usersArgs<ExtArgs>
   }
   export type donationsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    projects?: boolean | ProjectDefaultArgs<ExtArgs>
+    projects?: boolean | donations$projectsArgs<ExtArgs>
     users?: boolean | donations$usersArgs<ExtArgs>
   }
 
   export type $donationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "donations"
     objects: {
-      projects: Prisma.$ProjectPayload<ExtArgs>
+      projects: Prisma.$ProjectPayload<ExtArgs> | null
       users: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
       donation_id: string
-      project_id: bigint
+      project_id: bigint | null
       user_id: bigint | null
       donor_name: string | null
       donor_email: string | null
@@ -11809,7 +11809,7 @@ export namespace Prisma {
    */
   export interface Prisma__donationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    projects<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    projects<T extends donations$projectsArgs<ExtArgs> = {}>(args?: Subset<T, donations$projectsArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     users<T extends donations$usersArgs<ExtArgs> = {}>(args?: Subset<T, donations$usersArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -12253,6 +12253,25 @@ export namespace Prisma {
      * Limit how many donations to delete.
      */
     limit?: number
+  }
+
+  /**
+   * donations.projects
+   */
+  export type donations$projectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Project
+     */
+    select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Project
+     */
+    omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    where?: ProjectWhereInput
   }
 
   /**
@@ -24353,7 +24372,7 @@ export namespace Prisma {
     NOT?: donationsWhereInput | donationsWhereInput[]
     id?: BigIntFilter<"donations"> | bigint | number
     donation_id?: StringFilter<"donations"> | string
-    project_id?: BigIntFilter<"donations"> | bigint | number
+    project_id?: BigIntNullableFilter<"donations"> | bigint | number | null
     user_id?: BigIntNullableFilter<"donations"> | bigint | number | null
     donor_name?: StringNullableFilter<"donations"> | string | null
     donor_email?: StringNullableFilter<"donations"> | string | null
@@ -24371,14 +24390,14 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"donations"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"donations"> | Date | string | null
     deleted_at?: DateTimeNullableFilter<"donations"> | Date | string | null
-    projects?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+    projects?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     users?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type donationsOrderByWithRelationInput = {
     id?: SortOrder
     donation_id?: SortOrder
-    project_id?: SortOrder
+    project_id?: SortOrderInput | SortOrder
     user_id?: SortOrderInput | SortOrder
     donor_name?: SortOrderInput | SortOrder
     donor_email?: SortOrderInput | SortOrder
@@ -24406,7 +24425,7 @@ export namespace Prisma {
     AND?: donationsWhereInput | donationsWhereInput[]
     OR?: donationsWhereInput[]
     NOT?: donationsWhereInput | donationsWhereInput[]
-    project_id?: BigIntFilter<"donations"> | bigint | number
+    project_id?: BigIntNullableFilter<"donations"> | bigint | number | null
     user_id?: BigIntNullableFilter<"donations"> | bigint | number | null
     donor_name?: StringNullableFilter<"donations"> | string | null
     donor_email?: StringNullableFilter<"donations"> | string | null
@@ -24424,14 +24443,14 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"donations"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"donations"> | Date | string | null
     deleted_at?: DateTimeNullableFilter<"donations"> | Date | string | null
-    projects?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+    projects?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     users?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id" | "donation_id">
 
   export type donationsOrderByWithAggregationInput = {
     id?: SortOrder
     donation_id?: SortOrder
-    project_id?: SortOrder
+    project_id?: SortOrderInput | SortOrder
     user_id?: SortOrderInput | SortOrder
     donor_name?: SortOrderInput | SortOrder
     donor_email?: SortOrderInput | SortOrder
@@ -24462,7 +24481,7 @@ export namespace Prisma {
     NOT?: donationsScalarWhereWithAggregatesInput | donationsScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"donations"> | bigint | number
     donation_id?: StringWithAggregatesFilter<"donations"> | string
-    project_id?: BigIntWithAggregatesFilter<"donations"> | bigint | number
+    project_id?: BigIntNullableWithAggregatesFilter<"donations"> | bigint | number | null
     user_id?: BigIntNullableWithAggregatesFilter<"donations"> | bigint | number | null
     donor_name?: StringNullableWithAggregatesFilter<"donations"> | string | null
     donor_email?: StringNullableWithAggregatesFilter<"donations"> | string | null
@@ -25936,14 +25955,14 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    projects: ProjectCreateNestedOneWithoutDonationsInput
+    projects?: ProjectCreateNestedOneWithoutDonationsInput
     users?: UserCreateNestedOneWithoutDonationsInput
   }
 
   export type donationsUncheckedCreateInput = {
     id?: bigint | number
     donation_id: string
-    project_id: bigint | number
+    project_id?: bigint | number | null
     user_id?: bigint | number | null
     donor_name?: string | null
     donor_email?: string | null
@@ -25982,14 +26001,14 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    projects?: ProjectUpdateOneRequiredWithoutDonationsNestedInput
+    projects?: ProjectUpdateOneWithoutDonationsNestedInput
     users?: UserUpdateOneWithoutDonationsNestedInput
   }
 
   export type donationsUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     donation_id?: StringFieldUpdateOperationsInput | string
-    project_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    project_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     user_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     donor_name?: NullableStringFieldUpdateOperationsInput | string | null
     donor_email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26012,7 +26031,7 @@ export namespace Prisma {
   export type donationsCreateManyInput = {
     id?: bigint | number
     donation_id: string
-    project_id: bigint | number
+    project_id?: bigint | number | null
     user_id?: bigint | number | null
     donor_name?: string | null
     donor_email?: string | null
@@ -26056,7 +26075,7 @@ export namespace Prisma {
   export type donationsUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     donation_id?: StringFieldUpdateOperationsInput | string
-    project_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    project_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     user_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     donor_name?: NullableStringFieldUpdateOperationsInput | string | null
     donor_email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27485,9 +27504,9 @@ export namespace Prisma {
     assigned_to?: SortOrder
   }
 
-  export type ProjectScalarRelationFilter = {
-    is?: ProjectWhereInput
-    isNot?: ProjectWhereInput
+  export type ProjectNullableScalarRelationFilter = {
+    is?: ProjectWhereInput | null
+    isNot?: ProjectWhereInput | null
   }
 
   export type donationsCountOrderByAggregateInput = {
@@ -27920,11 +27939,6 @@ export namespace Prisma {
     user_id?: SortOrder
   }
 
-  export type ProjectNullableScalarRelationFilter = {
-    is?: ProjectWhereInput | null
-    isNot?: ProjectWhereInput | null
-  }
-
   export type volunteersCountOrderByAggregateInput = {
     id?: SortOrder
     volunteer_id?: SortOrder
@@ -28343,10 +28357,12 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type ProjectUpdateOneRequiredWithoutDonationsNestedInput = {
+  export type ProjectUpdateOneWithoutDonationsNestedInput = {
     create?: XOR<ProjectCreateWithoutDonationsInput, ProjectUncheckedCreateWithoutDonationsInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutDonationsInput
     upsert?: ProjectUpsertWithoutDonationsInput
+    disconnect?: ProjectWhereInput | boolean
+    delete?: ProjectWhereInput | boolean
     connect?: ProjectWhereUniqueInput
     update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutDonationsInput, ProjectUpdateWithoutDonationsInput>, ProjectUncheckedUpdateWithoutDonationsInput>
   }
@@ -29041,13 +29057,13 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
-    projects: ProjectCreateNestedOneWithoutDonationsInput
+    projects?: ProjectCreateNestedOneWithoutDonationsInput
   }
 
   export type donationsUncheckedCreateWithoutUsersInput = {
     id?: bigint | number
     donation_id: string
-    project_id: bigint | number
+    project_id?: bigint | number | null
     donor_name?: string | null
     donor_email?: string | null
     donor_phone?: string | null
@@ -29244,7 +29260,7 @@ export namespace Prisma {
     NOT?: donationsScalarWhereInput | donationsScalarWhereInput[]
     id?: BigIntFilter<"donations"> | bigint | number
     donation_id?: StringFilter<"donations"> | string
-    project_id?: BigIntFilter<"donations"> | bigint | number
+    project_id?: BigIntNullableFilter<"donations"> | bigint | number | null
     user_id?: BigIntNullableFilter<"donations"> | bigint | number | null
     donor_name?: StringNullableFilter<"donations"> | string | null
     donor_email?: StringNullableFilter<"donations"> | string | null
@@ -30444,7 +30460,7 @@ export namespace Prisma {
   export type donationsCreateManyUsersInput = {
     id?: bigint | number
     donation_id: string
-    project_id: bigint | number
+    project_id?: bigint | number | null
     donor_name?: string | null
     donor_email?: string | null
     donor_phone?: string | null
@@ -30655,13 +30671,13 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    projects?: ProjectUpdateOneRequiredWithoutDonationsNestedInput
+    projects?: ProjectUpdateOneWithoutDonationsNestedInput
   }
 
   export type donationsUncheckedUpdateWithoutUsersInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     donation_id?: StringFieldUpdateOperationsInput | string
-    project_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    project_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     donor_name?: NullableStringFieldUpdateOperationsInput | string | null
     donor_email?: NullableStringFieldUpdateOperationsInput | string | null
     donor_phone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30683,7 +30699,7 @@ export namespace Prisma {
   export type donationsUncheckedUpdateManyWithoutUsersInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     donation_id?: StringFieldUpdateOperationsInput | string
-    project_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    project_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     donor_name?: NullableStringFieldUpdateOperationsInput | string | null
     donor_email?: NullableStringFieldUpdateOperationsInput | string | null
     donor_phone?: NullableStringFieldUpdateOperationsInput | string | null

@@ -158,13 +158,16 @@ const DonateContent: React.FC = () => {
           donorPhone: donorPhone || null,
           anonymous,
           newsletter,
+
+          // Optional: you can expose these in UI later
+          paymentMethod: 'va',
+          paymentChannel: 'cimb',
         },
       })
 
       const data = res?.data as { success?: boolean; donationId?: string; error?: string }
-      if (data?.success) {
-        // Redirect to payment page
-        window.location.href = `/payment/${data.donationId}`
+      if (data?.success && data?.donationId) {
+        router.push(`/donate/payment/${data.donationId}`)
       } else {
         alert(data?.error || 'Failed to process donation')
       }
