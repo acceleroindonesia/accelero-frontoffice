@@ -37,8 +37,17 @@ const ContactPage: React.FC = () => {
     setSubmitStatus({ type: null, message: '' })
 
     try {
-      // Simulate API call - replace with actual API endpoint
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      const data = (await res.json().catch(() => null)) as { ok: boolean; message?: string } | null
+
+      if (!res.ok || !data?.ok) {
+        throw new Error(data?.message || 'Request failed')
+      }
 
       setSubmitStatus({
         type: 'success',
@@ -64,7 +73,6 @@ const ContactPage: React.FC = () => {
   return (
     <Master>
       <ScrollAnimations />
-
       {/* Hero Section */}
       <section className="contact-hero">
         <div className="container">
@@ -194,7 +202,6 @@ const ContactPage: React.FC = () => {
                       <option value="volunteer">{t('volunteerOpportunity')}</option>
                       <option value="partnership">{t('partnership')}</option>
                       <option value="donation">{t('donationQuestion')}</option>
-                      <option value="media">{t('mediaPress')}</option>
                       <option value="other">{t('other')}</option>
                     </select>
                   </div>
