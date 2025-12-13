@@ -54,9 +54,10 @@ const ProjectDetailPage: React.FC = () => {
 
   const [project, setProject] = useState<IProjectDetail | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [selectedTab, setSelectedTab] = useState<'overview' | 'updates' | 'budget' | 'timeline'>(
-    'overview',
-  )
+  // const [selectedTab, setSelectedTab] = useState<'overview' | 'updates' | 'budget' | 'timeline'>(
+  //   'overview',
+  // )
+  const [selectedTab, setSelectedTab] = useState<'overview'>('overview')
   const { t } = useLanguage()
 
   useEffect(() => {
@@ -164,24 +165,24 @@ const ProjectDetailPage: React.FC = () => {
                 >
                   Overview
                 </button>
-                <button
-                  className={`tab ${selectedTab === 'updates' ? 'active' : ''}`}
-                  onClick={() => setSelectedTab('updates')}
-                >
-                  Updates ({project.updates?.length || 0})
-                </button>
-                <button
-                  className={`tab ${selectedTab === 'budget' ? 'active' : ''}`}
-                  onClick={() => setSelectedTab('budget')}
-                >
-                  Budget Breakdown
-                </button>
-                <button
-                  className={`tab ${selectedTab === 'timeline' ? 'active' : ''}`}
-                  onClick={() => setSelectedTab('timeline')}
-                >
-                  Timeline
-                </button>
+                {/*<button*/}
+                {/*  className={`tab ${selectedTab === 'updates' ? 'active' : ''}`}*/}
+                {/*  onClick={() => setSelectedTab('updates')}*/}
+                {/*>*/}
+                {/*  Updates ({project.updates?.length || 0})*/}
+                {/*</button>*/}
+                {/*<button*/}
+                {/*  className={`tab ${selectedTab === 'budget' ? 'active' : ''}`}*/}
+                {/*  onClick={() => setSelectedTab('budget')}*/}
+                {/*>*/}
+                {/*  Budget Breakdown*/}
+                {/*</button>*/}
+                {/*<button*/}
+                {/*  className={`tab ${selectedTab === 'timeline' ? 'active' : ''}`}*/}
+                {/*  onClick={() => setSelectedTab('timeline')}*/}
+                {/*>*/}
+                {/*  Timeline*/}
+                {/*</button>*/}
               </div>
 
               {/* Tab Content */}
@@ -284,119 +285,119 @@ const ProjectDetailPage: React.FC = () => {
                   </div>
                 )}
 
-                {selectedTab === 'updates' && (
-                  <div className="updates-content">
-                    {project.updates && project.updates.length > 0 ? (
-                      <div className="updates-list">
-                        {project.updates.map((update, index) => (
-                          <div key={index} className="update-card">
-                            <div className="update-date">
-                              {new Date(update.date).toLocaleDateString('en-US', {
-                                month: 'long',
-                                day: 'numeric',
-                                year: 'numeric',
-                              })}
-                            </div>
-                            <h3 className="update-title">{update.title}</h3>
-                            <p className="update-content">{update.content}</p>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="empty-state">
-                        <span className="empty-icon">📝</span>
-                        <h3>No Updates Yet</h3>
-                        <p>Check back soon for progress updates on this program</p>
-                      </div>
-                    )}
-                  </div>
-                )}
+                {/*{selectedTab === 'updates' && (*/}
+                {/*  <div className="updates-content">*/}
+                {/*    {project.updates && project.updates.length > 0 ? (*/}
+                {/*      <div className="updates-list">*/}
+                {/*        {project.updates.map((update, index) => (*/}
+                {/*          <div key={index} className="update-card">*/}
+                {/*            <div className="update-date">*/}
+                {/*              {new Date(update.date).toLocaleDateString('en-US', {*/}
+                {/*                month: 'long',*/}
+                {/*                day: 'numeric',*/}
+                {/*                year: 'numeric',*/}
+                {/*              })}*/}
+                {/*            </div>*/}
+                {/*            <h3 className="update-title">{update.title}</h3>*/}
+                {/*            <p className="update-content">{update.content}</p>*/}
+                {/*          </div>*/}
+                {/*        ))}*/}
+                {/*      </div>*/}
+                {/*    ) : (*/}
+                {/*      <div className="empty-state">*/}
+                {/*        <span className="empty-icon">📝</span>*/}
+                {/*        <h3>No Updates Yet</h3>*/}
+                {/*        <p>Check back soon for progress updates on this program</p>*/}
+                {/*      </div>*/}
+                {/*    )}*/}
+                {/*  </div>*/}
+                {/*)}*/}
 
-                {selectedTab === 'budget' && (
-                  <div className="budget-content">
-                    {project.budget && project.budget.length > 0 ? (
-                      <>
-                        <div className="budget-overview">
-                          <h3>Total Budget</h3>
-                          <div className="budget-total">
-                            Rp {project.goalAmount.toLocaleString()}
-                          </div>
-                        </div>
-                        <div className="budget-list">
-                          {project.budget.map((item, index) => {
-                            const itemPercentage = (item.amount / project.goalAmount) * 100
-                            return (
-                              <div key={index} className="budget-item">
-                                <div className="budget-item-header">
-                                  <span className="budget-item-name">{item.item}</span>
-                                  <span className="budget-item-amount">
-                                    Rp {item.amount.toLocaleString()}
-                                  </span>
-                                </div>
-                                <div className="budget-item-bar">
-                                  <div
-                                    className="budget-item-fill"
-                                    style={{ width: `${itemPercentage}%` }}
-                                  ></div>
-                                </div>
-                                <div className="budget-item-percentage">
-                                  {itemPercentage.toFixed(1)}% of total budget
-                                </div>
-                              </div>
-                            )
-                          })}
-                        </div>
-                      </>
-                    ) : (
-                      <div className="empty-state">
-                        <span className="empty-icon">💰</span>
-                        <h3>Budget Details Coming Soon</h3>
-                        <p>Detailed budget breakdown will be available shortly</p>
-                      </div>
-                    )}
-                  </div>
-                )}
+                {/*{selectedTab === 'budget' && (*/}
+                {/*  <div className="budget-content">*/}
+                {/*    {project.budget && project.budget.length > 0 ? (*/}
+                {/*      <>*/}
+                {/*        <div className="budget-overview">*/}
+                {/*          <h3>Total Budget</h3>*/}
+                {/*          <div className="budget-total">*/}
+                {/*            Rp {project.goalAmount.toLocaleString()}*/}
+                {/*          </div>*/}
+                {/*        </div>*/}
+                {/*        <div className="budget-list">*/}
+                {/*          {project.budget.map((item, index) => {*/}
+                {/*            const itemPercentage = (item.amount / project.goalAmount) * 100*/}
+                {/*            return (*/}
+                {/*              <div key={index} className="budget-item">*/}
+                {/*                <div className="budget-item-header">*/}
+                {/*                  <span className="budget-item-name">{item.item}</span>*/}
+                {/*                  <span className="budget-item-amount">*/}
+                {/*                    Rp {item.amount.toLocaleString()}*/}
+                {/*                  </span>*/}
+                {/*                </div>*/}
+                {/*                <div className="budget-item-bar">*/}
+                {/*                  <div*/}
+                {/*                    className="budget-item-fill"*/}
+                {/*                    style={{ width: `${itemPercentage}%` }}*/}
+                {/*                  ></div>*/}
+                {/*                </div>*/}
+                {/*                <div className="budget-item-percentage">*/}
+                {/*                  {itemPercentage.toFixed(1)}% of total budget*/}
+                {/*                </div>*/}
+                {/*              </div>*/}
+                {/*            )*/}
+                {/*          })}*/}
+                {/*        </div>*/}
+                {/*      </>*/}
+                {/*    ) : (*/}
+                {/*      <div className="empty-state">*/}
+                {/*        <span className="empty-icon">💰</span>*/}
+                {/*        <h3>Budget Details Coming Soon</h3>*/}
+                {/*        <p>Detailed budget breakdown will be available shortly</p>*/}
+                {/*      </div>*/}
+                {/*    )}*/}
+                {/*  </div>*/}
+                {/*)}*/}
 
-                {selectedTab === 'timeline' && (
-                  <div className="timeline-content">
-                    {project.milestones && project.milestones.length > 0 ? (
-                      <div className="timeline-list">
-                        {project.milestones.map((milestone, index) => (
-                          <div
-                            key={index}
-                            className={`timeline-item ${milestone.completed ? 'completed' : ''}`}
-                          >
-                            <div className="timeline-marker">
-                              <div className="timeline-dot"></div>
-                              {index < project.milestones!.length - 1 && (
-                                <div className="timeline-line"></div>
-                              )}
-                            </div>
-                            <div className="timeline-content-box">
-                              <div className="timeline-date">
-                                {new Date(milestone.date).toLocaleDateString('en-US', {
-                                  month: 'long',
-                                  day: 'numeric',
-                                  year: 'numeric',
-                                })}
-                              </div>
-                              <p className="timeline-description">{milestone.description}</p>
-                              {milestone.completed && (
-                                <span className="timeline-badge">✓ Completed</span>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="empty-state">
-                        <span className="empty-icon">📅</span>
-                        <h3>Timeline Coming Soon</h3>
-                        <p>Program milestones will be added as the project progresses</p>
-                      </div>
-                    )}
-                  </div>
-                )}
+                {/*{selectedTab === 'timeline' && (*/}
+                {/*  <div className="timeline-content">*/}
+                {/*    {project.milestones && project.milestones.length > 0 ? (*/}
+                {/*      <div className="timeline-list">*/}
+                {/*        {project.milestones.map((milestone, index) => (*/}
+                {/*          <div*/}
+                {/*            key={index}*/}
+                {/*            className={`timeline-item ${milestone.completed ? 'completed' : ''}`}*/}
+                {/*          >*/}
+                {/*            <div className="timeline-marker">*/}
+                {/*              <div className="timeline-dot"></div>*/}
+                {/*              {index < project.milestones!.length - 1 && (*/}
+                {/*                <div className="timeline-line"></div>*/}
+                {/*              )}*/}
+                {/*            </div>*/}
+                {/*            <div className="timeline-content-box">*/}
+                {/*              <div className="timeline-date">*/}
+                {/*                {new Date(milestone.date).toLocaleDateString('en-US', {*/}
+                {/*                  month: 'long',*/}
+                {/*                  day: 'numeric',*/}
+                {/*                  year: 'numeric',*/}
+                {/*                })}*/}
+                {/*              </div>*/}
+                {/*              <p className="timeline-description">{milestone.description}</p>*/}
+                {/*              {milestone.completed && (*/}
+                {/*                <span className="timeline-badge">✓ Completed</span>*/}
+                {/*              )}*/}
+                {/*            </div>*/}
+                {/*          </div>*/}
+                {/*        ))}*/}
+                {/*      </div>*/}
+                {/*    ) : (*/}
+                {/*      <div className="empty-state">*/}
+                {/*        <span className="empty-icon">📅</span>*/}
+                {/*        <h3>Timeline Coming Soon</h3>*/}
+                {/*        <p>Program milestones will be added as the project progresses</p>*/}
+                {/*      </div>*/}
+                {/*    )}*/}
+                {/*  </div>*/}
+                {/*)}*/}
               </div>
             </div>
 
