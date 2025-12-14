@@ -115,10 +115,27 @@ const ProjectDetailPage: React.FC = () => {
     <Master>
       {/* Hero Section */}
       <section className="project-detail-hero">
-        <div className="project-hero-image">
-          <Image src={project.image} alt={project.title} fill priority className="hero-img" />
+        <div
+          className="project-hero-image"
+          style={{
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '16 / 9',
+            overflow: 'hidden',
+          }}
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            priority
+            className="hero-img"
+            sizes="100vw"
+            style={{ objectFit: 'cover' }}
+          />
           <div className="hero-overlay"></div>
         </div>
+
         <div className="hero-content">
           <div className="container">
             <div className="breadcrumb">

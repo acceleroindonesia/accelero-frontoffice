@@ -37,13 +37,19 @@ const nextConfig = {
       // Add your actual image hosting domains here when you replace dummy images
       {
         protocol: 'https',
-        hostname: 'res.cloudinary.com',
+        hostname: 'acceleroindonesia.com',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
         port: '',
         pathname: '/**',
       },
