@@ -8,12 +8,71 @@ function requireEnv(name: string): string {
   return v
 }
 
+function ipaymuTimestamp(date = new Date()): string {
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return (
+    date.getFullYear().toString() +
+    pad(date.getMonth() + 1) +
+    pad(date.getDate()) +
+    pad(date.getHours()) +
+    pad(date.getMinutes()) +
+    pad(date.getSeconds())
+  )
+}
+
 function sha256Hex(input: string): string {
   return crypto.createHash('sha256').update(input).digest('hex')
 }
 
 function hmacSha256Hex(secret: string, input: string): string {
   return crypto.createHmac('sha256', secret).update(input).digest('hex')
+}
+
+async function createIpaymuDirectPayment(params: Record<string, unknown>) {
+  const baseUrl = requireEnv('IPAYMU_BASE_URL')
+  const va = requireEnv('IPAYMU_VA')
+  const apiKey = requireEnv('IPAYMU_API_KEY')
+
+  // ✅ use iPaymu-style timestamp
+  const timestamp = ipaymuTimestamp()
+
+  const form = new URLSearchParams()
+  for (const [key, value] of Object.entries(params)) {
+    if (Array.isArray(value)) {
+      for (const item of value) form.append(key, String(item))
+    } else if (value !== undefined && value !== null) {
+      form.append(key, String(value))
+    }
+  }
+
+  const bodyString = form.toString()
+  const bodyHash = sha256Hex(bodyString)
+
+  const method = 'POST'
+  const path = '/api/v2/payment/direct'
+  const stringToSign = `${method}:${va}:${bodyHash}:${apiKey}`
+  const signature = hmacSha256Hex(apiKey, stringToSign)
+
+  const res = await fetch(`${baseUrl}${path}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Accept: 'application/json',
+      va,
+      timestamp,
+      // ✅ DO NOT COMMENT THIS OUT
+      signature,
+    },
+    body: bodyString,
+  })
+
+  const json = await res.json().catch(() => null)
+
+  return {
+    ok: res.ok,
+    status: res.status,
+    json,
+  }
 }
 
 function toBigIntOrNull(value: unknown): bigint | null {
@@ -57,50 +116,6 @@ function safeJsonDonation(row: any) {
     project_id: typeof row.project_id === 'bigint' ? row.project_id.toString() : row.project_id,
     user_id: typeof row.user_id === 'bigint' ? row.user_id.toString() : row.user_id,
     amount: typeof row.amount === 'bigint' ? row.amount.toString() : row.amount,
-  }
-}
-
-async function createIpaymuDirectPayment(params: Record<string, unknown>) {
-  const baseUrl = requireEnv('IPAYMU_BASE_URL')
-  const va = requireEnv('IPAYMU_VA')
-  const apiKey = requireEnv('IPAYMU_API_KEY')
-
-  const timestamp = new Date().toISOString()
-
-  const form = new URLSearchParams()
-  for (const [key, value] of Object.entries(params)) {
-    if (Array.isArray(value)) {
-      for (const item of value) form.append(key, String(item))
-    } else if (value !== undefined && value !== null) {
-      form.append(key, String(value))
-    }
-  }
-
-  const bodyString = form.toString()
-  const bodyHash = sha256Hex(bodyString)
-
-  const method = 'POST'
-  const path = '/api/v2/payment/direct'
-  const stringToSign = `${method}:${va}:${bodyHash}:${apiKey}`
-  const signature = hmacSha256Hex(apiKey, stringToSign)
-
-  const res = await fetch(`${baseUrl}${path}`, {
-    method,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      va,
-      timestamp,
-      signature,
-    },
-    body: bodyString,
-  })
-
-  const json = await res.json().catch(() => null)
-
-  return {
-    ok: res.ok,
-    status: res.status,
-    json,
   }
 }
 
@@ -285,25 +300,49 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const searchParams = request.nextUrl.searchParams
-    const donorEmail = searchParams.get('email')
+    const baseUrl = requireEnv('IPAYMU_BASE_URL')
+    const va = requireEnv('IPAYMU_VA')
+    const apiKey = requireEnv('IPAYMU_API_KEY')
 
-    const rows = await prisma.donations.findMany({
-      where: donorEmail ? { donor_email: donorEmail } : undefined,
-      orderBy: { created_at: 'desc' },
-      take: 50,
+    const timestamp = ipaymuTimestamp()
+
+    const method = 'GET'
+    const path = '/api/v2/payment-channels'
+
+    // GET has empty body => sha256('')
+    const bodyHash = sha256Hex('')
+
+    const stringToSign = `${method}:${va}:${bodyHash}:${apiKey}`
+    const signature = hmacSha256Hex(apiKey, stringToSign)
+
+    const res = await fetch(`${baseUrl}${path}`, {
+      method,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        va,
+        timestamp,
+        signature,
+      },
+      cache: 'no-store',
     })
 
-    return NextResponse.json({
-      success: true,
-      donations: rows.map(safeJsonDonation),
-    })
+    const json = await res.json().catch(() => null)
+
+    if (!res.ok) {
+      return NextResponse.json(
+        { success: false, error: 'Failed to fetch payment channels', details: json },
+        { status: 502 },
+      )
+    }
+
+    return NextResponse.json({ success: true, ...json })
   } catch (error) {
-    console.error('Error fetching donations:', error)
+    console.error('ipaymu payment-channels error:', error)
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch donations' },
+      { success: false, error: 'Failed to fetch payment channels' },
       { status: 500 },
     )
   }

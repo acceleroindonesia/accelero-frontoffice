@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useMemo, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Master from '@components/Layout/Master'
 import { ScrollAnimations } from '../home/components/ScrollAnimations'
@@ -14,6 +14,28 @@ interface IDonationProject {
   raisedAmount: number
   studentsImpacted: number
   image: string
+}
+
+type IpaymuChannel = {
+  Code: string
+  Name: string
+  Description?: string
+  Logo?: string
+  FeatureStatus?: string
+  HealthStatus?: string
+  PaymentInstructionsDoc?: string
+  TransactionFee?: {
+    ActualFee: number
+    ActualFeeType: 'PERCENT' | 'FLAT'
+    AdditionalFee: number
+  }
+}
+
+type IpaymuMethodGroup = {
+  Code: string
+  Name: string
+  Description?: string
+  Channels: IpaymuChannel[]
 }
 
 // Loading component for Suspense fallback
@@ -67,6 +89,11 @@ const DonateContent: React.FC = () => {
   const [newsletter, setNewsletter] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  const [paymentMethods, setPaymentMethods] = useState<IpaymuMethodGroup[]>([])
+  const [paymentMethod, setPaymentMethod] = useState<string>('va')
+  const [paymentChannel, setPaymentChannel] = useState<string>('cimb')
+  const [loadingPaymentMethods, setLoadingPaymentMethods] = useState(false)
+
   const predefinedAmounts = [50000, 100000, 250000, 500000, 1000000, 2500000]
 
   const motivationOptions = [
@@ -79,8 +106,14 @@ const DonateContent: React.FC = () => {
     { value: 'other', label: 'Other' },
   ]
 
+  const selectedMethod = useMemo(
+    () => paymentMethods.find((m) => m.Code === paymentMethod),
+    [paymentMethods, paymentMethod],
+  )
+
   useEffect(() => {
     fetchProjects()
+    fetchPaymentChannels()
   }, [])
 
   useEffect(() => {
@@ -105,6 +138,50 @@ const DonateContent: React.FC = () => {
       }
     } catch (error) {
       console.error('Failed to fetch projects:', error)
+    }
+  }
+
+  const fetchPaymentChannels = async () => {
+    setLoadingPaymentMethods(true)
+    try {
+      const res = await Request.getResponse({
+        url: '/api/ipaymu/payment-channels',
+        method: 'GET',
+      })
+
+      const data = res?.data as any
+      const methods = (data?.Data || []) as IpaymuMethodGroup[]
+
+      // Keep only channels that are active + online (optional but recommended)
+      const cleaned = methods
+        .map((m) => ({
+          ...m,
+          Channels: (m.Channels || []).filter(
+            (c) =>
+              (c.FeatureStatus ?? 'active') === 'active' &&
+              (c.HealthStatus ?? 'online') === 'online',
+          ),
+        }))
+        .filter((m) => m.Channels.length > 0)
+
+      setPaymentMethods(cleaned)
+
+      // Set defaults if current selection doesn't exist
+      if (cleaned.length > 0) {
+        const hasMethod = cleaned.some((m) => m.Code === paymentMethod)
+        const initialMethod = hasMethod ? paymentMethod : cleaned[0].Code
+        setPaymentMethod(initialMethod)
+
+        const methodObj = cleaned.find((m) => m.Code === initialMethod)
+        if (methodObj?.Channels?.length) {
+          const hasChannel = methodObj.Channels.some((c) => c.Code === paymentChannel)
+          setPaymentChannel(hasChannel ? paymentChannel : methodObj.Channels[0].Code)
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch iPaymu payment channels:', error)
+    } finally {
+      setLoadingPaymentMethods(false)
     }
   }
 
@@ -159,9 +236,8 @@ const DonateContent: React.FC = () => {
           anonymous,
           newsletter,
 
-          // Optional: you can expose these in UI later
-          paymentMethod: 'va',
-          paymentChannel: 'cimb',
+          paymentMethod,
+          paymentChannel,
         },
       })
 
@@ -432,11 +508,91 @@ const DonateContent: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Payment Method */}
+                <div className="form-section">
+                  <h2 className="section-title">
+                    <span className="section-number">5</span>
+                    Payment Method
+                  </h2>
+
+                  {loadingPaymentMethods ? (
+                    <p className="form-hint">Loading payment methods...</p>
+                  ) : paymentMethods.length === 0 ? (
+                    <p className="form-hint">
+                      Payment methods are not available right now. Please try again later.
+                    </p>
+                  ) : (
+                    <>
+                      <div className="form-row">
+                        <div className="form-group">
+                          <label className="form-label">Method</label>
+                          <select
+                            className="form-select"
+                            value={paymentMethod}
+                            onChange={(e) => {
+                              const newMethod = e.target.value
+                              setPaymentMethod(newMethod)
+                              const m = paymentMethods.find((x) => x.Code === newMethod)
+                              if (m?.Channels?.length) setPaymentChannel(m.Channels[0].Code)
+                            }}
+                            required
+                          >
+                            {paymentMethods.map((m) => (
+                              <option key={m.Code} value={m.Code}>
+                                {m.Name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div className="form-group">
+                          <label className="form-label">Channel</label>
+                          <select
+                            className="form-select"
+                            value={paymentChannel}
+                            onChange={(e) => setPaymentChannel(e.target.value)}
+                            required
+                            disabled={!selectedMethod}
+                          >
+                            {(selectedMethod?.Channels || []).map((c) => (
+                              <option key={c.Code} value={c.Code}>
+                                {c.Name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+
+                      {/* Optional: show fee info */}
+                      {selectedMethod ? (
+                        <div className="monthly-info">
+                          {(() => {
+                            const ch = selectedMethod.Channels.find(
+                              (c) => c.Code === paymentChannel,
+                            )
+                            const fee = ch?.TransactionFee
+                            if (!fee) return 'Fees depend on selected channel.'
+                            const feeText =
+                              fee.ActualFeeType === 'PERCENT'
+                                ? `${fee.ActualFee}%`
+                                : `Rp ${Number(fee.ActualFee).toLocaleString('id-ID')}`
+                            return `Estimated fee: ${feeText}`
+                          })()}
+                        </div>
+                      ) : null}
+                    </>
+                  )}
+                </div>
+
                 {/* Submit Button */}
                 <button
                   type="submit"
                   className="submit-btn"
-                  disabled={isSubmitting || getDonationAmount() < 10000}
+                  disabled={
+                    isSubmitting ||
+                    getDonationAmount() < 10000 ||
+                    (paymentMethods.length > 0 && (!paymentMethod || !paymentChannel))
+                  }
                 >
                   {isSubmitting ? (
                     <>
