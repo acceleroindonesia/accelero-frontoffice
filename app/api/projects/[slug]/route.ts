@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@utils/Prisma'
+import ToolBox from '@utils/ToolBox'
 
 // Force Node.js runtime (not Edge)
 export const runtime = 'nodejs'
@@ -9,6 +10,18 @@ interface School {
   address: string
   principal_name: string
   student_count: number
+}
+
+const toSchool = (value: unknown): Partial<School> => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
+  const obj = value as Record<string, unknown>
+
+  return {
+    name: typeof obj.name === 'string' ? obj.name : undefined,
+    address: typeof obj.address === 'string' ? obj.address : undefined,
+    principal_name: typeof obj.principal_name === 'string' ? obj.principal_name : undefined,
+    student_count: typeof obj.student_count === 'number' ? obj.student_count : undefined,
+  }
 }
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
@@ -35,7 +48,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       )
     }
 
-    const school = project.school as School
+    const school = toSchool(project.school)
 
     // Transform project for the response
     const transformedProject = {
@@ -51,17 +64,17 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       goalAmount: Number(project.goalAmount),
       raisedAmount: Number(project.raisedAmount),
       studentsImpacted: project.studentsImpacted,
-      image: project.image,
+      image: ToolBox.withGcsBase(project.image),
       status: project.status,
       featured: project.featured,
       category: project.category,
       startDate: project.startDate?.toISOString().split('T')[0],
       endDate: project.endDate?.toISOString().split('T')[0],
       school: {
-        name: school?.name || '',
-        address: school?.address || '',
-        principalName: school?.principal_name || '',
-        studentCount: school?.student_count || 0,
+        name: school.name || '',
+        address: school.address || '',
+        principalName: school.principal_name || '',
+        studentCount: school.student_count || 0,
       },
       donorCount: project.donorCount,
       volunteerCount: project.volunteerCount,
