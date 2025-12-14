@@ -37,7 +37,25 @@ const ProjectCard: React.FC<IProjectCard> = ({
       <Link href={`/projects/${url}`}>
         <div className="project-card-image">
           {image ? (
-            <Image src={image} alt={title} fill className="card-image" />
+            <div
+              style={{
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '16 / 9',
+                overflow: 'hidden',
+                borderRadius: 'inherit',
+              }}
+            >
+              <Image
+                src={image}
+                alt={title}
+                fill
+                className="card-image"
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: 'cover' }}
+                priority={false}
+              />
+            </div>
           ) : (
             <div className="card-placeholder">
               <span>📚</span>
