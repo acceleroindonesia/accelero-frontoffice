@@ -145,7 +145,7 @@ const DonateContent: React.FC = () => {
     setLoadingPaymentMethods(true)
     try {
       const res = await Request.getResponse({
-        url: '/api/ipaymu/payment-channels',
+        url: '/api/donations',
         method: 'GET',
       })
 
