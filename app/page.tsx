@@ -10,8 +10,6 @@ import HowItWorks from './home/components/HowItWorks'
 import VolunteerCTA from './home/components/VolunteerCTA'
 import { ScrollAnimations } from './home/components/ScrollAnimations'
 import Request, { type IResponse } from '@utils/Request'
-import PartnershipCTA from './home/components/PartnershipCTA'
-import BlogCTA from './home/components/BlogCTA'
 import { useLanguage } from '@contexts/LanguageContext'
 
 interface IProject {
@@ -28,25 +26,32 @@ interface IProject {
 }
 
 const Page: React.FC = () => {
+  const { t, language } = useLanguage() // Get both translation function and current language
   const [projects, setProjects] = useState<IProject[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const { t } = useLanguage()
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const res: IResponse = await Request.getResponse({
-        url: '/api/projects?featured=true&limit=6',
-        method: 'GET',
-      })
+      try {
+        setIsLoading(true)
+        const res: IResponse = await Request.getResponse({
+          url: `/api/projects?featured=true&limit=6&lang=${language}`, // Pass language parameter
+          method: 'GET',
+        })
 
-      if (res?.data?.projects) {
-        setProjects(res.data.projects)
+        // Type guard to check if response has projects property
+        if (res?.data && 'projects' in res.data && Array.isArray(res.data.projects)) {
+          setProjects(res.data.projects)
+        }
+      } catch (error) {
+        console.error('Failed to fetch projects:', error)
+      } finally {
+        setIsLoading(false)
       }
-      setIsLoading(false)
     }
 
     fetchProjects()
-  }, [])
+  }, [language]) // Refetch when language changes
 
   if (isLoading) {
     return (
@@ -110,8 +115,6 @@ const Page: React.FC = () => {
 
       <HowItWorks />
       <VolunteerCTA />
-      {/*<PartnershipCTA />*/}
-      {/*<BlogCTA />*/}
     </Master>
   )
 }
