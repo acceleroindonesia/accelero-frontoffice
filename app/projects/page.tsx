@@ -23,7 +23,7 @@ interface IProject {
 }
 
 const ProjectsPage: React.FC = () => {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage() // Get both translation function and current language
   const [projects, setProjects] = useState<IProject[]>([])
   const [filteredProjects, setFilteredProjects] = useState<IProject[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -36,26 +36,30 @@ const ProjectsPage: React.FC = () => {
     { value: 'all', label: t('allPrograms'), icon: '🎯' },
     { value: 'literacy', label: t('literacy'), icon: '📚' },
     { value: 'numeracy', label: t('numeracy'), icon: '🔢' },
+    { value: 'stem', label: 'STEM', icon: '🔬' }, // Added STEM category
     { value: 'teacher-training', label: t('teacherTraining'), icon: '👨‍🏫' },
     { value: 'infrastructure', label: t('infrastructure'), icon: '🏗️' },
   ]
 
   useEffect(() => {
     fetchProjects()
-  }, [])
+  }, [language]) // Refetch projects when language changes
 
   useEffect(() => {
     filterAndSortProjects()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projects, searchQuery, selectedCategory, selectedStatus, sortBy])
 
   const fetchProjects = async () => {
     try {
+      setIsLoading(true)
       const res: IResponse = await Request.getResponse({
-        url: '/api/projects?limit=50',
+        url: `/api/projects?limit=50&lang=${language}`, // Pass language parameter to API
         method: 'GET',
       })
 
-      if (res?.data?.projects) {
+      // Type guard to check if response has projects property
+      if (res?.data && 'projects' in res.data && Array.isArray(res.data.projects)) {
         setProjects(res.data.projects)
       }
     } catch (error) {

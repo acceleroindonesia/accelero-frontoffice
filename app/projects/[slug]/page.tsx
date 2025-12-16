@@ -51,30 +51,33 @@ interface IProjectDetail {
 const ProjectDetailPage: React.FC = () => {
   const params = useParams()
   const slug = params.slug as string
+  const { t, language } = useLanguage()
 
   const [project, setProject] = useState<IProjectDetail | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  // const [selectedTab, setSelectedTab] = useState<'overview' | 'updates' | 'budget' | 'timeline'>(
-  //   'overview',
-  // )
   const [selectedTab, setSelectedTab] = useState<'overview'>('overview')
-  const { t } = useLanguage()
 
   useEffect(() => {
     const fetchProject = async () => {
-      const res: IResponse = await Request.getResponse({
-        url: `/api/projects/${slug}`,
-        method: 'GET',
-      })
+      try {
+        setIsLoading(true)
+        const res: IResponse = await Request.getResponse({
+          url: `/api/projects/${slug}?lang=${language}`,
+          method: 'GET',
+        })
 
-      if (res?.data?.project) {
-        setProject(res.data.project)
+        if (res?.data && 'project' in res.data) {
+          setProject(res.data.project as IProjectDetail)
+        }
+      } catch (error) {
+        console.error('Failed to fetch project:', error)
+      } finally {
+        setIsLoading(false)
       }
-      setIsLoading(false)
     }
 
     fetchProject()
-  }, [slug])
+  }, [slug, language])
 
   if (isLoading) {
     return (
@@ -122,9 +125,9 @@ const ProjectDetailPage: React.FC = () => {
         <div className="hero-content">
           <div className="container">
             <div className="breadcrumb">
-              <Link href="/">Home</Link>
+              <Link href="/">{t('home')}</Link>
               <span>/</span>
-              <Link href="/projects">Projects</Link>
+              <Link href="/projects">{t('projects')}</Link>
               <span>/</span>
               <span>{project.title}</span>
             </div>
@@ -144,7 +147,9 @@ const ProjectDetailPage: React.FC = () => {
               </div>
               <div className="meta-item">
                 <span className="meta-icon">👥</span>
-                <span>{project.studentsImpacted} students</span>
+                <span>
+                  {project.studentsImpacted} {language === 'id' ? 'siswa' : 'students'}
+                </span>
               </div>
             </div>
           </div>
@@ -163,26 +168,8 @@ const ProjectDetailPage: React.FC = () => {
                   className={`tab ${selectedTab === 'overview' ? 'active' : ''}`}
                   onClick={() => setSelectedTab('overview')}
                 >
-                  Overview
+                  {t('overview')}
                 </button>
-                {/*<button*/}
-                {/*  className={`tab ${selectedTab === 'updates' ? 'active' : ''}`}*/}
-                {/*  onClick={() => setSelectedTab('updates')}*/}
-                {/*>*/}
-                {/*  Updates ({project.updates?.length || 0})*/}
-                {/*</button>*/}
-                {/*<button*/}
-                {/*  className={`tab ${selectedTab === 'budget' ? 'active' : ''}`}*/}
-                {/*  onClick={() => setSelectedTab('budget')}*/}
-                {/*>*/}
-                {/*  Budget Breakdown*/}
-                {/*</button>*/}
-                {/*<button*/}
-                {/*  className={`tab ${selectedTab === 'timeline' ? 'active' : ''}`}*/}
-                {/*  onClick={() => setSelectedTab('timeline')}*/}
-                {/*>*/}
-                {/*  Timeline*/}
-                {/*</button>*/}
               </div>
 
               {/* Tab Content */}
@@ -190,72 +177,104 @@ const ProjectDetailPage: React.FC = () => {
                 {selectedTab === 'overview' && (
                   <div className="overview-content">
                     <div className="content-section">
-                      <h2>About This Program</h2>
+                      <h2>{t('aboutThisProgram')}</h2>
                       <p className="lead-text">{project.description}</p>
                       <p className="body-text">{project.fullDescription || project.description}</p>
                     </div>
 
                     <div className="content-section">
-                      <h2>The Challenge</h2>
+                      <h2>{t('theChallenge')}</h2>
                       <div className="challenge-box">
                         <div className="challenge-icon">🎯</div>
                         <div>
-                          <h3>Why This Matters</h3>
+                          <h3>{t('whyThisMatters')}</h3>
                           <p>
-                            Many students in {project.location} are falling behind in foundational
-                            literacy and numeracy skills. Without intervention, they risk being left
-                            behind permanently.
+                            {language === 'id'
+                              ? `Banyak siswa di ${project.location} tertinggal dalam keterampilan literasi dan numerasi dasar. Tanpa intervensi, mereka berisiko tertinggal secara permanen.`
+                              : `Many students in ${project.location} are falling behind in foundational literacy and numeracy skills. Without intervention, they risk being left behind permanently.`}
                           </p>
                         </div>
                       </div>
                     </div>
 
                     <div className="content-section">
-                      <h2>Our Approach</h2>
+                      <h2>{language === 'id' ? 'Pendekatan Kami' : 'Our Approach'}</h2>
                       <div className="approach-grid">
                         <div className="approach-card">
                           <span className="approach-icon">📚</span>
-                          <h4>Teaching at Right Level</h4>
-                          <p>Students grouped by learning level, not grade</p>
+                          <h4>
+                            {language === 'id'
+                              ? 'Pembelajaran Sesuai Tingkat'
+                              : 'Teaching at Right Level'}
+                          </h4>
+                          <p>
+                            {language === 'id'
+                              ? 'Siswa dikelompokkan berdasarkan tingkat pembelajaran, bukan kelas'
+                              : 'Students grouped by learning level, not grade'}
+                          </p>
                         </div>
                         <div className="approach-card">
                           <span className="approach-icon">👨‍🏫</span>
-                          <h4>Trained Facilitators</h4>
-                          <p>Teachers equipped with proven methodologies</p>
+                          <h4>
+                            {language === 'id' ? 'Fasilitator Terlatih' : 'Trained Facilitators'}
+                          </h4>
+                          <p>
+                            {language === 'id'
+                              ? 'Guru dilengkapi dengan metodologi yang terbukti'
+                              : 'Teachers equipped with proven methodologies'}
+                          </p>
                         </div>
                         <div className="approach-card">
                           <span className="approach-icon">📊</span>
-                          <h4>Regular Assessment</h4>
-                          <p>Progress tracked and measured continuously</p>
+                          <h4>{language === 'id' ? 'Penilaian Berkala' : 'Regular Assessment'}</h4>
+                          <p>
+                            {language === 'id'
+                              ? 'Kemajuan dilacak dan diukur secara berkelanjutan'
+                              : 'Progress tracked and measured continuously'}
+                          </p>
                         </div>
                         <div className="approach-card">
                           <span className="approach-icon">🤝</span>
-                          <h4>Community Involvement</h4>
-                          <p>Parents and volunteers actively engaged</p>
+                          <h4>
+                            {language === 'id' ? 'Keterlibatan Komunitas' : 'Community Involvement'}
+                          </h4>
+                          <p>
+                            {language === 'id'
+                              ? 'Orang tua dan relawan terlibat aktif'
+                              : 'Parents and volunteers actively engaged'}
+                          </p>
                         </div>
                       </div>
                     </div>
 
                     <div className="content-section">
-                      <h2>Expected Impact</h2>
+                      <h2>{t('expectedImpact')}</h2>
                       <div className="impact-metrics">
                         <div className="impact-metric">
                           <div className="metric-number">85%</div>
-                          <div className="metric-label">Expected improvement rate</div>
+                          <div className="metric-label">
+                            {language === 'id'
+                              ? 'Tingkat peningkatan yang diharapkan'
+                              : 'Expected improvement rate'}
+                          </div>
                         </div>
                         <div className="impact-metric">
                           <div className="metric-number">{project.studentsImpacted}</div>
-                          <div className="metric-label">Students to benefit</div>
+                          <div className="metric-label">
+                            {language === 'id' ? 'Siswa yang diuntungkan' : 'Students to benefit'}
+                          </div>
                         </div>
                         <div className="impact-metric">
                           <div className="metric-number">12</div>
-                          <div className="metric-label">Months duration</div>
+                          <div className="metric-label">
+                            {language === 'id' ? 'Bulan durasi' : 'Months duration'}
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="content-section">
-                      <h2>About the School</h2>
+                      <h2>{t('aboutTheSchool')}</h2>
                       <div className="school-info-card">
                         <div className="school-header">
                           <div className="school-icon">🏫</div>
@@ -266,16 +285,16 @@ const ProjectDetailPage: React.FC = () => {
                         </div>
                         <div className="school-details">
                           <div className="detail-row">
-                            <span className="detail-label">Principal:</span>
+                            <span className="detail-label">{t('principal')}:</span>
                             <span className="detail-value">{project.school.principalName}</span>
                           </div>
                           <div className="detail-row">
-                            <span className="detail-label">Total Students:</span>
+                            <span className="detail-label">{t('totalStudents')}:</span>
                             <span className="detail-value">{project.school.studentCount}</span>
                           </div>
                           {project.school.establishedYear && (
                             <div className="detail-row">
-                              <span className="detail-label">Established:</span>
+                              <span className="detail-label">{t('established')}:</span>
                               <span className="detail-value">{project.school.establishedYear}</span>
                             </div>
                           )}
@@ -284,120 +303,6 @@ const ProjectDetailPage: React.FC = () => {
                     </div>
                   </div>
                 )}
-
-                {/*{selectedTab === 'updates' && (*/}
-                {/*  <div className="updates-content">*/}
-                {/*    {project.updates && project.updates.length > 0 ? (*/}
-                {/*      <div className="updates-list">*/}
-                {/*        {project.updates.map((update, index) => (*/}
-                {/*          <div key={index} className="update-card">*/}
-                {/*            <div className="update-date">*/}
-                {/*              {new Date(update.date).toLocaleDateString('en-US', {*/}
-                {/*                month: 'long',*/}
-                {/*                day: 'numeric',*/}
-                {/*                year: 'numeric',*/}
-                {/*              })}*/}
-                {/*            </div>*/}
-                {/*            <h3 className="update-title">{update.title}</h3>*/}
-                {/*            <p className="update-content">{update.content}</p>*/}
-                {/*          </div>*/}
-                {/*        ))}*/}
-                {/*      </div>*/}
-                {/*    ) : (*/}
-                {/*      <div className="empty-state">*/}
-                {/*        <span className="empty-icon">📝</span>*/}
-                {/*        <h3>No Updates Yet</h3>*/}
-                {/*        <p>Check back soon for progress updates on this program</p>*/}
-                {/*      </div>*/}
-                {/*    )}*/}
-                {/*  </div>*/}
-                {/*)}*/}
-
-                {/*{selectedTab === 'budget' && (*/}
-                {/*  <div className="budget-content">*/}
-                {/*    {project.budget && project.budget.length > 0 ? (*/}
-                {/*      <>*/}
-                {/*        <div className="budget-overview">*/}
-                {/*          <h3>Total Budget</h3>*/}
-                {/*          <div className="budget-total">*/}
-                {/*            Rp {project.goalAmount.toLocaleString()}*/}
-                {/*          </div>*/}
-                {/*        </div>*/}
-                {/*        <div className="budget-list">*/}
-                {/*          {project.budget.map((item, index) => {*/}
-                {/*            const itemPercentage = (item.amount / project.goalAmount) * 100*/}
-                {/*            return (*/}
-                {/*              <div key={index} className="budget-item">*/}
-                {/*                <div className="budget-item-header">*/}
-                {/*                  <span className="budget-item-name">{item.item}</span>*/}
-                {/*                  <span className="budget-item-amount">*/}
-                {/*                    Rp {item.amount.toLocaleString()}*/}
-                {/*                  </span>*/}
-                {/*                </div>*/}
-                {/*                <div className="budget-item-bar">*/}
-                {/*                  <div*/}
-                {/*                    className="budget-item-fill"*/}
-                {/*                    style={{ width: `${itemPercentage}%` }}*/}
-                {/*                  ></div>*/}
-                {/*                </div>*/}
-                {/*                <div className="budget-item-percentage">*/}
-                {/*                  {itemPercentage.toFixed(1)}% of total budget*/}
-                {/*                </div>*/}
-                {/*              </div>*/}
-                {/*            )*/}
-                {/*          })}*/}
-                {/*        </div>*/}
-                {/*      </>*/}
-                {/*    ) : (*/}
-                {/*      <div className="empty-state">*/}
-                {/*        <span className="empty-icon">💰</span>*/}
-                {/*        <h3>Budget Details Coming Soon</h3>*/}
-                {/*        <p>Detailed budget breakdown will be available shortly</p>*/}
-                {/*      </div>*/}
-                {/*    )}*/}
-                {/*  </div>*/}
-                {/*)}*/}
-
-                {/*{selectedTab === 'timeline' && (*/}
-                {/*  <div className="timeline-content">*/}
-                {/*    {project.milestones && project.milestones.length > 0 ? (*/}
-                {/*      <div className="timeline-list">*/}
-                {/*        {project.milestones.map((milestone, index) => (*/}
-                {/*          <div*/}
-                {/*            key={index}*/}
-                {/*            className={`timeline-item ${milestone.completed ? 'completed' : ''}`}*/}
-                {/*          >*/}
-                {/*            <div className="timeline-marker">*/}
-                {/*              <div className="timeline-dot"></div>*/}
-                {/*              {index < project.milestones!.length - 1 && (*/}
-                {/*                <div className="timeline-line"></div>*/}
-                {/*              )}*/}
-                {/*            </div>*/}
-                {/*            <div className="timeline-content-box">*/}
-                {/*              <div className="timeline-date">*/}
-                {/*                {new Date(milestone.date).toLocaleDateString('en-US', {*/}
-                {/*                  month: 'long',*/}
-                {/*                  day: 'numeric',*/}
-                {/*                  year: 'numeric',*/}
-                {/*                })}*/}
-                {/*              </div>*/}
-                {/*              <p className="timeline-description">{milestone.description}</p>*/}
-                {/*              {milestone.completed && (*/}
-                {/*                <span className="timeline-badge">✓ Completed</span>*/}
-                {/*              )}*/}
-                {/*            </div>*/}
-                {/*          </div>*/}
-                {/*        ))}*/}
-                {/*      </div>*/}
-                {/*    ) : (*/}
-                {/*      <div className="empty-state">*/}
-                {/*        <span className="empty-icon">📅</span>*/}
-                {/*        <h3>Timeline Coming Soon</h3>*/}
-                {/*        <p>Program milestones will be added as the project progresses</p>*/}
-                {/*      </div>*/}
-                {/*    )}*/}
-                {/*  </div>*/}
-                {/*)}*/}
               </div>
             </div>
 
@@ -408,13 +313,13 @@ const ProjectDetailPage: React.FC = () => {
                 <div className="donation-progress">
                   <div className="progress-stats-header">
                     <div className="raised-amount">
-                      <span className="amount-label">Raised</span>
+                      <span className="amount-label">{t('raised')}</span>
                       <span className="amount-value">
                         Rp {project.raisedAmount.toLocaleString()}
                       </span>
                     </div>
                     <div className="goal-amount">
-                      <span className="goal-label">Goal</span>
+                      <span className="goal-label">{t('goal')}</span>
                       <span className="goal-value">Rp {project.goalAmount.toLocaleString()}</span>
                     </div>
                   </div>
@@ -423,23 +328,25 @@ const ProjectDetailPage: React.FC = () => {
                       <div className="progress-shimmer"></div>
                     </div>
                   </div>
-                  <div className="progress-percentage-large">{percentage.toFixed(0)}% funded</div>
+                  <div className="progress-percentage-large">
+                    {percentage.toFixed(0)}% {t('funded')}
+                  </div>
                 </div>
 
                 {remaining > 0 && project.status === 'active' && (
                   <div className="donation-remaining">
-                    <strong>Rp {remaining.toLocaleString()}</strong> still needed
+                    <strong>Rp {remaining.toLocaleString()}</strong> {t('stillNeeded')}
                   </div>
                 )}
 
                 <div className="donation-stats-grid">
                   <div className="stat-box">
                     <div className="stat-box-number">{project.donorCount}</div>
-                    <div className="stat-box-label">Donors</div>
+                    <div className="stat-box-label">{t('donors')}</div>
                   </div>
                   <div className="stat-box">
                     <div className="stat-box-number">{project.volunteerCount}</div>
-                    <div className="stat-box-label">Volunteers</div>
+                    <div className="stat-box-label">{t('volunteers')}</div>
                   </div>
                 </div>
 
@@ -451,47 +358,71 @@ const ProjectDetailPage: React.FC = () => {
                     </Link>
                     <button className="btn-share">
                       <span className="btn-icon">📤</span>
-                      <span>Share This Project</span>
+                      <span>{language === 'id' ? 'Bagikan Proyek Ini' : 'Share This Project'}</span>
                     </button>
                   </>
                 ) : (
                   <div className="project-completed-banner">
                     <span className="completed-icon">✓</span>
-                    <span>Project Completed</span>
+                    <span>{language === 'id' ? 'Proyek Selesai' : 'Project Completed'}</span>
                   </div>
                 )}
 
                 <div className="donation-secure">
                   <span className="secure-icon">🔒</span>
-                  <span>Secure & transparent donations</span>
+                  <span>
+                    {language === 'id'
+                      ? 'Donasi aman & transparan'
+                      : 'Secure & transparent donations'}
+                  </span>
                 </div>
               </div>
 
               {/* Quick Impact Card */}
               <div className="quick-impact-card">
-                <h3>Your Impact</h3>
-                <p>See how your donation helps:</p>
+                <h3>{t('yourImpact')}</h3>
+                <p>
+                  {language === 'id'
+                    ? 'Lihat bagaimana donasi Anda membantu:'
+                    : 'See how your donation helps:'}
+                </p>
                 <div className="impact-examples">
                   <div className="impact-example">
                     <div className="impact-amount">Rp 100,000</div>
-                    <div className="impact-desc">Provides 10 reading books</div>
+                    <div className="impact-desc">
+                      {language === 'id'
+                        ? 'Menyediakan 10 buku bacaan'
+                        : 'Provides 10 reading books'}
+                    </div>
                   </div>
                   <div className="impact-example">
                     <div className="impact-amount">Rp 500,000</div>
-                    <div className="impact-desc">Supports 5 students for 1 month</div>
+                    <div className="impact-desc">
+                      {language === 'id'
+                        ? 'Mendukung 5 siswa selama 1 bulan'
+                        : 'Supports 5 students for 1 month'}
+                    </div>
                   </div>
                   <div className="impact-example">
                     <div className="impact-amount">Rp 1,000,000</div>
-                    <div className="impact-desc">Trains 1 teacher in TaRL method</div>
+                    <div className="impact-desc">
+                      {language === 'id'
+                        ? 'Melatih 1 guru dengan metode TaRL'
+                        : 'Trains 1 teacher in TaRL method'}
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Similar Projects */}
               <div className="similar-projects-card">
-                <h3>Other Programs You Might Like</h3>
+                <h3>
+                  {language === 'id'
+                    ? 'Program Lain yang Mungkin Anda Suka'
+                    : 'Other Programs You Might Like'}
+                </h3>
                 <Link href="/projects" className="btn-view-all">
-                  View All Programs →
+                  {t('viewAllPrograms')} →
                 </Link>
               </div>
             </div>
