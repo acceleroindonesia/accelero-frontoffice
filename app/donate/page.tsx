@@ -1,10 +1,11 @@
 'use client'
 
-import { Suspense, useEffect, useMemo, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Master from '@components/Layout/Master'
 import { ScrollAnimations } from '../home/components/ScrollAnimations'
 import Request from '@utils/Request'
+import { useLanguage } from '@contexts/LanguageContext'
 
 interface IDonationProject {
   id: string
@@ -14,28 +15,6 @@ interface IDonationProject {
   raisedAmount: number
   studentsImpacted: number
   image: string
-}
-
-type IpaymuChannel = {
-  Code: string
-  Name: string
-  Description?: string
-  Logo?: string
-  FeatureStatus?: string
-  HealthStatus?: string
-  PaymentInstructionsDoc?: string
-  TransactionFee?: {
-    ActualFee: number
-    ActualFeeType: 'PERCENT' | 'FLAT'
-    AdditionalFee: number
-  }
-}
-
-type IpaymuMethodGroup = {
-  Code: string
-  Name: string
-  Description?: string
-  Channels: IpaymuChannel[]
 }
 
 // Loading component for Suspense fallback
@@ -72,6 +51,7 @@ const DonateContent: React.FC = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const projectParam = searchParams.get('project')
+  const { t, language } = useLanguage()
 
   const [selectedProject, setSelectedProject] = useState<IDonationProject | null>(null)
   const [projects, setProjects] = useState<IDonationProject[]>([])
@@ -89,99 +69,40 @@ const DonateContent: React.FC = () => {
   const [newsletter, setNewsletter] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const [paymentMethods, setPaymentMethods] = useState<IpaymuMethodGroup[]>([])
-  const [paymentMethod, setPaymentMethod] = useState<string>('va')
-  const [paymentChannel, setPaymentChannel] = useState<string>('cimb')
-  const [loadingPaymentMethods, setLoadingPaymentMethods] = useState(false)
-
   const predefinedAmounts = [50000, 100000, 250000, 500000, 1000000, 2500000]
 
   const motivationOptions = [
-    { value: '', label: 'Select your motivation...' },
-    { value: 'education', label: 'I believe in education equity' },
-    { value: 'community', label: 'Supporting my community' },
-    { value: 'impact', label: 'Want to see measurable impact' },
-    { value: 'future', label: "Investing in children's future" },
-    { value: 'tax', label: 'Tax-deductible donation' },
-    { value: 'other', label: 'Other' },
+    { value: '', label: t('selectMotivation') },
+    { value: 'education', label: t('believeInEducationEquity') },
+    { value: 'community', label: t('supportingCommunity') },
+    { value: 'impact', label: t('wantMeasurableImpact') },
+    { value: 'future', label: t('investingInFuture') },
+    { value: 'tax', label: t('taxDeductible') },
+    { value: 'other', label: t('other') },
   ]
-
-  const selectedMethod = useMemo(
-    () => paymentMethods.find((m) => m.Code === paymentMethod),
-    [paymentMethods, paymentMethod],
-  )
 
   useEffect(() => {
     fetchProjects()
-    fetchPaymentChannels()
-  }, [])
+  }, [language]) // Refetch when language changes
 
   useEffect(() => {
     if (projectParam && projects.length > 0) {
       const project = projects.find((p) => p.id === projectParam)
-      if (project) {
-        setSelectedProject(project)
-      }
+      if (project) setSelectedProject(project)
     }
   }, [projectParam, projects])
 
   const fetchProjects = async () => {
     try {
       const res = await Request.getResponse({
-        url: '/api/projects?status=active&limit=20',
+        url: `/api/projects?status=active&limit=20&lang=${language}`,
         method: 'GET',
       })
 
       const data = res?.data as { projects?: IDonationProject[] }
-      if (data?.projects) {
-        setProjects(data.projects)
-      }
+      if (data?.projects) setProjects(data.projects)
     } catch (error) {
       console.error('Failed to fetch projects:', error)
-    }
-  }
-
-  const fetchPaymentChannels = async () => {
-    setLoadingPaymentMethods(true)
-    try {
-      const res = await Request.getResponse({
-        url: '/api/donations',
-        method: 'GET',
-      })
-
-      const data = res?.data as any
-      const methods = (data?.Data || []) as IpaymuMethodGroup[]
-
-      // Keep only channels that are active + online (optional but recommended)
-      const cleaned = methods
-        .map((m) => ({
-          ...m,
-          Channels: (m.Channels || []).filter(
-            (c) =>
-              (c.FeatureStatus ?? 'active') === 'active' &&
-              (c.HealthStatus ?? 'online') === 'online',
-          ),
-        }))
-        .filter((m) => m.Channels.length > 0)
-
-      setPaymentMethods(cleaned)
-
-      // Set defaults if current selection doesn't exist
-      if (cleaned.length > 0) {
-        const hasMethod = cleaned.some((m) => m.Code === paymentMethod)
-        const initialMethod = hasMethod ? paymentMethod : cleaned[0].Code
-        setPaymentMethod(initialMethod)
-
-        const methodObj = cleaned.find((m) => m.Code === initialMethod)
-        if (methodObj?.Channels?.length) {
-          const hasChannel = methodObj.Channels.some((c) => c.Code === paymentChannel)
-          setPaymentChannel(hasChannel ? paymentChannel : methodObj.Channels[0].Code)
-        }
-      }
-    } catch (error) {
-      console.error('Failed to fetch iPaymu payment channels:', error)
-    } finally {
-      setLoadingPaymentMethods(false)
     }
   }
 
@@ -190,17 +111,17 @@ const DonateContent: React.FC = () => {
     const project = projects.find((p) => p.id === projectId)
     setSelectedProject(project || null)
 
-    // Update URL query parameter
     const newUrl = projectId === 'general' ? '/donate' : `/donate?project=${projectId}`
     router.push(newUrl, { scroll: false })
   }
 
   const getDonationAmount = (): number => {
-    if (customAmount) {
-      return parseInt(customAmount) || 0
-    }
+    if (customAmount) return parseInt(customAmount) || 0
     return selectedAmount || 0
   }
+
+  const donationAmount = getDonationAmount()
+  const shouldShowMinDonationHint = donationAmount === 0 || donationAmount < 10000
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -209,13 +130,13 @@ const DonateContent: React.FC = () => {
     const amount = getDonationAmount()
 
     if (amount < 10000) {
-      alert('Minimum donation is Rp 10,000')
+      alert(t('minimumDonationAlert'))
       setIsSubmitting(false)
       return
     }
 
     if (!donorName || !donorEmail) {
-      alert('Please fill in your name and email')
+      alert(t('fillNameEmail'))
       setIsSubmitting(false)
       return
     }
@@ -235,18 +156,23 @@ const DonateContent: React.FC = () => {
           donorPhone: donorPhone || null,
           anonymous,
           newsletter,
-
-          paymentMethod,
-          paymentChannel,
         },
       })
 
-      const data = res?.data as { success?: boolean; donationId?: string; error?: string }
-      if (data?.success && data?.donationId) {
-        router.push(`/donate/payment/${data.donationId}`)
-      } else {
-        alert(data?.error || 'Failed to process donation')
+      const data = res?.data as {
+        success?: boolean
+        error?: string
+        ipaymu?: { Data?: { Url?: string } }
       }
+
+      const paymentUrl = data?.ipaymu?.Data?.Url
+      if (data?.success && paymentUrl) {
+        // Open iPaymu payment page immediately
+        window.location.assign(paymentUrl)
+        return
+      }
+
+      alert(data?.error || 'Failed to process donation')
     } catch (error) {
       console.error('Donation error:', error)
       alert('An error occurred. Please try again.')
@@ -257,14 +183,13 @@ const DonateContent: React.FC = () => {
 
   const getImpactMessage = () => {
     const amount = getDonationAmount()
-    if (amount >= 1000000) {
-      return `can train ${Math.floor(amount / 1000000)} teacher(s) in TaRL methodology`
-    } else if (amount >= 500000) {
-      return `can support ${Math.floor(amount / 100000)} students for one month`
-    } else if (amount >= 100000) {
-      return `can provide ${Math.floor(amount / 10000)} reading books`
-    }
-    return "will make a real difference in a student's life"
+    if (amount >= 1000000)
+      return `${t('canTrainTeachers')} ${Math.floor(amount / 1000000)} ${t('teachers')}`
+    if (amount >= 500000)
+      return `${t('canSupport')} ${Math.floor(amount / 100000)} ${t('studentsForMonth')}`
+    if (amount >= 100000)
+      return `${t('canProvide')} ${Math.floor(amount / 10000)} ${t('readingBooks')}`
+    return t('willMakeRealDifference')
   }
 
   return (
@@ -275,12 +200,9 @@ const DonateContent: React.FC = () => {
       <section className="donate-hero">
         <div className="container">
           <div className="donate-hero-content">
-            <span className="donate-label">Make an Impact</span>
-            <h1 className="donate-title">Every Donation Changes Lives</h1>
-            <p className="donate-subtitle">
-              Your contribution provides books, training, and hope to students who need it most.
-              100% transparent, 100% impactful.
-            </p>
+            <span className="donate-label">{t('makeAnImpactDonate')}</span>
+            <h1 className="donate-title">{t('everyDonationChangesLives')}</h1>
+            <p className="donate-subtitle">{t('donatePageDesc')}</p>
           </div>
         </div>
       </section>
@@ -328,7 +250,7 @@ const DonateContent: React.FC = () => {
                             {Math.round(
                               (selectedProject.raisedAmount / selectedProject.goalAmount) * 100,
                             )}
-                            % funded
+                            % {t('funded')}
                           </span>
                         </div>
                       </div>
@@ -340,7 +262,7 @@ const DonateContent: React.FC = () => {
                 <div className="form-section">
                   <h2 className="section-title">
                     <span className="section-number">2</span>
-                    Choose Your Amount
+                    {t('chooseYourAmount')}
                   </h2>
 
                   {/* Donation Type Toggle */}
@@ -351,7 +273,7 @@ const DonateContent: React.FC = () => {
                       onClick={() => setDonationType('one-time')}
                     >
                       <span className="toggle-icon">💝</span>
-                      <span>One-Time</span>
+                      <span>{t('oneTime')}</span>
                     </button>
                     <button
                       type="button"
@@ -359,14 +281,12 @@ const DonateContent: React.FC = () => {
                       onClick={() => setDonationType('monthly')}
                     >
                       <span className="toggle-icon">🔄</span>
-                      <span>Monthly</span>
+                      <span>{t('monthly')}</span>
                     </button>
                   </div>
 
                   {donationType === 'monthly' && (
-                    <div className="monthly-info">
-                      ℹ️ Monthly donations help us plan better and create lasting impact
-                    </div>
+                    <div className="monthly-info">ℹ️ {t('monthlyInfo')}</div>
                   )}
 
                   {/* Amount Buttons */}
@@ -388,13 +308,13 @@ const DonateContent: React.FC = () => {
 
                   {/* Custom Amount */}
                   <div className="form-group">
-                    <label className="form-label">Or enter custom amount</label>
+                    <label className="form-label">{t('orEnterCustomAmount')}</label>
                     <div className="input-with-prefix">
                       <span className="input-prefix">Rp</span>
                       <input
                         type="number"
                         className="form-input"
-                        placeholder="Enter amount"
+                        placeholder={t('enterAmount')}
                         value={customAmount}
                         onChange={(e) => {
                           setCustomAmount(e.target.value)
@@ -403,7 +323,10 @@ const DonateContent: React.FC = () => {
                         min="10000"
                       />
                     </div>
-                    <small className="form-hint">Minimum donation: Rp 10,000</small>
+
+                    {shouldShowMinDonationHint ? (
+                      <small className="form-hint">{t('minimumDonation')}</small>
+                    ) : null}
                   </div>
                 </div>
 
@@ -411,10 +334,10 @@ const DonateContent: React.FC = () => {
                 <div className="form-section">
                   <h2 className="section-title">
                     <span className="section-number">3</span>
-                    Share Your Motivation
+                    {t('shareYourMotivation')}
                   </h2>
                   <div className="form-group">
-                    <label className="form-label">What inspired you to give today?</label>
+                    <label className="form-label">{t('whatInspiredYou')}</label>
                     <select
                       className="form-select"
                       value={motivation}
@@ -431,11 +354,12 @@ const DonateContent: React.FC = () => {
 
                   <div className="form-group">
                     <label className="form-label">
-                      Message of Encouragement <span className="optional">(Optional)</span>
+                      {t('messageOfEncouragement')}{' '}
+                      <span className="optional">{t('optional')}</span>
                     </label>
                     <textarea
                       className="form-textarea"
-                      placeholder="Send a message to the students and teachers..."
+                      placeholder={t('sendMessageToStudents')}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       rows={4}
@@ -447,14 +371,14 @@ const DonateContent: React.FC = () => {
                 <div className="form-section">
                   <h2 className="section-title">
                     <span className="section-number">4</span>
-                    Your Information
+                    {t('yourInformation')}
                   </h2>
                   <div className="form-group">
-                    <label className="form-label">Full Name</label>
+                    <label className="form-label">{t('fullName')}</label>
                     <input
                       type="text"
                       className="form-input"
-                      placeholder="Enter your full name"
+                      placeholder={t('enterFullName')}
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
                       required
@@ -464,11 +388,11 @@ const DonateContent: React.FC = () => {
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label className="form-label">Email Address</label>
+                      <label className="form-label">{t('emailAddress')}</label>
                       <input
                         type="email"
                         className="form-input"
-                        placeholder="your@email.com"
+                        placeholder={t('yourEmail')}
                         value={donorEmail}
                         onChange={(e) => setDonorEmail(e.target.value)}
                         required
@@ -476,12 +400,12 @@ const DonateContent: React.FC = () => {
                     </div>
                     <div className="form-group">
                       <label className="form-label">
-                        Phone Number <span className="optional">(Optional)</span>
+                        {t('phoneNumberOptional')} <span className="optional">{t('optional')}</span>
                       </label>
                       <input
                         type="tel"
                         className="form-input"
-                        placeholder="+62 xxx xxxx xxxx"
+                        placeholder={t('phoneNumberPlaceholder')}
                         value={donorPhone}
                         onChange={(e) => setDonorPhone(e.target.value)}
                       />
@@ -495,7 +419,7 @@ const DonateContent: React.FC = () => {
                         checked={anonymous}
                         onChange={(e) => setAnonymous(e.target.checked)}
                       />
-                      <span>Make my donation anonymous</span>
+                      <span>{t('makeDonationAnonymous')}</span>
                     </label>
                     <label className="checkbox-label">
                       <input
@@ -503,130 +427,48 @@ const DonateContent: React.FC = () => {
                         checked={newsletter}
                         onChange={(e) => setNewsletter(e.target.checked)}
                       />
-                      <span>Send me monthly impact updates</span>
+                      <span>{t('sendMonthlyUpdates')}</span>
                     </label>
                   </div>
-                </div>
-
-                {/* Payment Method */}
-                <div className="form-section">
-                  <h2 className="section-title">
-                    <span className="section-number">5</span>
-                    Payment Method
-                  </h2>
-
-                  {loadingPaymentMethods ? (
-                    <p className="form-hint">Loading payment methods...</p>
-                  ) : paymentMethods.length === 0 ? (
-                    <p className="form-hint">
-                      Payment methods are not available right now. Please try again later.
-                    </p>
-                  ) : (
-                    <>
-                      <div className="form-row">
-                        <div className="form-group">
-                          <label className="form-label">Method</label>
-                          <select
-                            className="form-select"
-                            value={paymentMethod}
-                            onChange={(e) => {
-                              const newMethod = e.target.value
-                              setPaymentMethod(newMethod)
-                              const m = paymentMethods.find((x) => x.Code === newMethod)
-                              if (m?.Channels?.length) setPaymentChannel(m.Channels[0].Code)
-                            }}
-                            required
-                          >
-                            {paymentMethods.map((m) => (
-                              <option key={m.Code} value={m.Code}>
-                                {m.Name}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        <div className="form-group">
-                          <label className="form-label">Channel</label>
-                          <select
-                            className="form-select"
-                            value={paymentChannel}
-                            onChange={(e) => setPaymentChannel(e.target.value)}
-                            required
-                            disabled={!selectedMethod}
-                          >
-                            {(selectedMethod?.Channels || []).map((c) => (
-                              <option key={c.Code} value={c.Code}>
-                                {c.Name}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      </div>
-
-                      {/* Optional: show fee info */}
-                      {selectedMethod ? (
-                        <div className="monthly-info">
-                          {(() => {
-                            const ch = selectedMethod.Channels.find(
-                              (c) => c.Code === paymentChannel,
-                            )
-                            const fee = ch?.TransactionFee
-                            if (!fee) return 'Fees depend on selected channel.'
-                            const feeText =
-                              fee.ActualFeeType === 'PERCENT'
-                                ? `${fee.ActualFee}%`
-                                : `Rp ${Number(fee.ActualFee).toLocaleString('id-ID')}`
-                            return `Estimated fee: ${feeText}`
-                          })()}
-                        </div>
-                      ) : null}
-                    </>
-                  )}
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
                   className="submit-btn"
-                  disabled={
-                    isSubmitting ||
-                    getDonationAmount() < 10000 ||
-                    (paymentMethods.length > 0 && (!paymentMethod || !paymentChannel))
-                  }
+                  disabled={isSubmitting || getDonationAmount() < 10000}
                 >
                   {isSubmitting ? (
                     <>
                       <span className="spinner"></span>
-                      Processing...
+                      {t('processing')}
                     </>
                   ) : (
                     <>
-                      <span>Proceed to Payment</span>
+                      <span>{t('proceedToPayment')}</span>
                       <span className="btn-arrow">→</span>
                     </>
                   )}
                 </button>
 
-                <p className="form-security">
-                  🔒 Your donation is secure and encrypted. We never store your payment details.
-                </p>
+                <p className="form-security">🔒 {t('donationSecure')}</p>
               </form>
             </div>
 
             {/* Right Side - Summary */}
             <div className="donate-sidebar">
               <div className="donation-summary">
-                <h3>Donation Summary</h3>
+                <h3>{t('donationSummary')}</h3>
 
                 <div className="summary-item">
-                  <span className="summary-label">Donation Type</span>
+                  <span className="summary-label">{t('donationType')}</span>
                   <span className="summary-value">
-                    {donationType === 'one-time' ? 'One-Time' : 'Monthly Recurring'}
+                    {donationType === 'one-time' ? t('oneTimeDonation') : t('monthlyRecurring')}
                   </span>
                 </div>
 
                 <div className="summary-item">
-                  <span className="summary-label">Amount</span>
+                  <span className="summary-label">{t('amount')}</span>
                   <span className="summary-value summary-amount">
                     Rp {getDonationAmount().toLocaleString()}
                   </span>
@@ -634,7 +476,7 @@ const DonateContent: React.FC = () => {
 
                 {selectedProject && (
                   <div className="summary-item">
-                    <span className="summary-label">Supporting</span>
+                    <span className="summary-label">{t('supporting')}</span>
                     <span className="summary-value">{selectedProject.title}</span>
                   </div>
                 )}
@@ -642,15 +484,16 @@ const DonateContent: React.FC = () => {
                 <div className="summary-divider"></div>
 
                 <div className="summary-impact">
-                  <h4>Your Impact</h4>
+                  <h4>{t('yourImpactSummary')}</h4>
                   <p>
-                    Your donation of Rp {getDonationAmount().toLocaleString()} {getImpactMessage()}
+                    {language === 'id' ? 'Donasi Anda sebesar' : 'Your donation of'} Rp{' '}
+                    {getDonationAmount().toLocaleString()} {getImpactMessage()}
                   </p>
                 </div>
 
                 {donationType === 'monthly' && getDonationAmount() > 0 && (
                   <div className="summary-yearly">
-                    <span>Annual total</span>
+                    <span>{t('annualTotal')}</span>
                     <span>Rp {(getDonationAmount() * 12).toLocaleString()}</span>
                   </div>
                 )}
@@ -658,26 +501,26 @@ const DonateContent: React.FC = () => {
 
               {/* Trust Badges */}
               <div className="trust-badges">
-                <h4>Why Donate with Us?</h4>
+                <h4>{t('whyDonateWithUs')}</h4>
                 <div className="badge-item">
                   <span className="badge-icon">✓</span>
                   <div>
-                    <strong>100% Transparent</strong>
-                    <p>Track exactly where your donation goes</p>
+                    <strong>{t('hundredPercentTransparent')}</strong>
+                    <p>{t('trackDonation')}</p>
                   </div>
                 </div>
                 <div className="badge-item">
                   <span className="badge-icon">✓</span>
                   <div>
-                    <strong>Tax Deductible</strong>
-                    <p>Receive official donation receipt</p>
+                    <strong>{t('taxDeductibleReceipt')}</strong>
+                    <p>{t('receiveOfficialReceipt')}</p>
                   </div>
                 </div>
                 <div className="badge-item">
                   <span className="badge-icon">✓</span>
                   <div>
-                    <strong>Secure Payment</strong>
-                    <p>Bank-level encryption</p>
+                    <strong>{t('securePayment')}</strong>
+                    <p>{t('bankLevelEncryption')}</p>
                   </div>
                 </div>
               </div>
@@ -689,35 +532,23 @@ const DonateContent: React.FC = () => {
       {/* FAQ Section */}
       <section className="donate-faq">
         <div className="container">
-          <h2>Frequently Asked Questions</h2>
+          <h2>{t('frequentlyAskedQuestionsDonate')}</h2>
           <div className="faq-grid">
             <div className="faq-item">
-              <h4>How is my donation used?</h4>
-              <p>
-                100% of your donation goes directly to program costs - books, teacher training, and
-                student materials. Administrative costs are covered separately.
-              </p>
+              <h4>{t('howIsMyDonationUsed')}</h4>
+              <p>{t('howIsMyDonationUsedAnswer')}</p>
             </div>
             <div className="faq-item">
-              <h4>Will I receive a receipt?</h4>
-              <p>
-                Yes! You'll receive an email receipt immediately after donation, which is valid for
-                tax deduction purposes.
-              </p>
+              <h4>{t('willIReceiveReceipt')}</h4>
+              <p>{t('willIReceiveReceiptAnswer')}</p>
             </div>
             <div className="faq-item">
-              <h4>Can I cancel monthly donations?</h4>
-              <p>
-                Absolutely. You can cancel or modify your monthly donation at any time from your
-                donor dashboard.
-              </p>
+              <h4>{t('canICancelMonthly')}</h4>
+              <p>{t('canICancelMonthlyAnswer')}</p>
             </div>
             <div className="faq-item">
-              <h4>How do I track impact?</h4>
-              <p>
-                We send monthly updates with photos, stories, and measurable results from the
-                programs you support.
-              </p>
+              <h4>{t('howTrackImpact')}</h4>
+              <p>{t('howTrackImpactAnswer')}</p>
             </div>
           </div>
         </div>
