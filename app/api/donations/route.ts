@@ -1,71 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@utils/Prisma'
-import CryptoJS from 'crypto-js'
-
-function requireEnv(name: string): string {
-  const v = process.env[name]
-  if (!v) throw new Error(`Missing env var: ${name}`)
-  return v
-}
-
-function ipaymuTimestamp(): string {
-  const d = new Date()
-  const pad = (n: number) => String(n).padStart(2, '0')
-  return (
-    d.getFullYear() +
-    pad(d.getMonth() + 1) +
-    pad(d.getDate()) +
-    pad(d.getHours()) +
-    pad(d.getMinutes()) +
-    pad(d.getSeconds())
-  )
-}
-
-async function createIpaymuDirectPayment(body: {
-  name: string
-  phone: string
-  email: string
-  amount: number
-  comments: string
-  notifyUrl: string
-  referenceId: string
-  paymentMethod: string
-  paymentChannel: string
-}) {
-  const baseUrl = requireEnv('IPAYMU_BASE_URL')
-  const va = requireEnv('IPAYMU_VA')
-  const apiKey = requireEnv('IPAYMU_API_KEY')
-
-  const timestamp = ipaymuTimestamp()
-  const method = 'POST'
-  const path = '/api/v2/payment/direct'
-
-  const bodyEncrypt = CryptoJS.SHA256(JSON.stringify(body))
-  const stringToSign = `POST:${va}:${bodyEncrypt}:${apiKey}`
-  const signature = CryptoJS.enc.Hex.stringify(CryptoJS.HmacSHA256(stringToSign, apiKey))
-
-  const res = await fetch(`${baseUrl}${path}`, {
-    method,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      va,
-      signature,
-      timestamp,
-    },
-    body,
-  })
-
-  return {
-    ok: res.ok,
-    status: res.status,
-    json,
-  }
-}
-
-/* =======================
-   Utils
-======================= */
 
 function toBigIntOrNull(value: unknown): bigint | null {
   if (value === null || value === undefined) return null
@@ -109,13 +43,15 @@ export async function POST(request: NextRequest) {
       donorName,
       donorEmail,
       donorPhone,
-      paymentMethod,
-      paymentChannel,
-      anonymous,
+      frequency,
+      motivation,
       message,
+      anonymous,
+      newsletter,
       userId,
     } = body
 
+    // Validation
     if (!amount || Number(amount) < 10000) {
       return NextResponse.json(
         { success: false, error: 'Minimum donation is Rp 10,000' },
@@ -130,10 +66,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Resolve project ID
     const project_id = await resolveProjectId(projectId)
     const user_id = toBigIntOrNull(userId)
-    const donationId = `DON-${Date.now()}`
 
+    // Generate unique donation ID
+    const donationId = `DON-${Date.now()}-${Math.random().toString(36).substring(2, 9).toUpperCase()}`
+
+    // Create donation record with pending status
     const created = await prisma.donations.create({
       data: {
         donation_id: donationId,
@@ -143,101 +83,72 @@ export async function POST(request: NextRequest) {
         donor_email: donorEmail,
         donor_phone: donorPhone ?? null,
         amount: BigInt(amount),
-        status: 'pending',
-        payment_method: paymentMethod ?? 'va',
-        payment_channel: paymentChannel ?? 'bca',
+        status: 'pending', // Will be updated when payment proof is uploaded
+        payment_method: 'qris',
+        payment_channel: 'qris',
         message: message ?? null,
+        metadata: {
+          frequency: frequency ?? 'one-time',
+          motivation: motivation ?? null,
+          anonymous: anonymous ?? false,
+          newsletter: newsletter ?? true,
+        },
         created_at: new Date(),
         updated_at: new Date(),
       },
     })
 
-    // ⚠️ MATCH OFFICIAL SAMPLE TYPES
-    const ipaymuPayload = {
-      name: created.donor_name,
-      phone: created.donor_phone ?? '',
-      email: created.donor_email,
-      amount: Number(created.amount), // NUMBER (important)
-      comments: `Donation ${created.donation_id}`,
-      notifyUrl: requireEnv('IPAYMU_NOTIFY_URL'),
-      referenceId: created.donation_id,
-      paymentMethod: created.payment_method,
-      paymentChannel: created.payment_channel,
+    // Return success with donation ID (for QRIS modal)
+    return NextResponse.json({
+      success: true,
+      donationId: created.donation_id,
+      donation: safeJsonDonation(created),
+    })
+  } catch (err) {
+    console.error('Donation creation error:', err)
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Internal server error',
+        details: err instanceof Error ? err.message : 'Unknown error',
+      },
+      { status: 500 },
+    )
+  }
+}
+
+// GET endpoint to fetch donation details (optional, for admin dashboard)
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const donationId = searchParams.get('donationId')
+    const status = searchParams.get('status')
+    const limit = parseInt(searchParams.get('limit') || '50')
+
+    const whereClause: any = {}
+
+    if (donationId) {
+      whereClause.donation_id = donationId
     }
 
-    const payRes = await createIpaymuDirectPayment(ipaymuPayload)
-
-    if (!payRes.ok) {
-      await prisma.donations.update({
-        where: { donation_id: created.donation_id },
-        data: { status: 'failed' },
-      })
-
-      return NextResponse.json(
-        { success: false, error: 'iPaymu failed', details: payRes.json },
-        { status: 502 },
-      )
+    if (status) {
+      whereClause.status = status
     }
 
-    const data = payRes.json?.Data
-
-    const updated = await prisma.donations.update({
-      where: { donation_id: created.donation_id },
-      data: {
-        status: 'processing',
-        transaction_id: data?.TransactionId ? String(data.TransactionId) : null,
-        metadata: { ipaymu: payRes.json },
-        updated_at: new Date(),
+    const donations = await prisma.donations.findMany({
+      where: whereClause,
+      take: limit,
+      orderBy: {
+        created_at: 'desc',
       },
     })
 
     return NextResponse.json({
       success: true,
-      donation: safeJsonDonation(updated),
-      ipaymu: payRes.json,
+      donations: donations.map(safeJsonDonation),
     })
   } catch (err) {
-    console.error(err)
+    console.error('Fetch donations error:', err)
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
-  }
-}
-
-/* =======================
-   GET – Payment Channels
-======================= */
-
-export async function GET() {
-  try {
-    const baseUrl = requireEnv('IPAYMU_BASE_URL')
-    const va = requireEnv('IPAYMU_VA')
-    const apiKey = requireEnv('IPAYMU_API_KEY')
-
-    const timestamp = ipaymuTimestamp()
-
-    const empty = ''
-    const bodyEncrypt = CryptoJS.SHA256(JSON.stringify(empty))
-    const stringToSign = `GET:${va}:${bodyEncrypt}:${apiKey}`
-    const signature = CryptoJS.enc.Hex.stringify(CryptoJS.HmacSHA256(stringToSign, apiKey))
-
-    const res = await fetch(`${baseUrl}/api/v2/payment-channels`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        va: va,
-        timestamp: timestamp,
-        signature: signature,
-      },
-      cache: 'no-store',
-    })
-
-    const json = await res.json()
-    return NextResponse.json(json)
-  } catch (err) {
-    console.error(err)
-    return NextResponse.json(
-      { success: false, error: 'Failed to fetch payment channels' },
-      { status: 500 },
-    )
   }
 }

@@ -16,6 +16,7 @@ export interface IRequest {
   url: string
   method: string
   postData?: any
+  isFormData?: boolean
 }
 
 // variables

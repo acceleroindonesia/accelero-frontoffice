@@ -14,6 +14,8 @@ import './styles/about.css'
 import './styles/contact.css'
 import './styles/impact.css'
 import './styles/volunteer.css'
+import './styles/qris.css'
+
 import SessionWrapper from '@components/SessionWrapper'
 import { LanguageProvider } from '@contexts/LanguageContext'
 

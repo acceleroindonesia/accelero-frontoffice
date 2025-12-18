@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Master from '@components/Layout/Master'
 import { ScrollAnimations } from '../home/components/ScrollAnimations'
 import Request from '@utils/Request'
+import QRISModal from '@components/QRISPaymentModal'
 import { useLanguage } from '@contexts/LanguageContext'
 
 interface IDonationProject {
@@ -46,7 +47,6 @@ const DonateLoading: React.FC = () => (
   </div>
 )
 
-// Main donate content component that uses useSearchParams
 const DonateContent: React.FC = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -55,8 +55,9 @@ const DonateContent: React.FC = () => {
 
   const [selectedProject, setSelectedProject] = useState<IDonationProject | null>(null)
   const [projects, setProjects] = useState<IDonationProject[]>([])
+  const [showQRISModal, setShowQRISModal] = useState(false)
+  const [donationId, setDonationId] = useState<string | null>(null)
 
-  // Form state
   const [donationType, setDonationType] = useState<'one-time' | 'monthly'>('one-time')
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null)
   const [customAmount, setCustomAmount] = useState('')
@@ -83,7 +84,7 @@ const DonateContent: React.FC = () => {
 
   useEffect(() => {
     fetchProjects()
-  }, [language]) // Refetch when language changes
+  }, [language])
 
   useEffect(() => {
     if (projectParam && projects.length > 0) {
@@ -106,7 +107,6 @@ const DonateContent: React.FC = () => {
     }
   }
 
-  // Update URL when project changes
   const handleProjectChange = (projectId: string) => {
     const project = projects.find((p) => p.id === projectId)
     setSelectedProject(project || null)
@@ -156,23 +156,23 @@ const DonateContent: React.FC = () => {
           donorPhone: donorPhone || null,
           anonymous,
           newsletter,
+          paymentMethod: 'qris',
+          status: 'pending', // Status pending until payment proof uploaded
         },
       })
 
       const data = res?.data as {
         success?: boolean
         error?: string
-        ipaymu?: { Data?: { Url?: string } }
+        donationId?: string
       }
 
-      const paymentUrl = data?.ipaymu?.Data?.Url
-      if (data?.success && paymentUrl) {
-        // Open iPaymu payment page immediately
-        window.location.assign(paymentUrl)
-        return
+      if (data?.success && data?.donationId) {
+        setDonationId(data.donationId)
+        setShowQRISModal(true)
+      } else {
+        alert(data?.error || 'Failed to process donation')
       }
-
-      alert(data?.error || 'Failed to process donation')
     } catch (error) {
       console.error('Donation error:', error)
       alert('An error occurred. Please try again.')
@@ -181,15 +181,38 @@ const DonateContent: React.FC = () => {
     }
   }
 
-  const getImpactMessage = () => {
-    const amount = getDonationAmount()
-    if (amount >= 1000000)
-      return `${t('canTrainTeachers')} ${Math.floor(amount / 1000000)} ${t('teachers')}`
-    if (amount >= 500000)
-      return `${t('canSupport')} ${Math.floor(amount / 100000)} ${t('studentsForMonth')}`
-    if (amount >= 100000)
-      return `${t('canProvide')} ${Math.floor(amount / 10000)} ${t('readingBooks')}`
-    return t('willMakeRealDifference')
+  const handleConfirmPayment = async (proofFile: File) => {
+    if (!donationId) {
+      throw new Error('No donation ID found')
+    }
+
+    try {
+      // Upload payment proof
+      const formData = new FormData()
+      formData.append('paymentProof', proofFile)
+      formData.append('donationId', donationId)
+
+      const res = await Request.getResponse({
+        url: '/api/donations/upload-proof',
+        method: 'POST',
+        postData: formData,
+        isFormData: true,
+      })
+
+      const data = res?.data as { success?: boolean; error?: string }
+
+      if (data?.success) {
+        setShowQRISModal(false)
+        alert(t('thankYouForDonation'))
+        // Redirect to thank you page or reset form
+        router.push('/donate/thank-you')
+      } else {
+        throw new Error(data?.error || 'Failed to upload proof')
+      }
+    } catch (error) {
+      console.error('Upload error:', error)
+      throw error
+    }
   }
 
   return (
@@ -487,7 +510,7 @@ const DonateContent: React.FC = () => {
                   <h4>{t('yourImpactSummary')}</h4>
                   <p>
                     {language === 'id' ? 'Donasi Anda sebesar' : 'Your donation of'} Rp{' '}
-                    {getDonationAmount().toLocaleString()} {getImpactMessage()}
+                    {getDonationAmount().toLocaleString()} {}
                   </p>
                 </div>
 
@@ -528,6 +551,14 @@ const DonateContent: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* QRIS Modal */}
+      <QRISModal
+        isOpen={showQRISModal}
+        onClose={() => setShowQRISModal(false)}
+        donationAmount={getDonationAmount()}
+        onConfirmPayment={handleConfirmPayment}
+      />
 
       {/* FAQ Section */}
       <section className="donate-faq">
