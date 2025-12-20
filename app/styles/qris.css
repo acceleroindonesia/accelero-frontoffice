@@ -1,4 +1,3 @@
-
 .qris-modal-overlay {
     position: fixed;
     top: 0;
@@ -17,12 +16,24 @@
 .qris-modal-content {
     background: white;
     border-radius: 16px;
-    max-width: 700px;
+    max-width: 650px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .qris-modal-close {
@@ -69,7 +80,7 @@
 }
 
 .qris-modal-body {
-    padding: 20px 40px 40px;
+    padding: 20px 40px 30px;
 }
 
 .qris-amount-display {
@@ -77,7 +88,7 @@
     padding: 24px;
     border-radius: 12px;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
@@ -102,10 +113,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 24px;
     background: #f7fafc;
     border-radius: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .qris-code-image {
@@ -113,7 +124,7 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     width: 100% !important;
     height: auto !important;
-    max-width: 400px;
+    max-width: 350px;
     object-fit: contain;
 }
 
@@ -121,7 +132,7 @@
     text-align: center;
     color: #718096;
     font-size: 14px;
-    margin: 0 0 40px;
+    margin: 0 0 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,109 +145,159 @@
     flex-shrink: 0;
 }
 
-.qris-upload-section {
-    margin-top: 40px;
+.qris-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 30px 0;
+    color: #a0aec0;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.qris-divider::before,
+.qris-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.qris-divider span {
+    padding: 0 16px;
+}
+
+.bank-transfer-section {
+    margin-bottom: 30px;
+}
+
+.bank-transfer-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0 0 16px;
+    text-align: center;
+}
+
+.bank-details-card {
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.bank-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.bank-detail-row:last-child {
+    border-bottom: none;
+}
+
+.bank-detail-row.highlight {
+    background: white;
+    margin: 12px -12px -12px;
+    padding: 16px 12px;
+    border-radius: 0 0 12px 12px;
+    border-bottom: none;
+}
+
+.detail-label {
+    font-size: 14px;
+    color: #718096;
+    font-weight: 500;
+}
+
+.detail-value {
+    font-size: 15px;
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.account-number-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.account-number {
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+}
+
+.copy-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #5568d3;
+    transform: scale(1.05);
+}
+
+.sender-account-section {
     padding-top: 30px;
     border-top: 1px solid #e2e8f0;
 }
 
-.qris-upload-section h3 {
-    font-size: 18px;
+.sender-account-section h3 {
+    font-size: 16px;
     font-weight: 600;
-    color: #1a202c;
+    color: #2d3748;
     margin: 0 0 20px;
     text-align: center;
 }
 
-.qris-upload-area {
-    border: 2px dashed #cbd5e0;
-    border-radius: 12px;
-    padding: 40px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: #f7fafc;
-    position: relative;
-    min-height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.form-group {
+    margin-bottom: 0;
 }
 
-.qris-upload-area:hover {
-    border-color: #667eea;
-    background: #edf2f7;
-    transform: translateY(-2px);
-}
-
-.qris-upload-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-}
-
-.qris-upload-icon {
-    font-size: 56px;
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2d3748;
     margin-bottom: 8px;
 }
 
-.qris-upload-text {
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
     font-size: 16px;
-    font-weight: 600;
-    color: #2d3748;
-    margin: 0;
+    transition: all 0.2s;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
 }
 
-.qris-upload-hint {
+.form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-input:disabled {
+    background: #f7fafc;
+    cursor: not-allowed;
+}
+
+.form-hint {
+    display: block;
+    margin-top: 8px;
     font-size: 13px;
     color: #718096;
-    margin: 0;
-}
-
-.qris-preview {
-    position: relative;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.qris-preview img {
-    max-width: 100%;
-    max-height: 350px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    object-fit: contain;
-}
-
-.qris-remove-preview {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background: #f56565;
-    color: white;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s;
-}
-
-.qris-remove-preview:hover {
-    background: #e53e3e;
-    transform: scale(1.1);
-}
-
-.qris-file-input {
-    display: none;
+    line-height: 1.5;
 }
 
 .qris-error {
@@ -251,12 +312,11 @@
 }
 
 .qris-modal-footer {
-    padding: 30px 40px 40px;
+    padding: 24px 40px 32px;
     display: flex;
     gap: 12px;
     justify-content: center;
     border-top: 1px solid #e2e8f0;
-    margin-top: 20px;
 }
 
 .qris-btn-cancel,
@@ -276,7 +336,7 @@
     color: #4a5568;
 }
 
-.qris-btn-cancel:hover {
+.qris-btn-cancel:hover:not(:disabled) {
     background: #cbd5e0;
     transform: translateY(-1px);
 }
@@ -292,127 +352,14 @@
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-.qris-btn-confirm:disabled {
+.qris-btn-confirm:disabled,
+.qris-btn-cancel:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none;
 }
 
-/* Animations */
-@keyframes slideUp {
-    from {
-        transform: translateY(100px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.qris-modal-content {
-    animation: slideUp 0.3s ease-out;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .qris-modal-content {
-        max-width: 95%;
-        max-height: 95vh;
-    }
-
-    .qris-modal-header {
-        padding: 30px 24px 16px;
-    }
-
-    .qris-modal-header h2 {
-        font-size: 24px;
-    }
-
-    .qris-modal-body {
-        padding: 16px 24px 30px;
-    }
-
-    .qris-amount-value {
-        font-size: 28px;
-    }
-
-    .qris-code-container {
-        padding: 20px;
-    }
-
-    .qris-code-image {
-        max-width: 100%;
-    }
-
-    .qris-upload-area {
-        padding: 30px 16px;
-        min-height: 180px;
-    }
-
-    .qris-modal-footer {
-        padding: 20px 24px 30px;
-        flex-direction: column-reverse;
-    }
-
-    .qris-btn-cancel,
-    .qris-btn-confirm {
-        width: 100%;
-        min-width: unset;
-    }
-}
-
-@media (max-width: 480px) {
-    .qris-modal-overlay {
-        padding: 0;
-    }
-
-    .qris-modal-content {
-        border-radius: 16px 16px 0 0;
-        max-width: 100%;
-        max-height: 100vh;
-    }
-
-    .qris-modal-header h2 {
-        font-size: 20px;
-    }
-
-    .qris-instructions {
-        font-size: 14px;
-    }
-
-    .qris-amount-value {
-        font-size: 24px;
-    }
-
-    .qris-code-container {
-        padding: 16px;
-    }
-
-    .qris-scan-hint {
-        font-size: 13px;
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .qris-upload-section h3 {
-        font-size: 16px;
-    }
-
-    .qris-upload-icon {
-        font-size: 48px;
-    }
-
-    .qris-upload-text {
-        font-size: 14px;
-    }
-
-    .qris-upload-hint {
-        font-size: 12px;
-    }
-}
-
-/* Scrollbar Styling */
+/* Scrollbar */
 .qris-modal-content::-webkit-scrollbar {
     width: 8px;
 }
@@ -429,4 +376,70 @@
 
 .qris-modal-content::-webkit-scrollbar-thumb:hover {
     background: #a0aec0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .qris-modal-content {
+        max-width: 95%;
+    }
+
+    .qris-modal-header,
+    .qris-modal-body,
+    .qris-modal-footer {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .qris-amount-value {
+        font-size: 28px;
+    }
+
+    .account-number {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .qris-modal-overlay {
+        padding: 0;
+    }
+
+    .qris-modal-content {
+        border-radius: 16px 16px 0 0;
+        max-width: 100%;
+        max-height: 100vh;
+    }
+
+    .qris-modal-header h2 {
+        font-size: 22px;
+    }
+
+    .qris-amount-value {
+        font-size: 24px;
+    }
+
+    .bank-detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .account-number-row {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .account-number {
+        font-size: 14px;
+    }
+
+    .qris-modal-footer {
+        flex-direction: column-reverse;
+    }
+
+    .qris-btn-cancel,
+    .qris-btn-confirm {
+        width: 100%;
+    }
 }

@@ -181,22 +181,20 @@ const DonateContent: React.FC = () => {
     }
   }
 
-  const handleConfirmPayment = async (proofFile: File) => {
+  const handleConfirmPayment = async (senderAccountNumber: string) => {
     if (!donationId) {
       throw new Error('No donation ID found')
     }
 
     try {
-      // Upload payment proof
-      const formData = new FormData()
-      formData.append('paymentProof', proofFile)
-      formData.append('donationId', donationId)
-
       const res = await Request.getResponse({
-        url: '/api/donations/upload-proof',
+        url: '/api/donations/confirm-payment',
         method: 'POST',
-        postData: formData,
-        isFormData: true,
+        postData: {
+          donationId,
+          senderAccountNumber,
+          amount: getDonationAmount(),
+        },
       })
 
       const data = res?.data as { success?: boolean; error?: string }
@@ -204,13 +202,12 @@ const DonateContent: React.FC = () => {
       if (data?.success) {
         setShowQRISModal(false)
         alert(t('thankYouForDonation'))
-        // Redirect to thank you page or reset form
         router.push('/donate/thank-you')
       } else {
-        throw new Error(data?.error || 'Failed to upload proof')
+        throw new Error(data?.error || 'Failed to confirm payment')
       }
     } catch (error) {
-      console.error('Upload error:', error)
+      console.error('Confirm error:', error)
       throw error
     }
   }

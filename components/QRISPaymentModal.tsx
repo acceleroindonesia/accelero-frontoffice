@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { useLanguage } from '@contexts/LanguageContext'
 
@@ -8,7 +8,7 @@ interface QRISModalProps {
   isOpen: boolean
   onClose: () => void
   donationAmount: number
-  onConfirmPayment: (proofFile: File) => Promise<void>
+  onConfirmPayment: (senderAccountNumber: string) => Promise<void>
 }
 
 const QRISModal: React.FC<QRISModalProps> = ({
@@ -17,90 +17,73 @@ const QRISModal: React.FC<QRISModalProps> = ({
   donationAmount,
   onConfirmPayment,
 }) => {
-  const { t } = useLanguage()
-  const [proofFile, setProofFile] = useState<File | null>(null)
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const { t, language } = useLanguage()
+  const [senderAccountNumber, setSenderAccountNumber] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [copied, setCopied] = useState(false)
+
+  // Bank account details (you should store this in env variables)
+  const BANK_ACCOUNT = {
+    bank: 'BCA',
+    accountNumber: '1234567890', // Replace with your actual account
+    accountName: 'Yayasan Accelero Indonesia',
+  }
 
   if (!isOpen) return null
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    // Validate file type
-    if (!['image/png', 'image/jpeg', 'image/jpg'].includes(file.type)) {
-      setError('Please upload a valid image file (PNG, JPG, JPEG)')
-      return
-    }
-
-    // Validate file size (5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      setError('File size must be less than 5MB')
-      return
-    }
-
+  const handleAccountNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Only allow numbers
+    const value = e.target.value.replace(/\D/g, '')
+    setSenderAccountNumber(value)
     setError(null)
-    setProofFile(file)
-
-    // Create preview
-    const reader = new FileReader()
-    reader.onloadend = () => {
-      setPreviewUrl(reader.result as string)
-    }
-    reader.readAsDataURL(file)
   }
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-  }
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    const file = e.dataTransfer.files?.[0]
-    if (file) {
-      const fakeEvent = {
-        target: { files: [file] },
-      } as unknown as React.ChangeEvent<HTMLInputElement>
-      handleFileChange(fakeEvent)
+  const handleCopyAccount = async () => {
+    try {
+      await navigator.clipboard.writeText(BANK_ACCOUNT.accountNumber)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy:', err)
     }
   }
 
   const handleSubmit = async () => {
-    if (!proofFile) {
-      setError(t('paymentProofRequired'))
+    if (!senderAccountNumber || senderAccountNumber.length < 8) {
+      setError(t('accountNumberRequired'))
       return
     }
 
     setIsSubmitting(true)
     try {
-      await onConfirmPayment(proofFile)
+      await onConfirmPayment(senderAccountNumber)
       // Reset state
-      setProofFile(null)
-      setPreviewUrl(null)
+      setSenderAccountNumber('')
       setError(null)
-      // eslint-disable-next-line no-unused-vars
     } catch (err) {
-      setError('Failed to upload payment proof. Please try again.')
+      setError(
+        language === 'id'
+          ? 'Gagal mengkonfirmasi. Silakan coba lagi.'
+          : 'Failed to confirm. Please try again.',
+      )
     } finally {
       setIsSubmitting(false)
     }
   }
 
   const handleClose = () => {
-    setProofFile(null)
-    setPreviewUrl(null)
-    setError(null)
-    onClose()
+    if (!isSubmitting) {
+      setSenderAccountNumber('')
+      setError(null)
+      onClose()
+    }
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div className="qris-modal-overlay" onClick={handleClose}>
       <div className="qris-modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="qris-modal-close" onClick={handleClose}>
+        <button className="qris-modal-close" onClick={handleClose} disabled={isSubmitting}>
           ✕
         </button>
 
@@ -112,7 +95,7 @@ const QRISModal: React.FC<QRISModalProps> = ({
         <div className="qris-modal-body">
           {/* Donation Amount Display */}
           <div className="qris-amount-display">
-            <span className="qris-amount-label">{t('donationAmount')}:</span>
+            <span className="qris-amount-label">{t('donationAmount')}</span>
             <span className="qris-amount-value">Rp {donationAmount.toLocaleString()}</span>
           </div>
 
@@ -121,59 +104,69 @@ const QRISModal: React.FC<QRISModalProps> = ({
             <Image
               src="/qris.jpeg"
               alt="QRIS Code"
-              width={300}
-              height={300}
+              width={400}
+              height={400}
               className="qris-code-image"
               priority
+              unoptimized
             />
           </div>
 
           <p className="qris-scan-hint">
             <span className="qris-scan-icon">📱</span>
-            {t('scanWithAnyApp')}
+            <span>{t('scanWithAnyApp')}</span>
           </p>
 
-          {/* Upload Payment Proof Section */}
-          <div className="qris-upload-section">
-            <h3>{t('afterPayment')}</h3>
+          {/* Divider */}
+          <div className="qris-divider">
+            <span>{language === 'id' ? 'ATAU' : 'OR'}</span>
+          </div>
 
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-            <div
-              className="qris-upload-area"
-              onDragOver={handleDragOver}
-              onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
-            >
-              {previewUrl ? (
-                <div className="qris-preview">
-                  <img src={previewUrl} alt="Payment proof preview" />
-                  <button
-                    className="qris-remove-preview"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      setProofFile(null)
-                      setPreviewUrl(null)
-                    }}
-                  >
-                    ✕
+          {/* Bank Transfer Option */}
+          <div className="bank-transfer-section">
+            <h3>{t('orTransferDirectly')}</h3>
+            <div className="bank-details-card">
+              <div className="bank-detail-row">
+                <span className="detail-label">{t('bankName')}:</span>
+                <span className="detail-value">{BANK_ACCOUNT.bank}</span>
+              </div>
+              <div className="bank-detail-row">
+                <span className="detail-label">{t('accountName')}:</span>
+                <span className="detail-value">{BANK_ACCOUNT.accountName}</span>
+              </div>
+              <div className="bank-detail-row highlight">
+                <span className="detail-label">
+                  {language === 'id' ? 'Nomor Rekening:' : 'Account Number:'}
+                </span>
+                <div className="account-number-row">
+                  <span className="detail-value account-number">{BANK_ACCOUNT.accountNumber}</span>
+                  <button type="button" className="copy-btn" onClick={handleCopyAccount}>
+                    {copied ? '✓' : '📋'}
                   </button>
                 </div>
-              ) : (
-                <div className="qris-upload-placeholder">
-                  <span className="qris-upload-icon">📤</span>
-                  <p className="qris-upload-text">{t('uploadProofPlaceholder')}</p>
-                  <p className="qris-upload-hint">{t('supportedFormats')}</p>
-                </div>
-              )}
+              </div>
+            </div>
+          </div>
 
+          {/* Enter Sender Account Section */}
+          <div className="sender-account-section">
+            <h3>{t('afterPayment')}</h3>
+            <div className="form-group">
+              <label className="form-label">{t('senderAccountNumber')}</label>
               <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/png,image/jpeg,image/jpg"
-                onChange={handleFileChange}
-                className="qris-file-input"
-                hidden
+                type="text"
+                className="form-input"
+                placeholder={t('accountNumberPlaceholder')}
+                value={senderAccountNumber}
+                onChange={handleAccountNumberChange}
+                maxLength={20}
+                disabled={isSubmitting}
               />
+              <small className="form-hint">
+                {language === 'id'
+                  ? 'Masukkan nomor rekening yang Anda gunakan untuk mengirim donasi'
+                  : 'Enter the account number you used to send the donation'}
+              </small>
             </div>
 
             {error && <p className="qris-error">{error}</p>}
@@ -181,13 +174,19 @@ const QRISModal: React.FC<QRISModalProps> = ({
         </div>
 
         <div className="qris-modal-footer">
-          <button className="qris-btn-cancel" onClick={handleClose}>
+          <button
+            className="qris-btn-cancel"
+            onClick={handleClose}
+            disabled={isSubmitting}
+            type="button"
+          >
             {t('closeModal')}
           </button>
           <button
             className="qris-btn-confirm"
             onClick={handleSubmit}
-            disabled={!proofFile || isSubmitting}
+            disabled={!senderAccountNumber || isSubmitting}
+            type="button"
           >
             {isSubmitting ? t('processing') : t('confirmDonation')}
           </button>
