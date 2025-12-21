@@ -7,6 +7,7 @@ import { ScrollAnimations } from '../home/components/ScrollAnimations'
 import Request from '@utils/Request'
 import QRISModal from '@components/QRISPaymentModal'
 import { useLanguage } from '@contexts/LanguageContext'
+import Swal from 'sweetalert2'
 
 interface IDonationProject {
   id: string
@@ -104,6 +105,15 @@ const DonateContent: React.FC = () => {
       if (data?.projects) setProjects(data.projects)
     } catch (error) {
       console.error('Failed to fetch projects:', error)
+      Swal.fire({
+        icon: 'error',
+        title: language === 'id' ? 'Gagal Memuat' : 'Failed to Load',
+        text:
+          language === 'id'
+            ? 'Gagal memuat proyek. Silakan refresh halaman.'
+            : 'Failed to load projects. Please refresh the page.',
+        confirmButtonColor: '#667eea',
+      })
     }
   }
 
@@ -130,13 +140,23 @@ const DonateContent: React.FC = () => {
     const amount = getDonationAmount()
 
     if (amount < 10000) {
-      alert(t('minimumDonationAlert'))
+      Swal.fire({
+        icon: 'warning',
+        title: language === 'id' ? 'Donasi Minimum' : 'Minimum Donation',
+        text: t('minimumDonationAlert') || 'Minimum donation is Rp 10,000',
+        confirmButtonColor: '#667eea',
+      })
       setIsSubmitting(false)
       return
     }
 
     if (!donorName || !donorEmail) {
-      alert(t('fillNameEmail'))
+      Swal.fire({
+        icon: 'warning',
+        title: language === 'id' ? 'Data Tidak Lengkap' : 'Incomplete Data',
+        text: t('fillNameEmail') || 'Please fill in your name and email',
+        confirmButtonColor: '#667eea',
+      })
       setIsSubmitting(false)
       return
     }
@@ -157,7 +177,7 @@ const DonateContent: React.FC = () => {
           anonymous,
           newsletter,
           paymentMethod: 'qris',
-          status: 'pending', // Status pending until payment proof uploaded
+          status: 'pending',
         },
       })
 
@@ -171,11 +191,21 @@ const DonateContent: React.FC = () => {
         setDonationId(data.donationId)
         setShowQRISModal(true)
       } else {
-        alert(data?.error || 'Failed to process donation')
+        Swal.fire({
+          icon: 'error',
+          title: language === 'id' ? 'Gagal Memproses' : 'Processing Failed',
+          text: data?.error || 'Failed to process donation. Please try again.',
+          confirmButtonColor: '#667eea',
+        })
       }
     } catch (error) {
       console.error('Donation error:', error)
-      alert('An error occurred. Please try again.')
+      Swal.fire({
+        icon: 'error',
+        title: language === 'id' ? 'Terjadi Kesalahan' : 'An Error Occurred',
+        text: 'An error occurred while processing your donation. Please try again.',
+        confirmButtonColor: '#667eea',
+      })
     } finally {
       setIsSubmitting(false)
     }
@@ -188,7 +218,7 @@ const DonateContent: React.FC = () => {
 
     try {
       const res = await Request.getResponse({
-        url: '/api/donations/confirm-payment',
+        url: '/api/donations/payment',
         method: 'POST',
         postData: {
           donationId,
@@ -197,12 +227,28 @@ const DonateContent: React.FC = () => {
         },
       })
 
-      const data = res?.data as { success?: boolean; error?: string }
+      const data = res?.data as { success?: boolean; error?: string; message?: string }
 
       if (data?.success) {
         setShowQRISModal(false)
-        alert(t('thankYouForDonation'))
-        router.push('/donate/thank-you')
+
+        // Show success message with SweetAlert2
+        await Swal.fire({
+          icon: 'success',
+          title: language === 'id' ? 'Terima Kasih!' : 'Thank You!',
+          html:
+            data?.message ||
+            t('thankYouForDonation') ||
+            (language === 'id'
+              ? 'Terima kasih atas donasi Anda!<br>Kami akan memverifikasi pembayaran Anda segera.'
+              : 'Thank you for your donation!<br>We will verify your payment shortly.'),
+          confirmButtonColor: '#667eea',
+          timer: 3000,
+          timerProgressBar: true,
+        })
+
+        // Redirect to home
+        router.push('/')
       } else {
         throw new Error(data?.error || 'Failed to confirm payment')
       }

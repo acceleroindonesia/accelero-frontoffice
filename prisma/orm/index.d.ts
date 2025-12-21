@@ -11017,6 +11017,8 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     deleted_at: Date | null
+    is_verified: boolean | null
+    sender_account_number: string | null
   }
 
   export type DonationsMaxAggregateOutputType = {
@@ -11039,6 +11041,8 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     deleted_at: Date | null
+    is_verified: boolean | null
+    sender_account_number: string | null
   }
 
   export type DonationsCountAggregateOutputType = {
@@ -11062,6 +11066,8 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     deleted_at: number
+    is_verified: number
+    sender_account_number: number
     _all: number
   }
 
@@ -11100,6 +11106,8 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     deleted_at?: true
+    is_verified?: true
+    sender_account_number?: true
   }
 
   export type DonationsMaxAggregateInputType = {
@@ -11122,6 +11130,8 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     deleted_at?: true
+    is_verified?: true
+    sender_account_number?: true
   }
 
   export type DonationsCountAggregateInputType = {
@@ -11145,6 +11155,8 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     deleted_at?: true
+    is_verified?: true
+    sender_account_number?: true
     _all?: true
   }
 
@@ -11255,6 +11267,8 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     deleted_at: Date | null
+    is_verified: boolean
+    sender_account_number: string | null
     _count: DonationsCountAggregateOutputType | null
     _avg: DonationsAvgAggregateOutputType | null
     _sum: DonationsSumAggregateOutputType | null
@@ -11297,6 +11311,8 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
+    is_verified?: boolean
+    sender_account_number?: boolean
     projects?: boolean | donations$projectsArgs<ExtArgs>
     users?: boolean | donations$usersArgs<ExtArgs>
   }, ExtArgs["result"]["donations"]>
@@ -11322,6 +11338,8 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
+    is_verified?: boolean
+    sender_account_number?: boolean
     projects?: boolean | donations$projectsArgs<ExtArgs>
     users?: boolean | donations$usersArgs<ExtArgs>
   }, ExtArgs["result"]["donations"]>
@@ -11347,6 +11365,8 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
+    is_verified?: boolean
+    sender_account_number?: boolean
     projects?: boolean | donations$projectsArgs<ExtArgs>
     users?: boolean | donations$usersArgs<ExtArgs>
   }, ExtArgs["result"]["donations"]>
@@ -11372,9 +11392,11 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
+    is_verified?: boolean
+    sender_account_number?: boolean
   }
 
-  export type donationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "donation_id" | "project_id" | "user_id" | "donor_name" | "donor_email" | "donor_phone" | "amount" | "frequency" | "status" | "payment_method" | "payment_channel" | "transaction_id" | "paid_at" | "message" | "is_anonymous" | "metadata" | "created_at" | "updated_at" | "deleted_at", ExtArgs["result"]["donations"]>
+  export type donationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "donation_id" | "project_id" | "user_id" | "donor_name" | "donor_email" | "donor_phone" | "amount" | "frequency" | "status" | "payment_method" | "payment_channel" | "transaction_id" | "paid_at" | "message" | "is_anonymous" | "metadata" | "created_at" | "updated_at" | "deleted_at" | "is_verified" | "sender_account_number", ExtArgs["result"]["donations"]>
   export type donationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     projects?: boolean | donations$projectsArgs<ExtArgs>
     users?: boolean | donations$usersArgs<ExtArgs>
@@ -11415,6 +11437,8 @@ export namespace Prisma {
       created_at: Date | null
       updated_at: Date | null
       deleted_at: Date | null
+      is_verified: boolean
+      sender_account_number: string | null
     }, ExtArgs["result"]["donations"]>
     composites: {}
   }
@@ -11860,6 +11884,8 @@ export namespace Prisma {
     readonly created_at: FieldRef<"donations", 'DateTime'>
     readonly updated_at: FieldRef<"donations", 'DateTime'>
     readonly deleted_at: FieldRef<"donations", 'DateTime'>
+    readonly is_verified: FieldRef<"donations", 'Boolean'>
+    readonly sender_account_number: FieldRef<"donations", 'String'>
   }
     
 
@@ -23410,7 +23436,9 @@ export namespace Prisma {
     metadata: 'metadata',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    deleted_at: 'deleted_at'
+    deleted_at: 'deleted_at',
+    is_verified: 'is_verified',
+    sender_account_number: 'sender_account_number'
   };
 
   export type DonationsScalarFieldEnum = (typeof DonationsScalarFieldEnum)[keyof typeof DonationsScalarFieldEnum]
@@ -24390,6 +24418,8 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"donations"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"donations"> | Date | string | null
     deleted_at?: DateTimeNullableFilter<"donations"> | Date | string | null
+    is_verified?: BoolFilter<"donations"> | boolean
+    sender_account_number?: StringNullableFilter<"donations"> | string | null
     projects?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     users?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
@@ -24415,6 +24445,8 @@ export namespace Prisma {
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
     deleted_at?: SortOrderInput | SortOrder
+    is_verified?: SortOrder
+    sender_account_number?: SortOrderInput | SortOrder
     projects?: ProjectOrderByWithRelationInput
     users?: UserOrderByWithRelationInput
   }
@@ -24443,6 +24475,8 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"donations"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"donations"> | Date | string | null
     deleted_at?: DateTimeNullableFilter<"donations"> | Date | string | null
+    is_verified?: BoolFilter<"donations"> | boolean
+    sender_account_number?: StringNullableFilter<"donations"> | string | null
     projects?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     users?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id" | "donation_id">
@@ -24468,6 +24502,8 @@ export namespace Prisma {
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
     deleted_at?: SortOrderInput | SortOrder
+    is_verified?: SortOrder
+    sender_account_number?: SortOrderInput | SortOrder
     _count?: donationsCountOrderByAggregateInput
     _avg?: donationsAvgOrderByAggregateInput
     _max?: donationsMaxOrderByAggregateInput
@@ -24499,6 +24535,8 @@ export namespace Prisma {
     created_at?: DateTimeNullableWithAggregatesFilter<"donations"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"donations"> | Date | string | null
     deleted_at?: DateTimeNullableWithAggregatesFilter<"donations"> | Date | string | null
+    is_verified?: BoolWithAggregatesFilter<"donations"> | boolean
+    sender_account_number?: StringNullableWithAggregatesFilter<"donations"> | string | null
   }
 
   export type migrationsWhereInput = {
@@ -25955,6 +25993,8 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
+    is_verified?: boolean
+    sender_account_number?: string | null
     projects?: ProjectCreateNestedOneWithoutDonationsInput
     users?: UserCreateNestedOneWithoutDonationsInput
   }
@@ -25980,6 +26020,8 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
+    is_verified?: boolean
+    sender_account_number?: string | null
   }
 
   export type donationsUpdateInput = {
@@ -26001,6 +26043,8 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_verified?: BoolFieldUpdateOperationsInput | boolean
+    sender_account_number?: NullableStringFieldUpdateOperationsInput | string | null
     projects?: ProjectUpdateOneWithoutDonationsNestedInput
     users?: UserUpdateOneWithoutDonationsNestedInput
   }
@@ -26026,6 +26070,8 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_verified?: BoolFieldUpdateOperationsInput | boolean
+    sender_account_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type donationsCreateManyInput = {
@@ -26049,6 +26095,8 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
+    is_verified?: boolean
+    sender_account_number?: string | null
   }
 
   export type donationsUpdateManyMutationInput = {
@@ -26070,6 +26118,8 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_verified?: BoolFieldUpdateOperationsInput | boolean
+    sender_account_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type donationsUncheckedUpdateManyInput = {
@@ -26093,6 +26143,8 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_verified?: BoolFieldUpdateOperationsInput | boolean
+    sender_account_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type migrationsCreateInput = {
@@ -27530,6 +27582,8 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
+    is_verified?: SortOrder
+    sender_account_number?: SortOrder
   }
 
   export type donationsAvgOrderByAggregateInput = {
@@ -27559,6 +27613,8 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
+    is_verified?: SortOrder
+    sender_account_number?: SortOrder
   }
 
   export type donationsMinOrderByAggregateInput = {
@@ -27581,6 +27637,8 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
+    is_verified?: SortOrder
+    sender_account_number?: SortOrder
   }
 
   export type donationsSumOrderByAggregateInput = {
@@ -29057,6 +29115,8 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
+    is_verified?: boolean
+    sender_account_number?: string | null
     projects?: ProjectCreateNestedOneWithoutDonationsInput
   }
 
@@ -29080,6 +29140,8 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
+    is_verified?: boolean
+    sender_account_number?: string | null
   }
 
   export type donationsCreateOrConnectWithoutUsersInput = {
@@ -29278,6 +29340,8 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"donations"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"donations"> | Date | string | null
     deleted_at?: DateTimeNullableFilter<"donations"> | Date | string | null
+    is_verified?: BoolFilter<"donations"> | boolean
+    sender_account_number?: StringNullableFilter<"donations"> | string | null
   }
 
   export type volunteersUpsertWithWhereUniqueWithoutUsersInput = {
@@ -29342,6 +29406,8 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
+    is_verified?: boolean
+    sender_account_number?: string | null
     users?: UserCreateNestedOneWithoutDonationsInput
   }
 
@@ -29365,6 +29431,8 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
+    is_verified?: boolean
+    sender_account_number?: string | null
   }
 
   export type donationsCreateOrConnectWithoutProjectsInput = {
@@ -30477,6 +30545,8 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
+    is_verified?: boolean
+    sender_account_number?: string | null
   }
 
   export type volunteersCreateManyUsersInput = {
@@ -30671,6 +30741,8 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_verified?: BoolFieldUpdateOperationsInput | boolean
+    sender_account_number?: NullableStringFieldUpdateOperationsInput | string | null
     projects?: ProjectUpdateOneWithoutDonationsNestedInput
   }
 
@@ -30694,6 +30766,8 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_verified?: BoolFieldUpdateOperationsInput | boolean
+    sender_account_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type donationsUncheckedUpdateManyWithoutUsersInput = {
@@ -30716,6 +30790,8 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_verified?: BoolFieldUpdateOperationsInput | boolean
+    sender_account_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type volunteersUpdateWithoutUsersInput = {
@@ -30807,6 +30883,8 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     deleted_at?: Date | string | null
+    is_verified?: boolean
+    sender_account_number?: string | null
   }
 
   export type volunteersCreateManyProjectsInput = {
@@ -30851,6 +30929,8 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_verified?: BoolFieldUpdateOperationsInput | boolean
+    sender_account_number?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserUpdateOneWithoutDonationsNestedInput
   }
 
@@ -30874,6 +30954,8 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_verified?: BoolFieldUpdateOperationsInput | boolean
+    sender_account_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type donationsUncheckedUpdateManyWithoutProjectsInput = {
@@ -30896,6 +30978,8 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_verified?: BoolFieldUpdateOperationsInput | boolean
+    sender_account_number?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type volunteersUpdateWithoutProjectsInput = {

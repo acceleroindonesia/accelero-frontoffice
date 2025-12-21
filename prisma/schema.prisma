@@ -150,28 +150,30 @@ model contacts {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model donations {
-  id              BigInt    @id @default(autoincrement())
-  donation_id     String    @unique(map: "donations_donation_id_unique") @db.VarChar(255)
-  project_id      BigInt?
-  user_id         BigInt?
-  donor_name      String?   @db.VarChar(255)
-  donor_email     String?   @db.VarChar(255)
-  donor_phone     String?   @db.VarChar(255)
-  amount          BigInt
-  frequency       String    @default("one-time") @db.VarChar(255)
-  status          String    @default("pending") @db.VarChar(255)
-  payment_method  String?   @db.VarChar(255)
-  payment_channel String?   @db.VarChar(255)
-  transaction_id  String?   @db.VarChar(255)
-  paid_at         DateTime? @db.Timestamp(0)
-  message         String?
-  is_anonymous    Boolean   @default(false)
-  metadata        Json?     @db.Json
-  created_at      DateTime? @db.Timestamp(0)
-  updated_at      DateTime? @db.Timestamp(0)
-  deleted_at      DateTime? @db.Timestamp(0)
-  projects        Project?  @relation(fields: [project_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "donations_project_id_foreign")
-  users           User?     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "donations_user_id_foreign")
+  id                    BigInt    @id @default(autoincrement())
+  donation_id           String    @unique(map: "donations_donation_id_unique") @db.VarChar(255)
+  project_id            BigInt?
+  user_id               BigInt?
+  donor_name            String?   @db.VarChar(255)
+  donor_email           String?   @db.VarChar(255)
+  donor_phone           String?   @db.VarChar(255)
+  amount                BigInt
+  frequency             String    @default("one-time") @db.VarChar(255)
+  status                String    @default("pending") @db.VarChar(255)
+  payment_method        String?   @db.VarChar(255)
+  payment_channel       String?   @db.VarChar(255)
+  transaction_id        String?   @db.VarChar(255)
+  paid_at               DateTime? @db.Timestamp(0)
+  message               String?
+  is_anonymous          Boolean   @default(false)
+  metadata              Json?     @db.Json
+  created_at            DateTime? @db.Timestamp(0)
+  updated_at            DateTime? @db.Timestamp(0)
+  deleted_at            DateTime? @db.Timestamp(0)
+  is_verified           Boolean   @default(false)
+  sender_account_number String?   @db.VarChar(255)
+  projects              Project?  @relation(fields: [project_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "donations_project_id_foreign")
+  users                 User?     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "donations_user_id_foreign")
 
   @@index([created_at], map: "donations_created_at_index")
   @@index([project_id, status], map: "donations_project_id_status_index")

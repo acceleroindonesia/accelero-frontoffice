@@ -41,20 +41,34 @@
 .donate-form-section {
   padding: 4rem 0;
   background: #f8f9fa;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.donate-form-section .container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .donate-grid {
   display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 3rem;
+  grid-template-columns: 1fr; /* Single column on mobile */
+  gap: 2rem;
   align-items: start;
+  width: 100%;
 }
 
 .donate-form-container {
   background: white;
   border-radius: 20px;
-  padding: 3rem;
+  padding: 2rem;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .donate-form {
@@ -122,6 +136,8 @@
   font-size: 1rem;
   transition: all 0.3s ease;
   font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-input:focus,
@@ -214,18 +230,21 @@
 /* Amount Grid */
 .amount-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+  gap: 0.875rem;
+  width: 100%;
 }
 
 .amount-btn {
-  padding: 1.25rem 1rem;
+  padding: 1rem 0.75rem;
   border: 2px solid #e0e0e0;
   border-radius: 12px;
   background: white;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .amount-btn:hover {
@@ -367,8 +386,11 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  position: sticky;
-  top: 100px;
+  position: relative; /* Not sticky on mobile */
+  top: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .donation-summary {
@@ -376,6 +398,8 @@
   padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .donation-summary h3 {
@@ -454,6 +478,8 @@
   padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .trust-badges h4 {
@@ -499,26 +525,31 @@
 .donate-faq {
   padding: 4rem 0;
   background: white;
+  width: 100%;
+  overflow-x: hidden;
 }
 
-.donate-faq h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 3rem;
-  color: #1a1a1a;
+.donate-faq .container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .faq-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  grid-template-columns: 1fr; /* Single column on mobile */
+  gap: 1.5rem;
+  width: 100%;
 }
 
 .faq-item {
-  padding: 2rem;
+  padding: 1.5rem;
   background: #f8f9fa;
   border-radius: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .faq-item h4 {
@@ -536,43 +567,57 @@
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 1200px) {
+@media (min-width: 768px) {
+  .donate-form-section .container {
+    padding: 0 2rem;
+  }
+
+  .donate-form-container {
+    padding: 2.5rem;
+  }
+
+  .amount-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on tablet */
+    gap: 1rem;
+  }
+
+  .faq-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
   .donate-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 400px; /* 2 columns on desktop: content + sidebar */
+    gap: 3rem;
+  }
+
+  .donate-form-container {
+    padding: 3rem;
   }
 
   .donate-sidebar {
-    position: relative;
-    top: 0;
+    position: sticky;
+    top: 100px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 768px) {
-  /* Fix container padding */
-  .donate-hero .container,
-  .donate-form-section .container,
-  .donate-faq .container {
-    padding: 0 1rem;
-  }
-
   .donate-hero {
     padding: 4rem 0 3rem;
   }
 
+  .donate-hero .container {
+    padding: 0 1rem;
+  }
+
   .donate-title {
     font-size: 2.5rem;
-  }
-
-  .donate-form-container {
-    padding: 2rem;
-  }
-
-  .amount-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
   }
 
   .donation-type-toggle {
@@ -584,25 +629,20 @@
     font-size: 0.9rem;
   }
 
-  .faq-grid {
-    grid-template-columns: 1fr;
-  }
-
   .section-title {
     font-size: 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
-  /* Extra tight padding for small screens */
+  .donate-hero {
+    padding: 3rem 0 2rem;
+  }
+
   .donate-hero .container,
   .donate-form-section .container,
   .donate-faq .container {
-    padding: 0 0.75rem;
-  }
-
-  .donate-hero {
-    padding: 3rem 0 2rem;
+    padding: 0 0.875rem;
   }
 
   .donate-title {
@@ -616,8 +656,6 @@
   .donate-form-container {
     padding: 1.5rem;
     border-radius: 16px;
-    width: 50%;
-    max-width: 100%;
   }
 
   .form-section {
@@ -636,7 +674,7 @@
   }
 
   .amount-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column on very small screens */
     gap: 0.75rem;
   }
 

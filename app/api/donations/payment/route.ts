@@ -37,13 +37,9 @@ export async function POST(request: NextRequest) {
       where: { donation_id: donationId },
       data: {
         sender_account_number: senderAccountNumber,
-        status: 'Need Verifying', // Admin needs to verify
+        status: 'processing', // Admin needs to verify
         is_verified: false,
-        metadata: {
-          ...((donation.metadata as object) || {}),
-          confirmedAt: new Date().toISOString(),
-          confirmedAmount: amount,
-        },
+        paid_at: new Date(),
         updated_at: new Date(),
       },
     })

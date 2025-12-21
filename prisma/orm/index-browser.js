@@ -253,7 +253,9 @@ exports.Prisma.DonationsScalarFieldEnum = {
   metadata: 'metadata',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
+  deleted_at: 'deleted_at',
+  is_verified: 'is_verified',
+  sender_account_number: 'sender_account_number'
 };
 
 exports.Prisma.MigrationsScalarFieldEnum = {

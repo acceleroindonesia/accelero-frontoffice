@@ -1,4 +1,4 @@
-// app/api/banner/route.ts.ts
+// app/api/banner/page.tsx.ts
 import { NextResponse } from 'next/server'
 import { prisma } from '@utils/Prisma'
 import ToolBox from '@utils/ToolBox'
