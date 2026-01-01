@@ -1474,6 +1474,9 @@ export const translations = {
     joinOurMissionDesc:
       'Baik melalui volunteering, donasi, atau kemitraan—ada banyak cara untuk mendukung kesetaraan pendidikan di Indonesia.',
     viewOurPrograms: 'Lihat Program Kami',
+    volunteerHeroTitle: 'Menjadi Sukarelawan',
+    volunteerHeroSubtitle:
+      'Berikan dampak positif bagi komunitas Anda. Bergabunglah dengan tim relawan kami yang berdedikasi dan bantu ciptakan perubahan positif.',
 
     // Blog Page
     ourBlog: 'Blog Kami',
