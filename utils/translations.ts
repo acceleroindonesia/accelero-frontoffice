@@ -765,6 +765,21 @@ export const translations = {
     accountName: 'Account Name',
     copyAccountNumber: 'Copy Account Number',
     accountCopied: 'Account number copied!',
+
+    // Footer
+    footerMission:
+      'Empowering underserved communities in Indonesia through quality education. Every child deserves the right to learn.',
+    aboutUs: 'About Us',
+    impactStories: 'Impact Stories',
+    programs: 'Programs',
+    resources: 'Resources',
+    helpCenter: 'Help Center',
+    newsletterDescription: 'Get monthly updates on our programs and see the impact of your support',
+    subscribe: 'Subscribe',
+    allRightsReserved: 'All rights reserved',
+    secureDonations: 'Secure Donations',
+    verifiedNonprofit: 'Verified Nonprofit',
+    transparency: 'Transparency',
   },
   id: {
     // Navigation
@@ -1512,6 +1527,21 @@ export const translations = {
     accountName: 'Nama Rekening',
     copyAccountNumber: 'Salin Nomor Rekening',
     accountCopied: 'Nomor rekening tersalin!',
+    // Footer
+    footerMission:
+      'Memberdayakan komunitas kurang terlayani di Indonesia melalui pendidikan berkualitas. Setiap anak berhak untuk belajar.',
+    aboutUs: 'Tentang Kami',
+    impactStories: 'Kisah Dampak',
+    programs: 'Program',
+    resources: 'Sumber Daya',
+    helpCenter: 'Pusat Bantuan',
+    newsletterDescription:
+      'Dapatkan update bulanan tentang program kami dan lihat dampak dukungan Anda',
+    subscribe: 'Berlangganan',
+    allRightsReserved: 'Hak cipta dilindungi',
+    secureDonations: 'Donasi Aman',
+    verifiedNonprofit: 'Nirlaba Terverifikasi',
+    transparency: 'Transparansi',
   },
 }
 

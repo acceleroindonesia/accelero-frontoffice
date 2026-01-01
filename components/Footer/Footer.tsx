@@ -1,77 +1,46 @@
+'use client'
+
 import React from 'react'
 import Link from 'next/link'
+import { useLanguage } from '@contexts/LanguageContext'
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()
+  const { t } = useLanguage()
 
   const footerLinks = {
     about: [
-      { name: 'Our Mission', href: '/about' },
-      { name: 'Our Team', href: '/about/team' },
-      { name: 'Impact Stories', href: '/impact' },
-      { name: 'Annual Reports', href: '/reports' },
-      { name: 'Partnerships', href: '/partnerships' },
+      { nameKey: 'ourMission', href: '/about' },
+      { nameKey: 'ourTeam', href: '/about' },
+      { nameKey: 'impactStories', href: '/impact' },
     ],
     getInvolved: [
-      { name: 'Donate', href: '/donations' },
-      { name: 'Volunteer', href: '/volunteer' },
-      { name: 'Corporate Giving', href: '/partnerships/corporate' },
-      { name: 'Fundraise', href: '/fundraise' },
-      { name: 'Spread the Word', href: '/share' },
+      { nameKey: 'donate', href: '/donate' },
+      { nameKey: 'volunteer', href: '/volunteer' },
+      { nameKey: 'partner', href: '/partner' },
     ],
-    programs: [
-      { name: 'Teaching at Right Level', href: '/programs/tarl' },
-      { name: 'Reading Programs', href: '/programs/reading' },
-      { name: 'Math Foundation', href: '/programs/math' },
-      { name: 'Teacher Training', href: '/programs/training' },
-      { name: 'All Programs', href: '/programs' },
-    ],
+    programs: [{ nameKey: 'viewAllPrograms', href: '/projects' }],
     resources: [
-      { name: 'Help Center', href: '/help' },
-      { name: 'Contact Us', href: '/contact' },
-      { name: 'FAQ', href: '/help/answers' },
-      { name: 'News & Blog', href: '/news' },
-      { name: 'Media Kit', href: '/media' },
-    ],
-    legal: [
-      { name: 'Privacy Policy', href: '/legal/privacy' },
-      { name: 'Terms of Service', href: '/legal/terms' },
-      { name: 'Cookie Policy', href: '/legal/cookies' },
-      { name: 'Financial Transparency', href: '/transparency' },
+      { nameKey: 'helpCenter', href: '/help' },
+      { nameKey: 'contactUs', href: '/contact' },
+      { nameKey: 'faq', href: '/help/answers' },
+      { nameKey: 'blog', href: '/blog' },
     ],
   }
 
   const socialLinks = [
-    // {
-    //   name: 'Facebook',
-    //   href: 'https://facebook.com/accelerofoundation',
-    //   icon: (
-    //     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    //       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-    //     </svg>
-    //   ),
-    // },
-    // {
-    //   name: 'Twitter',
-    //   href: 'https://twitter.com/accelerofound',
-    //   icon: (
-    //     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    //       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    //     </svg>
-    //   ),
-    // },
     {
-      name: 'Titok',
-      href: 'https://twitter.com/accelerofound',
+      name: 'TikTok',
+      href: 'https://www.tiktok.com/@accelero.id',
       icon: (
-        <svg fill="#000000" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-          <g id="SVGRepo_iconCarrier">
-            {' '}
-            <title>tiktok</title>{' '}
-            <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"></path>{' '}
-          </g>
+        <svg
+          fill="currentColor"
+          viewBox="0 0 32 32"
+          width="20"
+          height="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"></path>
         </svg>
       ),
     },
@@ -93,15 +62,6 @@ const Footer: React.FC = () => {
         </svg>
       ),
     },
-    // {
-    //   name: 'YouTube',
-    //   href: 'https://youtube.com/@accelerofoundation',
-    //   icon: (
-    //     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    //       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-    //     </svg>
-    //   ),
-    // },
   ]
 
   return (
@@ -120,10 +80,7 @@ const Footer: React.FC = () => {
                 </div>
               </div>
             </Link>
-            <p className="footer-mission">
-              Empowering underserved communities in Indonesia through quality education. Every child
-              deserves the right to learn.
-            </p>
+            <p className="footer-mission">{t('footerMission')}</p>
             <div className="footer-social">
               {socialLinks.map((social) => (
                 <a
@@ -145,12 +102,12 @@ const Footer: React.FC = () => {
           {/* Footer Links */}
           <div className="footer-links">
             <div className="footer-column">
-              <h4 className="footer-column-title">About Us</h4>
+              <h4 className="footer-column-title">{t('aboutUs')}</h4>
               <ul className="footer-list">
                 {footerLinks.about.map((link) => (
-                  <li key={link.name}>
+                  <li key={link.nameKey}>
                     <Link href={link.href} className="footer-link">
-                      {link.name}
+                      {t(link.nameKey as any)}
                     </Link>
                   </li>
                 ))}
@@ -158,12 +115,12 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="footer-column">
-              <h4 className="footer-column-title">Get Involved</h4>
+              <h4 className="footer-column-title">{t('getInvolved')}</h4>
               <ul className="footer-list">
                 {footerLinks.getInvolved.map((link) => (
-                  <li key={link.name}>
+                  <li key={link.nameKey}>
                     <Link href={link.href} className="footer-link">
-                      {link.name}
+                      {t(link.nameKey as any)}
                     </Link>
                   </li>
                 ))}
@@ -171,12 +128,12 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="footer-column">
-              <h4 className="footer-column-title">Programs</h4>
+              <h4 className="footer-column-title">{t('programs')}</h4>
               <ul className="footer-list">
                 {footerLinks.programs.map((link) => (
-                  <li key={link.name}>
+                  <li key={link.nameKey}>
                     <Link href={link.href} className="footer-link">
-                      {link.name}
+                      {t(link.nameKey as any)}
                     </Link>
                   </li>
                 ))}
@@ -184,12 +141,12 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="footer-column">
-              <h4 className="footer-column-title">Resources</h4>
+              <h4 className="footer-column-title">{t('resources')}</h4>
               <ul className="footer-list">
                 {footerLinks.resources.map((link) => (
-                  <li key={link.name}>
+                  <li key={link.nameKey}>
                     <Link href={link.href} className="footer-link">
-                      {link.name}
+                      {t(link.nameKey as any)}
                     </Link>
                   </li>
                 ))}
@@ -201,21 +158,19 @@ const Footer: React.FC = () => {
         {/* Newsletter Section */}
         <div className="footer-newsletter">
           <div className="newsletter-content">
-            <h4 className="newsletter-title">Stay Updated</h4>
-            <p className="newsletter-description">
-              Get monthly updates on our programs and see the impact of your support
-            </p>
+            <h4 className="newsletter-title">{t('stayUpdated')}</h4>
+            <p className="newsletter-description">{t('newsletterDescription')}</p>
           </div>
           <form className="newsletter-form" suppressHydrationWarning>
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder={t('enterYourEmail')}
               className="newsletter-input"
               required
               suppressHydrationWarning
             />
             <button type="submit" className="newsletter-button" suppressHydrationWarning>
-              Subscribe
+              {t('subscribe')}
             </button>
           </form>
         </div>
@@ -224,24 +179,14 @@ const Footer: React.FC = () => {
         <div className="footer-bottom">
           <div className="footer-bottom-left">
             <p className="footer-copyright">
-              © {currentYear} Accelero Foundation. All rights reserved.
+              © {currentYear} Accelero Foundation. {t('allRightsReserved')}.
             </p>
-            <div className="footer-legal-links">
-              {footerLinks.legal.map((link, index) => (
-                <React.Fragment key={link.name}>
-                  <Link href={link.href} className="footer-legal-link">
-                    {link.name}
-                  </Link>
-                  {index < footerLinks.legal.length - 1 && <span className="separator">•</span>}
-                </React.Fragment>
-              ))}
-            </div>
           </div>
           <div className="footer-bottom-right">
             <div className="footer-badges">
-              <span className="badge">🔒 Secure Donations</span>
-              <span className="badge">✓ Verified Nonprofit</span>
-              <span className="badge">💯 Transparency</span>
+              <span className="badge">🔒 {t('secureDonations')}</span>
+              <span className="badge">✓ {t('verifiedNonprofit')}</span>
+              <span className="badge">💯 {t('transparency')}</span>
             </div>
           </div>
         </div>
