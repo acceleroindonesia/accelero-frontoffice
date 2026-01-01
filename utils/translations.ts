@@ -126,6 +126,12 @@ export const translations = {
     fullTraining: 'Full Training',
     fullTrainingDesc: 'Complete onboarding and ongoing support',
     meaningfulImpactDesc2: 'See the direct results of your work',
+    globalReachDesc2:
+      'Expand your social impact footprint across regions and communities around the world.',
+    transparentReportingDesc2:
+      'Receive detailed reports on the impact of your partnership with measurable results and metrics.',
+    implementationDesc:
+      'Launch collaborative programs with dedicated support and regular communication',
     applyToVolunteer: 'Apply to Volunteer',
     corporatePartnerships: 'Corporate Partnerships',
     volunteerImpact: 'Volunteer Impact',
@@ -780,6 +786,62 @@ export const translations = {
     secureDonations: 'Secure Donations',
     verifiedNonprofit: 'Verified Nonprofit',
     transparency: 'Transparency',
+
+    // Additional Impact Page strings
+    childrenReceivingQualityEducation: 'Children receiving quality education support',
+    educationalInstitutionsWeWorkWith: 'Educational institutions we work with',
+    generousDonors: 'Generous Donors',
+    peopleMakingEducationPossible: 'People making education possible',
+    investedInChildrenFutures: 'Invested in children futures',
+    ongoingEducationalInitiatives: 'Ongoing educational initiatives',
+    completedPrograms: 'Completed Programs',
+    successfullyFinishedProjects: 'Successfully finished projects',
+    whereWeMakeAnImpact: 'Where We Make an Impact',
+    ourProgramsFocus: 'Our programs focus on the most critical areas of educational development',
+    helpingStudentsBuild:
+      'Helping students build strong reading and writing foundations through proven TaRL methodology',
+    studentsImprovingReading: 'students improving reading skills',
+    makingMathAccessible:
+      'Making math accessible and fun through game-based learning and interactive tools',
+    studentsBuildingMathConfidence: 'students building math confidence',
+    empoweringEducators: 'Empowering educators with modern teaching methods for sustainable impact',
+    teachersTrainedInTaRL: 'teachers trained in TaRL',
+    creatingInspiringLearningSpaces:
+      'Creating inspiring learning spaces with proper facilities and resources',
+    studentsBenefitingNewSpaces: 'students benefiting from new spaces',
+    reachingRemoteCommunities: 'Reaching Remote Communities',
+    weFocusOnUnderserved:
+      'We focus on underserved regions where educational support is needed most',
+    papuaAndPapuaBarat: 'Papua & Papua Barat',
+    students: 'Students',
+    schools: 'Schools',
+    malukuAndMalukuUtara: 'Maluku & Maluku Utara',
+    nusaTenggara: 'Nusa Tenggara',
+    jakarta: 'Jakarta',
+    school: 'School',
+    successStories: 'Success Stories',
+    realStoriesOfTransformation: 'Real stories of transformation from our programs',
+    parentTestimonialText:
+      'After just 3 months in the Reading Excellence Program, my daughter went from struggling with basic words to reading full sentences. She now reads bedtime stories to her younger brother!',
+    ibuSari: 'Ibu Sari',
+    parentSDInpres: 'Parent, SD Inpres 01 Sorong',
+    teacherTestimonialText:
+      'The TaRL training completely changed how I teach. I now understand that meeting students where they are is more important than covering the entire curriculum.',
+    pakAhmad: 'Pak Ahmad',
+    teacherSDN: 'Teacher, SDN 05 Jakarta Selatan',
+    principalTestimonialText:
+      'Our new reading room has become the favorite place in school. Students come early and stay late just to spend time with books. It magical',
+    susterMaria: 'Suster Maria',
+    principalSDKatolik: 'Principal, SD Katolik Ende',
+    weBelieveInTransparency:
+      'We believe in transparency and accountability. Every program includes:',
+    regularProgressTracking: 'Regular Progress Tracking',
+    regularProgressTrackingDesc: 'Weekly and monthly evaluations ensure continuous improvement',
+    confidence: 'Confidence',
+    percentageReachingLevels: 'Percentage of students reaching age-appropriate learning levels',
+    bePartOfImpactStory: 'Be Part of Our Impact Story',
+    everyDonationCreatesRipples:
+      'Every donation creates ripples of change. Join us in transforming education for thousands of children across Indonesia.',
   },
   id: {
     // Navigation
@@ -1214,6 +1276,16 @@ export const translations = {
     motivationPlaceholder: 'Bagikan motivasi Anda untuk menjadi relawan dengan kami...',
     selectOneInterest: 'Silakan pilih setidaknya satu bidang minat',
     required: '*',
+    whyVolunteer: 'Mengapa Menjadi Sukarelawan?',
+    makeAnImpact: 'Berikan Dampak',
+    makeAnImpactDesc: 'Berkontribusi langsung pada proyek-proyek bermakna yang mengubah hidup.',
+    learnAndGrow: 'Belajar & Berkembang',
+    learnAndGrowDesc: 'Kembangkan keterampilan baru dan dapatkan pengalaman berharga.',
+    connect: 'Menghubungkan',
+    connectDesc:
+      'Bertemu dengan orang-orang yang memiliki minat serupa dan membangun hubungan yang langgeng.',
+    empower: 'Memberdayakan',
+    empowerDesc: 'Bantu memberdayakan komunitas untuk mencapai potensi penuh mereka.',
 
     // Volunteer Areas
     educationTutoring: 'Pendidikan & Bimbingan Belajar',
@@ -1542,6 +1614,64 @@ export const translations = {
     secureDonations: 'Donasi Aman',
     verifiedNonprofit: 'Nirlaba Terverifikasi',
     transparency: 'Transparansi',
+
+    // Additional Impact Page strings
+    childrenReceivingQualityEducation: 'Anak-anak menerima dukungan pendidikan berkualitas',
+    educationalInstitutionsWeWorkWith: 'Institusi pendidikan yang kami ajak bekerja sama',
+    generousDonors: 'Donatur yang Dermawan',
+    peopleMakingEducationPossible: 'Orang-orang yang mewujudkan pendidikan',
+    investedInChildrenFutures: 'Diinvestasikan untuk masa depan anak-anak',
+    ongoingEducationalInitiatives: 'Inisiatif pendidikan yang sedang berjalan',
+    completedPrograms: 'Program Selesai',
+    successfullyFinishedProjects: 'Proyek yang berhasil diselesaikan',
+    whereWeMakeAnImpact: 'Di Mana Kami Membuat Dampak',
+    ourProgramsFocus: 'Program kami berfokus pada area paling kritis dalam pengembangan pendidikan',
+    helpingStudentsBuild:
+      'Membantu siswa membangun fondasi membaca dan menulis yang kuat melalui metodologi TaRL yang terbukti',
+    studentsImprovingReading: 'siswa meningkatkan keterampilan membaca',
+    makingMathAccessible:
+      'Membuat matematika mudah diakses dan menyenangkan melalui pembelajaran berbasis permainan dan alat interaktif',
+    studentsBuildingMathConfidence: 'siswa membangun kepercayaan diri dalam matematika',
+    empoweringEducators:
+      'Memberdayakan pendidik dengan metode pengajaran modern untuk dampak berkelanjutan',
+    teachersTrainedInTaRL: 'guru dilatih dalam TaRL',
+    creatingInspiringLearningSpaces:
+      'Menciptakan ruang belajar yang inspiratif dengan fasilitas dan sumber daya yang tepat',
+    studentsBenefitingNewSpaces: 'siswa mendapat manfaat dari ruang baru',
+    reachingRemoteCommunities: 'Menjangkau Komunitas Terpencil',
+    weFocusOnUnderserved:
+      'Kami fokus pada daerah kurang terlayani di mana dukungan pendidikan paling dibutuhkan',
+    papuaAndPapuaBarat: 'Papua & Papua Barat',
+    students: 'Siswa',
+    schools: 'Sekolah',
+    malukuAndMalukuUtara: 'Maluku & Maluku Utara',
+    nusaTenggara: 'Nusa Tenggara',
+    jakarta: 'Jakarta',
+    school: 'Sekolah',
+    successStories: 'Kisah Sukses',
+    realStoriesOfTransformation: 'Kisah nyata transformasi dari program kami',
+    parentTestimonialText:
+      'Setelah hanya 3 bulan di Program Reading Excellence, putri saya berubah dari kesulitan dengan kata-kata dasar menjadi membaca kalimat lengkap. Sekarang dia membacakan cerita pengantar tidur untuk adiknya!',
+    ibuSari: 'Ibu Sari',
+    parentSDInpres: 'Orang Tua, SD Inpres 01 Sorong',
+    teacherTestimonialText:
+      'Pelatihan TaRL sepenuhnya mengubah cara saya mengajar. Saya sekarang memahami bahwa memenuhi siswa di mana mereka berada lebih penting daripada mencakup seluruh kurikulum.',
+    pakAhmad: 'Pak Ahmad',
+    teacherSDN: 'Guru, SDN 05 Jakarta Selatan',
+    principalTestimonialText:
+      'Ruang baca baru kami telah menjadi tempat favorit di sekolah. Siswa datang lebih awal dan tinggal lebih lama hanya untuk menghabiskan waktu dengan buku. Ini ajaib!',
+    susterMaria: 'Suster Maria',
+    principalSDKatolik: 'Kepala Sekolah, SD Katolik Ende',
+    weBelieveInTransparency:
+      'Kami percaya pada transparansi dan akuntabilitas. Setiap program mencakup:',
+    regularProgressTracking: 'Pelacakan Kemajuan Berkala',
+    regularProgressTrackingDesc:
+      'Evaluasi mingguan dan bulanan memastikan peningkatan berkelanjutan',
+    confidence: 'Kepercayaan Diri',
+    percentageReachingLevels: 'Persentase siswa mencapai level pembelajaran yang sesuai usia',
+    bePartOfImpactStory: 'Jadilah Bagian dari Kisah Dampak Kami',
+    everyDonationCreatesRipples:
+      'Setiap donasi menciptakan gelombang perubahan. Bergabunglah dengan kami dalam mengubah pendidikan untuk ribuan anak di seluruh Indonesia.',
   },
 }
 

@@ -110,42 +110,42 @@ const ImpactPage: React.FC = () => {
               <div className="stat-icon">🎓</div>
               <div className="stat-number">{stats.totalStudents.toLocaleString()}</div>
               <div className="stat-label">{t('totalStudentsReached')}</div>
-              <div className="stat-description">Children receiving quality education support</div>
+              <div className="stat-description">{t('childrenReceivingQualityEducation')}</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">🏫</div>
               <div className="stat-number">{stats.totalSchools}</div>
               <div className="stat-label">{t('schoolsTransformed')}</div>
-              <div className="stat-description">Educational institutions we work with</div>
+              <div className="stat-description">{t('educationalInstitutionsWeWorkWith')}</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">❤️</div>
               <div className="stat-number">{stats.totalDonors.toLocaleString()}</div>
-              <div className="stat-label">Generous Donors</div>
-              <div className="stat-description">People making education possible</div>
+              <div className="stat-label">{t('generousDonors')}</div>
+              <div className="stat-description">{t('peopleMakingEducationPossible')}</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">💰</div>
               <div className="stat-number">{formatCurrency(stats.totalFunded)}</div>
               <div className="stat-label">{t('totalRaised')}</div>
-              <div className="stat-description">Invested in children's futures</div>
+              <div className="stat-description">{t('investedInChildrenFutures')}</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">🚀</div>
               <div className="stat-number">{stats.activePrograms}</div>
               <div className="stat-label">{t('activePrograms')}</div>
-              <div className="stat-description">Ongoing educational initiatives</div>
+              <div className="stat-description">{t('ongoingEducationalInitiatives')}</div>
             </div>
 
             <div className="stat-card-large">
               <div className="stat-icon">✅</div>
               <div className="stat-number">{stats.completedPrograms}</div>
-              <div className="stat-label">{t('completed')} Programs</div>
-              <div className="stat-description">Successfully finished projects</div>
+              <div className="stat-label">{t('completedPrograms')}</div>
+              <div className="stat-description">{t('successfullyFinishedProjects')}</div>
             </div>
           </div>
         </div>
@@ -155,51 +155,44 @@ const ImpactPage: React.FC = () => {
       <Section className="impact-categories-section">
         <div className="container">
           <div className="section-header-center">
-            <h2 className="section-title-large">Where We Make an Impact</h2>
-            <p className="section-description">
-              Our programs focus on the most critical areas of educational development
-            </p>
+            <h2 className="section-title-large">{t('whereWeMakeAnImpact')}</h2>
+            <p className="section-description">{t('ourProgramsFocus')}</p>
           </div>
 
           <div className="impact-categories-grid">
             <div className="category-card">
               <div className="category-icon">📚</div>
-              <h3>Literacy Development</h3>
-              <p>
-                Helping students build strong reading and writing foundations through proven TaRL
-                methodology
-              </p>
+              <h3>{t('literacyDevelopment')}</h3>
+              <p>{t('helpingStudentsBuild')}</p>
               <div className="category-stat">
-                <strong>850+</strong> students improving reading skills
+                <strong>850+</strong> {t('studentsImprovingReading')}
               </div>
             </div>
 
             <div className="category-card">
               <div className="category-icon">🔢</div>
-              <h3>Numeracy Skills</h3>
-              <p>
-                Making math accessible and fun through game-based learning and interactive tools
-              </p>
+              <h3>{t('numeracySkills')}</h3>
+              <p>{t('makingMathAccessible')}</p>
               <div className="category-stat">
-                <strong>360+</strong> students building math confidence
+                <strong>360+</strong> {t('studentsBuildingMathConfidence')}
               </div>
             </div>
 
             <div className="category-card">
               <div className="category-icon">👨‍🏫</div>
-              <h3>Teacher Training</h3>
-              <p>Empowering educators with modern teaching methods for sustainable impact</p>
+              <h3>{t('teacherTraining')}</h3>
+              <p>{t('empoweringEducators')}</p>
               <div className="category-stat">
-                <strong>30+</strong> teachers trained in TaRL
+                <strong>30+</strong> {t('teachersTrainedInTaRL')}
               </div>
             </div>
 
             <div className="category-card">
               <div className="category-icon">🏗️</div>
-              <h3>Infrastructure</h3>
-              <p>Creating inspiring learning spaces with proper facilities and resources</p>
+              <h3>{t('infrastructure')}</h3>
+              <p>{t('creatingInspiringLearningSpaces')}</p>
               <div className="category-stat">
-                <strong>300+</strong> students benefiting from new spaces
+                <strong>300+</strong> {t('studentsBenefitingNewSpaces')}
               </div>
             </div>
           </div>
@@ -210,65 +203,63 @@ const ImpactPage: React.FC = () => {
       <section className="regional-impact-section">
         <div className="container">
           <div className="section-header-center">
-            <h2 className="section-title-large">Reaching Remote Communities</h2>
-            <p className="section-description">
-              We focus on underserved regions where educational support is needed most
-            </p>
+            <h2 className="section-title-large">{t('reachingRemoteCommunities')}</h2>
+            <p className="section-description">{t('weFocusOnUnderserved')}</p>
           </div>
 
           <div className="regions-grid">
             <div className="region-card">
-              <div className="region-name">Papua & Papua Barat</div>
+              <div className="region-name">{t('papuaAndPapuaBarat')}</div>
               <div className="region-stats">
                 <div className="region-stat-item">
                   <span className="stat-value">430</span>
-                  <span className="stat-label">Students</span>
+                  <span className="stat-label">{t('students')}</span>
                 </div>
                 <div className="region-stat-item">
                   <span className="stat-value">3</span>
-                  <span className="stat-label">Schools</span>
+                  <span className="stat-label">{t('schools')}</span>
                 </div>
               </div>
             </div>
 
             <div className="region-card">
-              <div className="region-name">Maluku & Maluku Utara</div>
+              <div className="region-name">{t('malukuAndMalukuUtara')}</div>
               <div className="region-stats">
                 <div className="region-stat-item">
                   <span className="stat-value">1,000+</span>
-                  <span className="stat-label">Students</span>
+                  <span className="stat-label">{t('students')}</span>
                 </div>
                 <div className="region-stat-item">
                   <span className="stat-value">6</span>
-                  <span className="stat-label">Schools</span>
+                  <span className="stat-label">{t('schools')}</span>
                 </div>
               </div>
             </div>
 
             <div className="region-card">
-              <div className="region-name">Nusa Tenggara</div>
+              <div className="region-name">{t('nusaTenggara')}</div>
               <div className="region-stats">
                 <div className="region-stat-item">
                   <span className="stat-value">420</span>
-                  <span className="stat-label">Students</span>
+                  <span className="stat-label">{t('students')}</span>
                 </div>
                 <div className="region-stat-item">
                   <span className="stat-value">2</span>
-                  <span className="stat-label">Schools</span>
+                  <span className="stat-label">{t('schools')}</span>
                 </div>
               </div>
             </div>
 
             <div className="region-card">
-              <div className="region-name">Jakarta</div>
+              <div className="region-name">{t('jakarta')}</div>
               <div className="region-stats">
                 <div className="region-stat-item">
                   <span className="stat-value">200</span>
-                  <span className="stat-label">Students</span>
+                  <span className="stat-label">{t('students')}</span>
                 </div>
                 <div className="region-stat-item">
                   <span className="stat-value">1</span>
-                  <span className="stat-label">School</span>
+                  <span className="stat-label">{t('school')}</span>
                 </div>
               </div>
             </div>
@@ -281,44 +272,34 @@ const ImpactPage: React.FC = () => {
         <div className="container">
           <div className="section-header-center">
             <h2 className="section-title-large">{t('successStories')}</h2>
-            <p className="section-description">Real stories of transformation from our programs</p>
+            <p className="section-description">{t('realStoriesOfTransformation')}</p>
           </div>
 
           <div className="stories-grid">
             <div className="story-card">
               <div className="story-quote">"</div>
-              <p className="story-text">
-                After just 3 months in the Reading Excellence Program, my daughter went from
-                struggling with basic words to reading full sentences. She now reads bedtime stories
-                to her younger brother!
-              </p>
+              <p className="story-text">{t('parentTestimonialText')}</p>
               <div className="story-author">
-                <strong>Ibu Sari</strong>
-                <span>Parent, SD Inpres 01 Sorong</span>
+                <strong>{t('ibuSari')}</strong>
+                <span>{t('parentSDInpres')}</span>
               </div>
             </div>
 
             <div className="story-card">
               <div className="story-quote">"</div>
-              <p className="story-text">
-                The TaRL training completely changed how I teach. I now understand that meeting
-                students where they are is more important than covering the entire curriculum.
-              </p>
+              <p className="story-text">{t('teacherTestimonialText')}</p>
               <div className="story-author">
-                <strong>Pak Ahmad</strong>
-                <span>Teacher, SDN 05 Jakarta Selatan</span>
+                <strong>{t('pakAhmad')}</strong>
+                <span>{t('teacherSDN')}</span>
               </div>
             </div>
 
             <div className="story-card">
               <div className="story-quote">"</div>
-              <p className="story-text">
-                Our new reading room has become the favorite place in school. Students come early
-                and stay late just to spend time with books. It's magical!
-              </p>
+              <p className="story-text">{t('principalTestimonialText')}</p>
               <div className="story-author">
-                <strong>Suster Maria</strong>
-                <span>Principal, SD Katolik Ende</span>
+                <strong>{t('susterMaria')}</strong>
+                <span>{t('principalSDKatolik')}</span>
               </div>
             </div>
           </div>
@@ -330,41 +311,39 @@ const ImpactPage: React.FC = () => {
         <div className="container">
           <div className="methodology-content">
             <div className="methodology-text">
-              <h2 className="section-title-large">How We Measure Impact</h2>
-              <p className="methodology-description">
-                We believe in transparency and accountability. Every program includes:
-              </p>
+              <h2 className="section-title-large">{t('howWeMeasureImpact')}</h2>
+              <p className="methodology-description">{t('weBelieveInTransparency')}</p>
 
               <div className="methodology-list">
                 <div className="methodology-item">
                   <div className="method-icon">📊</div>
                   <div className="method-content">
-                    <h4>Baseline Assessments</h4>
-                    <p>We measure each student's starting point before program begins</p>
+                    <h4>{t('baselineAssessments')}</h4>
+                    <p>{t('baselineAssessmentsDesc')}</p>
                   </div>
                 </div>
 
                 <div className="methodology-item">
                   <div className="method-icon">📈</div>
                   <div className="method-content">
-                    <h4>Regular Progress Tracking</h4>
-                    <p>Weekly and monthly evaluations ensure continuous improvement</p>
+                    <h4>{t('regularProgressTracking')}</h4>
+                    <p>{t('regularProgressTrackingDesc')}</p>
                   </div>
                 </div>
 
                 <div className="methodology-item">
                   <div className="method-icon">🎯</div>
                   <div className="method-content">
-                    <h4>Final Assessment</h4>
-                    <p>Comprehensive evaluation at program completion</p>
+                    <h4>{t('finalAssessment')}</h4>
+                    <p>{t('finalAssessmentDesc')}</p>
                   </div>
                 </div>
 
                 <div className="methodology-item">
                   <div className="method-icon">📝</div>
                   <div className="method-content">
-                    <h4>Transparent Reporting</h4>
-                    <p>All donors receive detailed updates on program outcomes</p>
+                    <h4>{t('transparentReportingImpact')}</h4>
+                    <p>{t('transparentReportingImpactDesc')}</p>
                   </div>
                 </div>
               </div>
@@ -372,31 +351,29 @@ const ImpactPage: React.FC = () => {
 
             <div className="methodology-visual">
               <div className="visual-card">
-                <h3>Average Learning Gains</h3>
+                <h3>{t('averageLearningGains')}</h3>
                 <div className="gain-item">
-                  <span>Literacy</span>
+                  <span>{t('literacy')}</span>
                   <div className="gain-bar">
                     <div className="gain-fill" style={{ width: '85%' }}></div>
                   </div>
                   <strong>85%</strong>
                 </div>
                 <div className="gain-item">
-                  <span>Numeracy</span>
+                  <span>{t('numeracy')}</span>
                   <div className="gain-bar">
                     <div className="gain-fill" style={{ width: '78%' }}></div>
                   </div>
                   <strong>78%</strong>
                 </div>
                 <div className="gain-item">
-                  <span>Confidence</span>
+                  <span>{t('confidence')}</span>
                   <div className="gain-bar">
                     <div className="gain-fill" style={{ width: '92%' }}></div>
                   </div>
                   <strong>92%</strong>
                 </div>
-                <p className="gain-note">
-                  Percentage of students reaching age-appropriate learning levels
-                </p>
+                <p className="gain-note">{t('percentageReachingLevels')}</p>
               </div>
             </div>
           </div>
@@ -407,17 +384,14 @@ const ImpactPage: React.FC = () => {
       <section className="impact-cta-section">
         <div className="container">
           <div className="cta-card-impact">
-            <h2>Be Part of Our Impact Story</h2>
-            <p>
-              Every donation creates ripples of change. Join us in transforming education for
-              thousands of children across Indonesia.
-            </p>
+            <h2>{t('bePartOfImpactStory')}</h2>
+            <p>{t('everyDonationCreatesRipples')}</p>
             <div className="cta-buttons-group">
               <a href="/donate" className="btn-cta-primary-large">
                 {t('donate')}
               </a>
               <a href="/projects" className="btn-cta-secondary-large">
-                Browse Programs
+                {t('browsePrograms')}
               </a>
             </div>
           </div>
