@@ -31,17 +31,17 @@ const HelpPage: React.FC = () => {
         { id: '3', question: 'Where does Accelero operate?' },
       ],
     },
-    {
-      id: 'account',
-      title: 'Account',
-      icon: '👤',
-      description: 'Manage your account settings',
-      questions: [
-        { id: '4', question: 'How to sign in?', popular: true },
-        { id: '5', question: 'How to reset my password?' },
-        { id: '6', question: 'How to update my profile?' },
-      ],
-    },
+    // {
+    //   id: 'account',
+    //   title: 'Account',
+    //   icon: '👤',
+    //   description: 'Manage your account settings',
+    //   questions: [
+    //     { id: '4', question: 'How to sign in?', popular: true },
+    //     { id: '5', question: 'How to reset my password?' },
+    //     { id: '6', question: 'How to update my profile?' },
+    //   ],
+    // },
     {
       id: 'donations',
       title: 'Donations',
