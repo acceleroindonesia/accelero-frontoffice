@@ -102,7 +102,7 @@ const QRISModal: React.FC<QRISModalProps> = ({
           {/* QRIS Code */}
           <div className="qris-code-container">
             <Image
-              src="/qris.jpeg"
+              src="/qris.jpg"
               alt="QRIS Code"
               width={400}
               height={400}
