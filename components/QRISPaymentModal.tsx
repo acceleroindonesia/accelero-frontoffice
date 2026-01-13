@@ -118,35 +118,35 @@ const QRISModal: React.FC<QRISModalProps> = ({
           </p>
 
           {/* Divider */}
-          <div className="qris-divider">
-            <span>{language === 'id' ? 'ATAU' : 'OR'}</span>
-          </div>
+          {/*<div className="qris-divider">*/}
+          {/*  <span>{language === 'id' ? 'ATAU' : 'OR'}</span>*/}
+          {/*</div>*/}
 
           {/* Bank Transfer Option */}
-          <div className="bank-transfer-section">
-            <h3>{t('orTransferDirectly')}</h3>
-            <div className="bank-details-card">
-              <div className="bank-detail-row">
-                <span className="detail-label">{t('bankName')}:</span>
-                <span className="detail-value">{BANK_ACCOUNT.bank}</span>
-              </div>
-              <div className="bank-detail-row">
-                <span className="detail-label">{t('accountName')}:</span>
-                <span className="detail-value">{BANK_ACCOUNT.accountName}</span>
-              </div>
-              <div className="bank-detail-row highlight">
-                <span className="detail-label">
-                  {language === 'id' ? 'Nomor Rekening:' : 'Account Number:'}
-                </span>
-                <div className="account-number-row">
-                  <span className="detail-value account-number">{BANK_ACCOUNT.accountNumber}</span>
-                  <button type="button" className="copy-btn" onClick={handleCopyAccount}>
-                    {copied ? '✓' : '📋'}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/*<div className="bank-transfer-section">*/}
+          {/*  <h3>{t('orTransferDirectly')}</h3>*/}
+          {/*  <div className="bank-details-card">*/}
+          {/*    <div className="bank-detail-row">*/}
+          {/*      <span className="detail-label">{t('bankName')}:</span>*/}
+          {/*      <span className="detail-value">{BANK_ACCOUNT.bank}</span>*/}
+          {/*    </div>*/}
+          {/*    <div className="bank-detail-row">*/}
+          {/*      <span className="detail-label">{t('accountName')}:</span>*/}
+          {/*      <span className="detail-value">{BANK_ACCOUNT.accountName}</span>*/}
+          {/*    </div>*/}
+          {/*    <div className="bank-detail-row highlight">*/}
+          {/*      <span className="detail-label">*/}
+          {/*        {language === 'id' ? 'Nomor Rekening:' : 'Account Number:'}*/}
+          {/*      </span>*/}
+          {/*      <div className="account-number-row">*/}
+          {/*        <span className="detail-value account-number">{BANK_ACCOUNT.accountNumber}</span>*/}
+          {/*        <button type="button" className="copy-btn" onClick={handleCopyAccount}>*/}
+          {/*          {copied ? '✓' : '📋'}*/}
+          {/*        </button>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
 
           {/* Enter Sender Account Section */}
           <div className="sender-account-section">
