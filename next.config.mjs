@@ -7,6 +7,7 @@ const nextConfig = {
     'http://localhost',
     'http://localhost:80',
     'https://accelero.vercel.app',
+    'https://accelero-backoffice-production.up.railway.app',
   ],
   typescript: {
     ignoreBuildErrors: true,
@@ -50,6 +51,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'storage.googleapis.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'accelero-backoffice-production.up.railway.app',
         port: '',
         pathname: '/**',
       },
