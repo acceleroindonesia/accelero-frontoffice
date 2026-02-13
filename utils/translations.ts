@@ -757,9 +757,10 @@ export const translations = {
       'Open your mobile banking or e-wallet app and scan this QR code to complete your donation.',
     donationAmount: 'Donation Amount',
     scanWithAnyApp: 'Scan with any banking app or e-wallet (GoPay, OVO, Dana, ShopeePay, etc.)',
-    afterPayment: 'After completing payment, please enter the account number you sent from:',
-    senderAccountNumber: 'Your Account Number',
-    enterSenderAccount: 'Enter your bank account number',
+    afterPayment:
+      'After completing payment, please enter the account number or phone number you sent from:',
+    senderAccountNumber: 'Your Account Number or Phone number',
+    enterSenderAccount: 'Enter your bank account number or phone number',
     accountNumberPlaceholder: 'e.g., 1234567890',
     confirmDonation: 'Confirm Donation',
     closeModal: 'Close',
@@ -1588,9 +1589,9 @@ export const translations = {
     scanWithAnyApp:
       'Pindai dengan aplikasi perbankan atau e-wallet (GoPay, OVO, Dana, ShopeePay, dll.)',
     afterPayment:
-      'Setelah menyelesaikan pembayaran, silakan masukkan nomor rekening pengirim Anda:',
-    senderAccountNumber: 'Nomor Rekening Anda',
-    enterSenderAccount: 'Masukkan nomor rekening bank Anda',
+      'Setelah menyelesaikan pembayaran, silakan masukkan nomor rekening atau Nomor Ponsel pengirim Anda:',
+    senderAccountNumber: 'Nomor Rekening Anda atau Nomor ponsel yang digunakan',
+    enterSenderAccount: 'Masukkan nomor rekening bank atau nomor ponsel Anda',
     accountNumberPlaceholder: 'contoh: 1234567890',
     confirmDonation: 'Konfirmasi Donasi',
     closeModal: 'Tutup',
